@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 280" role="img" aria-label="Saweeg geometric pattern">
+  <defs>
+    <path id="saweeg-star" d="M60 8 74 22h20v20l14 14-14 14v20H74l-14 14-14-14H26V70L12 56l14-14V22h20Z" fill="none" stroke="currentColor" stroke-width="10" stroke-linejoin="miter" stroke-linecap="square"/>
+  </defs>
+  <g color="#C4A972">
+    <use href="#saweeg-star" x="90" y="0" width="120" height="120"/>
+    <use href="#saweeg-star" x="0" y="80" width="120" height="120"/>
+    <use href="#saweeg-star" x="180" y="80" width="120" height="120"/>
+    <use href="#saweeg-star" x="90" y="160" width="120" height="120"/>
+  </g>
+  <g color="#5C6351" transform="translate(300)">
+    <use href="#saweeg-star" x="90" y="0" width="120" height="120"/>
+    <use href="#saweeg-star" x="0" y="80" width="120" height="120"/>
+    <use href="#saweeg-star" x="180" y="80" width="120" height="120"/>
+    <use href="#saweeg-star" x="90" y="160" width="120" height="120"/>
+  </g>
+  <g color="#C4A972" transform="translate(600)">
+    <use href="#saweeg-star" x="90" y="0" width="120" height="120"/>
+    <use href="#saweeg-star" x="0" y="80" width="120" height="120"/>
+    <use href="#saweeg-star" x="180" y="80" width="120" height="120"/>
+    <use href="#saweeg-star" x="90" y="160" width="120" height="120"/>
+  </g>
+</svg>
+

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://go.saweegsa.com/sitemap.xml
+

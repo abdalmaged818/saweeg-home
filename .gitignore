@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.vite/
+.DS_Store
+*.log
+screenshots/
+/index.html
+/404.html
+/en/
+/about/
+/news/
+/blog/
