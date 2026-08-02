@@ -17,8 +17,8 @@ export const en = {
   },
   meta: {
     home: {
-      title: "Saweeg | A Modern Extension of Authenticity",
-      description: "The official Saweeg gateway for the online store, digital menu, delivery, branches, brand news, and ways to connect."
+      title: "Saweeg | Everything Saweeg in One Place",
+      description: "The official Saweeg gateway for the online store, digital menu, delivery, branches, news, and ways to connect."
     },
     about: {
       title: "About Saweeg | A Brand Story from Madinah",
@@ -35,8 +35,8 @@ export const en = {
   },
   hero: {
     kicker: "From the heart of Madinah",
-    title: "Every Saweeg path, in one place",
-    description: "Choose your destination and explore Saweeg — from products, menus, and branches to news and ways to connect.",
+    title: "Everything Saweeg, in one place",
+    description: "Your journey starts here — shop, browse the menu, order delivery, find our branches, and discover what’s new at Saweeg.",
     primary: "Start here",
     secondary: "About Saweeg"
   },
@@ -46,7 +46,7 @@ export const en = {
     description: "Three clear paths take you directly to the Saweeg experience you need.",
     cards: {
       store: {
-        title: "Shop Saweeg products",
+        title: "Shop Saweeg",
         description: "Discover talbinah, saweeg, gift boxes, and more in our online store.",
         cta: "Visit the store"
       },
@@ -57,7 +57,7 @@ export const en = {
       },
       delivery: {
         title: "Order Saweeg now",
-        description: "Order Saweeg products through the delivery app that suits you.",
+        description: "Choose the delivery app that works for you and order Saweeg with ease.",
         hungerstation: "HungerStation",
         keeta: "Keeta"
       }
@@ -96,8 +96,8 @@ export const en = {
   },
   latest: {
     eyebrow: "From Saweeg",
-    title: "Latest from Saweeg",
-    description: "Concise highlights, ready to expand when full stories and articles are published.",
+    title: "What’s new at Saweeg?",
+    description: "News and stories from Saweeg, all in one place.",
     newsTag: "Saweeg news",
     blogTag: "From the blog",
     items: {
