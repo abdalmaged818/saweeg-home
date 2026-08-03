@@ -13,7 +13,6 @@ export const renderFooter = ({ locale, page, copy, prefix, pathFor }: FooterOpti
   const otherLocale: Locale = locale === "ar" ? "en" : "ar";
   return `
     <footer class="site-footer">
-      <img class="footer-pattern" src="${prefix}assets/brand/saweeg-pattern.svg" alt="" width="900" height="280" aria-hidden="true">
       <div class="container footer-content">
         <div class="footer-brand">
           <img src="${prefix}assets/brand/logo-saweeg.svg" alt="${copy.brandAlt}" width="88" height="88">

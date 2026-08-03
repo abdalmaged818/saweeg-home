@@ -5,7 +5,8 @@ const pageSegments: Record<PageId, string> = {
   home: "",
   about: "about/",
   news: "news/",
-  blog: "blog/"
+  blog: "blog/",
+  opportunities: "opportunities/"
 };
 
 export const createPathFor = (prefix: string) => (locale: Locale, page: PageId): string => {
@@ -18,4 +19,3 @@ export const canonicalFor = (locale: Locale, page: PageId): string => {
   const pageSegment = page === "home" ? "" : `/${page}`;
   return `${siteConfig.brand.origin}${localeSegment}${pageSegment}/`;
 };
-

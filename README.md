@@ -28,6 +28,7 @@ npm run preview
 - English content: `src/i18n/en.ts`
 - Destinations, branches, news, and opportunities: `src/data/`
 - Brand assets: `public/assets/brand/`
+- Approved home hero image: `public/assets/images/saweeg-madinah-hero.png`
 
 Career and collaboration buttons remain disabled until valid URLs are added to
 `siteConfig.links.careersUrl` and `siteConfig.links.collaborationUrl`. Enable

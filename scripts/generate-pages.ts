@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -8,6 +9,8 @@ import { renderBlogPage } from "../src/pages/blog.ts";
 import { renderDocument } from "../src/pages/document.ts";
 import { renderHomePage } from "../src/pages/home.ts";
 import { renderNewsPage } from "../src/pages/news.ts";
+import { renderOpportunitiesPage } from "../src/pages/opportunities.ts";
+import { siteConfig } from "../src/config/site.ts";
 import { createPathFor } from "../src/pages/routes.ts";
 
 interface PageTarget {
@@ -26,18 +29,29 @@ const targets: PageTarget[] = [
   { locale: "ar", page: "news", file: "news/index.html", prefix: "../" },
   { locale: "en", page: "news", file: "en/news/index.html", prefix: "../../" },
   { locale: "ar", page: "blog", file: "blog/index.html", prefix: "../" },
-  { locale: "en", page: "blog", file: "en/blog/index.html", prefix: "../../" }
+  { locale: "en", page: "blog", file: "en/blog/index.html", prefix: "../../" },
+  { locale: "ar", page: "opportunities", file: "opportunities/index.html", prefix: "../" },
+  { locale: "en", page: "opportunities", file: "en/opportunities/index.html", prefix: "../../" }
 ];
+
+const heroImageExists = existsSync(resolve(projectRoot, "public", siteConfig.assets.heroImage));
 
 const renderPage = ({ locale, page, prefix }: PageTarget): string => {
   const copy = getCopy(locale);
   const pathFor = createPathFor(prefix);
   let content = "";
 
-  if (page === "home") content = renderHomePage(locale, copy, prefix, pathFor(locale, "about"));
+  if (page === "home") content = renderHomePage(
+    copy,
+    prefix,
+    pathFor(locale, "about"),
+    pathFor(locale, "opportunities"),
+    heroImageExists ? `${prefix}${siteConfig.assets.heroImage}` : ""
+  );
   if (page === "about") content = renderAboutPage(copy, prefix, pathFor(locale, "home"));
   if (page === "news") content = renderNewsPage(copy, pathFor(locale, "home"));
   if (page === "blog") content = renderBlogPage(copy, pathFor(locale, "home"));
+  if (page === "opportunities") content = renderOpportunitiesPage(copy, pathFor(locale, "home"));
 
   return renderDocument({ locale, page, prefix, content });
 };

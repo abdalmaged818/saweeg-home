@@ -23,6 +23,8 @@ export const siteConfig = {
     careers: false,
     collaboration: false
   },
+  assets: {
+    heroImage: "assets/images/saweeg-madinah-hero.png"
+  },
   localeStorageKey: "saweeg-preferred-locale"
 } as const;
-

@@ -15,9 +15,10 @@ export default defineConfig({
         newsEn: resolve(__dirname, "en/news/index.html"),
         blogAr: resolve(__dirname, "blog/index.html"),
         blogEn: resolve(__dirname, "en/blog/index.html"),
+        opportunitiesAr: resolve(__dirname, "opportunities/index.html"),
+        opportunitiesEn: resolve(__dirname, "en/opportunities/index.html"),
         notFound: resolve(__dirname, "404.html")
       }
     }
   }
 });
-

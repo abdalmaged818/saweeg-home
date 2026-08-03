@@ -1,7 +1,6 @@
 import { siteConfig } from "../config/site.ts";
 import { branches } from "../data/branches.ts";
 import type { BranchId, SiteCopy } from "../types/site.ts";
-import { renderIcon } from "./icons.ts";
 
 const locations: Record<BranchId, string> = {
   maqsed: siteConfig.links.maqsedMap,
@@ -24,7 +23,7 @@ export const renderBranches = (copy: SiteCopy): string => `
       <div class="branches-grid">
         ${branches.map((branch) => `
           <article class="branch-card">
-            <div class="branch-title">${renderIcon("pin")}<h3>${copy.branches.names[branch.id]}</h3></div>
+            <h3>${copy.branches.names[branch.id]}</h3>
             <div class="branch-actions">
               <a class="button button-primary" href="${locations[branch.id]}" target="_blank" rel="noopener noreferrer">${copy.branches.locationCta}</a>
               <a class="button button-soft" href="${menus[branch.id]}" target="_blank" rel="noopener noreferrer">${copy.branches.menuCta}</a>
@@ -33,4 +32,3 @@ export const renderBranches = (copy: SiteCopy): string => `
       </div>
     </div>
   </section>`;
-

@@ -1,7 +1,6 @@
 import { siteConfig } from "../config/site.ts";
 import { opportunities } from "../data/opportunities.ts";
 import type { OpportunityId, SiteCopy } from "../types/site.ts";
-import { renderIcon } from "./icons.ts";
 
 const featureEnabled: Record<OpportunityId, boolean> = {
   careers: siteConfig.features.careers,
@@ -12,6 +11,20 @@ const urls: Record<OpportunityId, string> = {
   careers: siteConfig.links.careersUrl,
   collaboration: siteConfig.links.collaborationUrl
 };
+
+export const renderOpportunityPreview = (copy: SiteCopy, opportunitiesPath: string): string => `
+  <section class="section opportunity-preview-section" aria-labelledby="opportunity-preview-title">
+    <div class="container">
+      <article class="opportunity-preview-card">
+        <div>
+          <span class="eyebrow">${copy.opportunities.eyebrow}</span>
+          <h2 id="opportunity-preview-title">${copy.opportunities.homeTitle}</h2>
+          <p>${copy.opportunities.homeDescription}</p>
+        </div>
+        <a class="button button-primary" href="${opportunitiesPath}">${copy.opportunities.homeCta}</a>
+      </article>
+    </div>
+  </section>`;
 
 export const renderOpportunities = (copy: SiteCopy): string => `
   <section class="section opportunity-section" aria-labelledby="opportunities-title">
@@ -27,7 +40,6 @@ export const renderOpportunities = (copy: SiteCopy): string => `
           const showButton = featureEnabled[item.id] && urls[item.id].startsWith("https://");
           return `
             <article class="opportunity-card">
-              <span class="opportunity-icon">${renderIcon(item.icon)}</span>
               <h3>${content.title}</h3>
               <p>${content.description}</p>
               ${showButton ? `<a class="button button-outline" href="${urls[item.id]}" target="_blank" rel="noopener noreferrer">${content.cta}</a>` : ""}
@@ -36,4 +48,3 @@ export const renderOpportunities = (copy: SiteCopy): string => `
       </div>
     </div>
   </section>`;
-

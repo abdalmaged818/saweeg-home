@@ -1,5 +1,5 @@
 export type Locale = "ar" | "en";
-export type PageId = "home" | "about" | "news" | "blog";
+export type PageId = "home" | "about" | "news" | "blog" | "opportunities";
 export type DestinationId = "store" | "menu" | "delivery";
 export type QuickLinkId = "whatsapp" | "tiktok" | "x" | "maqsed" | "bustan";
 export type BranchId = "maqsed" | "bustan";
@@ -29,7 +29,6 @@ export interface NewsItem {
 
 export interface Opportunity {
   id: OpportunityId;
-  icon: IconName;
 }
 
 export interface PageMetaCopy {
@@ -57,6 +56,7 @@ export interface SiteCopy {
     kicker: string;
     title: string;
     description: string;
+    imageAlt: string;
     primary: string;
     secondary: string;
   };
@@ -81,9 +81,12 @@ export interface SiteCopy {
     paragraphTwo: string;
     cta: string;
     visualLabel: string;
+    brandDefinitionTitle: string;
+    brandDefinition: string;
   };
   values: {
     sectionLabel: string;
+    title: string;
     mission: { title: string; description: string };
     vision: { title: string; description: string };
     belief: { title: string; description: string };
@@ -100,6 +103,12 @@ export interface SiteCopy {
     eyebrow: string;
     title: string;
     description: string;
+    homeTitle: string;
+    homeDescription: string;
+    homeCta: string;
+    pageEyebrow: string;
+    pageTitle: string;
+    pageIntro: string;
     cards: Record<OpportunityId, { title: string; description: string; cta: string }>;
   };
   branches: {

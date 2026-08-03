@@ -16,7 +16,6 @@ export const renderLatest = (copy: SiteCopy, filter?: NewsKind): string => {
             const entry = copy.latest.items[item.id];
             return `
               <article class="post-card">
-                <div class="post-mark" aria-hidden="true"><span></span></div>
                 <div class="post-body">
                   <span class="post-tag">${item.kind === "news" ? copy.latest.newsTag : copy.latest.blogTag}</span>
                   <h3>${entry.title}</h3>
@@ -28,4 +27,3 @@ export const renderLatest = (copy: SiteCopy, filter?: NewsKind): string => {
       </div>
     </section>`;
 };
-

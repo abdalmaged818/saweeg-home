@@ -29,15 +29,6 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .quick-links-grid {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-
-  .quick-link {
-    justify-content: center;
-    text-align: center;
-  }
-
   .latest-grid--3 .post-card:last-child,
   .values-grid .value-card:last-child {
     grid-column: 1 / -1;
@@ -51,6 +42,13 @@
     padding: 58px 38px;
   }
 
+  .opportunity-preview-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 38px 36px;
+  }
+
   .footer-bottom {
     flex-direction: row;
     align-items: center;
@@ -60,7 +58,7 @@
 
 @media (min-width: 900px) {
   :root {
-    --header-height: 82px;
+    --header-height: 88px;
   }
 
   body.menu-open {
@@ -68,8 +66,8 @@
   }
 
   .brand img {
-    width: 70px;
-    height: 70px;
+    width: 64px;
+    height: 64px;
   }
 
   .desktop-nav {
@@ -82,12 +80,13 @@
   }
 
   .hero {
-    min-height: 640px;
-    padding-block: 92px;
+    min-height: 540px;
+    padding-block: 62px 46px;
   }
 
-  .hero-grid {
-    grid-template-columns: 1.4fr 0.6fr;
+  .hero--with-image .hero-grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+    gap: 54px;
   }
 
   .hero h1 {
@@ -95,21 +94,17 @@
     font-size: 3.75rem;
   }
 
-  .hero-decoration {
-    inset-block-start: 50%;
-    inset-inline-end: max(3vw, calc((100vw - var(--content-width)) / 2));
-    width: min(40vw, 480px);
-    transform: translateY(-50%);
-    opacity: 0.85;
+  .hero-media {
+    max-width: 500px;
   }
 
   .destinations-grid {
-    grid-template-columns: 1.12fr 1fr 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 20px;
   }
 
   .destination-card {
-    min-height: 350px;
+    min-height: 280px;
     padding: 30px 27px;
   }
 
@@ -193,17 +188,8 @@
   }
 
   .hero {
-    min-height: 500px;
-    padding-block: 52px 62px;
-  }
-
-  .button-row .button {
-    width: 100%;
-  }
-
-  .quick-link {
-    padding-inline: 10px;
-    font-size: 0.76rem;
+    min-height: 390px;
+    padding-block: 38px 26px;
   }
 
   .branch-actions .button,

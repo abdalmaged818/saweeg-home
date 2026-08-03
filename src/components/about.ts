@@ -9,10 +9,8 @@ export const renderAboutPreview = (copy: SiteCopy, prefix: string, aboutPath: st
         <p>${copy.about.short}</p>
         <a class="text-link" href="${aboutPath}">${copy.about.cta}<span aria-hidden="true">↗</span></a>
       </article>
-      <div class="brand-composition" role="img" aria-label="${copy.about.visualLabel}">
-        <span class="composition-orbit composition-orbit--one"></span>
-        <span class="composition-orbit composition-orbit--two"></span>
-        <img src="${prefix}assets/brand/saweeg-star.svg" alt="" width="160" height="160">
+      <div class="about-brand-panel">
+        <img src="${prefix}assets/brand/logo-saweeg.svg" alt="${copy.brandAlt}" width="220" height="220">
       </div>
     </div>
   </section>`;
@@ -26,9 +24,10 @@ export const renderAboutStory = (copy: SiteCopy, prefix: string): string => `
         <p>${copy.about.paragraphOne}</p>
         <p>${copy.about.paragraphTwo}</p>
       </div>
-      <div class="story-mark" aria-hidden="true">
-        <img src="${prefix}assets/brand/saweeg-star.svg" alt="" width="220" height="220">
-      </div>
+      <article class="brand-definition">
+        <img src="${prefix}assets/brand/logo-saweeg.svg" alt="${copy.brandAlt}" width="180" height="180">
+        <h2>${copy.about.brandDefinitionTitle}</h2>
+        <p>${copy.about.brandDefinition}</p>
+      </article>
     </div>
   </section>`;
-

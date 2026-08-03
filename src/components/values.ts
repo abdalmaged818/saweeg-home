@@ -7,12 +7,11 @@ export const renderValues = (copy: SiteCopy): string => {
       <div class="container">
         <div class="section-heading">
           <span class="eyebrow">${copy.values.sectionLabel}</span>
-          <h2 id="values-title">${copy.values.mission.title}، ${copy.values.vision.title}</h2>
+          <h2 id="values-title">${copy.values.title}</h2>
         </div>
         <div class="values-grid">
           ${values.map((value, index) => `
             <article class="value-card${index === 2 ? " value-card--soft" : ""}">
-              <span class="value-index">${String(index + 1).padStart(2, "0")}</span>
               <h3>${value.title}</h3>
               <p>${value.description}</p>
             </article>`).join("")}
@@ -20,4 +19,3 @@ export const renderValues = (copy: SiteCopy): string => {
       </div>
     </section>`;
 };
-

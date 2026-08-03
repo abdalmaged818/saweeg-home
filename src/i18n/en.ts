@@ -31,12 +31,17 @@ export const en = {
     blog: {
       title: "Saweeg Blog | Heritage, Thoughtfully Presented",
       description: "Stories about talbinah, Madinah's food heritage, and contemporary presentation from Saweeg."
+    },
+    opportunities: {
+      title: "Careers and Collaboration | Saweeg",
+      description: "Explore opportunities to join the Saweeg team or collaborate with the brand."
     }
   },
   hero: {
     kicker: "From the heart of Madinah",
     title: "Everything Saweeg, in one place",
     description: "Your journey starts here — shop, browse the menu, order delivery, find our branches, and discover what’s new at Saweeg.",
+    imageAlt: "A Madinah landmark presented within Saweeg's visual identity",
     primary: "Start here",
     secondary: "About Saweeg"
   },
@@ -77,10 +82,13 @@ export const en = {
     paragraphOne: "Saweeg is a Saudi brand from Madinah, reintroducing prophetic talbinah, saweeg, and authentic food products in a contemporary way that brings together product quality, thoughtful presentation, and the spirit of hospitality.",
     paragraphTwo: "The idea began in 2022 with a desire to revive Madinah's food heritage and present it in a way that feels closer to how people live today. Saweeg then set out to build a complete experience for the home, hospitality, and gifting.",
     cta: "Discover the Saweeg story",
-    visualLabel: "A composition from Saweeg's visual identity"
+    visualLabel: "A composition from Saweeg's visual identity",
+    brandDefinitionTitle: "The brand",
+    brandDefinition: "A Saudi brand from Madinah, bringing together authentic food heritage, thoughtful quality, beautiful presentation, and warm hospitality."
   },
   values: {
     sectionLabel: "What guides our experience",
+    title: "Our mission and vision",
     mission: {
       title: "Our mission",
       description: "We offer authentic products with trusted quality and a modern experience, keeping the spirit of heritage present in the home, hospitality, and gifting."
@@ -119,6 +127,12 @@ export const en = {
     eyebrow: "New opportunities",
     title: "Be part of the Saweeg journey",
     description: "We welcome talent and organizations interested in working, collaborating, and creating new opportunities with Saweeg.",
+    homeTitle: "Join us or collaborate with Saweeg",
+    homeDescription: "Whether you are looking for a role or have a collaboration idea, we would be glad to hear from you.",
+    homeCta: "Explore opportunities",
+    pageEyebrow: "Opportunities with Saweeg",
+    pageTitle: "Join us or collaborate with Saweeg",
+    pageIntro: "A dedicated place to explore careers and collaboration with Saweeg. Application links will appear here once approved.",
     cards: {
       careers: {
         title: "Join the Saweeg team",
