@@ -1,4 +1,5 @@
 import type { Locale, PageId, SiteCopy } from "../types/site.ts";
+import { pageAvailability } from "../config/features.ts";
 
 interface HeaderOptions {
   locale: Locale;
@@ -11,14 +12,16 @@ interface HeaderOptions {
 export const renderHeader = ({ locale, page, copy, prefix, pathFor }: HeaderOptions): string => {
   const otherLocale: Locale = locale === "ar" ? "en" : "ar";
   const home = pathFor(locale, "home");
-  const navItems = [
-    ["home", copy.nav.home],
-    ["about", copy.nav.about],
-    ["news", copy.nav.news],
-    ["blog", copy.nav.blog]
-  ] as const;
+  const allNavItems: Array<{ id: PageId; label: string }> = [
+    { id: "home", label: copy.nav.home },
+    { id: "about", label: copy.nav.about },
+    { id: "news", label: copy.nav.news },
+    { id: "blog", label: copy.nav.blog },
+    { id: "opportunities", label: copy.nav.opportunities }
+  ];
+  const navItems = allNavItems.filter(({ id }) => pageAvailability[id]);
 
-  const navigation = navItems.map(([id, label]) => `
+  const navigation = navItems.map(({ id, label }) => `
     <a href="${pathFor(locale, id)}"${page === id ? ' aria-current="page"' : ""}>${label}</a>`).join("");
 
   return `
@@ -31,7 +34,7 @@ export const renderHeader = ({ locale, page, copy, prefix, pathFor }: HeaderOpti
           <a href="${home}#contact">${copy.nav.contact}</a>
         </nav>
         <div class="header-actions">
-          <a class="language-link" href="${pathFor(otherLocale, page)}" lang="${otherLocale}" hreflang="${otherLocale}" data-locale-switch="${otherLocale}">${copy.languageSwitch}</a>
+          <a class="language-link" href="${pathFor(otherLocale, page)}" lang="${otherLocale}" hreflang="${otherLocale}" data-locale-switch="${otherLocale}" data-analytics-event="language_switch">${copy.languageSwitch}</a>
           <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-navigation" aria-label="${copy.menuLabel}" data-open-label="${copy.menuLabel}" data-close-label="${copy.closeMenuLabel}" data-menu-button>
             <span></span><span></span><span></span>
           </button>

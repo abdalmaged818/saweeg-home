@@ -9,11 +9,10 @@ export const renderContact = (copy: SiteCopy): string => `
         <h2 id="contact-title">${copy.contact.title}</h2>
         <p>${copy.contact.description}</p>
         <div class="button-row button-row--center">
-          <a class="button button-light" href="${siteConfig.links.whatsapp}" target="_blank" rel="noopener noreferrer">${copy.contact.whatsapp}</a>
-          <a class="button button-on-dark" href="${siteConfig.links.tiktok}" target="_blank" rel="noopener noreferrer">${copy.contact.tiktok}</a>
-          <a class="button button-on-dark" href="${siteConfig.links.x}" target="_blank" rel="noopener noreferrer">X</a>
+          <a class="button button-light" href="${siteConfig.links.whatsapp}" target="_blank" rel="noopener noreferrer" data-analytics-event="whatsapp_click">${copy.contact.whatsapp}</a>
+          <a class="button button-on-dark" href="${siteConfig.links.tiktok}" target="_blank" rel="noopener noreferrer" data-analytics-event="tiktok_click">${copy.contact.tiktok}</a>
+          <a class="button button-on-dark" href="${siteConfig.links.x}" target="_blank" rel="noopener noreferrer" data-analytics-event="x_click">X</a>
         </div>
       </div>
     </div>
   </section>`;
-

@@ -204,16 +204,22 @@ html[dir="rtl"] .button-icon {
 }
 
 .destination-card {
-  min-height: 250px;
+  min-height: 212px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 14px;
-  padding: 26px 24px;
+  gap: 12px;
+  padding: 22px 20px;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
   transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.destination-card:focus-visible {
+  outline: 3px solid var(--saweeg-gold);
+  outline-offset: 5px;
+  box-shadow: var(--shadow-hover);
 }
 
 .destination-card:hover {
@@ -348,7 +354,7 @@ html[dir="rtl"] .button-icon {
   background: var(--surface-soft);
 }
 
-.value-card h3,
+.value-card h2,
 .post-card h3,
 .opportunity-card h3,
 .branch-card h3 {

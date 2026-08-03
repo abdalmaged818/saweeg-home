@@ -19,8 +19,7 @@ export const renderAboutStory = (copy: SiteCopy, prefix: string): string => `
   <section class="section story-section" aria-labelledby="story-title">
     <div class="container story-grid">
       <div class="story-copy">
-        <span class="eyebrow">${copy.about.eyebrow}</span>
-        <h2 id="story-title">${copy.about.title}</h2>
+        <h2 id="story-title">${copy.about.storyTitle}</h2>
         <p>${copy.about.paragraphOne}</p>
         <p>${copy.about.paragraphTwo}</p>
       </div>

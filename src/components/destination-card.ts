@@ -10,19 +10,20 @@ export const renderDestinationCard = (destination: Destination, copy: SiteCopy):
         <h3>${content.title}</h3>
         <p>${content.description}</p>
         <div class="delivery-actions">
-          <a class="button button-soft" href="${siteConfig.links.hungerstation}" target="_blank" rel="noopener noreferrer">${content.hungerstation}</a>
-          <a class="button button-soft" href="${siteConfig.links.keeta}" target="_blank" rel="noopener noreferrer">${content.keeta}</a>
+          <a class="button button-soft" href="${siteConfig.links.hungerstation}" target="_blank" rel="noopener noreferrer" data-analytics-event="hungerstation_click">${content.hungerstation}</a>
+          <a class="button button-soft" href="${siteConfig.links.keeta}" target="_blank" rel="noopener noreferrer" data-analytics-event="keeta_click">${content.keeta}</a>
         </div>
       </article>`;
   }
 
   const href = destination.id === "store" ? siteConfig.links.store : siteConfig.links.menu;
+  const analyticsEvent = destination.id === "store" ? "store_click" : "menu_click";
   return `
-    <article class="destination-card destination-card--${destination.tone}">
+    <a class="destination-card destination-card--${destination.tone}" href="${href}" target="_blank" rel="noopener noreferrer" data-analytics-event="${analyticsEvent}">
       <h3>${content.title}</h3>
       <p>${content.description}</p>
-      <a class="button ${destination.id === "store" ? "button-light" : "button-primary"}" href="${href}" target="_blank" rel="noopener noreferrer">
+      <span class="button ${destination.id === "store" ? "button-light" : "button-primary"}">
         ${content.cta}
-      </a>
-    </article>`;
+      </span>
+    </a>`;
 };

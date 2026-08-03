@@ -13,12 +13,13 @@ export const en = {
     about: "About",
     news: "News",
     blog: "Blog",
+    opportunities: "Opportunities",
     contact: "Contact"
   },
   meta: {
     home: {
       title: "Saweeg | Everything Saweeg in One Place",
-      description: "The official Saweeg gateway for the online store, digital menu, delivery, branches, news, and ways to connect."
+      description: "The official Saweeg gateway for the online store, digital menu, delivery, branches, and ways to connect."
     },
     about: {
       title: "About Saweeg | A Brand Story from Madinah",
@@ -40,7 +41,7 @@ export const en = {
   hero: {
     kicker: "From the heart of Madinah",
     title: "Everything Saweeg, in one place",
-    description: "Your journey starts here — shop, browse the menu, order delivery, find our branches, and discover what’s new at Saweeg.",
+    description: "Saweeg is a Madinah-based brand presenting Talbinah and Sawiq with a contemporary spirit. From here, you can access the store, menu, delivery options, branches, and everything new from Saweeg.",
     imageAlt: "A Madinah landmark presented within Saweeg's visual identity",
     primary: "Start here",
     secondary: "About Saweeg"
@@ -78,12 +79,13 @@ export const en = {
   about: {
     eyebrow: "About the brand",
     title: "Saweeg, from Madinah to every home",
+    storyTitle: "The Saweeg story",
     short: "A Saudi brand reintroducing prophetic talbinah, saweeg, and authentic food products through a contemporary experience shaped by quality, presentation, and hospitality.",
     paragraphOne: "Saweeg is a Saudi brand from Madinah, reintroducing prophetic talbinah, saweeg, and authentic food products in a contemporary way that brings together product quality, thoughtful presentation, and the spirit of hospitality.",
     paragraphTwo: "The idea began in 2022 with a desire to revive Madinah's food heritage and present it in a way that feels closer to how people live today. Saweeg then set out to build a complete experience for the home, hospitality, and gifting.",
     cta: "Discover the Saweeg story",
     visualLabel: "A composition from Saweeg's visual identity",
-    brandDefinitionTitle: "The brand",
+    brandDefinitionTitle: "Saweeg at a glance",
     brandDefinition: "A Saudi brand from Madinah, bringing together authentic food heritage, thoughtful quality, beautiful presentation, and warm hospitality."
   },
   values: {
@@ -132,7 +134,7 @@ export const en = {
     homeCta: "Explore opportunities",
     pageEyebrow: "Opportunities with Saweeg",
     pageTitle: "Join us or collaborate with Saweeg",
-    pageIntro: "A dedicated place to explore careers and collaboration with Saweeg. Application links will appear here once approved.",
+    pageIntro: "Explore the career and collaboration paths that connect talent and organizations with Saweeg.",
     cards: {
       careers: {
         title: "Join the Saweeg team",
@@ -169,11 +171,11 @@ export const en = {
     rights: "© Saweeg. All rights reserved."
   },
   internal: {
-    aboutEyebrow: "Our story",
+    aboutEyebrow: "About Saweeg",
     aboutTitle: "The story begins in Madinah",
     aboutIntro: "An experience connecting authentic heritage with present-day quality and thoughtful hospitality.",
     newsEyebrow: "Brand news",
-    newsTitle: "Saweeg news",
+    newsTitle: "Latest Saweeg news",
     newsIntro: "Concise official highlights without unverified dates or details.",
     blogEyebrow: "From the blog",
     blogTitle: "Stories of heritage and contemporary presentation",

@@ -25,8 +25,8 @@ export const renderBranches = (copy: SiteCopy): string => `
           <article class="branch-card">
             <h3>${copy.branches.names[branch.id]}</h3>
             <div class="branch-actions">
-              <a class="button button-primary" href="${locations[branch.id]}" target="_blank" rel="noopener noreferrer">${copy.branches.locationCta}</a>
-              <a class="button button-soft" href="${menus[branch.id]}" target="_blank" rel="noopener noreferrer">${copy.branches.menuCta}</a>
+              <a class="button button-primary" href="${locations[branch.id]}" target="_blank" rel="noopener noreferrer" data-analytics-event="branch_map_click" data-analytics-label="${branch.id}">${copy.branches.locationCta}</a>
+              <a class="button button-soft" href="${menus[branch.id]}" target="_blank" rel="noopener noreferrer" data-analytics-event="branch_menu_click" data-analytics-label="${branch.id}">${copy.branches.menuCta}</a>
             </div>
           </article>`).join("")}
       </div>

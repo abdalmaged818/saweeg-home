@@ -49,6 +49,7 @@ export interface SiteCopy {
     about: string;
     news: string;
     blog: string;
+    opportunities: string;
     contact: string;
   };
   meta: Record<PageId, PageMetaCopy>;
@@ -76,6 +77,7 @@ export interface SiteCopy {
   about: {
     eyebrow: string;
     title: string;
+    storyTitle: string;
     short: string;
     paragraphOne: string;
     paragraphTwo: string;

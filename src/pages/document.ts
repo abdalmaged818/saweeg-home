@@ -49,7 +49,7 @@ export const renderDocument = ({ locale, page, prefix, content, noIndex = false,
   const alternateLocale: Locale = locale === "ar" ? "en" : "ar";
   const direction = locale === "ar" ? "rtl" : "ltr";
   const metadata = copy.meta[page];
-  const logo = `${siteConfig.brand.origin}/assets/brand/icon-512.png`;
+  const socialImage = `${siteConfig.brand.origin}/assets/social/saweeg-og.png`;
 
   return `<!doctype html>
 <html lang="${locale}" dir="${direction}" data-page="${page}">
@@ -72,12 +72,14 @@ export const renderDocument = ({ locale, page, prefix, content, noIndex = false,
   <meta property="og:title" content="${metadata.title}">
   <meta property="og:description" content="${metadata.description}">
   <meta property="og:url" content="${canonical}">
-  <meta property="og:image" content="${logo}">
+  <meta property="og:image" content="${socialImage}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="${copy.brandAlt}">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${metadata.title}">
   <meta name="twitter:description" content="${metadata.description}">
-  <meta name="twitter:image" content="${logo}">
+  <meta name="twitter:image" content="${socialImage}">
   <link rel="icon" href="${prefix}favicon.svg" type="image/svg+xml">
   <link rel="icon" href="${prefix}favicon-32x32.png" sizes="32x32" type="image/png">
   <link rel="icon" href="${prefix}favicon-16x16.png" sizes="16x16" type="image/png">

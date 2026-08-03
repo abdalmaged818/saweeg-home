@@ -1,6 +1,10 @@
 import "./styles/main.css";
 import { siteConfig } from "./config/site.ts";
 import type { Locale } from "./types/site.ts";
+import { bindAnalyticsEvents, initAnalytics } from "./analytics.ts";
+
+initAnalytics();
+bindAnalyticsEvents();
 
 const header = document.querySelector<HTMLElement>("[data-site-header]");
 const menuButton = document.querySelector<HTMLButtonElement>("[data-menu-button]");

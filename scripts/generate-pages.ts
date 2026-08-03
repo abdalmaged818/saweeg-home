@@ -11,7 +11,8 @@ import { renderHomePage } from "../src/pages/home.ts";
 import { renderNewsPage } from "../src/pages/news.ts";
 import { renderOpportunitiesPage } from "../src/pages/opportunities.ts";
 import { siteConfig } from "../src/config/site.ts";
-import { createPathFor } from "../src/pages/routes.ts";
+import { isPagePublic } from "../src/config/features.ts";
+import { canonicalFor, createPathFor } from "../src/pages/routes.ts";
 
 interface PageTarget {
   locale: Locale;
@@ -36,10 +37,28 @@ const targets: PageTarget[] = [
 
 const heroImageExists = existsSync(resolve(projectRoot, "public", siteConfig.assets.heroImage));
 
+const renderHiddenPage = (locale: Locale, homePath: string): string => {
+  const copy = getCopy(locale);
+  return `
+    <section class="not-found" aria-labelledby="hidden-page-title">
+      <div class="container not-found-inner">
+        <span class="eyebrow">${copy.notFound.eyebrow}</span>
+        <h1 id="hidden-page-title">${copy.notFound.title}</h1>
+        <p>${copy.notFound.description}</p>
+        <a class="button button-primary" href="${homePath}">${copy.notFound.cta}</a>
+      </div>
+    </section>`;
+};
+
 const renderPage = ({ locale, page, prefix }: PageTarget): string => {
   const copy = getCopy(locale);
   const pathFor = createPathFor(prefix);
   let content = "";
+
+  if (!isPagePublic(page)) {
+    content = renderHiddenPage(locale, pathFor(locale, "home"));
+    return renderDocument({ locale, page, prefix, content, noIndex: true });
+  }
 
   if (page === "home") content = renderHomePage(
     copy,
@@ -53,7 +72,7 @@ const renderPage = ({ locale, page, prefix }: PageTarget): string => {
   if (page === "blog") content = renderBlogPage(copy, pathFor(locale, "home"));
   if (page === "opportunities") content = renderOpportunitiesPage(copy, pathFor(locale, "home"));
 
-  return renderDocument({ locale, page, prefix, content });
+  return renderDocument({ locale, page, prefix, content, noIndex: !isPagePublic(page) });
 };
 
 for (const target of targets) {
@@ -61,6 +80,17 @@ for (const target of targets) {
   await mkdir(dirname(outputPath), { recursive: true });
   await writeFile(outputPath, renderPage(target), "utf8");
 }
+
+const sitemapUrls = targets
+  .filter(({ page }) => isPagePublic(page))
+  .map(({ locale, page }) => `  <url><loc>${canonicalFor(locale, page)}</loc></url>`)
+  .join("\n");
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapUrls}
+</urlset>
+`;
+await writeFile(resolve(projectRoot, "public/sitemap.xml"), sitemap, "utf8");
 
 const notFoundCopy = getCopy("ar");
 const notFoundContent = `

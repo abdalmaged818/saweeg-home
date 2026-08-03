@@ -6,6 +6,15 @@ import { renderContact } from "../components/contact.ts";
 import { renderDestinationCard } from "../components/destination-card.ts";
 import { renderHero } from "../components/hero.ts";
 import { renderOpportunityPreview } from "../components/opportunities.ts";
+import { pageAvailability } from "../config/features.ts";
+import { renderLatest } from "../components/latest.ts";
+
+const renderEditorialPreview = (copy: SiteCopy): string => {
+  if (pageAvailability.news && pageAvailability.blog) return renderLatest(copy);
+  if (pageAvailability.news) return renderLatest(copy, "news");
+  if (pageAvailability.blog) return renderLatest(copy, "blog");
+  return "";
+};
 
 export const renderHomePage = (copy: SiteCopy, prefix: string, aboutPath: string, opportunitiesPath: string, heroImagePath: string): string => `
   ${renderHero(copy, heroImagePath)}
@@ -18,6 +27,7 @@ export const renderHomePage = (copy: SiteCopy, prefix: string, aboutPath: string
   </section>
   ${renderBranches(copy)}
   ${renderAboutPreview(copy, prefix, aboutPath)}
-  ${renderOpportunityPreview(copy, opportunitiesPath)}
+  ${renderEditorialPreview(copy)}
+  ${pageAvailability.opportunities ? renderOpportunityPreview(copy, opportunitiesPath) : ""}
   ${renderContact(copy)}
 `;

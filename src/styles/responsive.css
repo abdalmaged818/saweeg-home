@@ -84,6 +84,10 @@
     padding-block: 62px 46px;
   }
 
+  .hero-grid {
+    gap: 28px;
+  }
+
   .hero--with-image .hero-grid {
     grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
     gap: 54px;
@@ -94,8 +98,19 @@
     font-size: 3.75rem;
   }
 
+  .hero p {
+    margin-block-start: 18px;
+  }
+
   .hero-media {
+    height: auto;
+    aspect-ratio: 1;
     max-width: 500px;
+  }
+
+  .hero-media img {
+    object-fit: cover;
+    object-position: 50% 50%;
   }
 
   .destinations-grid {
@@ -185,11 +200,6 @@
 
   .language-link {
     padding-inline: 11px;
-  }
-
-  .hero {
-    min-height: 390px;
-    padding-block: 38px 26px;
   }
 
   .branch-actions .button,
