@@ -109,7 +109,7 @@ html[dir="rtl"] .button-icon {
 
 .language-link,
 .footer-language {
-  min-height: 44px;
+  min-height: 42px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -123,8 +123,8 @@ html[dir="rtl"] .button-icon {
 }
 
 .menu-button {
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   display: grid;
   align-content: center;
   gap: 5px;
@@ -204,22 +204,16 @@ html[dir="rtl"] .button-icon {
 }
 
 .destination-card {
-  min-height: 212px;
+  min-height: 190px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
-  padding: 22px 20px;
+  padding: 24px 22px;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
   transition: transform 180ms ease, box-shadow 180ms ease;
-}
-
-.destination-card:focus-visible {
-  outline: 3px solid var(--saweeg-gold);
-  outline-offset: 5px;
-  box-shadow: var(--shadow-hover);
 }
 
 .destination-card:hover {
@@ -232,12 +226,12 @@ html[dir="rtl"] .button-icon {
 }
 
 .destination-card p {
-  flex: 1;
   color: var(--text-soft);
   font-size: 0.94rem;
 }
 
 .destination-card .button {
+  min-width: 132px;
   margin-block-start: 8px;
 }
 
@@ -257,12 +251,12 @@ html[dir="rtl"] .button-icon {
 
 .destination-card--menu {
   border-color: var(--border-strong);
-  background: var(--surface-soft);
+  background: var(--saweeg-green-soft);
 }
 
 .destination-card--delivery {
-  border-color: var(--border-strong);
-  background: var(--surface);
+  border-color: rgba(196, 169, 114, 0.56);
+  background: var(--saweeg-gold-soft);
 }
 
 .delivery-actions {
@@ -285,6 +279,10 @@ html[dir="rtl"] .button-icon {
   box-shadow: var(--shadow-soft);
 }
 
+.about-preview-grid .surface-card {
+  padding-block: 34px;
+}
+
 .about-copy p {
   margin-block-start: 14px;
   color: var(--text-soft);
@@ -304,27 +302,17 @@ html[dir="rtl"] .button-icon {
   color: var(--saweeg-green);
 }
 
-.about-brand-panel,
 .brand-definition {
   display: grid;
-  place-items: center;
-  align-content: center;
   gap: 14px;
   padding: 28px;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  background: var(--surface-soft);
-}
-
-.about-brand-panel img,
-.brand-definition img {
-  width: min(190px, 58%);
-  height: auto;
-  object-fit: contain;
+  background: var(--saweeg-green-soft);
 }
 
 .brand-definition {
-  text-align: center;
+  text-align: start;
 }
 
 .brand-definition h2 {
@@ -332,7 +320,7 @@ html[dir="rtl"] .button-icon {
 }
 
 .brand-definition p {
-  max-width: 420px;
+  max-width: 680px;
   color: var(--text-soft);
 }
 
@@ -346,12 +334,16 @@ html[dir="rtl"] .button-icon {
 }
 
 .value-card {
-  min-height: 245px;
+  min-height: 210px;
   padding: 26px 22px;
 }
 
-.value-card--soft {
-  background: var(--surface-soft);
+.value-card--green {
+  background: var(--saweeg-green-soft);
+}
+
+.value-card--gold {
+  background: var(--saweeg-gold-soft);
 }
 
 .value-card h2,
@@ -403,7 +395,8 @@ html[dir="rtl"] .button-icon {
 }
 
 .branch-card {
-  padding: 24px 20px;
+  min-height: 160px;
+  padding: 24px 22px;
   background: var(--surface-soft);
 }
 
@@ -415,7 +408,7 @@ html[dir="rtl"] .button-icon {
 }
 
 .contact-card {
-  padding: 42px 22px;
+  padding: 34px 22px;
   border-radius: var(--radius-lg);
   background: var(--saweeg-green);
   color: var(--surface);
@@ -456,8 +449,8 @@ html[dir="rtl"] .button-icon {
 }
 
 .footer-brand img {
-  width: 84px;
-  height: 84px;
+  width: 74px;
+  height: 74px;
   padding: 8px;
   border-radius: 19px;
   background: var(--saweeg-ivory);
@@ -493,4 +486,20 @@ html[dir="rtl"] .button-icon {
   border-color: rgba(232, 229, 220, 0.32);
   background: transparent;
   color: var(--saweeg-ivory);
+}
+
+.about-image-card {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-soft);
+  box-shadow: var(--shadow-soft);
+}
+
+.about-image-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 58%;
 }

@@ -16,8 +16,8 @@ const renderEditorialPreview = (copy: SiteCopy): string => {
   return "";
 };
 
-export const renderHomePage = (copy: SiteCopy, prefix: string, aboutPath: string, opportunitiesPath: string, heroImagePath: string): string => `
-  ${renderHero(copy, heroImagePath)}
+export const renderHomePage = (copy: SiteCopy, prefix: string, aboutPath: string, opportunitiesPath: string): string => `
+  ${renderHero(copy)}
   <section class="destinations-section" id="destinations" aria-label="${copy.destinations.title}">
     <div class="container">
       <div class="destinations-grid">

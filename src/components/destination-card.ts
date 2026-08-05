@@ -19,11 +19,11 @@ export const renderDestinationCard = (destination: Destination, copy: SiteCopy):
   const href = destination.id === "store" ? siteConfig.links.store : siteConfig.links.menu;
   const analyticsEvent = destination.id === "store" ? "store_click" : "menu_click";
   return `
-    <a class="destination-card destination-card--${destination.tone}" href="${href}" target="_blank" rel="noopener noreferrer" data-analytics-event="${analyticsEvent}">
+    <article class="destination-card destination-card--${destination.tone}">
       <h3>${content.title}</h3>
       <p>${content.description}</p>
-      <span class="button ${destination.id === "store" ? "button-light" : "button-primary"}">
+      <a class="button ${destination.id === "store" ? "button-light" : "button-primary"}" href="${href}" target="_blank" rel="noopener noreferrer" data-analytics-event="${analyticsEvent}">
         ${content.cta}
-      </span>
-    </a>`;
+      </a>
+    </article>`;
 };

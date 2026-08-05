@@ -7,7 +7,7 @@ export const renderValues = (copy: SiteCopy): string => {
       <div class="container">
         <div class="values-grid">
           ${values.map((value, index) => `
-            <article class="value-card${index === 2 ? " value-card--soft" : ""}">
+            <article class="value-card value-card--${["surface", "green", "gold"][index]}">
               <h2>${value.title}</h2>
               <p>${value.description}</p>
             </article>`).join("")}
