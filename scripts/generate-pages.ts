@@ -12,16 +12,21 @@ import { renderOpportunitiesPage } from "../src/pages/opportunities.ts";
 import { siteConfig } from "../src/config/site.ts";
 import { isPagePublic } from "../src/config/features.ts";
 import { canonicalFor, createPathFor } from "../src/pages/routes.ts";
+import { participationCanonicalFor, participationPathFor } from "../src/pages/routes.ts";
+import { publishedParticipations } from "../src/data/participations.ts";
+import { renderParticipationPage } from "../src/pages/participation.ts";
+import { participationsUi } from "../src/content/participations.ts";
 
 interface PageTarget {
   locale: Locale;
   page: PageId;
   file: string;
   prefix: string;
+  participationSlug?: string;
 }
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const targets: PageTarget[] = [
+const baseTargets: PageTarget[] = [
   { locale: "ar", page: "home", file: "index.html", prefix: "./" },
   { locale: "en", page: "home", file: "en/index.html", prefix: "../" },
   { locale: "ar", page: "about", file: "about/index.html", prefix: "../" },
@@ -33,6 +38,25 @@ const targets: PageTarget[] = [
   { locale: "ar", page: "opportunities", file: "opportunities/index.html", prefix: "../" },
   { locale: "en", page: "opportunities", file: "en/opportunities/index.html", prefix: "../../" }
 ];
+
+const participationTargets: PageTarget[] = publishedParticipations.flatMap((participation) => [
+  {
+    locale: "ar" as const,
+    page: "news" as const,
+    file: `news/${participation.slug}/index.html`,
+    prefix: "../../",
+    participationSlug: participation.slug
+  },
+  {
+    locale: "en" as const,
+    page: "news" as const,
+    file: `en/news/${participation.slug}/index.html`,
+    prefix: "../../../",
+    participationSlug: participation.slug
+  }
+]);
+
+const targets: PageTarget[] = [...baseTargets, ...participationTargets];
 
 const renderHiddenPage = (locale: Locale, homePath: string): string => {
   const copy = getCopy(locale);
@@ -47,10 +71,52 @@ const renderHiddenPage = (locale: Locale, homePath: string): string => {
     </section>`;
 };
 
-const renderPage = ({ locale, page, prefix }: PageTarget): string => {
+const renderPage = ({ locale, page, prefix, participationSlug }: PageTarget): string => {
   const copy = getCopy(locale);
   const pathFor = createPathFor(prefix);
   let content = "";
+
+  if (participationSlug) {
+    const participation = publishedParticipations.find((item) => item.slug === participationSlug);
+    if (!participation) throw new Error(`Missing participation: ${participationSlug}`);
+    const canonical = participationCanonicalFor(locale, participationSlug);
+    const otherLocale: Locale = locale === "ar" ? "en" : "ar";
+    const title = locale === "ar" ? participation.seoTitleAr : participation.seoTitleEn;
+    const description = locale === "ar" ? participation.seoDescriptionAr : participation.seoDescriptionEn;
+    const headline = locale === "ar" ? participation.titleAr : participation.titleEn;
+    const heroAlt = locale === "ar" ? participation.heroAltAr : participation.heroAltEn;
+    const ui = participationsUi[locale];
+    content = renderParticipationPage({
+      participation,
+      locale,
+      prefix,
+      homePath: pathFor(locale, "home"),
+      participationsPath: pathFor(locale, "news"),
+      aboutPath: pathFor(locale, "about")
+    });
+    return renderDocument({
+      locale,
+      page,
+      prefix,
+      content,
+      title,
+      description,
+      canonical,
+      alternateAr: participationCanonicalFor("ar", participationSlug),
+      alternateEn: participationCanonicalFor("en", participationSlug),
+      localeSwitchPath: participationPathFor(prefix, otherLocale, participationSlug),
+      socialImage: `${siteConfig.brand.origin}/${participation.heroImage}-1440.webp`,
+      socialImageAlt: heroAlt,
+      socialImageWidth: participation.heroWidth,
+      socialImageHeight: participation.heroHeight,
+      articleHeadline: headline,
+      breadcrumbs: [
+        { name: ui.breadcrumbHome, url: canonicalFor(locale, "home") },
+        { name: ui.breadcrumbParticipations, url: canonicalFor(locale, "news") },
+        { name: headline, url: canonical }
+      ]
+    });
+  }
 
   if (!isPagePublic(page)) {
     content = renderHiddenPage(locale, pathFor(locale, "home"));
@@ -58,13 +124,14 @@ const renderPage = ({ locale, page, prefix }: PageTarget): string => {
   }
 
   if (page === "home") content = renderHomePage(
+    locale,
     copy,
     prefix,
     pathFor(locale, "about"),
     pathFor(locale, "opportunities")
   );
-  if (page === "about") content = renderAboutPage(copy, `${prefix}${siteConfig.assets.heroImage}`, pathFor(locale, "home"));
-  if (page === "news") content = renderNewsPage(copy, pathFor(locale, "home"));
+  if (page === "about") content = renderAboutPage(locale, prefix);
+  if (page === "news") content = renderNewsPage(locale, prefix);
   if (page === "blog") content = renderBlogPage(copy, pathFor(locale, "home"));
   if (page === "opportunities") content = renderOpportunitiesPage(copy, pathFor(locale, "home"));
 
@@ -79,7 +146,7 @@ for (const target of targets) {
 
 const sitemapUrls = targets
   .filter(({ page }) => isPagePublic(page))
-  .map(({ locale, page }) => `  <url><loc>${canonicalFor(locale, page)}</loc></url>`)
+  .map(({ locale, page, participationSlug }) => `  <url><loc>${participationSlug ? participationCanonicalFor(locale, participationSlug) : canonicalFor(locale, page)}</loc></url>`)
   .join("\n");
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

@@ -20,7 +20,7 @@ export const siteConfig = {
     collaborationUrl: ""
   },
   features: {
-    news: false,
+    news: true,
     blog: false,
     opportunities: false,
     careers: false,

@@ -10,8 +10,8 @@ export const en = {
   navigationLabel: "Main navigation",
   nav: {
     home: "Home",
-    about: "About",
-    news: "News",
+    about: "About Saweeg",
+    news: "Participations",
     blog: "Blog",
     opportunities: "Opportunities",
     contact: "Contact"
@@ -26,8 +26,8 @@ export const en = {
       description: "Discover Saweeg's story, mission, and vision for presenting authentic food products through a contemporary experience."
     },
     news: {
-      title: "Saweeg News | Official Gateway",
-      description: "Follow concise official news and updates from Saweeg in Madinah."
+      title: "Saweeg Participations | From the Heart of Madinah",
+      description: "Explore Saweeg’s forums, exhibitions, visits, and encounters carrying Madinah’s story and culinary heritage."
     },
     blog: {
       title: "Saweeg Blog | Heritage, Thoughtfully Presented",

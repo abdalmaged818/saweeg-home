@@ -7,9 +7,10 @@ interface HeaderOptions {
   copy: SiteCopy;
   prefix: string;
   pathFor: (locale: Locale, page: PageId) => string;
+  localeSwitchPath?: string;
 }
 
-export const renderHeader = ({ locale, page, copy, prefix, pathFor }: HeaderOptions): string => {
+export const renderHeader = ({ locale, page, copy, prefix, pathFor, localeSwitchPath }: HeaderOptions): string => {
   const otherLocale: Locale = locale === "ar" ? "en" : "ar";
   const home = pathFor(locale, "home");
   const allNavItems: Array<{ id: PageId; label: string }> = [
@@ -34,7 +35,7 @@ export const renderHeader = ({ locale, page, copy, prefix, pathFor }: HeaderOpti
           <a href="${home}#contact">${copy.nav.contact}</a>
         </nav>
         <div class="header-actions">
-          <a class="language-link" href="${pathFor(otherLocale, page)}" lang="${otherLocale}" hreflang="${otherLocale}" data-locale-switch="${otherLocale}" data-analytics-event="language_switch">${copy.languageSwitch}</a>
+          <a class="language-link" href="${localeSwitchPath ?? pathFor(otherLocale, page)}" lang="${otherLocale}" hreflang="${otherLocale}" data-locale-switch="${otherLocale}" data-analytics-event="language_switch">${copy.languageSwitch}</a>
           <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-navigation" aria-label="${copy.menuLabel}" data-open-label="${copy.menuLabel}" data-close-label="${copy.closeMenuLabel}" data-menu-button>
             <span></span><span></span><span></span>
           </button>

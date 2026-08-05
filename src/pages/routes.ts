@@ -19,3 +19,13 @@ export const canonicalFor = (locale: Locale, page: PageId): string => {
   const pageSegment = page === "home" ? "" : `/${page}`;
   return `${siteConfig.brand.origin}${localeSegment}${pageSegment}/`;
 };
+
+export const participationPathFor = (prefix: string, locale: Locale, slug: string): string => {
+  const localeSegment = locale === "en" ? "en/" : "";
+  return `${prefix}${localeSegment}news/${slug}/`;
+};
+
+export const participationCanonicalFor = (locale: Locale, slug: string): string => {
+  const localeSegment = locale === "en" ? "/en" : "";
+  return `${siteConfig.brand.origin}${localeSegment}/news/${slug}/`;
+};
