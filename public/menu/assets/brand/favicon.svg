@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Saweeg">
+  <rect width="64" height="64" rx="18" fill="#E9E5DB"/>
+  <path d="M33 49V24" fill="none" stroke="#344331" stroke-width="4" stroke-linecap="round"/>
+  <path d="M32 31C18 31 14 20 15 11c12 0 19 8 17 20Z" fill="#556A51"/>
+  <path d="M34 39c13 0 18-9 17-18-11 0-18 7-17 18Z" fill="#B7865D"/>
+</svg>

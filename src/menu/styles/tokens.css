@@ -1,0 +1,34 @@
+:root {
+  --saweeg-green: #5c6351;
+  --saweeg-green-dark: #344331;
+  --saweeg-green-soft: #e7ece5;
+  --saweeg-ivory: #e8e5dc;
+  --saweeg-gold: #c4a972;
+  --saweeg-gold-soft: #eee2c5;
+  --page-bg: #f8f6f1;
+  --surface: #ffffff;
+  --surface-soft: #f1eee7;
+  --text: #1d211a;
+  --text-soft: #6f746c;
+  --border: rgba(92, 99, 81, 0.16);
+  --border-strong: rgba(92, 99, 81, 0.25);
+  --radius-xl: 28px;
+  --radius-lg: 24px;
+  --radius-md: 20px;
+  --radius-sm: 14px;
+  --radius-pill: 999px;
+  --shadow-soft: 0 14px 34px rgba(52, 67, 49, 0.08);
+  --shadow-header: 0 10px 28px rgba(52, 67, 49, 0.10);
+  --max-width: 1180px;
+  --header-offset: 96px;
+  --focus-ring: 0 0 0 4px rgba(92, 99, 81, 0.2);
+  --transition: 180ms ease;
+
+  --brand-beige: var(--saweeg-ivory);
+  --brand-green: var(--saweeg-green);
+  --brand-brown: #b7865d;
+  --green-dark: var(--saweeg-green-dark);
+  --green-soft: var(--saweeg-green-soft);
+  --brown-dark: #7a553a;
+  --brown-soft: #f1e7de;
+}

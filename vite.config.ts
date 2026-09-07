@@ -29,7 +29,10 @@ export default defineConfig({
         blogEn: resolve(projectRoot, "en/blog/index.html"),
         opportunitiesAr: resolve(projectRoot, "opportunities/index.html"),
         opportunitiesEn: resolve(projectRoot, "en/opportunities/index.html"),
-        notFound: resolve(projectRoot, "404.html")
+        notFound: resolve(projectRoot, "404.html"),
+        menuAr: resolve(projectRoot, "menu/index.html"),
+        menuEn: resolve(projectRoot, "menu/en/index.html"),
+        menuNotFound: resolve(projectRoot, "menu/404.html")
       }
     }
   }
