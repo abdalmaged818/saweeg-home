@@ -3,15 +3,19 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "packageManager": "pnpm@11.19.0",
   "scripts": {
     "generate": "node --experimental-strip-types scripts/generate-pages.ts",
     "dev": "node --experimental-strip-types scripts/generate-pages.ts && vite",
+    "images:optimize:menu": "node scripts/process-menu-product-images.mjs",
     "typecheck": "tsc --noEmit",
-    "build": "node --experimental-strip-types scripts/generate-pages.ts && tsc --noEmit && vite build",
+    "build": "node --experimental-strip-types scripts/generate-pages.ts && tsc --noEmit && vite build && node scripts/verify-unified-build.mjs",
+    "verify:build": "node scripts/verify-unified-build.mjs",
     "preview": "vite preview"
   },
   "devDependencies": {
     "@types/node": "22.15.3",
+    "sharp": "0.34.5",
     "typescript": "5.8.3",
     "vite": "7.0.6"
   }

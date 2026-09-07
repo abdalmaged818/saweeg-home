@@ -146,11 +146,21 @@ for (const target of targets) {
 
 const sitemapUrls = targets
   .filter(({ page }) => isPagePublic(page))
-  .map(({ locale, page, participationSlug }) => `  <url><loc>${participationSlug ? participationCanonicalFor(locale, participationSlug) : canonicalFor(locale, page)}</loc></url>`)
+  .map(({ locale, page, participationSlug }) => participationSlug ? participationCanonicalFor(locale, participationSlug) : canonicalFor(locale, page));
+const menuSitemapUrls = [
+  `${siteConfig.brand.origin}/menu/`,
+  `${siteConfig.brand.origin}/menu/en/`,
+  `${siteConfig.brand.origin}/menu/?branch=maqsed`,
+  `${siteConfig.brand.origin}/menu/?branch=bustan`,
+  `${siteConfig.brand.origin}/menu/en/?branch=maqsed`,
+  `${siteConfig.brand.origin}/menu/en/?branch=bustan`
+];
+const sitemapEntries = [...sitemapUrls, ...menuSitemapUrls]
+  .map((url) => `  <url><loc>${url}</loc></url>`)
   .join("\n");
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${sitemapUrls}
+${sitemapEntries}
 </urlset>
 `;
 await writeFile(resolve(projectRoot, "public/sitemap.xml"), sitemap, "utf8");

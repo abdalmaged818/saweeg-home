@@ -1,42 +1,49 @@
-# Saweeg Home
+# مشروع سويق الموحد
 
-The official bilingual gateway for Saweeg. It is intentionally isolated from
-[`saweeg-menu`](https://github.com/abdalmaged818/saweeg-menu) so the existing
-menu deployment and `menu.saweegsa.com` custom domain remain untouched.
+المصدر الوحيد للبوابة والمنيو. يجمع بناء Vite واحد الصفحات التالية على النطاق الرسمي `https://go.saweegsa.com`:
 
-Official domain: <https://go.saweegsa.com>
+- البوابة العربية: `/`
+- البوابة الإنجليزية: `/en/`
+- المشاركات العربية والإنجليزية: `/news/` و`/en/news/`
+- المنيو العربية: `/menu/?branch=maqsed` أو `/menu/?branch=bustan`
+- المنيو الإنجليزية: `/menu/en/?branch=maqsed` أو `/menu/en/?branch=bustan`
 
-## Local development
+## التشغيل والتحقق
 
-```bash
-npm install
-npm run dev
-```
-
-Validation:
+يتطلب Node.js 22 أو أحدث وpnpm 11.19.0.
 
 ```bash
-npm run typecheck
-npm run build
-npm run preview
+pnpm install --frozen-lockfile
+pnpm run dev
+pnpm run typecheck
+pnpm run build
+pnpm run preview
 ```
 
-## Content and configuration
+يشغّل `pnpm run build` توليد صفحات البوابة، فحص TypeScript، البناء الموحد، ثم فحصًا آليًا للمسارات وملفات المنيو وغياب أي اعتماد على `menu.saweegsa.com`.
 
-- External URLs and feature flags: `src/config/site.ts`
-- Arabic content: `src/i18n/ar.ts`
-- English content: `src/i18n/en.ts`
-- Destinations, branches, news, and opportunities: `src/data/`
-- Brand assets: `public/assets/brand/`
-- Approved home hero image: `public/assets/images/saweeg-madinah-hero.png`
+## مواقع الكود والمحتوى
 
-Career and collaboration buttons remain disabled until valid URLs are added to
-`siteConfig.links.careersUrl` and `siteConfig.links.collaborationUrl`. Enable
-the corresponding flag only after adding the URL.
+- صفحات ومكونات البوابة: `src/pages/` و`src/components/`.
+- نصوص البوابة: `src/i18n/` و`src/content/`.
+- المشاركات: `src/data/participations.ts` و`src/content/participations.ts`.
+- تطبيق المنيو: `src/menu/`.
+- منتجات وأسعار المنيو: `src/menu/data/products.ts` و`src/menu/data/extras.ts`.
+- فروع المنيو: `src/menu/data/branches.ts`.
+- صور المنيو المنشورة: `public/menu/assets/products/`.
+- صور المنيو المصدرية: `assets-source/menu/product-images/`.
+- معالجة صور المنيو: `pnpm run images:optimize:menu`.
+- مداخل المنيو: `menu/index.html` و`menu/en/index.html`.
 
-## Deployment
+## النشر
 
-GitHub Actions builds every push to `feature/saweeg-home` and deploys `main` to
-GitHub Pages. The custom domain is declared in `public/CNAME` and the production
-site is served from the domain root. DNS needs one `go` CNAME pointing to
-`abdalmaged818.github.io`; no `menu`, store, or nameserver record should change.
+الفرع `main` فقط هو الذي يرفع `dist/` إلى GitHub Pages. طلبات الدمج تبني وتتحقق دون نشر. ملف `public/CNAME` يبقى `go.saweegsa.com`، ولا يحتاج الدمج إلى Netlify أو تغيير DNS للنطاق الأساسي.
+
+قبل دمج فرع التوحيد، اقرأ:
+
+- `docs/UNIFIED_LOCAL_SETUP_AR.md`
+- `docs/UNIFIED_CONTENT_EDITING_AR.md`
+- `docs/UNIFIED_DEPLOYMENT_AND_ROLLBACK_AR.md`
+- `docs/LEGACY_MENU_TRANSITION_AR.md`
+
+حزمة التسليم المؤرخة قبل هذا الفرع تمثل النسخة المنفصلة قبل الدمج. تُنشأ حزمة تسليم نهائية جديدة بعد اعتماد الفرع ونشره والتحقق من الإنتاج.
