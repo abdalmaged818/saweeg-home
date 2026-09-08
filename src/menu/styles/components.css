@@ -55,8 +55,9 @@
 }
 
 .language-link {
-  min-height: 42px;
+  min-height: 44px;
   border: 1px solid var(--border);
+  background: var(--surface);
   color: var(--green-dark);
 }
 
@@ -65,12 +66,12 @@
 }
 
 .mobile-menu-button {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   display: inline-grid;
   place-items: center;
   border: 1px solid var(--border);
-  border-radius: 13px;
+  border-radius: var(--radius-sm);
   background: var(--surface);
   color: var(--green-dark);
   cursor: pointer;
@@ -127,7 +128,7 @@
 
 .eyebrow {
   margin: 0 0 0.45rem;
-  color: var(--brown-dark);
+  color: var(--saweeg-olive);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -158,7 +159,7 @@ html[lang="ar"] .eyebrow {
 .hero__body {
   max-width: 52ch;
   margin: 0.75rem 0 1.25rem;
-  color: #465044;
+  color: var(--text-soft);
   font-size: 1rem;
 }
 
@@ -172,11 +173,18 @@ html[lang="ar"] .eyebrow {
   font-weight: 700;
   transition:
     transform var(--transition),
-    background-color var(--transition);
+    background-color var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition);
 }
 
 .button:hover {
   transform: translateY(-2px);
+}
+
+.button:active {
+  transform: translateY(0);
 }
 
 .button--primary {
@@ -186,11 +194,12 @@ html[lang="ar"] .eyebrow {
 
 .button--primary:hover {
   background: var(--green-dark);
+  box-shadow: 0 6px 18px rgba(0, 47, 45, 0.16);
 }
 
 .button--secondary {
   border: 1px solid var(--brand-green);
-  background: transparent;
+  background: var(--surface);
   color: var(--green-dark);
 }
 
@@ -262,7 +271,7 @@ html[lang="ar"] .eyebrow {
 .branch-option.is-active {
   border-color: var(--brand-green);
   background: var(--brand-green);
-  box-shadow: 0 8px 20px rgba(85, 106, 81, 0.18);
+  box-shadow: 0 6px 18px rgba(0, 47, 45, 0.14);
   color: var(--surface);
 }
 
@@ -285,6 +294,7 @@ html[lang="ar"] .eyebrow {
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   background: var(--surface);
+  box-shadow: var(--shadow-card);
   transition:
     transform var(--transition),
     box-shadow var(--transition);
@@ -341,7 +351,7 @@ html[lang="ar"] .eyebrow {
 }
 
 .product-card__content {
-  min-height: 88px;
+  min-height: 96px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -377,7 +387,7 @@ html[lang="ar"] .eyebrow {
 .product-card__quantity,
 .compact-product-card__quantity {
   margin: 0.18rem 0 0;
-  color: var(--text-soft);
+  color: var(--text-secondary);
   font-size: 0.86rem;
   font-weight: 500;
   line-height: 1.45;
@@ -399,8 +409,8 @@ html[lang="ar"] .eyebrow {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  border: 1px solid rgba(85, 106, 81, 0.2);
-  border-radius: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
   background: var(--surface);
   padding: 1rem 1.1rem;
   transition:
@@ -409,8 +419,8 @@ html[lang="ar"] .eyebrow {
 }
 
 .compact-product-card:hover {
-  border-color: rgba(85, 106, 81, 0.34);
-  background: #fffefb;
+  border-color: var(--border-strong);
+  background: var(--surface);
 }
 
 .compact-product-card__name {
@@ -467,7 +477,7 @@ html[lang="ar"] .eyebrow {
 
 .extra-row__quantity {
   margin: 0.15rem 0 0;
-  color: var(--text-soft);
+  color: var(--text-secondary);
   font-size: 0.86rem;
 }
 
@@ -552,7 +562,7 @@ html[lang="ar"] .eyebrow {
   display: grid;
   place-items: center;
   overflow: hidden;
-  border-radius: 18px;
+  border-radius: var(--radius-md);
   background: var(--saweeg-ivory);
 }
 
@@ -569,7 +579,7 @@ html[lang="ar"] .eyebrow {
 
 .footer-link {
   width: fit-content;
-  min-height: 40px;
+  min-height: 44px;
   padding-inline: 0;
   color: var(--brand-beige);
 }
@@ -639,5 +649,5 @@ html[lang="ar"] .eyebrow {
 
 .not-found-copy {
   margin: 0.7rem auto 1.5rem;
-  color: var(--text-soft);
+  color: var(--text-secondary);
 }
