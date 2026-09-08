@@ -6,7 +6,7 @@ export const extras: Extra[] = [
   {
     id: "saudi-coffee-cup",
     nameAr: "كوب قهوة سعودية",
-    nameEn: "Saudi Coffee Cup",
+    nameEn: "Saudi Coffee",
     quantityAr: "كوب",
     quantityEn: "Cup",
     price: 6,
@@ -15,20 +15,20 @@ export const extras: Extra[] = [
   {
     id: "saudi-coffee-dallah",
     nameAr: "دلة قهوة سعودية",
-    nameEn: "Saudi Coffee Dallah",
+    nameEn: "Saudi Coffee",
     quantityAr: "دلة",
     quantityEn: "Dallah",
     price: 21,
-    branches: [...sharedBranches]
+    branches: ["maqsed"]
   },
   {
     id: "saudi-coffee-dallah-with-sweets",
     nameAr: "دلة قهوة سعودية مع حلى",
-    nameEn: "Saudi Coffee Dallah with Sweets",
+    nameEn: "Saudi Coffee",
     quantityAr: "دلة مع حلى",
     quantityEn: "Dallah with Sweets",
     price: 39,
-    branches: [...sharedBranches]
+    branches: ["maqsed"]
   },
   {
     id: "water",
@@ -70,7 +70,7 @@ export const extras: Extra[] = [
     id: "coffee-of-the-day-maqsed",
     nameAr: "قهوة اليوم",
     nameEn: "Coffee of the Day",
-    price: 10,
+    price: 6,
     branches: ["maqsed"]
   },
   {
@@ -82,7 +82,7 @@ export const extras: Extra[] = [
   },
   {
     id: "tea",
-    nameAr: "شاي",
+    nameAr: "شاهي",
     nameEn: "Tea",
     quantityAr: "كوب",
     quantityEn: "Cup",
@@ -91,8 +91,8 @@ export const extras: Extra[] = [
   },
   {
     id: "tea-flask",
-    nameAr: "ثلاجة شاي",
-    nameEn: "Tea Flask",
+    nameAr: "شاهي",
+    nameEn: "Tea",
     quantityAr: "ثلاجة",
     quantityEn: "Flask",
     price: 25,
