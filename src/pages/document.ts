@@ -5,6 +5,8 @@ import { renderFooter } from "../components/footer.ts";
 import { renderHeader } from "../components/header.ts";
 import { canonicalFor, createPathFor } from "./routes.ts";
 
+const homepageWelcome = "سلام من لدن أرض السلام";
+
 interface BreadcrumbItem {
   name: string;
   url: string;
@@ -158,6 +160,7 @@ export const renderDocument = ({
 </head>
 <body>
   <a class="skip-link" href="#main-content">${copy.skipLink}</a>
+  ${page === "home" ? `<div class="welcome-strip" lang="ar" dir="rtl"><p class="welcome-strip__text">${homepageWelcome}</p></div>` : ""}
   ${renderHeader({ locale, page, copy, prefix, pathFor, localeSwitchPath })}
   <main id="main-content">${content}</main>
   ${renderFooter({ locale, page, copy, prefix, pathFor, localeSwitchPath })}

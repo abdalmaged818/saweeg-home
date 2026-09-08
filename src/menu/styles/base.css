@@ -23,13 +23,14 @@ body {
   color: var(--text);
   font-family: "IBM Plex Sans Arabic", sans-serif;
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.65;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
 
 html[lang="en"] body {
   font-family: "Inter", sans-serif;
+  line-height: 1.6;
 }
 
 img {
@@ -58,7 +59,7 @@ button,
 }
 
 :focus-visible {
-  outline: 2px solid var(--brand-green);
+  outline: 3px solid var(--saweeg-green-seasonal);
   outline-offset: 3px;
   box-shadow: var(--focus-ring);
 }
@@ -68,7 +69,7 @@ button,
 }
 
 ::selection {
-  background: var(--brand-green);
+  background: var(--green-dark);
   color: var(--surface);
 }
 

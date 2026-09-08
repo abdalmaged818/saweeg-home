@@ -42,9 +42,23 @@ const readDist = (relative) =>
 
 const menuAr = readDist("menu/index.html");
 const menuEn = readDist("menu/en/index.html");
+const homeAr = readDist("index.html");
+const homeEn = readDist("en/index.html");
 const sitemap = readDist("sitemap.xml");
 const manifest = JSON.parse(readDist("menu/site.webmanifest"));
 const cname = readDist("CNAME").trim();
+const homepageWelcome = "سلام من لدن أرض السلام";
+
+for (const [html, label] of [[homeAr, "Arabic homepage"], [homeEn, "English homepage"]]) {
+  const occurrences = html.split(homepageWelcome).length - 1;
+  if (occurrences !== 1) failures.push(`${label} must contain the welcome phrase exactly once`);
+}
+
+for (const relative of expectedFiles.filter((file) => file.endsWith(".html") && !["index.html", "en/index.html"].includes(file))) {
+  if (readDist(relative).includes(homepageWelcome)) {
+    failures.push(`Welcome phrase must not appear outside the homepage: ${relative}`);
+  }
+}
 
 const requiredHtmlSnippets = [
   [menuAr, "https://go.saweegsa.com/menu/", "Arabic menu canonical"],
