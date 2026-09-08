@@ -25,57 +25,22 @@ const imageJobs = [
   officialProductImage("talbinah-matcha.png", "talbinah-matcha.webp"),
   officialProductImage("hot-talbinah-one-liter.png", "hot-talbinah-one-liter.webp"),
   officialProductImage("mixed-caramelized-nuts-pack.png", "mixed-caramelized-nuts-pack.webp"),
-  { sourceName: "الدمكة.jpg", outputName: "damkah.webp", verticalCrop: 0.5 },
-  {
-    sourceName: "ايسكريم بالتلبينة النبوية مع مكسرات.jpg",
-    outputName: "talbinah-ice-cream.webp",
-    width: 1400,
-    height: 1050,
-    extract: { left: 220, top: 260, width: 1720, height: 2260 },
-    fit: "contain",
-    background: { r: 248, g: 249, b: 251, alpha: 1 }
-  },
-  {
-    sourceName: "ايسكريم المانجو.jpg",
-    outputName: "mango-ice-cream.webp",
-    width: 1400,
-    height: 1050,
-    extract: { left: 250, top: 220, width: 1660, height: 2380 },
-    fit: "contain",
-    background: { r: 249, g: 250, b: 252, alpha: 1 }
-  },
-  {
-    sourceName: "ايسكريم مكس.jpg",
-    outputName: "mixed-ice-cream.webp",
-    width: 1400,
-    height: 1050,
-    extract: { left: 320, top: 390, width: 1520, height: 2120 },
-    fit: "contain",
-    background: { r: 249, g: 249, b: 251, alpha: 1 }
-  },
+  officialProductImage("damkah-2026-09.png", "damkah-2026-09.webp"),
+  officialProductImage("talbinah-ice-cream-2026-09.png", "talbinah-ice-cream-2026-09.webp"),
+  officialProductImage("mango-ice-cream-2026-09.png", "mango-ice-cream-2026-09.webp"),
+  officialProductImage("mixed-ice-cream-2026-09.png", "mixed-ice-cream-2026-09.webp"),
   officialProductImage("saweeg-powder.png", "sawiq-powder.webp"),
-  { sourceName: "بوكس الاهداء.jpg", outputName: "gift-box.webp", verticalCrop: 1 },
+  officialProductImage("gift-box-2026-09.png", "gift-box-2026-09.webp"),
   officialProductImage("al-jabirah-box.png", "al-jabirah-box.webp"),
   officialProductImage("date-pecan-tart-box.png", "date-pecan-tart-box.webp"),
-  { sourceName: "بوكس معمول.jpg", outputName: "maamoul-box.webp", verticalCrop: 0.5 },
-  { sourceName: "تلبينة باردة.jpg", outputName: "cold-talbinah.webp", verticalCrop: 0.5 },
-  { sourceName: "تلبينة حاره.jpg", outputName: "hot-talbinah.webp", verticalCrop: 0.55 },
-  {
-    sourceName: "تشيز كيك.jpg",
-    outputName: "talbinah-lotus-cheesecake.webp",
-    width: 1400,
-    height: 1050,
-    extract: { left: 250, top: 500, width: 1660, height: 1800 },
-    fit: "cover"
-  },
-  {
-    sourceName: "تمر بالسويق.JPG",
-    outputName: "dates-with-saweeg.webp",
-    width: 1400,
-    height: 1050,
-    extract: { left: 361, top: 0, width: 5776, height: 4332 },
-    fit: "cover"
-  },
+  officialProductImage("maamoul-box-2026-09.png", "maamoul-box-2026-09.webp"),
+  officialProductImage("cold-talbinah-2026-09.png", "cold-talbinah-2026-09.webp"),
+  officialProductImage("hot-talbinah-2026-09.png", "hot-talbinah-2026-09.webp"),
+  officialProductImage(
+    "talbinah-lotus-cheesecake-2026-09.png",
+    "talbinah-lotus-cheesecake-2026-09.webp"
+  ),
+  officialProductImage("dates-with-saweeg-2026-09.png", "dates-with-saweeg-2026-09.webp"),
   {
     sourceName: "كريب مديني أجبان.jpg",
     outputName: "madini-crepe-cheese.webp",
@@ -92,23 +57,14 @@ const imageJobs = [
     extract: { left: 120, top: 530, width: 1920, height: 1440 },
     fit: "cover"
   },
-  {
-    sourceName: "تمر صفاوي.jpg",
-    outputName: "safawi-dates-gift-box.webp",
-    width: 1400,
-    height: 1050,
-    extract: { left: 80, top: 330, width: 2000, height: 2200 },
-    fit: "contain",
-    background: { r: 252, g: 252, b: 254, alpha: 1 }
-  },
-  {
-    sourceName: "ظرف التلبينة.JPG",
-    outputName: "talbinah-sachet-box.webp",
-    width: 1400,
-    height: 1050,
-    extract: { left: 442, top: 0, width: 5371, height: 4028 },
-    fit: "cover"
-  },
+  officialProductImage(
+    "safawi-dates-gift-box-2026-09.png",
+    "safawi-dates-gift-box-2026-09.webp"
+  ),
+  officialProductImage(
+    "talbinah-sachet-box-12-2026-09.png",
+    "talbinah-sachet-box-12-2026-09.webp"
+  ),
   officialProductImage("talbinah-sachets.png", "talbinah-sachets.webp")
 ];
 
