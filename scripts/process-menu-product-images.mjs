@@ -8,9 +8,23 @@ const sourceDirectory = path.join(projectRoot, "assets-source", "menu", "product
 const outputDirectory = path.join(projectRoot, "public", "menu", "assets", "products");
 const WEBP_QUALITY = 86;
 const CANVAS_COLOR = { r: 247, g: 247, b: 245, alpha: 1 };
+const OFFICIAL_PRODUCT_BACKGROUND = { r: 251, g: 245, b: 238, alpha: 1 };
+
+const officialProductImage = (sourceName, outputName) => ({
+  sourceName,
+  outputName,
+  width: 1400,
+  height: 1050,
+  fullFrame: true,
+  fit: "contain",
+  background: OFFICIAL_PRODUCT_BACKGROUND
+});
 
 const imageJobs = [
-  { sourceName: "الجابرة تلبينة.jpg", outputName: "talbinah-powder.webp", verticalCrop: 0.78 },
+  officialProductImage("talbinah-nabawi-powder.png", "talbinah-powder.webp"),
+  officialProductImage("talbinah-matcha.png", "talbinah-matcha.webp"),
+  officialProductImage("hot-talbinah-one-liter.png", "hot-talbinah-one-liter.webp"),
+  officialProductImage("mixed-caramelized-nuts-pack.png", "mixed-caramelized-nuts-pack.webp"),
   { sourceName: "الدمكة.jpg", outputName: "damkah.webp", verticalCrop: 0.5 },
   {
     sourceName: "ايسكريم بالتلبينة النبوية مع مكسرات.jpg",
@@ -39,10 +53,10 @@ const imageJobs = [
     fit: "contain",
     background: { r: 249, g: 249, b: 251, alpha: 1 }
   },
-  { sourceName: "بودرة سويق.jpg", outputName: "sawiq-powder.webp", verticalCrop: 0.83 },
+  officialProductImage("saweeg-powder.png", "sawiq-powder.webp"),
   { sourceName: "بوكس الاهداء.jpg", outputName: "gift-box.webp", verticalCrop: 1 },
-  { sourceName: "بوكس التلبينة.jpg", outputName: "al-jabirah-box.webp", verticalCrop: 1 },
-  { sourceName: "بوكس بسبوسه.jpg", outputName: "date-pecan-tart-box.webp", verticalCrop: 0.5 },
+  officialProductImage("al-jabirah-box.png", "al-jabirah-box.webp"),
+  officialProductImage("date-pecan-tart-box.png", "date-pecan-tart-box.webp"),
   { sourceName: "بوكس معمول.jpg", outputName: "maamoul-box.webp", verticalCrop: 0.5 },
   { sourceName: "تلبينة باردة.jpg", outputName: "cold-talbinah.webp", verticalCrop: 0.5 },
   { sourceName: "تلبينة حاره.jpg", outputName: "hot-talbinah.webp", verticalCrop: 0.55 },
@@ -95,14 +109,7 @@ const imageJobs = [
     extract: { left: 442, top: 0, width: 5371, height: 4028 },
     fit: "cover"
   },
-  {
-    sourceName: "أظرف التلبينة.JPG",
-    outputName: "talbinah-sachets.webp",
-    width: 1400,
-    height: 1050,
-    extract: { left: 386, top: 0, width: 6187, height: 4640 },
-    fit: "cover"
-  }
+  officialProductImage("talbinah-sachets.png", "talbinah-sachets.webp")
 ];
 
 const fileExists = async (filePath) => {
@@ -130,7 +137,16 @@ for (const job of imageJobs) {
   let summary;
   let outputBuffer;
 
-  if (job.extract) {
+  if (job.fullFrame) {
+    pipeline = pipeline.resize({
+      width: job.width,
+      height: job.height,
+      fit: job.fit,
+      position: "centre",
+      background: job.background
+    });
+    summary = "contain, full source image";
+  } else if (job.extract) {
     pipeline = pipeline.extract(job.extract).resize({
       width: job.width,
       height: job.height,

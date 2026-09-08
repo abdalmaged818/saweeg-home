@@ -79,8 +79,8 @@ const productDirectory = path.join(distRoot, "menu", "assets", "products");
 const productImages = fs.existsSync(productDirectory)
   ? fs.readdirSync(productDirectory).filter((name) => name.endsWith(".webp"))
   : [];
-if (productImages.length !== 19) {
-  failures.push(`Expected 19 menu product images, found ${productImages.length}`);
+if (productImages.length !== 22) {
+  failures.push(`Expected 22 menu product images, found ${productImages.length}`);
 }
 
 const textExtensions = new Set([".html", ".js", ".css", ".xml", ".json", ".webmanifest", ".txt"]);

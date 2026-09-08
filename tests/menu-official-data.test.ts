@@ -100,3 +100,26 @@ test("confirmed official labels are retained", () => {
   assert.equal(extrasById.tea.nameAr, "شاهي");
   assert.equal(extrasById["tea-flask"].nameAr, "شاهي");
 });
+
+test("official supplied product images are mapped without cropping", () => {
+  const expectedImages = {
+    "talbinah-sachets": "talbinah-sachets.webp",
+    "talbinah-matcha": "talbinah-matcha.webp",
+    "mixed-caramelized-nuts-sachet": "mixed-caramelized-nuts-pack.webp",
+    "al-jabirah-box": "al-jabirah-box.webp",
+    "date-pecan-tart-box": "date-pecan-tart-box.webp",
+    "talbinah-powder": "talbinah-powder.webp",
+    "saweeg-powder": "sawiq-powder.webp",
+    "hot-talbinah-one-liter": "hot-talbinah-one-liter.webp"
+  } as const;
+
+  for (const [id, image] of Object.entries(expectedImages)) {
+    const product = products.find((candidate) => candidate.id === id);
+    assert(product, `Missing product ${id}`);
+    assert.equal(product.displayMode, "image", `${id} should use an image card`);
+    if (product.displayMode === "image") {
+      assert.equal(product.image, image);
+      assert.equal(product.imageFit, "contain");
+    }
+  }
+});

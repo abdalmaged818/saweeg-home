@@ -69,7 +69,10 @@ export const products: Product[] = [
     nameEn: "Talbinah Matcha",
     price: 22,
     category: "talbinah",
-    displayMode: "compact",
+    displayMode: "image",
+    image: "talbinah-matcha.webp",
+    imageFit: "contain",
+    imagePosition: "center",
     branches: [...sharedBranches]
   },
   {
@@ -80,7 +83,10 @@ export const products: Product[] = [
     quantityEn: "1 Liter",
     price: 49,
     category: "talbinah",
-    displayMode: "compact",
+    displayMode: "image",
+    image: "hot-talbinah-one-liter.webp",
+    imageFit: "contain",
+    imagePosition: "center",
     branches: ["maqsed"]
   },
   {
@@ -181,7 +187,7 @@ export const products: Product[] = [
     category: "boxes",
     displayMode: "image",
     image: "date-pecan-tart-box.webp",
-    imageFit: "cover",
+    imageFit: "contain",
     imagePosition: "center",
     branches: [...sharedBranches]
   },
@@ -207,7 +213,7 @@ export const products: Product[] = [
     category: "boxes",
     displayMode: "image",
     image: "al-jabirah-box.webp",
-    imageFit: "cover",
+    imageFit: "contain",
     imagePosition: "center",
     branches: [...sharedBranches]
   },
@@ -233,7 +239,7 @@ export const products: Product[] = [
     category: "ready",
     displayMode: "image",
     image: "talbinah-powder.webp",
-    imageFit: "cover",
+    imageFit: "contain",
     imagePosition: "center",
     branches: [...sharedBranches]
   },
@@ -245,7 +251,7 @@ export const products: Product[] = [
     category: "ready",
     displayMode: "image",
     image: "sawiq-powder.webp",
-    imageFit: "cover",
+    imageFit: "contain",
     imagePosition: "center",
     branches: [...sharedBranches]
   },
@@ -259,7 +265,7 @@ export const products: Product[] = [
     category: "ready",
     displayMode: "image",
     image: "talbinah-sachets.webp",
-    imageFit: "cover",
+    imageFit: "contain",
     imagePosition: "center",
     branches: [...sharedBranches]
   },
@@ -269,7 +275,10 @@ export const products: Product[] = [
     nameEn: "Mixed Caramelized Nuts Pack",
     price: 12,
     category: "ready",
-    displayMode: "compact",
+    displayMode: "image",
+    image: "mixed-caramelized-nuts-pack.webp",
+    imageFit: "contain",
+    imagePosition: "center",
     branches: [...sharedBranches]
   }
 ];
