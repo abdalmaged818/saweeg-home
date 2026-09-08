@@ -10,7 +10,7 @@ export const products: Product[] = [
     price: 14,
     category: "talbinah",
     displayMode: "image",
-    image: "talbinah-ice-cream.webp",
+    image: "talbinah-ice-cream-2026-09.webp",
     imageFit: "cover",
     imagePosition: "center",
     branches: [...sharedBranches]
@@ -22,7 +22,7 @@ export const products: Product[] = [
     price: 14,
     category: "talbinah",
     displayMode: "image",
-    image: "mango-ice-cream.webp",
+    image: "mango-ice-cream-2026-09.webp",
     imageFit: "cover",
     imagePosition: "center",
     branches: [...sharedBranches]
@@ -34,7 +34,7 @@ export const products: Product[] = [
     price: 14,
     category: "talbinah",
     displayMode: "image",
-    image: "mixed-ice-cream.webp",
+    image: "mixed-ice-cream-2026-09.webp",
     imageFit: "cover",
     imagePosition: "center",
     branches: [...sharedBranches]
@@ -46,7 +46,7 @@ export const products: Product[] = [
     price: 15,
     category: "talbinah",
     displayMode: "image",
-    image: "cold-talbinah.webp",
+    image: "cold-talbinah-2026-09.webp",
     imageFit: "cover",
     imagePosition: "center",
     branches: [...sharedBranches]
@@ -58,7 +58,7 @@ export const products: Product[] = [
     price: 15,
     category: "talbinah",
     displayMode: "image",
-    image: "hot-talbinah.webp",
+    image: "hot-talbinah-2026-09.webp",
     imageFit: "cover",
     imagePosition: "center",
     branches: [...sharedBranches]
@@ -96,7 +96,7 @@ export const products: Product[] = [
     price: 19,
     category: "sweets",
     displayMode: "image",
-    image: "talbinah-lotus-cheesecake.webp",
+    image: "talbinah-lotus-cheesecake-2026-09.webp",
     imageFit: "cover",
     imagePosition: "center",
     branches: [...sharedBranches]
@@ -108,7 +108,7 @@ export const products: Product[] = [
     price: 19,
     category: "sweets",
     displayMode: "image",
-    image: "dates-with-saweeg.webp",
+    image: "dates-with-saweeg-2026-09.webp",
     imageFit: "cover",
     imagePosition: "center",
     branches: [...sharedBranches]
@@ -122,7 +122,7 @@ export const products: Product[] = [
     price: 19,
     category: "sweets",
     displayMode: "image",
-    image: "damkah.webp",
+    image: "damkah-2026-09.webp",
     imageFit: "cover",
     imagePosition: "center",
     branches: [...sharedBranches]
@@ -160,7 +160,7 @@ export const products: Product[] = [
     price: 78,
     category: "boxes",
     displayMode: "image",
-    image: "maamoul-box.webp",
+    image: "maamoul-box-2026-09.webp",
     imageFit: "cover",
     imagePosition: "center",
     branches: [...sharedBranches]
@@ -172,7 +172,7 @@ export const products: Product[] = [
     price: 78,
     category: "boxes",
     displayMode: "image",
-    image: "safawi-dates-gift-box.webp",
+    image: "safawi-dates-gift-box-2026-09.webp",
     imageFit: "cover",
     imagePosition: "center",
     branches: [...sharedBranches]
@@ -200,7 +200,7 @@ export const products: Product[] = [
     price: 68,
     category: "boxes",
     displayMode: "image",
-    image: "talbinah-sachet-box.webp",
+    image: "talbinah-sachet-box-12-2026-09.webp",
     imageFit: "cover",
     imagePosition: "center",
     branches: [...sharedBranches]
@@ -226,7 +226,7 @@ export const products: Product[] = [
     price: 42,
     category: "boxes",
     displayMode: "image",
-    image: "gift-box.webp",
+    image: "gift-box-2026-09.webp",
     imageFit: "cover",
     imagePosition: "center",
     branches: [...sharedBranches]
