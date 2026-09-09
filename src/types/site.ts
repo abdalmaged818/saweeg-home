@@ -61,6 +61,13 @@ export interface SiteCopy {
     primary: string;
     secondary: string;
   };
+  nationalDayOffer: {
+    badge: string;
+    heading: string;
+    offer: string;
+    cta: string;
+    imageAlt: string;
+  };
   destinations: {
     eyebrow: string;
     title: string;
