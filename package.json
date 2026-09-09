@@ -4,6 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "packageManager": "pnpm@11.19.0",
+  "engines": {
+    "node": ">=24.19.0 <25",
+    "pnpm": "11.19.0"
+  },
   "scripts": {
     "generate": "node --experimental-strip-types scripts/generate-pages.ts",
     "dev": "node --experimental-strip-types scripts/generate-pages.ts && vite",
@@ -16,8 +20,8 @@
   },
   "devDependencies": {
     "@types/node": "22.15.3",
-    "sharp": "0.34.5",
+    "sharp": "0.35.4",
     "typescript": "5.8.3",
-    "vite": "7.0.6"
+    "vite": "7.3.5"
   }
 }
