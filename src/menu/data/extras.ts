@@ -36,7 +36,7 @@ export const extras: Extra[] = [
     nameEn: "Water",
     quantityAr: "عبوة",
     quantityEn: "Bottle",
-    price: 1.5,
+    price: 1,
     branches: [...sharedBranches]
   },
   {
@@ -71,7 +71,7 @@ export const extras: Extra[] = [
     nameAr: "قهوة اليوم",
     nameEn: "Coffee of the Day",
     price: 6,
-    branches: ["maqsed"]
+    branches: []
   },
   {
     id: "coffee-of-the-day-bustan",

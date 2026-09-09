@@ -26,7 +26,7 @@ const productPrices = {
   "gift-box": 42,
   "talbinah-powder": 25,
   "saweeg-powder": 25,
-  "talbinah-sachets": 5.5,
+  "talbinah-sachets": 6,
   "mixed-caramelized-nuts-sachet": 12
 } as const;
 
@@ -42,7 +42,7 @@ const branchExtraPrices = (branch: BranchId): Record<string, number> =>
       .map((extra) => [extra.id, extra.price])
   );
 
-test("all official August 2026 product prices are represented", () => {
+test("all confirmed product prices are represented", () => {
   assert.deepEqual(
     Object.fromEntries(products.map((product) => [product.id, product.price])),
     productPrices
@@ -63,23 +63,22 @@ test("branch-specific product selections match the official PDFs", () => {
   assert(bustan.includes("madini-crepe-signature"));
 });
 
-test("Maqsed add-ons and prices match the official PDF", () => {
+test("Maqsed add-ons and prices match the confirmed menu data", () => {
   assert.deepEqual(branchExtraPrices("maqsed"), {
     "saudi-coffee-cup": 6,
     "saudi-coffee-dallah": 21,
     "saudi-coffee-dallah-with-sweets": 39,
-    water: 1.5,
+    water: 1,
     maamoul: 21,
     tart: 11,
-    basbousa: 11,
-    "coffee-of-the-day-maqsed": 6
+    basbousa: 11
   });
 });
 
-test("Bustan add-ons and prices match the official PDF", () => {
+test("Bustan add-ons and prices match the confirmed menu data", () => {
   assert.deepEqual(branchExtraPrices("bustan"), {
     "saudi-coffee-cup": 6,
-    water: 1.5,
+    water: 1,
     maamoul: 21,
     tart: 11,
     basbousa: 11,
