@@ -148,11 +148,11 @@ export const renderDocument = ({
   <meta name="twitter:title" content="${metadata.title}">
   <meta name="twitter:description" content="${metadata.description}">
   <meta name="twitter:image" content="${socialImage}">
-  <link rel="icon" href="${prefix}favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="${prefix}favicon-32x32.png" sizes="32x32" type="image/png">
-  <link rel="icon" href="${prefix}favicon-16x16.png" sizes="16x16" type="image/png">
-  <link rel="apple-touch-icon" href="${prefix}apple-touch-icon.png" sizes="180x180">
-  <link rel="manifest" href="${prefix}site.webmanifest">
+  <link rel="icon" href="${prefix}favicon-saweeg-202609.ico" sizes="any">
+  <link rel="icon" href="${prefix}favicon-saweeg-202609-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="${prefix}favicon-saweeg-202609-16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="${prefix}favicon-saweeg-202609-apple-touch-180.png" sizes="180x180">
+  <link rel="manifest" href="${prefix}site.webmanifest?v=202609">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
