@@ -216,8 +216,8 @@ html[dir="rtl"] .hero h1 {
   --so-white: #fff;
   --so-on-dark: #efece3;
   --so-on-dark-soft: #b9c5bd;
-  --so-radius: clamp(18px, 2.4vw, 26px);
-  --so-pad: clamp(22px, 4vw, 48px);
+  --so-radius: clamp(14px, 1.8vw, 20px);
+  --so-pad: clamp(22px, 3.4vw, 42px);
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   position: relative;
@@ -228,7 +228,7 @@ html[dir="rtl"] .hero h1 {
   overflow: hidden;
   border-radius: var(--so-radius);
   background-color: var(--so-green-deep);
-  box-shadow: 0 1px 2px rgb(28 41 38 / 6%), 0 26px 50px -36px rgb(0 47 45 / 60%);
+  box-shadow: 0 8px 22px rgb(0 47 45 / 8%);
   color: var(--so-on-dark);
   font-family: var(--so-font);
   text-decoration: none;
@@ -243,42 +243,21 @@ html[dir="rtl"] .hero h1 {
   font-family: inherit;
 }
 
-.saweeg-national-offer::before {
-  content: "";
-  position: absolute;
-  inset-block-start: 0;
-  inset-inline: 0;
-  z-index: 3;
-  block-size: 3px;
-  background-color: var(--so-green-national);
-}
-
-.saweeg-national-offer::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  border: 1px solid rgb(196 169 114 / 34%);
-  border-radius: inherit;
-  pointer-events: none;
-}
-
 .saweeg-national-offer__media {
   display: flex;
   align-items: center;
   justify-content: center;
   min-block-size: 0;
   overflow: hidden;
-  padding: clamp(14px, 3vw, 30px);
-  aspect-ratio: 4 / 3;
-  background-color: var(--so-cream);
+  padding: 0;
+  aspect-ratio: 1;
 }
 
 .saweeg-national-offer__image {
   display: block;
   inline-size: 100%;
   block-size: 100%;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
 }
 
@@ -294,21 +273,10 @@ html[dir="rtl"] .hero h1 {
 .saweeg-national-offer__eyebrow {
   display: inline-flex;
   align-items: flex-start;
-  gap: .65em;
   color: var(--so-on-dark-soft);
   font-size: clamp(.8rem, .77rem + .18vw, .9rem);
   font-weight: 600;
   line-height: 1.4;
-}
-
-.saweeg-national-offer__eyebrow::before {
-  content: "";
-  flex: 0 0 auto;
-  inline-size: 24px;
-  block-size: 2px;
-  margin-block-start: .62em;
-  border-radius: 2px;
-  background-color: var(--so-green-national);
 }
 
 .saweeg-national-offer__title {
@@ -317,13 +285,6 @@ html[dir="rtl"] .hero h1 {
   font-weight: 700;
   line-height: 1.2;
   text-wrap: balance;
-}
-
-.saweeg-national-offer__rule {
-  inline-size: 64px;
-  block-size: 1px;
-  border-radius: 1px;
-  background-color: rgb(196 169 114 / 50%);
 }
 
 .saweeg-national-offer__offer {
@@ -402,7 +363,7 @@ html[dir="rtl"] .hero h1 {
 @media (hover: hover) and (pointer: fine) {
   .saweeg-national-offer:hover {
     transform: translateY(-3px);
-    box-shadow: 0 1px 2px rgb(28 41 38 / 6%), 0 32px 56px -34px rgb(0 47 45 / 55%);
+    box-shadow: 0 12px 26px rgb(0 47 45 / 12%);
   }
 
   .saweeg-national-offer:hover .saweeg-national-offer__cta {
@@ -431,18 +392,31 @@ html[dir="rtl"] .hero h1 {
   .saweeg-national-offer {
     grid-template-columns: minmax(0, 1.03fr) minmax(0, .97fr);
     align-items: stretch;
+    direction: ltr;
   }
 
-  .saweeg-national-offer__body {
+  .saweeg-national-offer[dir="rtl"] .saweeg-national-offer__body {
+    grid-column: 1;
+    grid-row: 1;
+    direction: rtl;
+    text-align: right;
+  }
+
+  .saweeg-national-offer[dir="rtl"] .saweeg-national-offer__media {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .saweeg-national-offer[dir="ltr"] .saweeg-national-offer__media {
     grid-column: 1;
     grid-row: 1;
   }
 
-  .saweeg-national-offer__media {
+  .saweeg-national-offer[dir="ltr"] .saweeg-national-offer__body {
     grid-column: 2;
     grid-row: 1;
-    min-block-size: clamp(300px, 25vw, 390px);
-    aspect-ratio: auto;
+    direction: ltr;
+    text-align: left;
   }
 }
 
