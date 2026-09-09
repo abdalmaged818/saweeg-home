@@ -46,6 +46,13 @@ export const en = {
     primary: "Start here",
     secondary: "About Saweeg"
   },
+  nationalDayOffer: {
+    badge: "National Day offer",
+    heading: "For National Day",
+    offer: "3 Al Jabirah boxes for SAR 196",
+    cta: "Discover the offer",
+    imageAlt: "A selection of Saweeg boxes and products for the National Day offer"
+  },
   destinations: {
     eyebrow: "Your journey starts here",
     title: "Where would you like to go?",

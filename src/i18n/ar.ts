@@ -46,6 +46,13 @@ export const ar = {
     primary: "ابدأ من هنا",
     secondary: "تعرّف على سويق"
   },
+  nationalDayOffer: {
+    badge: "عرض اليوم الوطني",
+    heading: "بمناسبة اليوم الوطني",
+    offer: "٣ بوكسات من الجابرة بـ١٩٦ ريال",
+    cta: "اكتشف العرض",
+    imageAlt: "تشكيلة من بوكسات ومنتجات سويق ضمن عرض اليوم الوطني"
+  },
   destinations: {
     eyebrow: "وجهتك تبدأ هنا",
     title: "وين تبغى تروح؟",

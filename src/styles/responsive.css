@@ -21,6 +21,25 @@
     padding-block: 74px;
   }
 
+  .national-day-offer-card {
+    grid-template-columns: minmax(0, 0.92fr) minmax(320px, 1.08fr);
+    align-items: center;
+    gap: 34px;
+    padding: 24px;
+  }
+
+  .national-day-offer-copy {
+    padding-inline: 24px;
+  }
+
+  html[dir="rtl"] .national-day-offer-copy {
+    order: 2;
+  }
+
+  html[dir="rtl"] .national-day-offer-media {
+    order: 1;
+  }
+
   .destinations-grid,
   .values-grid,
   .latest-grid,

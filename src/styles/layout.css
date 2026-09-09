@@ -133,10 +133,13 @@
 .hero--text-only .hero-copy {
   max-width: 820px;
   margin-inline: auto;
+  display: grid;
+  justify-items: center;
   text-align: center;
 }
 
 .hero--text-only .hero p {
+  max-width: 680px;
   margin-inline: auto;
 }
 
@@ -196,6 +199,83 @@ html[dir="rtl"] .hero h1 {
 
 .destinations-section {
   padding-block: 12px 30px;
+}
+
+.national-day-offer {
+  padding-block: 0 30px;
+}
+
+.national-day-offer-card {
+  display: grid;
+  gap: 24px;
+  overflow: hidden;
+  padding: 18px;
+  border: 1px solid color-mix(in srgb, var(--saweeg-gold) 45%, var(--border));
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--saweeg-green-dark), var(--saweeg-green));
+  box-shadow: var(--shadow-soft);
+  color: var(--saweeg-ivory);
+  text-decoration: none;
+}
+
+.national-day-offer-card:focus-visible {
+  outline: 3px solid var(--saweeg-gold);
+  outline-offset: 4px;
+}
+
+.national-day-offer-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 12px 8px;
+}
+
+.national-day-offer-copy .eyebrow {
+  border: 1px solid color-mix(in srgb, var(--saweeg-gold) 65%, transparent);
+  background: color-mix(in srgb, var(--saweeg-gold) 18%, transparent);
+  color: var(--saweeg-gold-soft);
+}
+
+.national-day-offer-copy h2 {
+  margin-block-start: 12px;
+  font-size: clamp(1.7rem, 6vw, 2.7rem);
+}
+
+.national-day-offer-copy p {
+  margin-block-start: 12px;
+  color: color-mix(in srgb, var(--saweeg-ivory) 88%, transparent);
+  font-size: clamp(1.05rem, 3.8vw, 1.3rem);
+  font-weight: 700;
+}
+
+.national-day-offer-cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-block-start: 20px;
+  padding-inline: 20px;
+  border: 1px solid var(--saweeg-gold);
+  border-radius: 999px;
+  background: var(--saweeg-gold);
+  color: var(--saweeg-green-dark);
+  font-weight: 800;
+}
+
+.national-day-offer-media {
+  min-width: 0;
+  margin: 0;
+  border-radius: calc(var(--radius-lg) - 8px);
+  overflow: hidden;
+  background: var(--saweeg-green-dark);
+}
+
+.national-day-offer-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
 }
 
 .branches-section {
