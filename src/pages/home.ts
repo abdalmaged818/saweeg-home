@@ -12,7 +12,7 @@ import { renderHomeParticipations } from "../components/participations.ts";
 
 export const renderHomePage = (locale: Locale, copy: SiteCopy, prefix: string, aboutPath: string, opportunitiesPath: string): string => `
   ${renderHero(copy)}
-  ${renderNationalDayOffer(copy, prefix)}
+  ${renderNationalDayOffer(locale, copy, prefix)}
   <section class="destinations-section" id="destinations" aria-label="${copy.destinations.title}">
     <div class="container">
       <div class="destinations-grid">

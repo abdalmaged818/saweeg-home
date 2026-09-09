@@ -205,78 +205,268 @@ html[dir="rtl"] .hero h1 {
   padding-block: 0 30px;
 }
 
-.national-day-offer-card {
+/* Approved National Day offer card. Selectors are scoped to this component. */
+.saweeg-national-offer {
+  --so-font: inherit;
+  --so-max-width: 1080px;
+  --so-green-deep: #002f2d;
+  --so-green-national: #00894a;
+  --so-gold: #c4a972;
+  --so-cream: #e8e5dc;
+  --so-white: #fff;
+  --so-on-dark: #efece3;
+  --so-on-dark-soft: #b9c5bd;
+  --so-radius: clamp(18px, 2.4vw, 26px);
+  --so-pad: clamp(22px, 4vw, 48px);
   display: grid;
-  gap: 24px;
+  grid-template-columns: minmax(0, 1fr);
+  position: relative;
+  box-sizing: border-box;
+  inline-size: 100%;
+  max-inline-size: var(--so-max-width);
+  margin-inline: auto;
   overflow: hidden;
-  padding: 18px;
-  border: 1px solid color-mix(in srgb, var(--saweeg-gold) 45%, var(--border));
-  border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, var(--saweeg-green-dark), var(--saweeg-green));
-  box-shadow: var(--shadow-soft);
-  color: var(--saweeg-ivory);
+  border-radius: var(--so-radius);
+  background-color: var(--so-green-deep);
+  box-shadow: 0 1px 2px rgb(28 41 38 / 6%), 0 26px 50px -36px rgb(0 47 45 / 60%);
+  color: var(--so-on-dark);
+  font-family: var(--so-font);
   text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .35s cubic-bezier(.2, .7, .3, 1), box-shadow .35s cubic-bezier(.2, .7, .3, 1);
 }
 
-.national-day-offer-card:focus-visible {
-  outline: 3px solid var(--saweeg-gold);
-  outline-offset: 4px;
+.saweeg-national-offer * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
 }
 
-.national-day-offer-copy {
+.saweeg-national-offer::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 3;
+  block-size: 3px;
+  background-color: var(--so-green-national);
+}
+
+.saweeg-national-offer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: 1px solid rgb(196 169 114 / 34%);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.saweeg-national-offer__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 0;
+  overflow: hidden;
+  padding: clamp(14px, 3vw, 30px);
+  aspect-ratio: 4 / 3;
+  background-color: var(--so-cream);
+}
+
+.saweeg-national-offer__image {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.saweeg-national-offer__body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  padding: 12px 8px;
+  gap: clamp(12px, 1.7vw, 18px);
+  padding: var(--so-pad);
 }
 
-.national-day-offer-copy .eyebrow {
-  border: 1px solid color-mix(in srgb, var(--saweeg-gold) 65%, transparent);
-  background: color-mix(in srgb, var(--saweeg-gold) 18%, transparent);
-  color: var(--saweeg-gold-soft);
+.saweeg-national-offer__eyebrow {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: .65em;
+  color: var(--so-on-dark-soft);
+  font-size: clamp(.8rem, .77rem + .18vw, .9rem);
+  font-weight: 600;
+  line-height: 1.4;
 }
 
-.national-day-offer-copy h2 {
-  margin-block-start: 12px;
-  font-size: clamp(1.7rem, 6vw, 2.7rem);
+.saweeg-national-offer__eyebrow::before {
+  content: "";
+  flex: 0 0 auto;
+  inline-size: 24px;
+  block-size: 2px;
+  margin-block-start: .62em;
+  border-radius: 2px;
+  background-color: var(--so-green-national);
 }
 
-.national-day-offer-copy p {
-  margin-block-start: 12px;
-  color: color-mix(in srgb, var(--saweeg-ivory) 88%, transparent);
-  font-size: clamp(1.05rem, 3.8vw, 1.3rem);
+.saweeg-national-offer__title {
+  color: var(--so-on-dark);
+  font-size: clamp(1.5rem, 1.12rem + 1.7vw, 2.25rem);
   font-weight: 700;
+  line-height: 1.2;
+  text-wrap: balance;
 }
 
-.national-day-offer-cta {
+.saweeg-national-offer__rule {
+  inline-size: 64px;
+  block-size: 1px;
+  border-radius: 1px;
+  background-color: rgb(196 169 114 / 50%);
+}
+
+.saweeg-national-offer__offer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .25em;
+  color: var(--so-on-dark);
+  font-size: clamp(1rem, .94rem + .35vw, 1.18rem);
+  line-height: 1.5;
+}
+
+.saweeg-national-offer__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .35em;
+}
+
+.saweeg-national-offer__lead {
+  color: var(--so-on-dark-soft);
+  font-size: clamp(.95rem, .9rem + .25vw, 1.05rem);
+}
+
+.saweeg-national-offer__amount {
+  color: var(--so-gold);
+  font-size: clamp(2.5rem, 1.75rem + 3.3vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: lining-nums;
+}
+
+.saweeg-national-offer__currency {
+  color: var(--so-on-dark);
+  font-size: clamp(1rem, .88rem + .5vw, 1.3rem);
+  font-weight: 600;
+}
+
+.saweeg-national-offer__cta {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
-  margin-block-start: 20px;
-  padding-inline: 20px;
-  border: 1px solid var(--saweeg-gold);
+  gap: .6em;
+  margin-block-start: clamp(4px, 1vw, 12px);
+  padding: .9em clamp(1.15em, .72em + 1.7vw, 1.7em);
   border-radius: 999px;
-  background: var(--saweeg-gold);
-  color: var(--saweeg-green-dark);
-  font-weight: 800;
+  background-color: var(--so-cream);
+  color: var(--so-green-deep);
+  font-size: clamp(.95rem, .9rem + .25vw, 1.05rem);
+  font-weight: 700;
+  line-height: 1;
+  transition: background-color .3s ease;
 }
 
-.national-day-offer-media {
-  min-width: 0;
-  margin: 0;
-  border-radius: calc(var(--radius-lg) - 8px);
-  overflow: hidden;
-  background: var(--saweeg-green-dark);
+.saweeg-national-offer__icon {
+  flex: 0 0 auto;
+  inline-size: 1.05em;
+  block-size: 1.05em;
+  transition: transform .3s cubic-bezier(.2, .7, .3, 1);
 }
 
-.national-day-offer-media img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1;
-  object-fit: contain;
+.saweeg-national-offer[dir="rtl"] .saweeg-national-offer__icon {
+  transform: scaleX(-1);
 }
+
+.saweeg-national-offer[dir="ltr"] .saweeg-national-offer__eyebrow {
+  font-size: clamp(.74rem, .71rem + .16vw, .82rem);
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.saweeg-national-offer:focus-visible {
+  outline: 3px solid var(--so-green-national);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .saweeg-national-offer:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 1px 2px rgb(28 41 38 / 6%), 0 32px 56px -34px rgb(0 47 45 / 55%);
+  }
+
+  .saweeg-national-offer:hover .saweeg-national-offer__cta {
+    background-color: var(--so-white);
+  }
+
+  .saweeg-national-offer[dir="ltr"]:hover .saweeg-national-offer__icon {
+    transform: translateX(4px);
+  }
+
+  .saweeg-national-offer[dir="rtl"]:hover .saweeg-national-offer__icon {
+    transform: scaleX(-1) translateX(4px);
+  }
+}
+
+@media (max-width: 420px) {
+  .saweeg-national-offer__cta {
+    justify-content: space-between;
+    inline-size: 100%;
+    padding: 1em 1.15em;
+    font-size: .9rem;
+  }
+}
+
+@media (min-width: 760px) {
+  .saweeg-national-offer {
+    grid-template-columns: minmax(0, 1.03fr) minmax(0, .97fr);
+    align-items: stretch;
+  }
+
+  .saweeg-national-offer__body {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .saweeg-national-offer__media {
+    grid-column: 2;
+    grid-row: 1;
+    min-block-size: clamp(300px, 25vw, 390px);
+    aspect-ratio: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .saweeg-national-offer,
+  .saweeg-national-offer__cta,
+  .saweeg-national-offer__icon {
+    transition: none;
+  }
+
+  .saweeg-national-offer:hover {
+    transform: none;
+  }
+
+  .saweeg-national-offer[dir="ltr"]:hover .saweeg-national-offer__icon {
+    transform: none;
+  }
+
+  .saweeg-national-offer[dir="rtl"]:hover .saweeg-national-offer__icon {
+    transform: scaleX(-1);
+  }
+}
+
+/* End approved National Day offer card. */
 
 .branches-section {
   padding-block: 44px 58px;
