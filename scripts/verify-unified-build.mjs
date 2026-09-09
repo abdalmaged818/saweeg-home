@@ -25,6 +25,18 @@ const expectedFiles = [
   "menu/404.html",
   "menu/site.webmanifest",
   "menu/assets/brand/logo-saweeg.svg",
+  "favicon-saweeg-202609.ico",
+  "favicon-saweeg-202609-16.png",
+  "favicon-saweeg-202609-32.png",
+  "favicon-saweeg-202609-apple-touch-180.png",
+  "assets/brand/favicon-saweeg-202609-192.png",
+  "assets/brand/favicon-saweeg-202609-512.png",
+  "menu/favicon-saweeg-202609.ico",
+  "menu/favicon-saweeg-202609-16.png",
+  "menu/favicon-saweeg-202609-32.png",
+  "menu/favicon-saweeg-202609-apple-touch-180.png",
+  "menu/assets/brand/favicon-saweeg-202609-192.png",
+  "menu/assets/brand/favicon-saweeg-202609-512.png",
   "CNAME",
   "sitemap.xml"
 ];
@@ -46,6 +58,7 @@ const homeAr = readDist("index.html");
 const homeEn = readDist("en/index.html");
 const sitemap = readDist("sitemap.xml");
 const manifest = JSON.parse(readDist("menu/site.webmanifest"));
+const homeManifest = JSON.parse(readDist("site.webmanifest"));
 const cname = readDist("CNAME").trim();
 const homepageWelcome = "سلام من لدن أرض السلام";
 
@@ -65,8 +78,12 @@ const requiredHtmlSnippets = [
   [menuAr, "https://go.saweegsa.com/menu/en/", "Arabic menu alternate"],
   [menuEn, "https://go.saweegsa.com/menu/en/", "English menu canonical"],
   [menuEn, "https://go.saweegsa.com/menu/", "English menu alternate"],
-  [menuAr, "/menu/site.webmanifest", "Arabic menu manifest"],
-  [menuEn, "/menu/site.webmanifest", "English menu manifest"]
+  [menuAr, "/menu/site.webmanifest?v=202609", "Arabic menu manifest"],
+  [menuEn, "/menu/site.webmanifest?v=202609", "English menu manifest"],
+  [menuAr, "/menu/favicon-saweeg-202609.ico", "Arabic menu favicon"],
+  [menuEn, "/menu/favicon-saweeg-202609.ico", "English menu favicon"],
+  [homeAr, "favicon-saweeg-202609.ico", "Arabic homepage favicon"],
+  [homeEn, "favicon-saweeg-202609.ico", "English homepage favicon"]
 ];
 
 for (const [html, snippet, label] of requiredHtmlSnippets) {
@@ -88,6 +105,20 @@ for (const url of sitemapUrls) {
 if (cname !== "go.saweegsa.com") failures.push(`Unexpected CNAME: ${cname}`);
 if (manifest.start_url !== "/menu/") failures.push(`Unexpected menu start_url: ${manifest.start_url}`);
 if (manifest.scope !== "/menu/") failures.push(`Unexpected menu scope: ${manifest.scope}`);
+const menuIconSources = manifest.icons.map((icon) => icon.src);
+const homeIconSources = homeManifest.icons.map((icon) => icon.src);
+for (const source of [
+  "/menu/assets/brand/favicon-saweeg-202609-192.png",
+  "/menu/assets/brand/favicon-saweeg-202609-512.png"
+]) {
+  if (!menuIconSources.includes(source)) failures.push(`Missing menu manifest icon: ${source}`);
+}
+for (const source of [
+  "assets/brand/favicon-saweeg-202609-192.png",
+  "assets/brand/favicon-saweeg-202609-512.png"
+]) {
+  if (!homeIconSources.includes(source)) failures.push(`Missing homepage manifest icon: ${source}`);
+}
 
 const productDirectory = path.join(distRoot, "menu", "assets", "products");
 const productImages = fs.existsSync(productDirectory)
@@ -132,6 +163,7 @@ const verifyLocalReferences = (relative, html) => {
 
 verifyLocalReferences("menu/index.html", menuAr);
 verifyLocalReferences("menu/en/index.html", menuEn);
+verifyLocalReferences("menu/404.html", readDist("menu/404.html"));
 
 const result = {
   expectedFiles: expectedFiles.length,
