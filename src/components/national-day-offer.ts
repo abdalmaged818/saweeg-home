@@ -12,7 +12,6 @@ export const renderNationalDayOffer = (locale: Locale, copy: SiteCopy, prefix: s
         <div class="saweeg-national-offer__body">
           <span class="saweeg-national-offer__eyebrow">${copy.nationalDayOffer.badge}</span>
           <h2 class="saweeg-national-offer__title" id="national-day-offer-title">${copy.nationalDayOffer.heading}</h2>
-          <span class="saweeg-national-offer__rule" aria-hidden="true"></span>
           <p class="saweeg-national-offer__offer" aria-label="${copy.nationalDayOffer.offer}">
             <span aria-hidden="true">${copy.nationalDayOffer.offerPrefix}</span>
             <span class="saweeg-national-offer__price" aria-hidden="true">
