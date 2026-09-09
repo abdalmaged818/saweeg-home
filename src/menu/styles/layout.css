@@ -56,13 +56,17 @@
 }
 
 .menu-back-navigation {
-  background: var(--brand-beige);
-  padding-block: 0.75rem;
+  padding-block: 0 3rem;
 }
 
 .menu-back-navigation__inner {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+}
+
+.menu-back-navigation__button {
+  max-width: 100%;
+  text-align: center;
 }
 
 .hero {

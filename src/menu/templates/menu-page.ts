@@ -652,12 +652,12 @@ export const renderMenuPage = (
   const menuSection = createMenuSection(state);
   const extrasSection = createExtrasSection(state);
   main.append(
-    createBackNavigation(state),
     createHero(state),
     createBranchSection(state),
     menuSection,
     extrasSection,
     createBranchLocationsSection(state),
+    createBackNavigation(state),
     createStoreSection(state),
     createContactSection(state)
   );
