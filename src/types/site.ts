@@ -65,6 +65,10 @@ export interface SiteCopy {
     badge: string;
     heading: string;
     offer: string;
+    offerPrefix: string;
+    offerLead: string;
+    amount: string;
+    currency: string;
     cta: string;
     imageAlt: string;
   };

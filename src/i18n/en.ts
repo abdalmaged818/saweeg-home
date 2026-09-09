@@ -50,6 +50,10 @@ export const en = {
     badge: "National Day offer",
     heading: "For National Day",
     offer: "3 Al Jabirah boxes for SAR 196",
+    offerPrefix: "3 Al Jabirah boxes",
+    offerLead: "for",
+    amount: "196",
+    currency: "SAR",
     cta: "Discover the offer",
     imageAlt: "A selection of Saweeg boxes and products for the National Day offer"
   },
