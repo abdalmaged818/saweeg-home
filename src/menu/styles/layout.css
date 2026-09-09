@@ -55,6 +55,16 @@
   justify-content: flex-end;
 }
 
+.menu-back-navigation {
+  background: var(--brand-beige);
+  padding-block: 0.75rem;
+}
+
+.menu-back-navigation__inner {
+  display: flex;
+  justify-content: flex-start;
+}
+
 .hero {
   position: relative;
   overflow: hidden;
