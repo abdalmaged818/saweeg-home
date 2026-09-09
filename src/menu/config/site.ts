@@ -4,6 +4,9 @@ const officialSiteUrl = "https://go.saweegsa.com/menu/";
 
 export const menuBasePath = "/menu/";
 
+export const gatewayHomePath = (language: Language): string =>
+  language === "en" ? "/en/" : "/";
+
 export const siteConfig = {
   brandName: {
     ar: "سويق",

@@ -254,6 +254,22 @@ const createHero = (state: AppState): HTMLElement => {
   return section;
 };
 
+const createBackNavigation = (state: AppState): HTMLElement => {
+  const messages = getMessages(state.language);
+  const navigation = createElement("nav", "menu-back-navigation");
+  navigation.setAttribute("aria-label", messages.backToPreviousPage);
+  const inner = createElement("div", "container menu-back-navigation__inner");
+  const link = createElement(
+    "a",
+    "button button--secondary menu-back-navigation__button",
+    messages.backToPreviousPage
+  );
+  link.dataset.menuBackLink = "";
+  inner.append(link);
+  navigation.append(inner);
+  return navigation;
+};
+
 const createBranchButton = (
   branch: Branch,
   state: AppState
@@ -636,6 +652,7 @@ export const renderMenuPage = (
   const menuSection = createMenuSection(state);
   const extrasSection = createExtrasSection(state);
   main.append(
+    createBackNavigation(state),
     createHero(state),
     createBranchSection(state),
     menuSection,

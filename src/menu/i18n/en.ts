@@ -11,6 +11,7 @@ export const en = {
   heroTitle: "Saweeg Menu",
   heroBody: "Choose your branch and explore the full menu and prices.",
   chooseBranch: "Choose Your Branch",
+  backToPreviousPage: "Back to previous page",
   branchSectionTitle: "Choose a Branch",
   branchSectionBody: "Some products and extras vary by branch.",
   branchSelectorLabel: "Choose a Saweeg branch",

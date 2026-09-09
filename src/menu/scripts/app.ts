@@ -1,6 +1,8 @@
 import {
   absoluteAssetUrl,
   branchMapUrl,
+  gatewayHomePath,
+  menuBasePath,
   pageUrl,
   siteConfig
 } from "../config/site";
@@ -20,6 +22,26 @@ import { refreshLanguageLinks } from "./language-switcher";
 import { bindMobileMenu } from "./mobile-menu";
 
 const storageKey = "saweeg:selected-branch";
+
+const isMenuPath = (pathname: string): boolean =>
+  pathname === menuBasePath.slice(0, -1) || pathname.startsWith(menuBasePath);
+
+const getGatewayReturnUrl = (): string | null => {
+  if (!document.referrer || window.opener || window.history.length <= 1) {
+    return null;
+  }
+
+  try {
+    const referrer = new URL(document.referrer);
+    if (referrer.origin !== window.location.origin || isMenuPath(referrer.pathname)) {
+      return null;
+    }
+
+    return `${referrer.pathname}${referrer.search}${referrer.hash}`;
+  } catch {
+    return null;
+  }
+};
 
 const validBranch = (value: string | null): BranchId | null =>
   value === "maqsed" || value === "bustan" ? value : null;
@@ -150,6 +172,11 @@ export const initializeApp = (): void => {
 
   const state = getInitialState();
   const refs = renderMenuPage(root, state);
+  const backLink = root.querySelector<HTMLAnchorElement>("[data-menu-back-link]");
+  if (!backLink) {
+    throw new Error("Menu back link is missing.");
+  }
+  backLink.href = getGatewayReturnUrl() ?? gatewayHomePath(state.language);
   bindMobileMenu(refs.mobileMenuButton, refs.mobileMenu, state.language);
 
   const refreshSelectionUi = (): void => {
