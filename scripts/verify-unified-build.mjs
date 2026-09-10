@@ -25,6 +25,7 @@ const expectedFiles = [
   "menu/404.html",
   "menu/site.webmanifest",
   "menu/assets/brand/logo-saweeg.svg",
+  "assets/social/saweeg-gateway-preview-20260910.png",
   "favicon-saweeg-202609.ico",
   "favicon-saweeg-202609-16.png",
   "favicon-saweeg-202609-32.png",
@@ -54,6 +55,7 @@ const readDist = (relative) =>
 
 const menuAr = readDist("menu/index.html");
 const menuEn = readDist("menu/en/index.html");
+const menuNotFound = readDist("menu/404.html");
 const homeAr = readDist("index.html");
 const homeEn = readDist("en/index.html");
 const sitemap = readDist("sitemap.xml");
@@ -61,6 +63,7 @@ const manifest = JSON.parse(readDist("menu/site.webmanifest"));
 const homeManifest = JSON.parse(readDist("site.webmanifest"));
 const cname = readDist("CNAME").trim();
 const homepageWelcome = "سلام من لدن أرض السلام";
+const socialPreview = "https://go.saweegsa.com/assets/social/saweeg-gateway-preview-20260910.png";
 
 for (const [html, label] of [[homeAr, "Arabic homepage"], [homeEn, "English homepage"]]) {
   const occurrences = html.split(homepageWelcome).length - 1;
@@ -88,6 +91,31 @@ const requiredHtmlSnippets = [
 
 for (const [html, snippet, label] of requiredHtmlSnippets) {
   if (!html.includes(snippet)) failures.push(`Missing ${label}: ${snippet}`);
+}
+
+const socialMetadataPages = [
+  [homeAr, "Arabic homepage"],
+  [homeEn, "English homepage"],
+  [menuAr, "Arabic menu"],
+  [menuEn, "English menu"],
+  [menuNotFound, "Menu not found page"]
+];
+for (const [html, label] of socialMetadataPages) {
+  const normalizedHtml = html.replace(/\s+/g, " ");
+  const ogImageCount = (html.match(/property="og:image"/g) ?? []).length;
+  if (ogImageCount !== 1) failures.push(`${label} must contain exactly one og:image`);
+  for (const required of [
+    `property="og:image" content="${socialPreview}"`,
+    `property="og:image:secure_url" content="${socialPreview}"`,
+    'property="og:image:type" content="image/png"',
+    'property="og:image:width" content="1200"',
+    'property="og:image:height" content="630"',
+    'name="twitter:card" content="summary_large_image"',
+    `name="twitter:image" content="${socialPreview}"`,
+    'name="twitter:image:alt"'
+  ]) {
+    if (!normalizedHtml.includes(required)) failures.push(`Missing social metadata in ${label}: ${required}`);
+  }
 }
 
 const sitemapUrls = [

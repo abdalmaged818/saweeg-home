@@ -115,7 +115,12 @@ export const renderDocument = ({
     title: title ?? copy.meta[page].title,
     description: description ?? copy.meta[page].description
   };
-  const socialImage = socialImageOverride ?? `${siteConfig.brand.origin}/assets/social/saweeg-og.png`;
+  const socialImage = socialImageOverride
+    ?? `${siteConfig.brand.origin}/assets/social/saweeg-gateway-preview-20260910.png`;
+  const socialImageType = socialImage.endsWith(".webp") ? "image/webp" : "image/png";
+  const resolvedSocialImageAlt = socialImageAlt ?? (locale === "ar"
+    ? "معاينة البوابة الرسمية لسويق"
+    : "Preview of the official Saweeg gateway");
   const arCanonical = alternateAr ?? canonicalFor("ar", page);
   const enCanonical = alternateEn ?? canonicalFor("en", page);
 
@@ -141,13 +146,16 @@ export const renderDocument = ({
   <meta property="og:description" content="${metadata.description}">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${socialImage}">
+  <meta property="og:image:secure_url" content="${socialImage}">
+  <meta property="og:image:type" content="${socialImageType}">
   <meta property="og:image:width" content="${socialImageWidth}">
   <meta property="og:image:height" content="${socialImageHeight}">
-  <meta property="og:image:alt" content="${socialImageAlt ?? copy.brandAlt}">
+  <meta property="og:image:alt" content="${resolvedSocialImageAlt}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${metadata.title}">
   <meta name="twitter:description" content="${metadata.description}">
   <meta name="twitter:image" content="${socialImage}">
+  <meta name="twitter:image:alt" content="${resolvedSocialImageAlt}">
   <link rel="icon" href="${prefix}favicon-saweeg-202609.ico" sizes="any">
   <link rel="icon" href="${prefix}favicon-saweeg-202609-32.png" sizes="32x32" type="image/png">
   <link rel="icon" href="${prefix}favicon-saweeg-202609-16.png" sizes="16x16" type="image/png">
