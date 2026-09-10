@@ -179,7 +179,10 @@ export const ar = {
   },
   footer: {
     tagline: "امتداد عصري للأصالة",
-    rights: "© سويق. جميع الحقوق محفوظة."
+    rights: "© سويق. جميع الحقوق محفوظة.",
+    profilesHeading: "تحميل الملفات التعريفية",
+    officialProfile: "تحميل الملف التعريفي الرسمي لسويق – 2026",
+    hospitalityProfile: "تحميل ملف سويق لقطاع الفنادق والضيافة – 2026"
   },
   internal: {
     aboutEyebrow: "عن سويق",

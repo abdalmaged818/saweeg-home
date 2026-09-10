@@ -26,6 +26,8 @@ const expectedFiles = [
   "menu/site.webmanifest",
   "menu/assets/brand/logo-saweeg.svg",
   "assets/social/saweeg-gateway-preview-20260910.png",
+  "assets/documents/saweeg-official-profile-2026.pdf",
+  "assets/documents/saweeg-hotels-hospitality-profile-2026.pdf",
   "favicon-saweeg-202609.ico",
   "favicon-saweeg-202609-16.png",
   "favicon-saweeg-202609-32.png",
@@ -91,6 +93,17 @@ const requiredHtmlSnippets = [
 
 for (const [html, snippet, label] of requiredHtmlSnippets) {
   if (!html.includes(snippet)) failures.push(`Missing ${label}: ${snippet}`);
+}
+
+for (const [html, label] of [[homeAr, "Arabic homepage"], [homeEn, "English homepage"]]) {
+  for (const [path, download] of [
+    ["/assets/documents/saweeg-official-profile-2026.pdf", "saweeg-official-profile-2026.pdf"],
+    ["/assets/documents/saweeg-hotels-hospitality-profile-2026.pdf", "saweeg-hotels-hospitality-profile-2026.pdf"]
+  ]) {
+    if (!html.includes(`href="${path}" download="${download}"`)) {
+      failures.push(`Missing profile download in ${label}: ${path}`);
+    }
+  }
 }
 
 const socialMetadataPages = [

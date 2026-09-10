@@ -33,6 +33,13 @@ export const renderFooter = ({ locale, page, copy, prefix, pathFor, localeSwitch
           ${optionalLinks.map(({ page: optionalPage, label }) => `<a href="${pathFor(locale, optionalPage)}">${label}</a>`).join("")}
           <a href="${pathFor(locale, "home")}#contact">${copy.nav.contact}</a>
         </nav>
+        <section class="footer-downloads" aria-labelledby="footer-profiles-heading">
+          <h2 id="footer-profiles-heading">${copy.footer.profilesHeading}</h2>
+          <div class="footer-downloads__links">
+            <a href="/assets/documents/saweeg-official-profile-2026.pdf" download="saweeg-official-profile-2026.pdf">${copy.footer.officialProfile}</a>
+            <a href="/assets/documents/saweeg-hotels-hospitality-profile-2026.pdf" download="saweeg-hotels-hospitality-profile-2026.pdf">${copy.footer.hospitalityProfile}</a>
+          </div>
+        </section>
         <div class="footer-bottom">
           <span>${copy.footer.rights}</span>
           <a class="footer-language" href="${localeSwitchPath ?? pathFor(otherLocale, page)}" lang="${otherLocale}" hreflang="${otherLocale}" data-locale-switch="${otherLocale}" data-analytics-event="language_switch">${copy.languageSwitch}</a>

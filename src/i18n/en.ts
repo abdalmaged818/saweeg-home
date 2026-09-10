@@ -179,7 +179,10 @@ export const en = {
   },
   footer: {
     tagline: "A modern extension of authenticity",
-    rights: "© Saweeg. All rights reserved."
+    rights: "© Saweeg. All rights reserved.",
+    profilesHeading: "Download Saweeg Profiles",
+    officialProfile: "Download the Official Saweeg Profile – 2026",
+    hospitalityProfile: "Download the Saweeg Hotels & Hospitality Profile – 2026"
   },
   internal: {
     aboutEyebrow: "About Saweeg",

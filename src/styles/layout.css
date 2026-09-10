@@ -574,3 +574,10 @@ html[dir="rtl"] .hero h1 {
   padding-block-start: 16px;
   border-block-start: 1px solid rgba(232, 229, 220, 0.18);
 }
+
+.footer-downloads {
+  grid-column: 1 / -1;
+  margin-block-start: 24px;
+  padding-block-start: 20px;
+  border-block-start: 1px solid rgba(232, 229, 220, 0.18);
+}
