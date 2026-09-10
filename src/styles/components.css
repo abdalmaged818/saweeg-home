@@ -482,6 +482,41 @@ html[dir="rtl"] .button-icon {
   color: var(--surface);
 }
 
+.footer-downloads h2 {
+  color: var(--saweeg-ivory);
+  font-size: 0.98rem;
+}
+
+.footer-downloads__links {
+  display: grid;
+  gap: 8px;
+  margin-block-start: 10px;
+}
+
+.footer-downloads__links a {
+  width: fit-content;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: rgba(232, 229, 220, 0.86);
+  font-size: 0.88rem;
+  text-decoration: underline;
+  text-decoration-color: rgba(196, 169, 114, 0.7);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: color var(--transition), text-decoration-color var(--transition);
+}
+
+.footer-downloads__links a:hover {
+  color: var(--surface);
+  text-decoration-color: var(--saweeg-gold);
+}
+
+.footer-downloads__links a:focus-visible {
+  outline-color: var(--saweeg-gold-soft);
+  box-shadow: 0 0 0 4px rgba(244, 239, 228, 0.22);
+}
+
 .footer-bottom {
   color: rgba(232, 229, 220, 0.68);
   font-size: 0.8rem;

@@ -142,6 +142,9 @@ export interface SiteCopy {
   footer: {
     tagline: string;
     rights: string;
+    profilesHeading: string;
+    officialProfile: string;
+    hospitalityProfile: string;
   };
   internal: {
     aboutEyebrow: string;
