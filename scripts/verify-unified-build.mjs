@@ -41,6 +41,7 @@ const expectedFiles = [
   "menu/assets/brand/favicon-saweeg-202609-192.png",
   "menu/assets/brand/favicon-saweeg-202609-512.png",
   "CNAME",
+  "robots.txt",
   "sitemap.xml"
 ];
 
@@ -131,16 +132,60 @@ for (const [html, label] of socialMetadataPages) {
   }
 }
 
+const publicSeoPages = expectedFiles
+  .filter((file) => file.endsWith("index.html") && !file.startsWith("blog/") && !file.startsWith("opportunities/") && !file.startsWith("en/blog/") && !file.startsWith("en/opportunities/"));
+for (const relative of publicSeoPages) {
+  const html = readDist(relative);
+  const titleCount = (html.match(/<title>/g) ?? []).length;
+  const descriptionCount = (html.match(/<meta\s+name="description"/g) ?? []).length;
+  const canonicalMatch = html.match(/<link\s+rel="canonical"\s+href="(https:\/\/[^\"]+)"/);
+  const alternateCount = (html.match(/<link\s+rel="alternate"\s+hreflang="(?:ar|en|x-default)"\s+href="https:\/\//g) ?? []).length;
+  if (titleCount !== 1) failures.push(`${relative} must contain exactly one title`);
+  if (descriptionCount !== 1) failures.push(`${relative} must contain exactly one meta description`);
+  if (!canonicalMatch) failures.push(`${relative} must contain an absolute HTTPS canonical URL`);
+  if (alternateCount !== 3) failures.push(`${relative} must contain Arabic, English, and x-default hreflang links`);
+}
+
+const parseJsonLd = (html, label) => {
+  const matches = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
+  if (matches.length !== 1) {
+    failures.push(`${label} must contain exactly one JSON-LD script`);
+    return null;
+  }
+  try {
+    return JSON.parse(matches[0][1]);
+  } catch {
+    failures.push(`${label} contains invalid JSON-LD`);
+    return null;
+  }
+};
+
+for (const [html, label, canonical] of [
+  [menuAr, "Arabic menu", "https://go.saweegsa.com/menu/"],
+  [menuEn, "English menu", "https://go.saweegsa.com/menu/en/"]
+]) {
+  const jsonLd = parseJsonLd(html, label);
+  const graph = jsonLd?.["@graph"];
+  const menu = Array.isArray(graph) ? graph.find((item) => item?.["@type"] === "Menu") : null;
+  if (!menu || menu.url !== canonical) failures.push(`${label} must expose a canonical Menu JSON-LD entity in initial HTML`);
+  if (!new RegExp(`<link\\s+rel="canonical"\\s+href="${canonical}"`).test(html)) {
+    failures.push(`${label} canonical must not include a branch query parameter`);
+  }
+}
+
 const sitemapUrls = [
   "https://go.saweegsa.com/menu/",
-  "https://go.saweegsa.com/menu/en/",
-  "https://go.saweegsa.com/menu/?branch=maqsed",
-  "https://go.saweegsa.com/menu/?branch=bustan",
-  "https://go.saweegsa.com/menu/en/?branch=maqsed",
-  "https://go.saweegsa.com/menu/en/?branch=bustan"
+  "https://go.saweegsa.com/menu/en/"
 ];
 for (const url of sitemapUrls) {
   if (!sitemap.includes(url)) failures.push(`Missing sitemap URL: ${url}`);
+}
+if (/\?branch=(?:maqsed|bustan)/.test(sitemap)) {
+  failures.push("Sitemap must not contain query-parameter menu variants");
+}
+const robots = readDist("robots.txt");
+if (!robots.includes("Sitemap: https://go.saweegsa.com/sitemap.xml")) {
+  failures.push("robots.txt must reference the absolute sitemap URL");
 }
 
 if (cname !== "go.saweegsa.com") failures.push(`Unexpected CNAME: ${cname}`);
@@ -202,9 +247,9 @@ const verifyLocalReferences = (relative, html) => {
   }
 };
 
-verifyLocalReferences("menu/index.html", menuAr);
-verifyLocalReferences("menu/en/index.html", menuEn);
-verifyLocalReferences("menu/404.html", readDist("menu/404.html"));
+for (const relative of expectedFiles.filter((file) => file.endsWith(".html"))) {
+  verifyLocalReferences(relative, readDist(relative));
+}
 
 const result = {
   expectedFiles: expectedFiles.length,
