@@ -171,6 +171,9 @@ for (const [html, label, canonical] of [
   if (!new RegExp(`<link\\s+rel="canonical"\\s+href="${canonical}"`).test(html)) {
     failures.push(`${label} canonical must not include a branch query parameter`);
   }
+  if ((html.match(/<h1(?:\s|>)/g) ?? []).length !== 1) {
+    failures.push(`${label} must expose one meaningful H1 in initial HTML`);
+  }
 }
 
 const sitemapUrls = [
