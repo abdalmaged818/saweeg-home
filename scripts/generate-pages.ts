@@ -149,11 +149,7 @@ const sitemapUrls = targets
   .map(({ locale, page, participationSlug }) => participationSlug ? participationCanonicalFor(locale, participationSlug) : canonicalFor(locale, page));
 const menuSitemapUrls = [
   `${siteConfig.brand.origin}/menu/`,
-  `${siteConfig.brand.origin}/menu/en/`,
-  `${siteConfig.brand.origin}/menu/?branch=maqsed`,
-  `${siteConfig.brand.origin}/menu/?branch=bustan`,
-  `${siteConfig.brand.origin}/menu/en/?branch=maqsed`,
-  `${siteConfig.brand.origin}/menu/en/?branch=bustan`
+  `${siteConfig.brand.origin}/menu/en/`
 ];
 const sitemapEntries = [...sitemapUrls, ...menuSitemapUrls]
   .map((url) => `  <url><loc>${url}</loc></url>`)
