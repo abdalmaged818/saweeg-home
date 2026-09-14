@@ -39,9 +39,9 @@ export const en = {
     }
   },
   hero: {
-    kicker: "From the heart of Madinah",
-    title: "Everything Saweeg, in one place",
-    description: "Saweeg is a Madinah-based brand presenting Talbinah and Sawiq with a contemporary spirit. From here, you can access the store, menu, delivery options, branches, and everything new from Saweeg.",
+    kicker: "The Official Saweeg Website",
+    title: "Saweeg — Saudi Arabia’s first brand specialized in Prophetic Talbinah",
+    description: "From the heart of Madinah, we develop the city’s culinary heritage and present it through contemporary products that bring together authenticity and innovation. Discover our story, products, branch menus and activities in one place.",
     imageAlt: "A Madinah landmark presented within Saweeg's visual identity",
     primary: "Start here",
     secondary: "About Saweeg"
