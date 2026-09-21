@@ -7,8 +7,6 @@ import type { BranchId } from "../src/menu/types/menu.ts";
 
 const productPrices = {
   "talbinah-ice-cream": 14,
-  "mango-ice-cream": 14,
-  "mixed-ice-cream": 14,
   "cold-talbinah": 15,
   "hot-talbinah": 15,
   "talbinah-matcha": 22,
@@ -53,8 +51,8 @@ test("branch-specific product selections match the official PDFs", () => {
   const maqsed = branchProductIds("maqsed");
   const bustan = branchProductIds("bustan");
 
-  assert.equal(maqsed.length, 20);
-  assert.equal(bustan.length, 21);
+  assert.equal(maqsed.length, 18);
+  assert.equal(bustan.length, 19);
   assert(maqsed.includes("hot-talbinah-one-liter"));
   assert(!bustan.includes("hot-talbinah-one-liter"));
   assert(!maqsed.includes("madini-crepe-cheese"));

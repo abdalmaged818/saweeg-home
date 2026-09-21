@@ -16,30 +16,6 @@ export const products: Product[] = [
     branches: [...sharedBranches]
   },
   {
-    id: "mango-ice-cream",
-    nameAr: "آيس كريم المانجا",
-    nameEn: "Mango Ice Cream",
-    price: 14,
-    category: "talbinah",
-    displayMode: "image",
-    image: "mango-ice-cream-2026-09.webp",
-    imageFit: "cover",
-    imagePosition: "center",
-    branches: [...sharedBranches]
-  },
-  {
-    id: "mixed-ice-cream",
-    nameAr: "آيس كريم مكس",
-    nameEn: "Mixed Ice Cream",
-    price: 14,
-    category: "talbinah",
-    displayMode: "image",
-    image: "mixed-ice-cream-2026-09.webp",
-    imageFit: "cover",
-    imagePosition: "center",
-    branches: [...sharedBranches]
-  },
-  {
     id: "cold-talbinah",
     nameAr: "تلبينة باردة",
     nameEn: "Cold Talbinah",
