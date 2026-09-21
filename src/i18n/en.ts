@@ -57,6 +57,13 @@ export const en = {
     cta: "Discover the offer",
     imageAlt: "A selection of Saweeg boxes and products for the National Day offer"
   },
+  jeddahParkEvent: {
+    eyebrow: "Celebrating Saudi National Day",
+    heading: "Jeddah, we’re coming to Jeddah Park",
+    description: "Join Saweeg in celebrating Saudi National Day at Jeddah Park from 23 to 26 September 2026.",
+    cta: "View Jeddah Park location",
+    imageAlt: "Jeddah Park facade and fountains during Saudi National Day celebrations"
+  },
   destinations: {
     eyebrow: "Your journey starts here",
     title: "Where would you like to go?",

@@ -72,6 +72,13 @@ export interface SiteCopy {
     cta: string;
     imageAlt: string;
   };
+  jeddahParkEvent: {
+    eyebrow: string;
+    heading: string;
+    description: string;
+    cta: string;
+    imageAlt: string;
+  };
   destinations: {
     eyebrow: string;
     title: string;
