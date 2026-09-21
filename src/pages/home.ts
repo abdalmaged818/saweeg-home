@@ -5,6 +5,7 @@ import { renderBranches } from "../components/branches.ts";
 import { renderContact } from "../components/contact.ts";
 import { renderDestinationCard } from "../components/destination-card.ts";
 import { renderHero } from "../components/hero.ts";
+import { renderJeddahParkEvent } from "../components/jeddah-park-event.ts";
 import { renderNationalDayOffer } from "../components/national-day-offer.ts";
 import { renderOpportunityPreview } from "../components/opportunities.ts";
 import { pageAvailability } from "../config/features.ts";
@@ -13,6 +14,7 @@ import { renderHomeParticipations } from "../components/participations.ts";
 export const renderHomePage = (locale: Locale, copy: SiteCopy, prefix: string, aboutPath: string, opportunitiesPath: string): string => `
   ${renderHero(copy)}
   ${renderNationalDayOffer(locale, copy, prefix)}
+  ${renderJeddahParkEvent(locale, copy, prefix)}
   <section class="destinations-section" id="destinations" aria-label="${copy.destinations.title}">
     <div class="container">
       <div class="destinations-grid">

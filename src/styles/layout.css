@@ -205,6 +205,151 @@ html[dir="rtl"] .hero h1 {
   padding-block: 0 30px;
 }
 
+.jeddah-park-event {
+  padding-block: 0 30px;
+}
+
+.jeddah-park-event__card {
+  --jeddah-green: #0d413a;
+  --jeddah-green-soft: #40635a;
+  --jeddah-cream: #f8f4eb;
+  --jeddah-gold: #a88951;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "media"
+    "body";
+  inline-size: 100%;
+  max-inline-size: 1080px;
+  margin-inline: auto;
+  overflow: hidden;
+  border: 1px solid rgb(13 65 58 / 10%);
+  border-radius: 14px;
+  background: var(--jeddah-cream);
+  box-shadow: 0 5px 16px rgb(13 65 58 / 7%);
+  color: var(--jeddah-green);
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.jeddah-park-event__media {
+  grid-area: media;
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: #d9e0df;
+}
+
+.jeddah-park-event__image {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.jeddah-park-event__body {
+  grid-area: body;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 14px;
+  padding: clamp(22px, 4vw, 42px);
+}
+
+.jeddah-park-event__eyebrow {
+  color: var(--jeddah-green-soft);
+  font-size: .9rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.jeddah-park-event__title {
+  color: var(--jeddah-green);
+  font-size: clamp(1.55rem, 1.22rem + 1.4vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.28;
+  text-wrap: balance;
+}
+
+.jeddah-park-event__description {
+  max-inline-size: 48ch;
+  color: #36584f;
+  font-size: clamp(.98rem, .93rem + .22vw, 1.08rem);
+  line-height: 1.8;
+}
+
+.jeddah-park-event__cta {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 44px;
+  margin-block-start: 4px;
+  padding-inline: 1.2em;
+  border-radius: 999px;
+  background: var(--jeddah-green);
+  color: #fff;
+  font-size: .96rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.jeddah-park-event__card:focus-visible {
+  outline: 3px solid var(--jeddah-gold);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .jeddah-park-event__card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 9px 22px rgb(13 65 58 / 11%);
+  }
+}
+
+@media (min-width: 760px) {
+  .jeddah-park-event__card {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas: "media body";
+    align-items: stretch;
+    direction: ltr;
+  }
+
+  .jeddah-park-event__card[dir="rtl"] .jeddah-park-event__media {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .jeddah-park-event__card[dir="rtl"] .jeddah-park-event__body {
+    grid-column: 1;
+    grid-row: 1;
+    direction: rtl;
+    text-align: right;
+  }
+
+  .jeddah-park-event__card[dir="ltr"] .jeddah-park-event__media {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .jeddah-park-event__card[dir="ltr"] .jeddah-park-event__body {
+    grid-column: 2;
+    grid-row: 1;
+    direction: ltr;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jeddah-park-event__card {
+    transition: none;
+  }
+
+  .jeddah-park-event__card:hover {
+    transform: none;
+  }
+}
+
 /* Approved National Day offer card. Selectors are scoped to this component. */
 .saweeg-national-offer {
   --so-font: inherit;
