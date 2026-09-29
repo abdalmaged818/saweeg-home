@@ -651,3 +651,7 @@ html[lang="ar"] .eyebrow {
   margin: 0.7rem auto 1.5rem;
   color: var(--text-secondary);
 }
+
+.branch-section__haram-link {
+  justify-self: start;
+}

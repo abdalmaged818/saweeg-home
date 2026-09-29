@@ -22,6 +22,8 @@ const expectedFiles = [
   "en/news/princess-sara-meeting/index.html",
   "menu/index.html",
   "menu/en/index.html",
+  "menu/haram/index.html",
+  "menu/haram/en/index.html",
   "menu/404.html",
   "menu/site.webmanifest",
   "menu/assets/brand/logo-saweeg.svg",
@@ -58,6 +60,8 @@ const readDist = (relative) =>
 
 const menuAr = readDist("menu/index.html");
 const menuEn = readDist("menu/en/index.html");
+const menuHaramAr = readDist("menu/haram/index.html");
+const menuHaramEn = readDist("menu/haram/en/index.html");
 const menuNotFound = readDist("menu/404.html");
 const homeAr = readDist("index.html");
 const homeEn = readDist("en/index.html");
@@ -84,6 +88,10 @@ const requiredHtmlSnippets = [
   [menuAr, "https://go.saweegsa.com/menu/en/", "Arabic menu alternate"],
   [menuEn, "https://go.saweegsa.com/menu/en/", "English menu canonical"],
   [menuEn, "https://go.saweegsa.com/menu/", "English menu alternate"],
+  [menuHaramAr, "https://go.saweegsa.com/menu/haram/", "Al Haram Arabic canonical"],
+  [menuHaramAr, "https://go.saweegsa.com/menu/haram/en/", "Al Haram Arabic alternate"],
+  [menuHaramEn, "https://go.saweegsa.com/menu/haram/en/", "Al Haram English canonical"],
+  [menuHaramEn, "https://go.saweegsa.com/menu/haram/", "Al Haram English alternate"],
   [menuAr, "/menu/site.webmanifest?v=202609", "Arabic menu manifest"],
   [menuEn, "/menu/site.webmanifest?v=202609", "English menu manifest"],
   [menuAr, "/menu/favicon-saweeg-202609.ico", "Arabic menu favicon"],
@@ -112,6 +120,8 @@ const socialMetadataPages = [
   [homeEn, "English homepage"],
   [menuAr, "Arabic menu"],
   [menuEn, "English menu"],
+  [menuHaramAr, "Al Haram Arabic menu"],
+  [menuHaramEn, "Al Haram English menu"],
   [menuNotFound, "Menu not found page"]
 ];
 for (const [html, label] of socialMetadataPages) {
@@ -162,7 +172,9 @@ const parseJsonLd = (html, label) => {
 
 for (const [html, label, canonical] of [
   [menuAr, "Arabic menu", "https://go.saweegsa.com/menu/"],
-  [menuEn, "English menu", "https://go.saweegsa.com/menu/en/"]
+  [menuEn, "English menu", "https://go.saweegsa.com/menu/en/"],
+  [menuHaramAr, "Al Haram Arabic menu", "https://go.saweegsa.com/menu/haram/"],
+  [menuHaramEn, "Al Haram English menu", "https://go.saweegsa.com/menu/haram/en/"]
 ]) {
   const jsonLd = parseJsonLd(html, label);
   const graph = jsonLd?.["@graph"];
@@ -178,7 +190,9 @@ for (const [html, label, canonical] of [
 
 const sitemapUrls = [
   "https://go.saweegsa.com/menu/",
-  "https://go.saweegsa.com/menu/en/"
+  "https://go.saweegsa.com/menu/en/",
+  "https://go.saweegsa.com/menu/haram/",
+  "https://go.saweegsa.com/menu/haram/en/"
 ];
 for (const url of sitemapUrls) {
   if (!sitemap.includes(url)) failures.push(`Missing sitemap URL: ${url}`);
@@ -213,8 +227,8 @@ const productDirectory = path.join(distRoot, "menu", "assets", "products");
 const productImages = fs.existsSync(productDirectory)
   ? fs.readdirSync(productDirectory).filter((name) => name.endsWith(".webp"))
   : [];
-if (productImages.length !== 20) {
-  failures.push(`Expected 20 menu product images, found ${productImages.length}`);
+if (productImages.length !== 23) {
+  failures.push(`Expected 23 menu product images, found ${productImages.length}`);
 }
 
 const textExtensions = new Set([".html", ".js", ".css", ".xml", ".json", ".webmanifest", ".txt"]);

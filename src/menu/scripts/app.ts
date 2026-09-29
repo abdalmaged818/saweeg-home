@@ -3,7 +3,8 @@ import { getMessages } from "../i18n";
 import {
   renderExtras,
   renderMenuPage,
-  renderMenuSections
+  renderMenuSections,
+  type MenuPageOptions
 } from "../templates/menu-page";
 import type { AppState, BranchId, Language } from "../types/menu";
 import { bindBranchSwitcher } from "./branch-switcher";
@@ -52,18 +53,23 @@ const storeBranch = (branch: BranchId): void => {
   }
 };
 
-const getInitialState = (): AppState => {
+const getInitialState = (fixedBranch?: BranchId): AppState => {
   const params = new URLSearchParams(window.location.search);
   const language: Language =
     document.documentElement.lang === "en" ? "en" : "ar";
 
   return {
     language,
-    branch: validBranch(params.get("branch")) ?? getStoredBranch() ?? "maqsed"
+    branch: fixedBranch ?? validBranch(params.get("branch")) ?? getStoredBranch() ?? "maqsed"
   };
 };
 
-const syncUrl = (state: AppState, mode: "push" | "replace"): void => {
+const syncUrl = (
+  state: AppState,
+  mode: "push" | "replace",
+  fixedBranch?: BranchId
+): void => {
+  if (fixedBranch) return;
   const params = new URLSearchParams(window.location.search);
   params.set("branch", state.branch);
   const query = params.toString();
@@ -75,14 +81,14 @@ const syncUrl = (state: AppState, mode: "push" | "replace"): void => {
   );
 };
 
-export const initializeApp = (): void => {
+export const initializeApp = (options: MenuPageOptions & { fixedBranch?: BranchId } = {}): void => {
   const root = document.querySelector<HTMLElement>("#app");
   if (!root) {
     throw new Error("Application root is missing.");
   }
 
-  const state = getInitialState();
-  const refs = renderMenuPage(root, state);
+  const state = getInitialState(options.fixedBranch);
+  const refs = renderMenuPage(root, state, options);
   const backLink = root.querySelector<HTMLAnchorElement>("[data-menu-back-link]");
   if (!backLink) {
     throw new Error("Menu back link is missing.");
@@ -109,8 +115,8 @@ export const initializeApp = (): void => {
   };
 
   const refreshContent = (): void => {
-    renderMenuSections(refs.menuSections, state);
-    renderExtras(refs.extrasList, state);
+    renderMenuSections(refs.menuSections, state, options.products);
+    renderExtras(refs.extrasList, state, options.extras);
     attachImageFallbacks(refs.menuSections);
     refreshSelectionUi();
   };
@@ -121,19 +127,23 @@ export const initializeApp = (): void => {
     }
     state.branch = branch;
     storeBranch(branch);
-    syncUrl(state, "push");
+    syncUrl(state, "push", options.fixedBranch);
     refreshContent();
   };
 
-  bindBranchSwitcher(root, changeBranch);
+  if (!options.fixedBranch) {
+    bindBranchSwitcher(root, changeBranch);
+  }
 
   window.addEventListener("popstate", () => {
-    const params = new URLSearchParams(window.location.search);
-    state.branch = validBranch(params.get("branch")) ?? "maqsed";
+    if (!options.fixedBranch) {
+      const params = new URLSearchParams(window.location.search);
+      state.branch = validBranch(params.get("branch")) ?? "maqsed";
+    }
     refreshContent();
   });
 
-  syncUrl(state, "replace");
+  syncUrl(state, "replace", options.fixedBranch);
   refreshSelectionUi();
   attachImageFallbacks(root);
 };
