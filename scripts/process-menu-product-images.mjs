@@ -39,6 +39,9 @@ const imageJobs = [
     "talbinah-lotus-cheesecake-2026-09.webp"
   ),
   officialProductImage("dates-with-saweeg-2026-09.png", "dates-with-saweeg-2026-09.webp"),
+  officialProductImage("ايسكريم مكس.jpg", "haram-mixed-ice-cream.webp"),
+  officialProductImage("الجابرة تلبينة.jpg", "haram-al-jabirah-sachet.webp"),
+  officialProductImage("بوكس بسبوسه.jpg", "haram-pecan-basbousa-box.webp"),
   {
     sourceName: "كريب مديني أجبان.jpg",
     outputName: "madini-crepe-cheese.webp",

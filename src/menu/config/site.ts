@@ -39,6 +39,10 @@ export const siteConfig = {
     bustan: {
       ar: "فرع بستان المستظل",
       en: "Bustan Al-Mustazal Branch"
+    },
+    haram: {
+      ar: "فرع الحرم",
+      en: "Al Haram Branch"
     }
   } satisfies Record<BranchId, Record<Language, string>>
 } as const;

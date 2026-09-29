@@ -11,6 +11,7 @@ export const ar = {
   heroTitle: "منيو سويق",
   heroBody: "اختر الفرع واستعرض جميع الأصناف والأسعار.",
   chooseBranch: "اختر فرعك",
+  haramMenuLink: "منيو فرع الحرم",
   backToPreviousPage: "العودة للصفحة السابقة",
   branchSectionTitle: "اختر الفرع",
   branchSectionBody: "تختلف بعض الأصناف والإضافات حسب الفرع.",

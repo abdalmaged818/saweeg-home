@@ -1,6 +1,6 @@
 export type Language = "ar" | "en";
 
-export type BranchId = "maqsed" | "bustan";
+export type BranchId = "maqsed" | "bustan" | "haram";
 
 export type CategoryId =
   | "talbinah"
@@ -36,7 +36,7 @@ interface ProductBase {
 
 export interface ImageProduct extends ProductBase {
   displayMode: "image";
-  image: string;
+  image?: string;
   imageFit?: "cover" | "contain";
   imagePosition?: string;
   imageScale?: number;

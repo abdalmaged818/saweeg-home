@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { extras } from "../src/menu/data/extras.ts";
+import { haramExtras, haramProducts } from "../src/menu/data/haram.ts";
 import { products } from "../src/menu/data/products.ts";
 import type { BranchId } from "../src/menu/types/menu.ts";
 
@@ -119,4 +120,56 @@ test("official supplied product images are mapped without cropping", () => {
       assert.equal(product.imageFit, "contain");
     }
   }
+});
+
+test("Al Haram has exactly the 34 unique products and official prices", () => {
+  const haramItems = [...haramProducts, ...haramExtras];
+  const expectedPrices = {
+    "haram-talbinah-ice-cream-biscuit": 11,
+    "haram-talbinah-ice-cream-cup": 15,
+    "haram-chocolate-ice-cream-biscuit": 11,
+    "haram-chocolate-ice-cream-cup": 15,
+    "haram-mixed-ice-cream-biscuit": 11,
+    "haram-mixed-ice-cream-cup": 15,
+    "haram-lotus-cheesecake": 20,
+    "haram-damkah": 20,
+    "haram-dates-with-saweeg": 20,
+    "haram-pecan-basbousa": 13,
+    "haram-date-tart": 13,
+    "haram-maamoul-saweeg": 25,
+    "haram-cold-talbinah": 16,
+    "haram-hot-talbinah": 16,
+    "haram-hot-talbinah-one-liter": 55,
+    "haram-saudi-coffee": 7,
+    "haram-saudi-coffee-dallah": 25,
+    "haram-saudi-coffee-dallah-with-sweets": 45,
+    "haram-tea": 5,
+    "haram-tea-flask": 25,
+    "haram-talbinah-matcha-ice-cream": 25,
+    "haram-water": 1,
+    "haram-talbinah-powder-sachet": 30,
+    "haram-saweeg-powder-sachet": 30,
+    "haram-mixed-nuts-sachet": 14,
+    "haram-al-jabirah-sachet": 8,
+    "haram-safawi-dates-nuts-box": 78,
+    "haram-ajwa-dates-nuts-box": 85,
+    "haram-al-jabirah-box": 75,
+    "haram-gift-box": 52,
+    "haram-maamoul-box": 89,
+    "haram-pecan-basbousa-box": 55,
+    "haram-sachet-box": 75,
+    "haram-date-tart-box": 55
+  } as const;
+
+  assert.equal(haramItems.length, 34);
+  assert.equal(new Set(haramItems.map((item) => item.id)).size, 34);
+  assert.deepEqual(
+    Object.fromEntries(haramItems.map((item) => [item.id, item.price])),
+    expectedPrices
+  );
+  assert.equal(
+    haramItems.filter((item) => item.nameAr.includes("آيس كريم شوكولاتة")).length,
+    2
+  );
+  assert(!haramItems.some((item) => /مانجا|mango/i.test(`${item.nameAr} ${item.nameEn}`)));
 });

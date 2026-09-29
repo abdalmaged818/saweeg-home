@@ -32,6 +32,8 @@ export default defineConfig({
         notFound: resolve(projectRoot, "404.html"),
         menuAr: resolve(projectRoot, "menu/index.html"),
         menuEn: resolve(projectRoot, "menu/en/index.html"),
+        menuHaramAr: resolve(projectRoot, "menu/haram/index.html"),
+        menuHaramEn: resolve(projectRoot, "menu/haram/en/index.html"),
         menuNotFound: resolve(projectRoot, "menu/404.html")
       }
     }

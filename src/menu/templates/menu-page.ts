@@ -2,7 +2,7 @@ import { assetUrl, branchMapUrl, menuBasePath, siteConfig } from "../config/site
 import { branches } from "../data/branches";
 import { categories } from "../data/categories";
 import { extras } from "../data/extras";
-import { products } from "../data/products";
+import { products as defaultProducts } from "../data/products";
 import { getMessages } from "../i18n";
 import type {
   AppState,
@@ -10,8 +10,22 @@ import type {
   CompactProduct,
   Extra,
   ImageProduct,
-  Language
+  Language,
+  Product
 } from "../types/menu";
+
+export interface MenuPageOptions {
+  products?: Product[];
+  extras?: Extra[];
+  showBranchSection?: boolean;
+  showBranchLocations?: boolean;
+  hero?: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    ctaLabel?: string;
+  };
+}
 
 export interface MenuPageRefs {
   root: HTMLElement;
@@ -90,6 +104,9 @@ const appHref = (
   language: Language,
   branch: AppState["branch"]
 ): string => {
+  if (branch === "haram") {
+    return `${menuBasePath}haram/${language === "en" ? "en/" : ""}`;
+  }
   const languagePath = language === "en" ? "en/" : "";
   const query = new URLSearchParams(
     typeof window === "undefined" ? undefined : window.location.search
@@ -99,12 +116,17 @@ const appHref = (
   return `${menuBasePath}${languagePath}?${query.toString()}${hash}`;
 };
 
+const brandHref = (language: Language, branch: AppState["branch"]): string =>
+  branch === "haram"
+    ? `${menuBasePath}${language === "en" ? "en/" : ""}`
+    : appHref(language, branch);
+
 const createBrand = (
   language: Language,
   branch: AppState["branch"]
 ): HTMLAnchorElement => {
   const brand = createElement("a", "brand");
-  brand.href = appHref(language, branch);
+  brand.href = brandHref(language, branch);
   brand.setAttribute(
     "aria-label",
     language === "ar" ? "العودة إلى منيو سويق" : "Back to Saweeg menu"
@@ -232,7 +254,11 @@ const createMobileMenu = (state: AppState): HTMLElement => {
   return menu;
 };
 
-const createHero = (state: AppState): HTMLElement => {
+const createHero = (
+  state: AppState,
+  hero?: MenuPageOptions["hero"],
+  hasBranchSelection = true
+): HTMLElement => {
   const messages = getMessages(state.language);
   const section = createElement("section", "hero");
   const inner = createElement("div", "hero__inner container");
@@ -240,13 +266,13 @@ const createHero = (state: AppState): HTMLElement => {
   const button = createElement(
     "a",
     "button button--primary",
-    messages.chooseBranch
+    hero?.ctaLabel ?? messages.chooseBranch
   );
-  button.href = "#branch-picker";
+  button.href = hasBranchSelection ? "#branch-picker" : "#menu-products";
   content.append(
-    createElement("p", "eyebrow", messages.heroEyebrow),
-    createElement("h1", "hero__title", messages.heroTitle),
-    createElement("p", "hero__body", messages.heroBody),
+    createElement("p", "eyebrow", hero?.eyebrow ?? messages.heroEyebrow),
+    createElement("h1", "hero__title", hero?.title ?? messages.heroTitle),
+    createElement("p", "hero__body", hero?.body ?? messages.heroBody),
     button
   );
   inner.append(content);
@@ -312,6 +338,13 @@ const createBranchSection = (state: AppState): HTMLElement => {
   branches.forEach((branch) => selector.append(createBranchButton(branch, state)));
 
   controls.append(selector);
+  const haramLink = createElement(
+    "a",
+    "button button--secondary branch-section__haram-link",
+    messages.haramMenuLink
+  );
+  haramLink.href = appHref(state.language, "haram");
+  controls.append(haramLink);
   inner.append(copy, controls);
   section.append(inner);
   return section;
@@ -504,20 +537,23 @@ const createProductCard = (
   const media = createElement("div", "product-card__media");
   const decorative = createElement("span", "product-card__fallback");
   decorative.setAttribute("aria-hidden", "true");
-  const image = createElement("img", "product-card__image");
   const name = localName(product, language);
-  image.src = assetUrl(`assets/products/${product.image}`);
-  image.alt = messages.productImageAlt(name);
-  image.width = 1400;
-  image.height = 1050;
-  image.loading = "lazy";
-  image.decoding = "async";
-  image.dataset.fallbackKind = "product";
-  image.style.objectFit = product.imageFit ?? "cover";
-  image.style.objectPosition = product.imagePosition ?? "center";
-  image.style.transformOrigin = product.imagePosition ?? "center";
-  image.style.setProperty("--image-scale", String(product.imageScale ?? 1));
-  media.append(decorative, image);
+  media.append(decorative);
+  if (product.image) {
+    const image = createElement("img", "product-card__image");
+    image.src = assetUrl(`assets/products/${product.image}`);
+    image.alt = messages.productImageAlt(name);
+    image.width = 1400;
+    image.height = 1050;
+    image.loading = "lazy";
+    image.decoding = "async";
+    image.dataset.fallbackKind = "product";
+    image.style.objectFit = product.imageFit ?? "cover";
+    image.style.objectPosition = product.imagePosition ?? "center";
+    image.style.transformOrigin = product.imagePosition ?? "center";
+    image.style.setProperty("--image-scale", String(product.imageScale ?? 1));
+    media.append(image);
+  }
 
   const content = createElement("div", "product-card__content");
   const copy = createElement("div", "product-card__copy");
@@ -577,13 +613,14 @@ const createExtraRow = (extra: Extra, language: Language): HTMLElement => {
 
 export const renderMenuSections = (
   container: HTMLElement,
-  state: AppState
+  state: AppState,
+  productData: Product[] = defaultProducts
 ): void => {
   const fragment = document.createDocumentFragment();
   categories
     .filter((category) => category.id !== "drinks")
     .forEach((category) => {
-      const categoryProducts = products.filter(
+      const categoryProducts = productData.filter(
         (product) =>
           product.branches.includes(state.branch) &&
           product.category === category.id
@@ -629,10 +666,11 @@ export const renderMenuSections = (
 
 export const renderExtras = (
   container: HTMLElement,
-  state: AppState
+  state: AppState,
+  extraData: Extra[] = extras
 ): void => {
   const fragment = document.createDocumentFragment();
-  extras
+  extraData
     .filter((extra) => extra.branches.includes(state.branch))
     .forEach((extra) => fragment.append(createExtraRow(extra, state.language)));
   container.replaceChildren(fragment);
@@ -640,7 +678,8 @@ export const renderExtras = (
 
 export const renderMenuPage = (
   root: HTMLElement,
-  state: AppState
+  state: AppState,
+  options: MenuPageOptions = {}
 ): MenuPageRefs => {
   const messages = getMessages(state.language);
   const skipLink = createElement("a", "skip-link", messages.skipToContent);
@@ -652,11 +691,11 @@ export const renderMenuPage = (
   const menuSection = createMenuSection(state);
   const extrasSection = createExtrasSection(state);
   main.append(
-    createHero(state),
-    createBranchSection(state),
+    createHero(state, options.hero, options.showBranchSection !== false),
+    ...(options.showBranchSection === false ? [] : [createBranchSection(state)]),
     menuSection,
     extrasSection,
-    createBranchLocationsSection(state),
+    ...(options.showBranchLocations === false ? [] : [createBranchLocationsSection(state)]),
     createBackNavigation(state),
     createStoreSection(state),
     createContactSection(state)
@@ -679,8 +718,8 @@ export const renderMenuPage = (
     throw new Error("Menu page could not be initialized.");
   }
 
-  renderMenuSections(menuSections, state);
-  renderExtras(extrasList, state);
+  renderMenuSections(menuSections, state, options.products);
+  renderExtras(extrasList, state, options.extras);
 
   return {
     root,
@@ -699,6 +738,6 @@ export const updateMenuLinks = (root: HTMLElement, state: AppState): void => {
     );
   });
   root.querySelectorAll<HTMLAnchorElement>("[data-brand-link]").forEach((link) => {
-    link.href = appHref(state.language, state.branch);
+    link.href = brandHref(state.language, state.branch);
   });
 };
