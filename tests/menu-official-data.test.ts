@@ -173,3 +173,28 @@ test("Al Haram has exactly the 34 unique products and official prices", () => {
   );
   assert(!haramItems.some((item) => /مانجا|mango/i.test(`${item.nameAr} ${item.nameEn}`)));
 });
+
+test("Al Haram maps images only to exact approved products", () => {
+  const imageFreeProductIds = haramProducts
+    .filter((product) => product.displayMode === "image" && !product.image)
+    .map((product) => product.id);
+
+  assert.deepEqual(imageFreeProductIds, [
+    "haram-talbinah-ice-cream-biscuit",
+    "haram-chocolate-ice-cream-biscuit",
+    "haram-chocolate-ice-cream-cup",
+    "haram-mixed-ice-cream-biscuit",
+    "haram-talbinah-matcha-ice-cream",
+    "haram-pecan-basbousa",
+    "haram-date-tart",
+    "haram-maamoul-saweeg",
+    "haram-ajwa-dates-nuts-box",
+    "haram-date-tart-box"
+  ]);
+
+  const mappedImages = haramProducts
+    .filter((product) => product.displayMode === "image")
+    .flatMap((product) => product.image ? [product.image] : []);
+
+  assert.equal(mappedImages.length, new Set(mappedImages).size);
+});

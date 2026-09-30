@@ -10,8 +10,6 @@ export const haramProducts: Product[] = [
     price: 11,
     category: "talbinah",
     displayMode: "image",
-    image: "talbinah-ice-cream-2026-09.webp",
-    imageFit: "cover",
     branches: [...haram]
   },
   {
@@ -50,8 +48,6 @@ export const haramProducts: Product[] = [
     price: 11,
     category: "talbinah",
     displayMode: "image",
-    image: "haram-mixed-ice-cream.webp",
-    imageFit: "contain",
     branches: [...haram]
   },
   {
@@ -105,8 +101,6 @@ export const haramProducts: Product[] = [
     price: 25,
     category: "talbinah",
     displayMode: "image",
-    image: "talbinah-matcha.webp",
-    imageFit: "contain",
     branches: [...haram]
   },
   {

@@ -2,7 +2,7 @@ export type Locale = "ar" | "en";
 export type PageId = "home" | "about" | "news" | "blog" | "opportunities";
 export type DestinationId = "store" | "menu" | "delivery";
 export type QuickLinkId = "whatsapp" | "tiktok" | "x" | "maqsed" | "bustan";
-export type BranchId = "maqsed" | "bustan";
+export type BranchId = "maqsed" | "bustan" | "haram";
 export type NewsKind = "news" | "blog";
 export type OpportunityId = "careers" | "collaboration";
 export type IconName = "bag" | "menu" | "delivery" | "whatsapp" | "tiktok" | "x" | "pin" | "arrow" | "people" | "handshake";
@@ -61,24 +61,6 @@ export interface SiteCopy {
     primary: string;
     secondary: string;
   };
-  nationalDayOffer: {
-    badge: string;
-    heading: string;
-    offer: string;
-    offerPrefix: string;
-    offerLead: string;
-    amount: string;
-    currency: string;
-    cta: string;
-    imageAlt: string;
-  };
-  jeddahParkEvent: {
-    eyebrow: string;
-    heading: string;
-    description: string;
-    cta: string;
-    imageAlt: string;
-  };
   destinations: {
     eyebrow: string;
     title: string;
@@ -136,6 +118,8 @@ export interface SiteCopy {
     title: string;
     description: string;
     locationCta: string;
+    locationCtas: Partial<Record<BranchId, string>>;
+    locations: Partial<Record<BranchId, string>>;
     menuCta: string;
     names: Record<BranchId, string>;
   };

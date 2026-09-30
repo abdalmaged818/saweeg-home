@@ -305,6 +305,17 @@ html[lang="ar"] .eyebrow {
   transform: translateY(-3px);
 }
 
+.product-card--without-image {
+  display: flex;
+  min-block-size: 96px;
+}
+
+.product-card--without-image .product-card__content {
+  flex: 1;
+  min-height: 0;
+  align-items: center;
+}
+
 .product-card__media {
   position: relative;
   aspect-ratio: 4 / 3;

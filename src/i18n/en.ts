@@ -46,24 +46,6 @@ export const en = {
     primary: "Start here",
     secondary: "About Saweeg"
   },
-  nationalDayOffer: {
-    badge: "National Day offer",
-    heading: "For National Day",
-    offer: "3 Al Jabirah boxes for SAR 196",
-    offerPrefix: "3 Al Jabirah boxes",
-    offerLead: "for",
-    amount: "196",
-    currency: "SAR",
-    cta: "Discover the offer",
-    imageAlt: "A selection of Saweeg boxes and products for the National Day offer"
-  },
-  jeddahParkEvent: {
-    eyebrow: "Celebrating Saudi National Day",
-    heading: "Jeddah, we’re coming to Jeddah Park",
-    description: "Join Saweeg in celebrating Saudi National Day at Jeddah Park from 23 to 26 September 2026.",
-    cta: "View Jeddah Park location",
-    imageAlt: "Jeddah Park facade and fountains during Saudi National Day celebrations"
-  },
   destinations: {
     eyebrow: "Your journey starts here",
     title: "Where would you like to go?",
@@ -171,10 +153,17 @@ export const en = {
     title: "Saweeg branches",
     description: "Choose a branch to open its location or browse its digital menu.",
     locationCta: "Open location",
+    locationCtas: {
+      haram: "View location on Google Maps"
+    },
+    locations: {
+      haram: "Madinah – Al Haram Area"
+    },
     menuCta: "Open menu",
     names: {
       maqsed: "Al-Maqsed branch",
-      bustan: "Bustan Al-Mustazal branch"
+      bustan: "Bustan Al-Mustazal branch",
+      haram: "Al Haram Branch"
     }
   },
   contact: {
