@@ -6,8 +6,8 @@
 "start_url": "/menu/",
 "scope": "/menu/",
 "display": "standalone",
-"theme_color": "#F8F6F1",
-"background_color": "#F8F6F1",
+"theme_color": "#F4F1EC",
+"background_color": "#F4F1EC",
 "icons": [
 {
 "src": "/menu/assets/brand/favicon-saweeg-202609-192.png",
