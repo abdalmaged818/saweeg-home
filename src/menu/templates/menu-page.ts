@@ -338,13 +338,6 @@ const createBranchSection = (state: AppState): HTMLElement => {
   branches.forEach((branch) => selector.append(createBranchButton(branch, state)));
 
   controls.append(selector);
-  const haramLink = createElement(
-    "a",
-    "button button--secondary branch-section__haram-link",
-    messages.haramMenuLink
-  );
-  haramLink.href = appHref(state.language, "haram");
-  controls.append(haramLink);
   inner.append(copy, controls);
   section.append(inner);
   return section;

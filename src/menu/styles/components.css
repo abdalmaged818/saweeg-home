@@ -194,7 +194,7 @@ html[lang="ar"] .eyebrow {
 
 .button--primary:hover {
   background: var(--green-dark);
-  box-shadow: 0 6px 18px rgba(0, 47, 45, 0.16);
+  box-shadow: 0 6px 18px rgba(92, 99, 81, 0.16);
 }
 
 .button--secondary {
@@ -210,7 +210,7 @@ html[lang="ar"] .eyebrow {
 .button--text {
   color: var(--brand-green);
   text-decoration: underline;
-  text-decoration-color: rgba(85, 106, 81, 0.36);
+  text-decoration-color: rgba(92, 99, 81, 0.36);
   text-underline-offset: 4px;
 }
 
@@ -271,7 +271,7 @@ html[lang="ar"] .eyebrow {
 .branch-option.is-active {
   border-color: var(--brand-green);
   background: var(--brand-green);
-  box-shadow: 0 6px 18px rgba(0, 47, 45, 0.14);
+  box-shadow: 0 6px 18px rgba(92, 99, 81, 0.14);
   color: var(--surface);
 }
 
@@ -329,9 +329,9 @@ html[lang="ar"] .eyebrow {
   inset: 50% auto auto 50%;
   width: 38%;
   aspect-ratio: 0.66;
-  border: 1px solid rgba(85, 106, 81, 0.16);
+  border: 1px solid rgba(92, 99, 81, 0.16);
   border-radius: 100% 0 100% 0;
-  background: rgba(85, 106, 81, 0.08);
+  background: rgba(92, 99, 81, 0.08);
   transform: translate(-50%, -50%) rotate(36deg);
 }
 
@@ -341,7 +341,7 @@ html[lang="ar"] .eyebrow {
   inset-inline-start: -38%;
   width: 170%;
   height: 1px;
-  background: rgba(85, 106, 81, 0.18);
+  background: rgba(92, 99, 81, 0.18);
   content: "";
   transform: rotate(-36deg);
 }
@@ -585,7 +585,7 @@ html[lang="ar"] .eyebrow {
 
 .footer-tagline {
   margin: 0.35rem 0 0;
-  color: rgba(248, 246, 241, 0.82);
+  color: rgba(244, 241, 236, 0.82);
 }
 
 .footer-link {
@@ -603,9 +603,9 @@ html[lang="ar"] .eyebrow {
 
 .copyright {
   margin: 0;
-  border-block-start: 1px solid rgba(233, 229, 219, 0.18);
+  border-block-start: 1px solid rgba(244, 241, 236, 0.18);
   padding-block-start: 1.2rem;
-  color: rgba(248, 246, 241, 0.76);
+  color: rgba(244, 241, 236, 0.76);
   font-size: 0.85rem;
 }
 
@@ -661,8 +661,4 @@ html[lang="ar"] .eyebrow {
 .not-found-copy {
   margin: 0.7rem auto 1.5rem;
   color: var(--text-secondary);
-}
-
-.branch-section__haram-link {
-  justify-self: start;
 }

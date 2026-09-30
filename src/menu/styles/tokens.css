@@ -1,32 +1,9 @@
+@import "../../styles/tokens.css";
+
 :root {
-  --saweeg-green: #002f2d;
-  --saweeg-green-dark: #002f2d;
-  --saweeg-green-seasonal: #00894a;
-  --saweeg-olive: #5c6351;
-  --saweeg-green-soft: #e8f3ed;
-  --saweeg-ivory: #e8e5dc;
-  --saweeg-gold: #c4a972;
-  --saweeg-gold-soft: #f4efe4;
-  --page-bg: #f8f7f3;
-  --surface: #ffffff;
-  --surface-soft: #f2f0ea;
-  --text: #1c2926;
-  --text-secondary: #727872;
-  --text-soft: var(--saweeg-olive);
-  --border: #e8e5dc;
-  --border-strong: #d7d4cb;
-  --radius-xl: 18px;
-  --radius-lg: 18px;
-  --radius-md: 16px;
-  --radius-sm: 14px;
   --radius-pill: 999px;
-  --shadow-card: 0 4px 16px rgba(0, 47, 45, 0.04);
-  --shadow-soft: 0 8px 24px rgba(0, 47, 45, 0.06);
-  --shadow-header: 0 8px 22px rgba(0, 47, 45, 0.08);
   --max-width: 1180px;
   --header-offset: 96px;
-  --focus-ring: 0 0 0 4px rgba(0, 137, 74, 0.18);
-  --transition: 180ms ease;
 
   --brand-beige: var(--saweeg-ivory);
   --brand-green: var(--saweeg-green);

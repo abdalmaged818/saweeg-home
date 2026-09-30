@@ -101,7 +101,7 @@
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: rgba(28, 41, 38, 0.22);
+  background: rgba(92, 99, 81, 0.22);
 }
 
 .mobile-navigation-inner {
@@ -331,12 +331,12 @@ html[dir="rtl"] .hero h1 {
   gap: 12px;
   margin-block-start: 22px;
   padding-block-start: 16px;
-  border-block-start: 1px solid rgba(232, 229, 220, 0.18);
+  border-block-start: 1px solid rgba(244, 241, 236, 0.18);
 }
 
 .footer-downloads {
   grid-column: 1 / -1;
   margin-block-start: 24px;
   padding-block-start: 20px;
-  border-block-start: 1px solid rgba(232, 229, 220, 0.18);
+  border-block-start: 1px solid rgba(244, 241, 236, 0.18);
 }

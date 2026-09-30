@@ -132,7 +132,7 @@ export const renderDocument = ({
   ${dynamicBase ? '<script>(function(){var base=document.createElement("base");var firstPath=location.pathname.split("/").filter(Boolean)[0];base.href=location.hostname.endsWith(".github.io")&&firstPath?"/"+firstPath+"/":"/";document.head.appendChild(base);}());</script>' : ""}
   <title>${metadata.title}</title>
   <meta name="description" content="${metadata.description}">
-  <meta name="theme-color" content="#F8F6F1">
+  <meta name="theme-color" content="#F4F1EC">
   ${noIndex ? '<meta name="robots" content="noindex, follow">' : ""}
   <link rel="canonical" href="${canonical}">
   <link rel="alternate" hreflang="ar" href="${arCanonical}">
