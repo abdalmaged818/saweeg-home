@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const sourceImage = path.join(projectRoot, "assets-source", "home", "national-day-aljabirah-offer-2026-09.png");
+const sourceImage = path.join(projectRoot, "public", "assets", "images", "saweeg-madinah-hero.png");
 const sourceLogo = path.join(projectRoot, "public", "assets", "brand", "logo-saweeg.svg");
 const outputDirectory = path.join(projectRoot, "public", "assets", "social");
 const outputImage = path.join(outputDirectory, "saweeg-gateway-preview-20260910.png");

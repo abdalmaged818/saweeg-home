@@ -4,10 +4,11 @@ import type { BranchId, SiteCopy } from "../types/site.ts";
 
 const locations: Record<BranchId, string> = {
   maqsed: siteConfig.links.maqsedMap,
-  bustan: siteConfig.links.bustanMap
+  bustan: siteConfig.links.bustanMap,
+  haram: siteConfig.links.haramMap
 };
 
-const menus: Record<BranchId, string> = {
+const menus: Partial<Record<BranchId, string>> = {
   maqsed: siteConfig.links.maqsedMenu,
   bustan: siteConfig.links.bustanMenu
 };
@@ -21,14 +22,19 @@ export const renderBranches = (copy: SiteCopy): string => `
         <p>${copy.branches.description}</p>
       </div>
       <div class="branches-grid">
-        ${branches.map((branch) => `
-          <article class="branch-card">
-            <h3>${copy.branches.names[branch.id]}</h3>
-            <div class="branch-actions">
-              <a class="button button-primary" href="${locations[branch.id]}" target="_blank" rel="noopener noreferrer" data-analytics-event="branch_map_click" data-analytics-label="${branch.id}">${copy.branches.locationCta}</a>
-              <a class="button button-soft" href="${menus[branch.id]}" target="_blank" rel="noopener noreferrer" data-analytics-event="branch_menu_click" data-analytics-label="${branch.id}">${copy.branches.menuCta}</a>
-            </div>
-          </article>`).join("")}
+        ${branches.map((branch) => {
+          const location = copy.branches.locations[branch.id];
+          const menu = menus[branch.id];
+          return `
+            <article class="branch-card">
+              <h3>${copy.branches.names[branch.id]}</h3>
+              ${location ? `<p class="branch-card__location">${location}</p>` : ""}
+              <div class="branch-actions">
+                <a class="button button-primary" href="${locations[branch.id]}" target="_blank" rel="noopener noreferrer" data-analytics-event="branch_map_click" data-analytics-label="${branch.id}">${copy.branches.locationCtas[branch.id] ?? copy.branches.locationCta}</a>
+                ${menu ? `<a class="button button-soft" href="${menu}" target="_blank" rel="noopener noreferrer" data-analytics-event="branch_menu_click" data-analytics-label="${branch.id}">${copy.branches.menuCta}</a>` : ""}
+              </div>
+            </article>`;
+        }).join("")}
       </div>
     </div>
   </section>`;

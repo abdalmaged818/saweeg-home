@@ -531,15 +531,17 @@ const createProductCard = (
   language: Language
 ): HTMLElement => {
   const messages = getMessages(language);
-  const article = createElement("article", "product-card");
+  const article = createElement(
+    "article",
+    product.image ? "product-card" : "product-card product-card--without-image"
+  );
   article.dataset.productId = product.id;
   article.dataset.displayMode = product.displayMode;
-  const media = createElement("div", "product-card__media");
-  const decorative = createElement("span", "product-card__fallback");
-  decorative.setAttribute("aria-hidden", "true");
   const name = localName(product, language);
-  media.append(decorative);
   if (product.image) {
+    const media = createElement("div", "product-card__media");
+    const decorative = createElement("span", "product-card__fallback");
+    decorative.setAttribute("aria-hidden", "true");
     const image = createElement("img", "product-card__image");
     image.src = assetUrl(`assets/products/${product.image}`);
     image.alt = messages.productImageAlt(name);
@@ -552,7 +554,8 @@ const createProductCard = (
     image.style.objectPosition = product.imagePosition ?? "center";
     image.style.transformOrigin = product.imagePosition ?? "center";
     image.style.setProperty("--image-scale", String(product.imageScale ?? 1));
-    media.append(image);
+    media.append(decorative, image);
+    article.append(media);
   }
 
   const content = createElement("div", "product-card__content");
@@ -566,7 +569,7 @@ const createProductCard = (
     messages.priceLabel(product.price)
   );
   content.append(copy, price);
-  article.append(media, content);
+  article.append(content);
   return article;
 };
 
