@@ -27,6 +27,10 @@ const imageJobs = [
   officialProductImage("mixed-caramelized-nuts-pack.png", "mixed-caramelized-nuts-pack.webp"),
   officialProductImage("damkah-2026-09.png", "damkah-2026-09.webp"),
   officialProductImage("talbinah-ice-cream-2026-09.png", "talbinah-ice-cream-2026-09.webp"),
+  officialProductImage(
+    "chocolate-ice-cream-cup-2026-10.png",
+    "chocolate-ice-cream-cup-2026-10.webp"
+  ),
   officialProductImage("saweeg-powder.png", "sawiq-powder.webp"),
   officialProductImage("gift-box-2026-09.png", "gift-box-2026-09.webp"),
   officialProductImage("al-jabirah-box.png", "al-jabirah-box.webp"),
