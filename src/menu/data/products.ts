@@ -16,6 +16,45 @@ export const products: Product[] = [
     branches: [...sharedBranches]
   },
   {
+    id: "chocolate-ice-cream-cup",
+    nameAr: "آيس كريم شوكولاتة – كوب",
+    nameEn: "Chocolate Ice Cream – Cup",
+    price: 14,
+    category: "talbinah",
+    displayMode: "image",
+    image: "chocolate-ice-cream-cup-2026-10.webp",
+    imageFit: "contain",
+    imagePosition: "center",
+    branches: [...sharedBranches]
+  },
+  {
+    id: "chocolate-ice-cream-biscuit",
+    nameAr: "آيس كريم شوكولاتة – بسكوت",
+    nameEn: "Chocolate Ice Cream – Biscuit",
+    price: 10,
+    category: "talbinah",
+    displayMode: "image",
+    branches: [...sharedBranches]
+  },
+  {
+    id: "mixed-ice-cream-cup",
+    nameAr: "آيس كريم مكس (تلبينة + شوكولاتة) – كوب",
+    nameEn: "Mixed Ice Cream (Talbinah + Chocolate) – Cup",
+    price: 14,
+    category: "talbinah",
+    displayMode: "image",
+    branches: [...sharedBranches]
+  },
+  {
+    id: "mixed-ice-cream-biscuit",
+    nameAr: "آيس كريم مكس (تلبينة + شوكولاتة) – بسكوت",
+    nameEn: "Mixed Ice Cream (Talbinah + Chocolate) – Biscuit",
+    price: 10,
+    category: "talbinah",
+    displayMode: "image",
+    branches: [...sharedBranches]
+  },
+  {
     id: "cold-talbinah",
     nameAr: "تلبينة باردة",
     nameEn: "Cold Talbinah",

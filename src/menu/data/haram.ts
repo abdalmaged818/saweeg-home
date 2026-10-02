@@ -39,12 +39,14 @@ export const haramProducts: Product[] = [
     price: 15,
     category: "talbinah",
     displayMode: "image",
+    image: "chocolate-ice-cream-cup-2026-10.webp",
+    imageFit: "contain",
     branches: [...haram]
   },
   {
     id: "haram-mixed-ice-cream-biscuit",
-    nameAr: "آيس كريم مكس – بسكوت",
-    nameEn: "Mixed Ice Cream – Biscuit",
+    nameAr: "آيس كريم مكس (تلبينة + شوكولاتة) – بسكوت",
+    nameEn: "Mixed Ice Cream (Talbinah + Chocolate) – Biscuit",
     price: 11,
     category: "talbinah",
     displayMode: "image",
@@ -52,8 +54,8 @@ export const haramProducts: Product[] = [
   },
   {
     id: "haram-mixed-ice-cream-cup",
-    nameAr: "آيس كريم مكس – كوب",
-    nameEn: "Mixed Ice Cream – Cup",
+    nameAr: "آيس كريم مكس (تلبينة + شوكولاتة) – كوب",
+    nameEn: "Mixed Ice Cream (Talbinah + Chocolate) – Cup",
     price: 15,
     category: "talbinah",
     displayMode: "image",
