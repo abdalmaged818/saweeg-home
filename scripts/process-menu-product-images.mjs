@@ -31,6 +31,18 @@ const imageJobs = [
     "chocolate-ice-cream-cup-2026-10.png",
     "chocolate-ice-cream-cup-2026-10.webp"
   ),
+  officialProductImage(
+    "chocolate-ice-cream-biscuit-2026-10.png",
+    "chocolate-ice-cream-biscuit-2026-10.webp"
+  ),
+  officialProductImage(
+    "mixed-ice-cream-cup-2026-10.png",
+    "mixed-ice-cream-cup-2026-10.webp"
+  ),
+  officialProductImage(
+    "mixed-ice-cream-biscuit-2026-10.png",
+    "mixed-ice-cream-biscuit-2026-10.webp"
+  ),
   officialProductImage("saweeg-powder.png", "sawiq-powder.webp"),
   officialProductImage("gift-box-2026-09.png", "gift-box-2026-09.webp"),
   officialProductImage("al-jabirah-box.png", "al-jabirah-box.webp"),

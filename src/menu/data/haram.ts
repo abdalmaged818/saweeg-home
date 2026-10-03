@@ -30,6 +30,9 @@ export const haramProducts: Product[] = [
     price: 11,
     category: "talbinah",
     displayMode: "image",
+    image: "chocolate-ice-cream-biscuit-2026-10.webp",
+    imageFit: "contain",
+    imagePosition: "center",
     branches: [...haram]
   },
   {
@@ -50,6 +53,9 @@ export const haramProducts: Product[] = [
     price: 11,
     category: "talbinah",
     displayMode: "image",
+    image: "mixed-ice-cream-biscuit-2026-10.webp",
+    imageFit: "contain",
+    imagePosition: "center",
     branches: [...haram]
   },
   {
@@ -59,8 +65,9 @@ export const haramProducts: Product[] = [
     price: 15,
     category: "talbinah",
     displayMode: "image",
-    image: "haram-mixed-ice-cream.webp",
+    image: "mixed-ice-cream-cup-2026-10.webp",
     imageFit: "contain",
+    imagePosition: "center",
     branches: [...haram]
   },
   {
