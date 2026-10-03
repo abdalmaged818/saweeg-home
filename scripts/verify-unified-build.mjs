@@ -227,8 +227,19 @@ const productDirectory = path.join(distRoot, "menu", "assets", "products");
 const productImages = fs.existsSync(productDirectory)
   ? fs.readdirSync(productDirectory).filter((name) => name.endsWith(".webp"))
   : [];
-if (productImages.length !== 24) {
-  failures.push(`Expected 24 menu product images, found ${productImages.length}`);
+const requiredIceCreamProductImages = [
+  "chocolate-ice-cream-cup-2026-10.webp",
+  "chocolate-ice-cream-biscuit-2026-10.webp",
+  "mixed-ice-cream-cup-2026-10.webp",
+  "mixed-ice-cream-biscuit-2026-10.webp"
+];
+if (productImages.length !== 27) {
+  failures.push(`Expected 27 menu product images, found ${productImages.length}`);
+}
+for (const image of requiredIceCreamProductImages) {
+  if (!productImages.includes(image)) {
+    failures.push(`Missing required ice cream product image: ${image}`);
+  }
 }
 
 const textExtensions = new Set([".html", ".js", ".css", ".xml", ".json", ".webmanifest", ".txt"]);

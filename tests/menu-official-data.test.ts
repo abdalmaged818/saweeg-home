@@ -265,8 +265,6 @@ test("Al Haram maps images only to exact approved products", () => {
 
   assert.deepEqual(imageFreeProductIds, [
     "haram-talbinah-ice-cream-biscuit",
-    "haram-chocolate-ice-cream-biscuit",
-    "haram-mixed-ice-cream-biscuit",
     "haram-talbinah-matcha-ice-cream",
     "haram-pecan-basbousa",
     "haram-date-tart",
@@ -282,19 +280,52 @@ test("Al Haram maps images only to exact approved products", () => {
   assert.equal(mappedImages.length, new Set(mappedImages).size);
 });
 
-test("the approved chocolate cup image cannot be reused for another presentation", () => {
-  const chocolateCupImage = "chocolate-ice-cream-cup-2026-10.webp";
-  const productsUsingImage = [...products, ...haramProducts].filter(
-    (product) => product.displayMode === "image" && product.image === chocolateCupImage
-  );
+test("official ice cream images map only to their exact formats in every branch", () => {
+  const sharedById = Object.fromEntries(products.map((product) => [product.id, product]));
+  const haramById = Object.fromEntries(haramProducts.map((product) => [product.id, product]));
+  const expectedMappings = {
+    "chocolate-ice-cream-cup": {
+      haramId: "haram-chocolate-ice-cream-cup",
+      image: "chocolate-ice-cream-cup-2026-10.webp"
+    },
+    "chocolate-ice-cream-biscuit": {
+      haramId: "haram-chocolate-ice-cream-biscuit",
+      image: "chocolate-ice-cream-biscuit-2026-10.webp"
+    },
+    "mixed-ice-cream-cup": {
+      haramId: "haram-mixed-ice-cream-cup",
+      image: "mixed-ice-cream-cup-2026-10.webp"
+    },
+    "mixed-ice-cream-biscuit": {
+      haramId: "haram-mixed-ice-cream-biscuit",
+      image: "mixed-ice-cream-biscuit-2026-10.webp"
+    }
+  } as const;
 
-  assert.deepEqual(
-    productsUsingImage.map((product) => product.id),
-    ["chocolate-ice-cream-cup", "haram-chocolate-ice-cream-cup"]
-  );
-  for (const product of productsUsingImage) {
-    assert.equal(product.nameAr, "آيس كريم شوكولاتة – كوب");
-    assert.equal(product.nameEn, "Chocolate Ice Cream – Cup");
-    assert.equal(product.imageFit, "contain");
+  for (const [sharedId, expected] of Object.entries(expectedMappings)) {
+    const sharedProduct = sharedById[sharedId];
+    const haramProduct = haramById[expected.haramId];
+    assert(sharedProduct, `Missing shared product ${sharedId}`);
+    assert(haramProduct, `Missing Al Haram product ${expected.haramId}`);
+    assert.deepEqual(sharedProduct.branches, ["maqsed", "bustan"]);
+    assert.deepEqual(haramProduct.branches, ["haram"]);
+
+    for (const product of [sharedProduct, haramProduct]) {
+      assert.equal(product.displayMode, "image");
+      assert.equal(product.image, expected.image);
+      assert.equal(product.imageFit, "contain");
+      assert.equal(product.imagePosition ?? "center", "center");
+    }
+
+    const productsUsingImage = [...products, ...haramProducts].filter(
+      (product) => product.displayMode === "image" && product.image === expected.image
+    );
+    assert.deepEqual(
+      productsUsingImage.map((product) => product.id),
+      [sharedId, expected.haramId]
+    );
   }
+
+  const menuProducts = [...products, ...haramProducts];
+  assert.equal(menuProducts.length, new Set(menuProducts.map((product) => product.id)).size);
 });
