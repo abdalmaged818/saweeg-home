@@ -23,7 +23,7 @@ export const products: Product[] = [
     category: "talbinah",
     displayMode: "image",
     image: "chocolate-ice-cream-cup-2026-10-refresh.webp",
-    imageFit: "contain",
+    imageFit: "cover",
     imagePosition: "center",
     branches: [...sharedBranches]
   },
@@ -35,7 +35,7 @@ export const products: Product[] = [
     category: "talbinah",
     displayMode: "image",
     image: "chocolate-ice-cream-biscuit-2026-10-refresh.webp",
-    imageFit: "contain",
+    imageFit: "cover",
     imagePosition: "center",
     branches: [...sharedBranches]
   },
@@ -47,7 +47,7 @@ export const products: Product[] = [
     category: "talbinah",
     displayMode: "image",
     image: "mixed-ice-cream-cup-2026-10-refresh.webp",
-    imageFit: "contain",
+    imageFit: "cover",
     imagePosition: "center",
     branches: [...sharedBranches]
   },
@@ -59,7 +59,7 @@ export const products: Product[] = [
     category: "talbinah",
     displayMode: "image",
     image: "mixed-ice-cream-biscuit-2026-10-refresh.webp",
-    imageFit: "contain",
+    imageFit: "cover",
     imagePosition: "center",
     branches: [...sharedBranches]
   },

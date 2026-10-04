@@ -285,7 +285,7 @@ test("Al Haram maps images only to exact approved products", () => {
   assert.equal(mappedImages.length, new Set(mappedImages).size);
 });
 
-test("official ice cream images map only to their exact formats in every branch", () => {
+test("official ice cream images map only to their exact formats and fill frames in every branch", () => {
   const sharedById = Object.fromEntries(products.map((product) => [product.id, product]));
   const haramById = Object.fromEntries(haramProducts.map((product) => [product.id, product]));
   const expectedMappings = {
@@ -318,7 +318,7 @@ test("official ice cream images map only to their exact formats in every branch"
     for (const product of [sharedProduct, haramProduct]) {
       assert.equal(product.displayMode, "image");
       assert.equal(product.image, expected.image);
-      assert.equal(product.imageFit, "contain");
+      assert.equal(product.imageFit, "cover");
       assert.equal(product.imagePosition ?? "center", "center");
     }
 
