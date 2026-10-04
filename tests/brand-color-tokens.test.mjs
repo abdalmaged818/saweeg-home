@@ -58,6 +58,8 @@ test("homepage cards and interactive states consume the approved semantic tokens
   const normalizeLines = (source) => source.replace(/\r\n/g, "\n");
   const components = normalizeLines(fs.readFileSync(path.join(projectRoot, "src", "styles", "components.css"), "utf8"));
   const menuComponents = normalizeLines(fs.readFileSync(path.join(projectRoot, "src", "menu", "styles", "components.css"), "utf8"));
+  const base = normalizeLines(fs.readFileSync(path.join(projectRoot, "src", "styles", "base.css"), "utf8"));
+  const menuBase = normalizeLines(fs.readFileSync(path.join(projectRoot, "src", "menu", "styles", "base.css"), "utf8"));
 
   for (const expected of [
     ".destination-card--menu {\n  border-color: var(--color-border);\n  background: var(--color-menu-card);",
@@ -75,4 +77,15 @@ test("homepage cards and interactive states consume the approved semantic tokens
   ]) {
     assert.ok(menuComponents.includes(expected), `Missing menu color contract: ${expected}`);
   }
+
+  for (const source of [base, menuBase]) {
+    assert.ok(
+      source.includes(":focus-visible {\n  outline: 3px solid var(--saweeg-green-seasonal);\n  outline-offset: 3px;\n  box-shadow: var(--focus-ring);"),
+      "Missing light-surface keyboard focus contract"
+    );
+  }
+  assert.ok(
+    components.includes(".destination-card--store :focus-visible {\n  outline-color: var(--color-ivory);\n  box-shadow: var(--focus-ring-on-dark);"),
+    "Missing dark-surface keyboard focus contract"
+  );
 });
