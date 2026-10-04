@@ -13,8 +13,8 @@
 }
 
 .eyebrow--dark {
-  background: rgba(255, 255, 255, 0.12);
-  color: var(--surface);
+  background: var(--color-on-olive-faint);
+  color: var(--color-ivory);
 }
 
 .button-row {
@@ -52,33 +52,40 @@
 }
 
 .button-primary {
-  background: var(--saweeg-green);
-  color: var(--surface);
+  background: var(--button-primary);
+  color: var(--button-primary-text);
 }
 
 .button-primary:hover {
-  background: var(--saweeg-green-dark);
-  box-shadow: 0 6px 18px rgba(92, 99, 81, 0.16);
+  background: var(--button-primary-hover);
+  box-shadow: var(--shadow-button);
+}
+
+.button-primary:active {
+  background: var(--button-primary-active);
 }
 
 .button-outline {
   border-color: var(--saweeg-green);
-  background: transparent;
+  background: var(--surface);
   color: var(--saweeg-green-dark);
 }
 
 .button-outline:hover {
-  background: var(--saweeg-green-soft);
+  background: var(--button-secondary-hover);
+  color: var(--color-olive-hover);
 }
 
 .button-soft {
   border-color: var(--border);
-  background: var(--surface-soft);
+  background: var(--surface);
   color: var(--saweeg-green-dark);
 }
 
 .button-soft:hover {
   border-color: var(--saweeg-green);
+  background: var(--button-secondary-hover);
+  color: var(--color-olive-hover);
 }
 
 .button-light {
@@ -87,17 +94,17 @@
 }
 
 .button-light:hover {
-  background: var(--saweeg-ivory);
+  background: var(--button-secondary-hover);
 }
 
 .button-on-dark {
-  border-color: rgba(255, 255, 255, 0.38);
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--surface);
+  border-color: var(--color-on-olive-border);
+  background: var(--color-on-olive-faint);
+  color: var(--color-ivory);
 }
 
 .button-on-dark:hover {
-  background: rgba(255, 255, 255, 0.18);
+  background: var(--color-on-olive-hover);
 }
 
 .button-icon {
@@ -244,21 +251,52 @@ html[dir="rtl"] .button-icon {
 }
 
 .destination-card--store h3 {
-  color: var(--surface);
+  color: var(--color-ivory);
 }
 
 .destination-card--store p {
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--color-on-olive-secondary);
 }
 
 .destination-card--menu {
-  border-color: var(--border-strong);
-  background: var(--saweeg-green-soft);
+  border-color: var(--color-border);
+  background: var(--color-menu-card);
+}
+
+.destination-card--menu h3 {
+  color: var(--color-text);
+}
+
+.destination-card--menu p {
+  color: var(--color-olive);
 }
 
 .destination-card--delivery {
-  border-color: rgba(196, 169, 114, 0.56);
-  background: var(--saweeg-gold-soft);
+  border-color: var(--color-gold-border);
+  background: var(--color-ordering-card);
+}
+
+.destination-card--delivery h3 {
+  color: var(--color-text);
+}
+
+.destination-card--delivery p {
+  color: var(--color-olive);
+}
+
+.destination-card--store .button-light {
+  background: var(--button-gold);
+  color: var(--button-gold-text);
+}
+
+.destination-card--store .button-light:hover {
+  background: var(--button-gold-hover);
+}
+
+.destination-card--delivery .button-soft {
+  border-color: var(--color-olive);
+  background: var(--color-white);
+  color: var(--color-olive);
 }
 
 .delivery-actions {
@@ -428,14 +466,14 @@ html[dir="rtl"] .button-icon {
 }
 
 .contact-card h2 {
-  color: var(--surface);
+  color: var(--color-ivory);
   font-size: clamp(1.75rem, 7vw, 2.75rem);
 }
 
 .contact-card p {
   max-width: 600px;
   margin: 12px auto 0;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-on-olive-secondary);
 }
 
 .opportunity-preview-card {
@@ -471,7 +509,7 @@ html[dir="rtl"] .button-icon {
 
 .footer-brand p {
   margin-block-start: 12px;
-  color: rgba(244, 241, 236, 0.78);
+  color: var(--color-on-olive-secondary);
 }
 
 .footer-nav a {
@@ -480,7 +518,7 @@ html[dir="rtl"] .button-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: rgba(244, 241, 236, 0.86);
+  color: var(--color-on-olive-secondary);
   font-size: 0.88rem;
 }
 
@@ -504,10 +542,10 @@ html[dir="rtl"] .button-icon {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
-  color: rgba(244, 241, 236, 0.86);
+  color: var(--color-on-olive-secondary);
   font-size: 0.88rem;
   text-decoration: underline;
-  text-decoration-color: rgba(196, 169, 114, 0.7);
+  text-decoration-color: var(--color-gold-decoration);
   text-decoration-thickness: 1px;
   text-underline-offset: 4px;
   transition: color var(--transition), text-decoration-color var(--transition);
@@ -519,20 +557,27 @@ html[dir="rtl"] .button-icon {
 }
 
 .footer-downloads__links a:focus-visible {
-  outline-color: var(--saweeg-gold-soft);
-  box-shadow: 0 0 0 4px rgba(244, 241, 236, 0.22);
+  outline-color: var(--color-ivory);
+  box-shadow: var(--focus-ring-on-dark);
 }
 
 .footer-bottom {
-  color: rgba(244, 241, 236, 0.68);
+  color: var(--color-on-olive-secondary);
   font-size: 0.8rem;
 }
 
 .footer-language {
   width: fit-content;
-  border-color: rgba(244, 241, 236, 0.32);
+  border-color: var(--color-on-olive-border);
   background: transparent;
   color: var(--saweeg-ivory);
+}
+
+.contact-card :focus-visible,
+.site-footer :focus-visible,
+.destination-card--store :focus-visible {
+  outline-color: var(--color-ivory);
+  box-shadow: var(--focus-ring-on-dark);
 }
 
 .about-image-card {

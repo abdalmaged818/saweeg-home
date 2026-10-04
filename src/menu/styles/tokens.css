@@ -5,11 +5,11 @@
   --max-width: 1180px;
   --header-offset: 96px;
 
-  --brand-beige: var(--saweeg-ivory);
-  --brand-green: var(--saweeg-green);
-  --brand-brown: var(--saweeg-olive);
-  --green-dark: var(--saweeg-green-dark);
-  --green-soft: var(--saweeg-green-soft);
-  --brown-dark: var(--saweeg-olive);
-  --brown-soft: var(--saweeg-gold-soft);
+  --brand-beige: var(--color-ivory);
+  --brand-green: var(--color-olive);
+  --brand-brown: var(--color-olive);
+  --green-dark: var(--color-olive);
+  --green-soft: var(--color-olive-soft);
+  --brown-dark: var(--color-secondary);
+  --brown-soft: var(--color-ordering-card);
 }

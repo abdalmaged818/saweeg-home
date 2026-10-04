@@ -1,10 +1,15 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import path from "node:path";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 
 import { extras } from "../src/menu/data/extras.ts";
 import { haramExtras, haramProducts } from "../src/menu/data/haram.ts";
 import { products } from "../src/menu/data/products.ts";
 import type { BranchId } from "../src/menu/types/menu.ts";
+
+const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 const productPrices = {
   "talbinah-ice-cream": 14,
@@ -286,19 +291,19 @@ test("official ice cream images map only to their exact formats in every branch"
   const expectedMappings = {
     "chocolate-ice-cream-cup": {
       haramId: "haram-chocolate-ice-cream-cup",
-      image: "chocolate-ice-cream-cup-2026-10.webp"
+      image: "chocolate-ice-cream-cup-2026-10-refresh.webp"
     },
     "chocolate-ice-cream-biscuit": {
       haramId: "haram-chocolate-ice-cream-biscuit",
-      image: "chocolate-ice-cream-biscuit-2026-10.webp"
+      image: "chocolate-ice-cream-biscuit-2026-10-refresh.webp"
     },
     "mixed-ice-cream-cup": {
       haramId: "haram-mixed-ice-cream-cup",
-      image: "mixed-ice-cream-cup-2026-10.webp"
+      image: "mixed-ice-cream-cup-2026-10-refresh.webp"
     },
     "mixed-ice-cream-biscuit": {
       haramId: "haram-mixed-ice-cream-biscuit",
-      image: "mixed-ice-cream-biscuit-2026-10.webp"
+      image: "mixed-ice-cream-biscuit-2026-10-refresh.webp"
     }
   } as const;
 
@@ -328,4 +333,29 @@ test("official ice cream images map only to their exact formats in every branch"
 
   const menuProducts = [...products, ...haramProducts];
   assert.equal(menuProducts.length, new Set(menuProducts.map((product) => product.id)).size);
+});
+
+test("refreshed ice cream source assets and processing jobs are one-to-one", () => {
+  const processor = fs.readFileSync(
+    path.join(projectRoot, "scripts", "process-menu-product-images.mjs"),
+    "utf8"
+  );
+  const assetRoot = path.join(projectRoot, "assets-source", "menu", "product-images");
+  const outputRoot = path.join(projectRoot, "public", "menu", "assets", "products");
+  const expectedJobs = [
+    ["chocolate-ice-cream-cup-2026-10-refresh.png", "chocolate-ice-cream-cup-2026-10-refresh.webp"],
+    ["chocolate-ice-cream-biscuit-2026-10-refresh.png", "chocolate-ice-cream-biscuit-2026-10-refresh.webp"],
+    ["mixed-ice-cream-cup-2026-10-refresh.png", "mixed-ice-cream-cup-2026-10-refresh.webp"],
+    ["mixed-ice-cream-biscuit-2026-10-refresh.png", "mixed-ice-cream-biscuit-2026-10-refresh.webp"]
+  ] as const;
+
+  for (const [source, output] of expectedJobs) {
+    assert.ok(fs.existsSync(path.join(assetRoot, source)), `Missing protected source asset: ${source}`);
+    assert.ok(fs.existsSync(path.join(outputRoot, output)), `Missing generated WebP asset: ${output}`);
+    assert.match(
+      processor,
+      new RegExp(`suppliedIceCreamImage\\([\\s\\S]*?"${source}"[\\s\\S]*?"${output}"`),
+      `Missing exact processing job for ${source}`
+    );
+  }
 });

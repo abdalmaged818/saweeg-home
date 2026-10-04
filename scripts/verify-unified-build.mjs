@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import sharp from "sharp";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const distRoot = path.join(projectRoot, "dist");
@@ -228,17 +229,23 @@ const productImages = fs.existsSync(productDirectory)
   ? fs.readdirSync(productDirectory).filter((name) => name.endsWith(".webp"))
   : [];
 const requiredIceCreamProductImages = [
-  "chocolate-ice-cream-cup-2026-10.webp",
-  "chocolate-ice-cream-biscuit-2026-10.webp",
-  "mixed-ice-cream-cup-2026-10.webp",
-  "mixed-ice-cream-biscuit-2026-10.webp"
+  "chocolate-ice-cream-cup-2026-10-refresh.webp",
+  "chocolate-ice-cream-biscuit-2026-10-refresh.webp",
+  "mixed-ice-cream-cup-2026-10-refresh.webp",
+  "mixed-ice-cream-biscuit-2026-10-refresh.webp"
 ];
-if (productImages.length !== 27) {
-  failures.push(`Expected 27 menu product images, found ${productImages.length}`);
+if (productImages.length !== 26) {
+  failures.push(`Expected 26 menu product images, found ${productImages.length}`);
 }
 for (const image of requiredIceCreamProductImages) {
   if (!productImages.includes(image)) {
     failures.push(`Missing required ice cream product image: ${image}`);
+    continue;
+  }
+
+  const metadata = await sharp(path.join(productDirectory, image)).metadata();
+  if (metadata.format !== "webp" || metadata.width !== 1080 || metadata.height !== 1080) {
+    failures.push(`Unexpected refreshed ice cream image output: ${image} must be a 1080x1080 WebP`);
   }
 }
 

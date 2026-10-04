@@ -25,9 +25,9 @@
 }
 
 .welcome-strip {
-  border-block-end: 1px solid rgba(255, 255, 255, 0.12);
-  background: var(--saweeg-green-dark);
-  color: var(--surface);
+  border-block-end: 1px solid var(--color-on-olive-faint);
+  background: var(--color-olive);
+  color: var(--color-ivory);
 }
 
 .welcome-strip__text {
@@ -58,7 +58,7 @@
   padding: 6px 12px;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.96);
+  background: var(--color-header-surface);
   box-shadow: var(--shadow-header);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -101,7 +101,7 @@
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: rgba(92, 99, 81, 0.22);
+  background: var(--color-modal-backdrop);
 }
 
 .mobile-navigation-inner {
@@ -331,12 +331,12 @@ html[dir="rtl"] .hero h1 {
   gap: 12px;
   margin-block-start: 22px;
   padding-block-start: 16px;
-  border-block-start: 1px solid rgba(244, 241, 236, 0.18);
+  border-block-start: 1px solid var(--color-on-olive-border);
 }
 
 .footer-downloads {
   grid-column: 1 / -1;
   margin-block-start: 24px;
   padding-block-start: 20px;
-  border-block-start: 1px solid rgba(244, 241, 236, 0.18);
+  border-block-start: 1px solid var(--color-on-olive-border);
 }
