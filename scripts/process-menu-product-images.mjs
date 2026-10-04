@@ -20,6 +20,16 @@ const officialProductImage = (sourceName, outputName) => ({
   background: OFFICIAL_PRODUCT_BACKGROUND
 });
 
+const suppliedIceCreamImage = (sourceName, outputName) => ({
+  sourceName,
+  outputName,
+  width: 1080,
+  height: 1080,
+  fullFrame: true,
+  fit: "contain",
+  background: { r: 0, g: 0, b: 0, alpha: 0 }
+});
+
 const imageJobs = [
   officialProductImage("talbinah-nabawi-powder.png", "talbinah-powder.webp"),
   officialProductImage("talbinah-matcha.png", "talbinah-matcha.webp"),
@@ -27,21 +37,21 @@ const imageJobs = [
   officialProductImage("mixed-caramelized-nuts-pack.png", "mixed-caramelized-nuts-pack.webp"),
   officialProductImage("damkah-2026-09.png", "damkah-2026-09.webp"),
   officialProductImage("talbinah-ice-cream-2026-09.png", "talbinah-ice-cream-2026-09.webp"),
-  officialProductImage(
-    "chocolate-ice-cream-cup-2026-10.png",
-    "chocolate-ice-cream-cup-2026-10.webp"
+  suppliedIceCreamImage(
+    "chocolate-ice-cream-cup-2026-10-refresh.png",
+    "chocolate-ice-cream-cup-2026-10-refresh.webp"
   ),
-  officialProductImage(
-    "chocolate-ice-cream-biscuit-2026-10.png",
-    "chocolate-ice-cream-biscuit-2026-10.webp"
+  suppliedIceCreamImage(
+    "chocolate-ice-cream-biscuit-2026-10-refresh.png",
+    "chocolate-ice-cream-biscuit-2026-10-refresh.webp"
   ),
-  officialProductImage(
-    "mixed-ice-cream-cup-2026-10.png",
-    "mixed-ice-cream-cup-2026-10.webp"
+  suppliedIceCreamImage(
+    "mixed-ice-cream-cup-2026-10-refresh.png",
+    "mixed-ice-cream-cup-2026-10-refresh.webp"
   ),
-  officialProductImage(
-    "mixed-ice-cream-biscuit-2026-10.png",
-    "mixed-ice-cream-biscuit-2026-10.webp"
+  suppliedIceCreamImage(
+    "mixed-ice-cream-biscuit-2026-10-refresh.png",
+    "mixed-ice-cream-biscuit-2026-10-refresh.webp"
   ),
   officialProductImage("saweeg-powder.png", "sawiq-powder.webp"),
   officialProductImage("gift-box-2026-09.png", "gift-box-2026-09.webp"),
@@ -55,7 +65,6 @@ const imageJobs = [
     "talbinah-lotus-cheesecake-2026-09.webp"
   ),
   officialProductImage("dates-with-saweeg-2026-09.png", "dates-with-saweeg-2026-09.webp"),
-  officialProductImage("ايسكريم مكس.jpg", "haram-mixed-ice-cream.webp"),
   officialProductImage("الجابرة تلبينة.jpg", "haram-al-jabirah-sachet.webp"),
   officialProductImage("بوكس بسبوسه.jpg", "haram-pecan-basbousa-box.webp"),
   {

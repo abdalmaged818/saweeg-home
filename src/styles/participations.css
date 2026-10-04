@@ -290,7 +290,7 @@ html[lang="en"] .participation-body p {
 .participation-cta p {
   max-width: 620px;
   margin-block-start: 10px;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--color-on-olive-secondary);
 }
 
 .about-story-grid,

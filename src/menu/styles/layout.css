@@ -28,7 +28,7 @@
   gap: 0.75rem;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.96);
+  background: var(--color-header-surface);
   box-shadow: var(--shadow-header);
   padding: 6px 12px;
   backdrop-filter: blur(10px);
