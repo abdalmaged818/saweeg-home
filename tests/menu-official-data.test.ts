@@ -157,6 +157,27 @@ test("Haram source pages route every locale through one renderer and one price s
   assert.doesNotMatch(renderer, /fallback|placeholder/i);
 });
 
+test("Haram refinement keeps the shared site shell and compact accessible menu presentation", () => {
+  const haramMain = fs.readFileSync(path.join(projectRoot, "src", "menu", "haram-main.ts"), "utf8");
+  const renderer = fs.readFileSync(path.join(projectRoot, "src", "menu", "haram", "render.ts"), "utf8");
+  const styles = fs.readFileSync(path.join(projectRoot, "src", "menu", "haram", "haram.css"), "utf8");
+  const headerController = fs.readFileSync(path.join(projectRoot, "src", "components", "header-controller.ts"), "utf8");
+
+  assert.match(haramMain, /\.\.\/styles\/main\.css/);
+  assert.match(haramMain, /bindSharedHeader\(root\)/);
+  assert.match(renderer, /welcome-strip haram-welcome-strip/);
+  assert.match(renderer, /site-header haram-site-header/);
+  assert.match(renderer, /menu-button/);
+  assert.match(headerController, /\[data-menu-button\]/);
+  assert.match(headerController, /\[data-mobile-navigation\]/);
+  assert.match(renderer, /haram-language-card__arrow/);
+  assert.doesNotMatch(renderer, /haram-language-card__flag|copy\.flag|copy\.vatNotice/);
+  assert.doesNotMatch(styles, /haram-category__heading::after|haram-selector-hero|haram-menu-intro__vat/);
+  assert.match(styles, /\.haram-product__media\s*\{[\s\S]*?aspect-ratio:\s*1/);
+  assert.match(styles, /\.haram-product--text-only\s*\.haram-product__body/);
+  assert.match(styles, /\.haram-language-card\[dir="rtl"\]\s+\.haram-language-card__arrow/);
+});
+
 test("supplied product source assets, outputs, and processing jobs remain one-to-one", async () => {
   const processor = fs.readFileSync(path.join(projectRoot, "scripts", "process-menu-product-images.mjs"), "utf8");
   const assetRoot = path.join(projectRoot, "assets-source", "menu", "product-images");

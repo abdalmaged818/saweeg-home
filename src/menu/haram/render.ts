@@ -27,21 +27,67 @@ const externalLink = (label: string, href: string, className: string): HTMLAncho
 
 const localePath = (locale: HaramLocale): string => `${selectorPath}${locale}/`;
 
-const createBrand = (copy: HaramLocaleContent, compact = false): HTMLAnchorElement => {
-  const link = create("a", "haram-brand");
-  link.href = selectorPath;
-  link.setAttribute("aria-label", copy.chooseLanguage);
-  const image = create("img", "haram-brand__logo") as HTMLImageElement;
+const createSharedHeader = (copy: HaramLocaleContent, isSelector = false): HTMLElement => {
+  const wrapper = document.createDocumentFragment();
+  const welcome = create("div", "welcome-strip haram-welcome-strip");
+  welcome.lang = "ar";
+  welcome.dir = "rtl";
+  welcome.append(create("p", "welcome-strip__text", "سلام من لدن أرض السلام"));
+
+  const header = create("header", "site-header haram-site-header");
+  header.dataset.siteHeader = "";
+  const inner = create("div", "container header-inner");
+  const brand = create("a", "brand") as HTMLAnchorElement;
+  brand.href = "/";
+  brand.setAttribute("aria-label", copy.locale === "ar" ? "الصفحة الرئيسية لسويق" : "Saweeg home");
+  const image = create("img") as HTMLImageElement;
   image.src = assetUrl(siteConfig.logoPath);
   image.alt = copy.locale === "ar" ? "شعار سويق" : "Saweeg logo";
-  image.width = compact ? 72 : 84;
-  image.height = compact ? 42 : 52;
+  image.width = 72;
+  image.height = 72;
   image.decoding = "async";
-  const branch = create("span", "haram-brand__branch");
-  branch.append(create("strong", undefined, copy.branchName));
-  if (!compact) branch.append(create("span", undefined, copy.welcome));
-  link.append(image, branch);
-  return link;
+  brand.append(image);
+
+  const desktopNav = create("nav", "desktop-nav haram-site-header__nav");
+  desktopNav.setAttribute("aria-label", copy.branchName);
+  const branchLink = create("a", undefined, copy.branchName);
+  branchLink.href = selectorPath;
+  branchLink.setAttribute("aria-current", isSelector ? "page" : "false");
+  desktopNav.append(branchLink);
+
+  const actions = create("div", "header-actions");
+  const changeLanguage = create("a", "language-link", isSelector ? copy.chooseLanguage : copy.changeLanguage);
+  changeLanguage.href = isSelector ? "#haram-languages" : selectorPath;
+  const menuButton = create("button", "menu-button") as HTMLButtonElement;
+  menuButton.type = "button";
+  menuButton.dataset.menuButton = "";
+  menuButton.dataset.openLabel = copy.chooseLanguage;
+  menuButton.dataset.closeLabel = copy.changeLanguage;
+  menuButton.setAttribute("aria-expanded", "false");
+  menuButton.setAttribute("aria-label", copy.chooseLanguage);
+  menuButton.append(create("span"), create("span"), create("span"));
+  actions.append(changeLanguage, menuButton);
+
+  const mobileNavigation = create("div", "mobile-navigation") as HTMLDivElement;
+  mobileNavigation.dataset.mobileNavigation = "";
+  mobileNavigation.hidden = true;
+  const mobileInner = create("div", "container mobile-navigation-inner");
+  const mobileNav = create("nav");
+  mobileNav.setAttribute("aria-label", copy.branchName);
+  const mobileBranch = create("a", undefined, copy.branchName);
+  mobileBranch.href = selectorPath;
+  const mobileLanguage = create("a", undefined, isSelector ? copy.chooseLanguage : copy.changeLanguage);
+  mobileLanguage.href = isSelector ? "#haram-languages" : selectorPath;
+  mobileNav.append(mobileBranch, mobileLanguage);
+  mobileInner.append(mobileNav);
+  mobileNavigation.append(mobileInner);
+  inner.append(brand, desktopNav, actions);
+  header.append(inner, mobileNavigation);
+  wrapper.append(welcome, header);
+
+  const chrome = create("div", "haram-shared-header");
+  chrome.append(wrapper);
+  return chrome;
 };
 
 const createImageMedia = (
@@ -89,18 +135,6 @@ const createProduct = (item: HaramMenuItem, copy: HaramLocaleContent): HTMLEleme
   return article;
 };
 
-const createMenuHeader = (copy: HaramLocaleContent): HTMLElement => {
-  const header = create("header", "haram-header");
-  const inner = create("div", "haram-shell haram-header__inner");
-  const title = create("div", "haram-header__title");
-  title.append(create("span", undefined, copy.menuTitle), create("strong", undefined, copy.branchName));
-  const change = create("a", "haram-button haram-button--outline", copy.changeLanguage);
-  change.href = selectorPath;
-  inner.append(createBrand(copy, true), title, change);
-  header.append(inner);
-  return header;
-};
-
 const createFooter = (copy: HaramLocaleContent): HTMLElement => {
   const footer = create("footer", "haram-footer");
   const inner = create("div", "haram-shell haram-footer__inner");
@@ -123,20 +157,20 @@ const createFooter = (copy: HaramLocaleContent): HTMLElement => {
 };
 
 const createStoreAndContact = (copy: HaramLocaleContent): HTMLElement => {
-  const section = create("section", "haram-support");
-  const shell = create("div", "haram-shell haram-support__grid");
-  const store = create("article", "haram-support__card haram-support__card--store");
+  const section = create("section", "haram-support section");
+  const shell = create("div", "container destinations-grid haram-support__grid");
+  const store = create("article", "destination-card destination-card--store");
   store.append(
-    create("p", "haram-support__eyebrow", copy.storeEyebrow),
+    create("p", "eyebrow eyebrow--dark", copy.storeEyebrow),
     create("h2", undefined, copy.storeTitle),
     create("p", undefined, copy.storeBody),
-    externalLink(copy.storeButton, siteConfig.links.onlineStore, "haram-button haram-button--light")
+    externalLink(copy.storeButton, siteConfig.links.onlineStore, "button button-light")
   );
-  const contact = create("article", "haram-support__card");
-  const actions = create("div", "haram-support__actions");
+  const contact = create("article", "destination-card");
+  const actions = create("div", "button-row");
   actions.append(
-    externalLink(copy.whatsapp, siteConfig.links.whatsapp, "haram-button haram-button--primary"),
-    externalLink(copy.links, siteConfig.links.linktree, "haram-button haram-button--text")
+    externalLink(copy.whatsapp, siteConfig.links.whatsapp, "button button-primary"),
+    externalLink(copy.links, siteConfig.links.linktree, "button button-soft")
   );
   contact.append(create("h2", undefined, copy.contactTitle), create("p", undefined, copy.contactBody), actions);
   shell.append(store, contact);
@@ -150,31 +184,30 @@ export const renderHaramSelector = (root: HTMLElement): void => {
   document.documentElement.dir = "rtl";
   document.title = "فرع الحرم | سويق";
   const page = create("div", "haram haram--selector");
-  const hero = create("header", "haram-selector-hero");
-  const heroInner = create("div", "haram-shell haram-selector-hero__inner");
-  heroInner.append(createBrand(arabic), create("p", "haram-selector-hero__english", arabic.welcomeEnglish));
-  hero.append(heroInner);
   const main = create("main", "haram-selector-main");
-  const shell = create("div", "haram-shell haram-selector-main__inner");
+  const shell = create("div", "container haram-selector-main__inner");
   shell.append(
-    create("h1", "haram-selector-main__welcome", arabic.welcome),
-    create("p", "haram-selector-main__branch", `${arabic.branchName} · Al Haram Branch`),
-    create("h2", "haram-selector-main__heading", arabic.chooseLanguage),
+    create("p", "haram-selector-main__eyebrow", arabic.branchName),
+    create("h1", "haram-selector-main__heading", arabic.chooseLanguage),
     create("p", "haram-selector-main__subheading", arabic.chooseLanguageEnglish)
   );
   const grid = create("nav", "haram-language-grid");
+  grid.id = "haram-languages";
   grid.setAttribute("aria-label", arabic.chooseLanguage);
   Object.values(haramLocaleContent).forEach((copy) => {
     const card = create("a", "haram-language-card");
     card.href = localePath(copy.locale);
     card.lang = copy.locale;
     card.dir = copy.direction;
-    card.append(create("span", "haram-language-card__flag", copy.flag), create("span", "haram-language-card__label", copy.nativeLabel));
+    card.append(
+      create("span", "haram-language-card__label", copy.nativeLabel),
+      create("span", "haram-language-card__arrow", "→")
+    );
     grid.append(card);
   });
   shell.append(grid);
   main.append(shell);
-  page.append(hero, main, createFooter(arabic));
+  page.append(createSharedHeader(arabic, true), main, createFooter(arabic));
   root.replaceChildren(page);
 };
 
@@ -186,12 +219,12 @@ export const renderHaramMenu = (root: HTMLElement, locale: HaramLocale): void =>
   const page = create("div", "haram haram--menu");
   const main = create("main", "haram-main");
   const intro = create("section", "haram-menu-intro");
-  const introInner = create("div", "haram-shell");
-  introInner.append(create("h1", undefined, copy.menuTitle), create("p", undefined, copy.branchName), create("p", "haram-menu-intro__vat", copy.vatNotice));
+  const introInner = create("div", "container");
+  introInner.append(create("p", "haram-menu-intro__branch", copy.branchName), create("h1", undefined, copy.menuTitle));
   intro.append(introInner);
   main.append(intro);
 
-  const menu = create("div", "haram-shell haram-menu");
+  const menu = create("div", "container haram-menu");
   categoryOrder.forEach((category) => {
     const items = haramMenuItems.filter((item) => item.category === category);
     const section = create("section", "haram-category");
@@ -204,10 +237,10 @@ export const renderHaramMenu = (root: HTMLElement, locale: HaramLocale): void =>
     section.append(heading, grid);
     menu.append(section);
   });
-  const changeBottom = create("a", "haram-button haram-button--secondary haram-menu__change", copy.changeLanguage);
+  const changeBottom = create("a", "text-link haram-menu__change", copy.changeLanguage);
   changeBottom.href = selectorPath;
   menu.append(changeBottom);
   main.append(menu, createStoreAndContact(copy));
-  page.append(createMenuHeader(copy), main, createFooter(copy));
+  page.append(createSharedHeader(copy), main, createFooter(copy));
   root.replaceChildren(page);
 };

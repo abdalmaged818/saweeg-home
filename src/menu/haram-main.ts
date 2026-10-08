@@ -1,5 +1,6 @@
-import "./styles/main.css";
+import "../styles/main.css";
 import "./haram/haram.css";
+import { bindSharedHeader } from "../components/header-controller.ts";
 import { renderHaramMenu, renderHaramSelector } from "./haram/render";
 import { haramLocales, type HaramLocale } from "./haram/types";
 
@@ -19,3 +20,5 @@ if (pageKind === "selector") {
 } else {
   window.location.replace("/menu/haram/");
 }
+
+bindSharedHeader(root);
