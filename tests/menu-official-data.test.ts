@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import test from "node:test";
+import sharp from "sharp";
 import { fileURLToPath } from "node:url";
 
 import { canonicalImageFor, canonicalProductImages } from "../src/menu/data/catalog-images.ts";
@@ -93,13 +94,16 @@ test("every Haram locale supplies all translations, UI labels, and the approved 
 });
 
 test("canonical product photos map only to their stable product variants", () => {
-  const approvedIceCreamImages = {
+  const approvedCanonicalImages = {
+    "talbinah-ice-cream-biscuit": "talbinah-ice-cream-biscuit-2026-10.webp",
     "chocolate-ice-cream-cup": "chocolate-ice-cream-cup-2026-10-refresh.webp",
     "chocolate-ice-cream-biscuit": "chocolate-ice-cream-biscuit-2026-10-refresh.webp",
     "mixed-ice-cream-cup": "mixed-ice-cream-cup-2026-10-refresh.webp",
-    "mixed-ice-cream-biscuit": "mixed-ice-cream-biscuit-2026-10-refresh.webp"
+    "mixed-ice-cream-biscuit": "mixed-ice-cream-biscuit-2026-10-refresh.webp",
+    "talbinah-matcha": "talbinah-matcha-2026-10.webp",
+    "sachet-box": "talbinah-sachet-box-2026-10.webp"
   } as const;
-  for (const [catalogId, file] of Object.entries(approvedIceCreamImages)) {
+  for (const [catalogId, file] of Object.entries(approvedCanonicalImages)) {
     assert.equal(canonicalImageFor(catalogId)?.file, file);
     const users = Object.entries(canonicalProductImages)
       .filter(([, image]) => image.file === file)
@@ -107,10 +111,40 @@ test("canonical product photos map only to their stable product variants", () =>
     assert.deepEqual(users, [catalogId]);
   }
   assert.equal(canonicalImageFor("talbinah-ice-cream-cup")?.file, "talbinah-ice-cream-2026-09.webp");
-  assert.equal(canonicalImageFor("talbinah-ice-cream-biscuit"), undefined);
   assert.equal(canonicalImageFor("pecan-basbousa"), undefined);
   assert.equal(canonicalImageFor("date-tart"), undefined);
   assert.equal(canonicalImageFor("saweeg-maamoul"), undefined);
+});
+
+test("approved Talbinah photos follow existing availability in every applicable menu", () => {
+  const sharedProductImages = {
+    "talbinah-matcha": "talbinah-matcha-2026-10.webp",
+    "sachet-box": "talbinah-sachet-box-2026-10.webp"
+  } as const;
+  for (const [catalogId, file] of Object.entries(sharedProductImages)) {
+    const product = products.find((candidate) => (candidate.catalogId ?? candidate.id) === catalogId);
+    assert(product, `Missing shared ${catalogId} product`);
+    assert.deepEqual(product.branches, ["maqsed", "bustan"]);
+    assert.equal(canonicalImageFor(product.catalogId ?? product.id)?.file, file);
+  }
+  assert.equal(
+    products.some((product) => (product.catalogId ?? product.id) === "talbinah-ice-cream-biscuit"),
+    false
+  );
+
+  const haramProductImages = {
+    "talbinah-ice-cream-biscuit": "talbinah-ice-cream-biscuit-2026-10.webp",
+    "talbinah-matcha": "talbinah-matcha-2026-10.webp",
+    "sachet-box": "talbinah-sachet-box-2026-10.webp"
+  } as const;
+  for (const [catalogId, file] of Object.entries(haramProductImages)) {
+    const item = haramMenuItems.find((candidate) => candidate.catalogId === catalogId);
+    assert(item, `Missing Al Haram ${catalogId} product`);
+    assert.equal(item.image?.file, file);
+    for (const locale of haramLocales) {
+      assert.ok(haramLocaleContent[locale].productNames[item.id].trim(), `${locale} is missing ${item.id}`);
+    }
+  }
 });
 
 test("Haram source pages route every locale through one renderer and one price source", () => {
@@ -123,19 +157,33 @@ test("Haram source pages route every locale through one renderer and one price s
   assert.doesNotMatch(renderer, /fallback|placeholder/i);
 });
 
-test("supplied ice cream source assets and processing jobs remain one-to-one", () => {
+test("supplied product source assets, outputs, and processing jobs remain one-to-one", async () => {
   const processor = fs.readFileSync(path.join(projectRoot, "scripts", "process-menu-product-images.mjs"), "utf8");
   const assetRoot = path.join(projectRoot, "assets-source", "menu", "product-images");
   const outputRoot = path.join(projectRoot, "public", "menu", "assets", "products");
-  const expectedJobs = [
+  const expectedIceCreamJobs = [
     ["chocolate-ice-cream-cup-2026-10-refresh.png", "chocolate-ice-cream-cup-2026-10-refresh.webp"],
     ["chocolate-ice-cream-biscuit-2026-10-refresh.png", "chocolate-ice-cream-biscuit-2026-10-refresh.webp"],
     ["mixed-ice-cream-cup-2026-10-refresh.png", "mixed-ice-cream-cup-2026-10-refresh.webp"],
     ["mixed-ice-cream-biscuit-2026-10-refresh.png", "mixed-ice-cream-biscuit-2026-10-refresh.webp"]
   ] as const;
-  for (const [source, output] of expectedJobs) {
+  const expectedProductJobs = [
+    ["talbinah-ice-cream-biscuit-2026-10.png", "talbinah-ice-cream-biscuit-2026-10.webp"],
+    ["talbinah-sachet-box-2026-10.png", "talbinah-sachet-box-2026-10.webp"],
+    ["talbinah-matcha-2026-10.png", "talbinah-matcha-2026-10.webp"]
+  ] as const;
+  for (const [source, output] of [...expectedIceCreamJobs, ...expectedProductJobs]) {
     assert.ok(fs.existsSync(path.join(assetRoot, source)), `Missing protected source asset: ${source}`);
     assert.ok(fs.existsSync(path.join(outputRoot, output)), `Missing generated WebP asset: ${output}`);
+  }
+  for (const [source, output] of expectedIceCreamJobs) {
     assert.match(processor, new RegExp(`suppliedIceCreamImage\\([\\s\\S]*?"${source}"[\\s\\S]*?"${output}"`));
+  }
+  for (const [source, output] of expectedProductJobs) {
+    assert.match(processor, new RegExp(`suppliedProductImage\\([\\s\\S]*?"${source}"[\\s\\S]*?"${output}"`));
+    const metadata = await sharp(path.join(outputRoot, output)).metadata();
+    assert.equal(metadata.format, "webp");
+    assert.equal(metadata.width, 1400);
+    assert.equal(metadata.height, 1050);
   }
 });

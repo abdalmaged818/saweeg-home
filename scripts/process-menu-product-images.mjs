@@ -30,6 +30,16 @@ const suppliedIceCreamImage = (sourceName, outputName) => ({
   background: { r: 0, g: 0, b: 0, alpha: 0 }
 });
 
+const suppliedProductImage = (sourceName, outputName, extract, fit = "contain") => ({
+  sourceName,
+  outputName,
+  width: 1400,
+  height: 1050,
+  extract,
+  fit,
+  background: OFFICIAL_PRODUCT_BACKGROUND
+});
+
 const imageJobs = [
   officialProductImage("talbinah-nabawi-powder.png", "talbinah-powder.webp"),
   officialProductImage("talbinah-matcha.png", "talbinah-matcha.webp"),
@@ -37,6 +47,22 @@ const imageJobs = [
   officialProductImage("mixed-caramelized-nuts-pack.png", "mixed-caramelized-nuts-pack.webp"),
   officialProductImage("damkah-2026-09.png", "damkah-2026-09.webp"),
   officialProductImage("talbinah-ice-cream-2026-09.png", "talbinah-ice-cream-2026-09.webp"),
+  suppliedProductImage(
+    "talbinah-ice-cream-biscuit-2026-10.png",
+    "talbinah-ice-cream-biscuit-2026-10.webp",
+    { left: 240, top: 80, width: 600, height: 950 }
+  ),
+  suppliedProductImage(
+    "talbinah-matcha-2026-10.png",
+    "talbinah-matcha-2026-10.webp",
+    { left: 200, top: 200, width: 680, height: 820 }
+  ),
+  suppliedProductImage(
+    "talbinah-sachet-box-2026-10.png",
+    "talbinah-sachet-box-2026-10.webp",
+    { left: 40, top: 200, width: 1000, height: 750 },
+    "cover"
+  ),
   suppliedIceCreamImage(
     "chocolate-ice-cream-cup-2026-10-refresh.png",
     "chocolate-ice-cream-cup-2026-10-refresh.webp"
