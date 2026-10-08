@@ -211,50 +211,52 @@ test("official supplied product images are mapped without cropping", () => {
   }
 });
 
-test("Al Haram has exactly the 34 unique products and official prices", () => {
+test("Al Haram exactly matches the official Excel catalogue after confirmed chocolate spelling consolidation", () => {
   const haramItems = [...haramProducts, ...haramExtras];
-  const expectedPrices = {
-    "haram-talbinah-ice-cream-biscuit": 11,
-    "haram-talbinah-ice-cream-cup": 15,
-    "haram-chocolate-ice-cream-biscuit": 11,
-    "haram-chocolate-ice-cream-cup": 15,
-    "haram-mixed-ice-cream-biscuit": 11,
-    "haram-mixed-ice-cream-cup": 15,
-    "haram-lotus-cheesecake": 20,
-    "haram-damkah": 20,
-    "haram-dates-with-saweeg": 20,
-    "haram-pecan-basbousa": 13,
-    "haram-date-tart": 13,
-    "haram-maamoul-saweeg": 25,
-    "haram-cold-talbinah": 16,
-    "haram-hot-talbinah": 16,
-    "haram-hot-talbinah-one-liter": 55,
-    "haram-saudi-coffee": 7,
-    "haram-saudi-coffee-dallah": 25,
-    "haram-saudi-coffee-dallah-with-sweets": 45,
-    "haram-tea": 5,
-    "haram-tea-flask": 25,
-    "haram-talbinah-matcha-ice-cream": 25,
-    "haram-water": 1,
-    "haram-talbinah-powder-sachet": 30,
-    "haram-saweeg-powder-sachet": 30,
-    "haram-mixed-nuts-sachet": 14,
-    "haram-al-jabirah-sachet": 8,
-    "haram-safawi-dates-nuts-box": 78,
-    "haram-ajwa-dates-nuts-box": 85,
-    "haram-al-jabirah-box": 75,
-    "haram-gift-box": 52,
-    "haram-maamoul-box": 89,
-    "haram-pecan-basbousa-box": 55,
-    "haram-sachet-box": 75,
-    "haram-date-tart-box": 55
+  const expectedCatalogue = {
+    "haram-talbinah-ice-cream-biscuit": ["آيس كريم تلبينة – بسكوت", "Talbinah Ice Cream – Biscuit", 11],
+    "haram-talbinah-ice-cream-cup": ["آيس كريم تلبينة – كوب", "Talbinah Ice Cream – Cup", 15],
+    "haram-chocolate-ice-cream-biscuit": ["آيس كريم شوكولاتة – بسكوت", "Chocolate Ice Cream – Biscuit", 11],
+    "haram-chocolate-ice-cream-cup": ["آيس كريم شوكولاتة – كوب", "Chocolate Ice Cream – Cup", 15],
+    "haram-mixed-ice-cream-biscuit": ["آيس كريم مكس (تلبينة + شوكولاتة) – بسكوت", "Mixed Ice Cream (Talbinah + Chocolate) – Biscuit", 11],
+    "haram-mixed-ice-cream-cup": ["آيس كريم مكس (تلبينة + شوكولاتة) – كوب", "Mixed Ice Cream (Talbinah + Chocolate) – Cup", 15],
+    "haram-cold-talbinah": ["تلبينة باردة", "Cold Talbinah", 16],
+    "haram-hot-talbinah": ["تلبينة حارة", "Hot Talbinah", 16],
+    "haram-hot-talbinah-one-liter": ["تلبينة حارة – 1 لتر", "Hot Talbinah – 1 Liter", 55],
+    "haram-talbinah-matcha-ice-cream": ["ماتشا تلبينة – آيس كريم", "Talbinah Matcha Ice Cream", 25],
+    "haram-lotus-cheesecake": ["تشيز كيك لوتس", "Lotus Cheese Cake", 20],
+    "haram-damkah": ["دمكة", "Damkah", 20],
+    "haram-dates-with-saweeg": ["تمر سويق", "Dates with Saweeg (Millet)", 20],
+    "haram-pecan-basbousa": ["بسبوسة بيكان", "Pecan Basbousa", 13],
+    "haram-date-tart": ["تارت تمر", "Date Tart", 13],
+    "haram-maamoul-saweeg": ["معمول سويق", "Saweeg Maamoul", 25],
+    "haram-talbinah-powder-sachet": ["ظرف بودرة تلبينة", "Talbinah Powder Pack", 30],
+    "haram-saweeg-powder-sachet": ["ظرف بودرة سويق", "Saweeg Powder Pack", 30],
+    "haram-mixed-nuts-sachet": ["ظرف مكسرات مكس", "Mixed Nuts Pack", 14],
+    "haram-al-jabirah-sachet": ["ظرف الجابرة – بالحبة", "Al Jabirah Sachet – Single", 8],
+    "haram-safawi-dates-nuts-box": ["بوكس تمر صفاوي محشي بالمكسرات", "Safawi Dates Stuffed with Mixed Nuts Gift Box", 78],
+    "haram-ajwa-dates-nuts-box": ["بوكس تمر عجوة محشي بالمكسرات", "Ajwa Dates Stuffed with Mixed Nuts Gift Box", 85],
+    "haram-al-jabirah-box": ["بوكس الجابرة", "Al Jabirah Box", 75],
+    "haram-gift-box": ["بوكس الإهداء", "Gift Box", 52],
+    "haram-maamoul-box": ["بوكس معمول سويق", "Saweeg Maamoul Box", 89],
+    "haram-pecan-basbousa-box": ["بوكس بسبوسة بيكان – مستطيل", "Rectangular Pecan Basbousa Box", 55],
+    "haram-sachet-box": ["بوكس الأظرف", "Sachet Box", 75],
+    "haram-date-tart-box": ["بوكس تارت تمر", "Date Tart Box", 55],
+    "haram-saudi-coffee": ["قهوة سعودية", "Saudi Coffee", 7],
+    "haram-saudi-coffee-dallah": ["دلة قهوة سعودية", "Saudi Coffee Dallah", 25],
+    "haram-saudi-coffee-dallah-with-sweets": ["دلة قهوة سعودية مع حلا", "Saudi Coffee Dallah with Sweets", 45],
+    "haram-tea": ["شاهي", "Tea", 5],
+    "haram-tea-flask": ["ثلاجة شاهي", "Tea Flask", 25],
+    "haram-water": ["مياه معبأة", "Bottled Water", 1]
   } as const;
 
   assert.equal(haramItems.length, 34);
   assert.equal(new Set(haramItems.map((item) => item.id)).size, 34);
   assert.deepEqual(
-    Object.fromEntries(haramItems.map((item) => [item.id, item.price])),
-    expectedPrices
+    Object.fromEntries(
+      haramItems.map((item) => [item.id, [item.nameAr, item.nameEn, item.price]])
+    ),
+    expectedCatalogue
   );
   assert.equal(
     haramItems.filter((item) => item.nameAr.includes("آيس كريم شوكولاتة")).length,
