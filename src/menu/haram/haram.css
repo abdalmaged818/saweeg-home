@@ -55,8 +55,10 @@ body:has(.haram) {
 }
 
 .haram-language-grid {
+  --haram-language-card-block-size: 80px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: var(--haram-language-card-block-size);
   gap: 12px;
   margin-block-start: clamp(1.75rem, 5vw, 2.75rem);
   text-align: initial;
@@ -64,7 +66,8 @@ body:has(.haram) {
 
 .haram-language-card {
   min-width: 0;
-  min-height: 64px;
+  min-height: 0;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -86,16 +89,21 @@ body:has(.haram) {
 }
 
 .haram-language-card__label {
+  flex: 1 1 auto;
   min-width: 0;
+  display: block;
   overflow-wrap: anywhere;
   font-family: "Noto Sans", "IBM Plex Sans Arabic", sans-serif;
   font-size: 0.95rem;
   font-weight: 700;
-  line-height: 1.4;
+  line-height: 1.25;
 }
 
 .haram-language-card__arrow {
   flex: 0 0 auto;
+  inline-size: 1.25rem;
+  display: grid;
+  place-items: center;
   color: var(--saweeg-green-dark);
   font-family: var(--font-en);
   font-size: 1.25rem;
@@ -140,6 +148,8 @@ body:has(.haram) {
   gap: 14px;
 }
 
+.haram-product-grid + .haram-product-grid { margin-block-start: 14px; }
+
 .haram-product {
   min-width: 0;
   overflow: hidden;
@@ -152,10 +162,10 @@ body:has(.haram) {
 .haram-product__media {
   width: 100%;
   aspect-ratio: 1;
-  display: grid;
+  display: block;
   min-height: 0;
   overflow: hidden;
-  background: var(--surface-soft);
+  background: #faf5ee;
 }
 
 .haram-product__image {
@@ -197,9 +207,9 @@ body:has(.haram) {
 .haram-product--text-only { box-shadow: none; }
 
 .haram-product--text-only .haram-product__body {
-  min-height: 94px;
+  min-height: 0;
   align-items: center;
-  padding-block: 20px;
+  padding-block: 16px;
 }
 
 .haram-menu__change { margin-block-start: clamp(2rem, 5vw, 3.5rem); }
@@ -267,7 +277,10 @@ html[lang="id"] .haram,
 html[lang="ms"] .haram { font-family: "Noto Sans", "IBM Plex Sans Arabic", sans-serif; }
 
 @media (min-width: 500px) {
-  .haram-product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .haram-language-grid { --haram-language-card-block-size: 72px; }
+
+  .haram-product-grid--media,
+  .haram-product-grid--text-only { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (min-width: 680px) {
@@ -275,7 +288,12 @@ html[lang="ms"] .haram { font-family: "Noto Sans", "IBM Plex Sans Arabic", sans-
 
   .haram-language-card:last-child { grid-column: 2; }
 
-  .haram-product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .haram-product-grid--media { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  .haram-product-grid--text-only {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 18rem));
+    justify-content: start;
+  }
 }
 
 @media (min-width: 900px) {
@@ -283,7 +301,9 @@ html[lang="ms"] .haram { font-family: "Noto Sans", "IBM Plex Sans Arabic", sans-
 
   .haram-language-card:last-child { grid-column: auto; }
 
-  .haram-product-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+  .haram-product-grid { gap: 18px; }
+
+  .haram-product-grid--media { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 
   .haram-footer__inner { padding-block: 30px; }
 }

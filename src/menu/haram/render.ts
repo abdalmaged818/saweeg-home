@@ -135,6 +135,35 @@ const createProduct = (item: HaramMenuItem, copy: HaramLocaleContent): HTMLEleme
   return article;
 };
 
+const createProductRun = (items: HaramMenuItem[], copy: HaramLocaleContent): HTMLElement => {
+  const hasMedia = Boolean(items[0]?.image);
+  const grid = create(
+    "div",
+    `haram-product-grid haram-product-grid--${hasMedia ? "media" : "text-only"}`
+  );
+  items.forEach((item) => grid.append(createProduct(item, copy)));
+  return grid;
+};
+
+const createProductRuns = (items: HaramMenuItem[], copy: HaramLocaleContent): HTMLElement[] => {
+  const runs: HaramMenuItem[][] = [];
+  let currentRun: HaramMenuItem[] = [];
+  let currentRunHasMedia: boolean | undefined;
+
+  items.forEach((item) => {
+    const hasMedia = Boolean(item.image);
+    if (currentRunHasMedia !== undefined && currentRunHasMedia !== hasMedia) {
+      runs.push(currentRun);
+      currentRun = [];
+    }
+    currentRun.push(item);
+    currentRunHasMedia = hasMedia;
+  });
+
+  if (currentRun.length) runs.push(currentRun);
+  return runs.map((run) => createProductRun(run, copy));
+};
+
 const createFooter = (copy: HaramLocaleContent): HTMLElement => {
   const footer = create("footer", "haram-footer");
   const inner = create("div", "haram-shell haram-footer__inner");
@@ -232,9 +261,7 @@ export const renderHaramMenu = (root: HTMLElement, locale: HaramLocale): void =>
     const heading = create("h2", "haram-category__heading", copy.categories[category]);
     heading.id = titleId;
     section.setAttribute("aria-labelledby", titleId);
-    const grid = create("div", "haram-product-grid");
-    items.forEach((item) => grid.append(createProduct(item, copy)));
-    section.append(heading, grid);
+    section.append(heading, ...createProductRuns(items, copy));
     menu.append(section);
   });
   const changeBottom = create("a", "text-link haram-menu__change", copy.changeLanguage);
