@@ -5,6 +5,7 @@ const sharedBranches = ["maqsed", "bustan"] as const;
 export const products: Product[] = [
   {
     id: "talbinah-ice-cream",
+    catalogId: "talbinah-ice-cream-cup",
     nameAr: "آيسكريم التلبينة النبوية",
     nameEn: "Talbinah Ice Cream",
     price: 14,
@@ -115,6 +116,7 @@ export const products: Product[] = [
   },
   {
     id: "talbinah-lotus-cheesecake",
+    catalogId: "lotus-cheesecake",
     nameAr: "تشيز كيك تلبينة لوتس",
     nameEn: "Talbinah Cheese Cake Lotus",
     price: 19,
@@ -177,6 +179,7 @@ export const products: Product[] = [
   },
   {
     id: "maamoul-box",
+    catalogId: "saweeg-maamoul-box",
     nameAr: "بوكس معمول",
     nameEn: "Maamoul Box",
     quantityAr: "27 قطعة",
@@ -191,6 +194,7 @@ export const products: Product[] = [
   },
   {
     id: "safawi-dates-gift-box",
+    catalogId: "safawi-dates-nuts-box",
     nameAr: "بوكس تمر صفاوي محشي مكسرات",
     nameEn: "Safawi Dates Stuffed with Mixed Nuts Gift Box",
     price: 78,
@@ -217,6 +221,7 @@ export const products: Product[] = [
   },
   {
     id: "talbinah-sachet-box",
+    catalogId: "sachet-box",
     nameAr: "بوكس أظرف التلبينة",
     nameEn: "Talbinah Sachet Box",
     quantityAr: "12 ظرف",
@@ -257,6 +262,7 @@ export const products: Product[] = [
   },
   {
     id: "talbinah-powder",
+    catalogId: "talbinah-powder-sachet",
     nameAr: "بودرة تلبينة نبوية",
     nameEn: "Talbinah Nabawi Powder",
     price: 25,
@@ -269,6 +275,7 @@ export const products: Product[] = [
   },
   {
     id: "saweeg-powder",
+    catalogId: "saweeg-powder-sachet",
     nameAr: "بودرة سويق",
     nameEn: "Saweeg Powder",
     price: 25,
@@ -295,6 +302,7 @@ export const products: Product[] = [
   },
   {
     id: "mixed-caramelized-nuts-sachet",
+    catalogId: "mixed-nuts-sachet",
     nameAr: "ظرف مكسرات مكرملة مكس",
     nameEn: "Mixed Caramelized Nuts Pack",
     price: 12,

@@ -1,26 +1,21 @@
 import "./styles/main.css";
-import { haramExtras, haramProducts } from "./data/haram";
-import { initializeApp } from "./scripts/app";
+import "./haram/haram.css";
+import { renderHaramMenu, renderHaramSelector } from "./haram/render";
+import { haramLocales, type HaramLocale } from "./haram/types";
 
-const isEnglish = document.documentElement.lang === "en";
+const root = document.querySelector<HTMLElement>("#app");
 
-initializeApp({
-  fixedBranch: "haram",
-  products: haramProducts,
-  extras: haramExtras,
-  showBranchSection: false,
-  showBranchLocations: false,
-  hero: isEnglish
-    ? {
-        eyebrow: "Saweeg",
-        title: "Al Haram Branch Menu",
-        body: "Explore the Al Haram Branch menu and prices.",
-        ctaLabel: "View Menu"
-      }
-    : {
-        eyebrow: "سويق",
-        title: "منيو فرع الحرم",
-        body: "استعرض منيو فرع الحرم والأسعار.",
-        ctaLabel: "استعرض المنيو"
-      }
-});
+if (!root) {
+  throw new Error("The Haram menu root was not found.");
+}
+
+const pageKind = document.body.dataset.haramPage;
+const locale = document.body.dataset.haramLocale;
+
+if (pageKind === "selector") {
+  renderHaramSelector(root);
+} else if (locale && (haramLocales as readonly string[]).includes(locale)) {
+  renderHaramMenu(root, locale as HaramLocale);
+} else {
+  window.location.replace("/menu/haram/");
+}

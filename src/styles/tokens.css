@@ -15,6 +15,10 @@
   --color-on-olive-secondary: #dce0d5;
   --color-error: #9b3a32;
   --color-error-surface: #faece9;
+  --color-haram-ivory: #f8f7f3;
+  --color-haram-text: #1c2926;
+  --color-haram-secondary: #727872;
+  --color-haram-light: #e8e5dc;
 
   --color-olive-soft: color-mix(in srgb, var(--color-olive) 10%, transparent);
   --color-olive-faint: color-mix(in srgb, var(--color-olive) 6%, transparent);

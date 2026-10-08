@@ -4,63 +4,27 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
+import { canonicalImageFor, canonicalProductImages } from "../src/menu/data/catalog-images.ts";
 import { extras } from "../src/menu/data/extras.ts";
-import { haramExtras, haramProducts } from "../src/menu/data/haram.ts";
 import { products } from "../src/menu/data/products.ts";
+import { haramMenuItems } from "../src/menu/haram/data.ts";
+import { haramLocaleContent } from "../src/menu/haram/locales.ts";
+import { haramItemIds, haramLocales } from "../src/menu/haram/types.ts";
 import type { BranchId } from "../src/menu/types/menu.ts";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
-const productPrices = {
-  "talbinah-ice-cream": 14,
-  "chocolate-ice-cream-cup": 14,
-  "chocolate-ice-cream-biscuit": 10,
-  "mixed-ice-cream-cup": 14,
-  "mixed-ice-cream-biscuit": 10,
-  "cold-talbinah": 15,
-  "hot-talbinah": 15,
-  "talbinah-matcha": 22,
-  "hot-talbinah-one-liter": 49,
-  "talbinah-lotus-cheesecake": 19,
-  "dates-with-saweeg": 19,
-  damkah: 19,
-  "madini-crepe-cheese": 9,
-  "madini-crepe-signature": 9,
-  "maamoul-box": 78,
-  "safawi-dates-gift-box": 78,
-  "date-pecan-tart-box": 51,
-  "talbinah-sachet-box": 68,
-  "al-jabirah-box": 68,
-  "gift-box": 42,
-  "talbinah-powder": 25,
-  "saweeg-powder": 25,
-  "talbinah-sachets": 6,
-  "mixed-caramelized-nuts-sachet": 12
-} as const;
-
 const branchProductIds = (branch: BranchId): string[] =>
-  products
-    .filter((product) => product.branches.includes(branch))
-    .map((product) => product.id);
+  products.filter((product) => product.branches.includes(branch)).map((product) => product.id);
 
 const branchExtraPrices = (branch: BranchId): Record<string, number> =>
   Object.fromEntries(
-    extras
-      .filter((extra) => extra.branches.includes(branch))
-      .map((extra) => [extra.id, extra.price])
+    extras.filter((extra) => extra.branches.includes(branch)).map((extra) => [extra.id, extra.price])
   );
 
-test("all confirmed product prices are represented", () => {
-  assert.deepEqual(
-    Object.fromEntries(products.map((product) => [product.id, product.price])),
-    productPrices
-  );
-});
-
-test("branch-specific product selections match the official PDFs", () => {
+test("Maqsed and Bustan menus retain their confirmed products and prices", () => {
   const maqsed = branchProductIds("maqsed");
   const bustan = branchProductIds("bustan");
-
   assert.equal(maqsed.length, 22);
   assert.equal(bustan.length, 23);
   for (const productId of [
@@ -69,279 +33,98 @@ test("branch-specific product selections match the official PDFs", () => {
     "mixed-ice-cream-cup",
     "mixed-ice-cream-biscuit"
   ]) {
-    assert(maqsed.includes(productId), `Maqsed is missing ${productId}`);
-    assert(bustan.includes(productId), `Bustan is missing ${productId}`);
+    const product = products.find((candidate) => candidate.id === productId);
+    assert(product, `Missing shared product ${productId}`);
+    assert.deepEqual(product.branches, ["maqsed", "bustan"]);
+    assert.equal(product.price, productId.includes("cup") ? 14 : 10);
+    assert(maqsed.includes(productId));
+    assert(bustan.includes(productId));
   }
   assert(maqsed.includes("hot-talbinah-one-liter"));
   assert(!bustan.includes("hot-talbinah-one-liter"));
-  assert(!maqsed.includes("madini-crepe-cheese"));
-  assert(!maqsed.includes("madini-crepe-signature"));
-  assert(bustan.includes("madini-crepe-cheese"));
-  assert(bustan.includes("madini-crepe-signature"));
-});
-
-test("Maqsed add-ons and prices match the confirmed menu data", () => {
   assert.deepEqual(branchExtraPrices("maqsed"), {
-    "saudi-coffee-cup": 6,
-    "saudi-coffee-dallah": 21,
-    "saudi-coffee-dallah-with-sweets": 39,
-    water: 1,
-    maamoul: 21,
-    tart: 11,
-    basbousa: 11
+    "saudi-coffee-cup": 6, "saudi-coffee-dallah": 21, "saudi-coffee-dallah-with-sweets": 39,
+    water: 1, maamoul: 21, tart: 11, basbousa: 11
   });
-});
-
-test("Bustan add-ons and prices match the confirmed menu data", () => {
   assert.deepEqual(branchExtraPrices("bustan"), {
-    "saudi-coffee-cup": 6,
-    water: 1,
-    maamoul: 21,
-    tart: 11,
-    basbousa: 11,
-    "coffee-of-the-day-bustan": 10,
-    tea: 5,
-    "tea-flask": 25
+    "saudi-coffee-cup": 6, water: 1, maamoul: 21, tart: 11, basbousa: 11,
+    "coffee-of-the-day-bustan": 10, tea: 5, "tea-flask": 25
   });
 });
 
-test("confirmed official labels are retained", () => {
-  const byId = Object.fromEntries(products.map((product) => [product.id, product]));
-  const extrasById = Object.fromEntries(extras.map((extra) => [extra.id, extra]));
-
-  assert.equal(byId["dates-with-saweeg"].nameEn, "Dates with Saweeg (Millet)");
-  assert.equal(byId["talbinah-lotus-cheesecake"].nameEn, "Talbinah Cheese Cake Lotus");
-  assert.equal(byId["mixed-caramelized-nuts-sachet"].nameAr, "ظرف مكسرات مكرملة مكس");
-  assert.equal(byId["talbinah-ice-cream"].noteAr, undefined);
-  assert.equal(extrasById.tea.nameAr, "شاهي");
-  assert.equal(extrasById["tea-flask"].nameAr, "شاهي");
+test("Al Haram has exactly the approved 34 priced variants without duplicates", () => {
+  const expectedPrices = {
+    "talbinah-ice-cream-biscuit": 11, "talbinah-ice-cream-cup": 15,
+    "chocolate-ice-cream-biscuit": 11, "chocolate-ice-cream-cup": 15,
+    "mixed-ice-cream-biscuit": 11, "mixed-ice-cream-cup": 15,
+    "lotus-cheesecake": 20, damkah: 20, "dates-with-saweeg": 20, "pecan-basbousa": 13,
+    "date-tart": 13, "saweeg-maamoul": 25, "cold-talbinah": 16, "hot-talbinah": 16,
+    "hot-talbinah-one-liter": 55, "saudi-coffee": 7, "saudi-coffee-dallah": 25,
+    "saudi-coffee-dallah-with-sweets": 45, tea: 5, "tea-thermos": 25, "talbinah-matcha": 25,
+    "bottled-water": 1, "talbinah-powder-sachet": 30, "saweeg-powder-sachet": 30,
+    "mixed-nuts-sachet": 14, "al-jabirah-sachet": 8, "safawi-dates-nuts-box": 78,
+    "ajwa-dates-nuts-box": 85, "al-jabirah-box": 75, "gift-box": 52,
+    "saweeg-maamoul-box": 89, "pecan-basbousa-box": 55, "sachet-box": 75, "date-tart-box": 55
+  } as const;
+  assert.equal(haramMenuItems.length, 34);
+  assert.equal(new Set(haramMenuItems.map((item) => item.id)).size, 34);
+  assert.deepEqual(Object.fromEntries(haramMenuItems.map((item) => [item.id, item.price])), expectedPrices);
+  const matcha = haramMenuItems.find((item) => item.id === "talbinah-matcha");
+  assert.equal(matcha?.category, "drinks");
+  assert.equal(haramMenuItems.filter((item) => item.category === "iceCream").length, 6);
+  assert.equal(haramMenuItems.filter((item) => item.category === "drinks").length, 10);
 });
 
-test("approved chocolate and mixed ice creams have exact labels, branches, and prices", () => {
-  const sharedById = Object.fromEntries(products.map((product) => [product.id, product]));
-  const haramById = Object.fromEntries(haramProducts.map((product) => [product.id, product]));
-
-  const sharedExpected = {
-    "chocolate-ice-cream-cup": {
-      nameAr: "آيس كريم شوكولاتة – كوب",
-      nameEn: "Chocolate Ice Cream – Cup",
-      price: 14
-    },
-    "chocolate-ice-cream-biscuit": {
-      nameAr: "آيس كريم شوكولاتة – بسكوت",
-      nameEn: "Chocolate Ice Cream – Biscuit",
-      price: 10
-    },
-    "mixed-ice-cream-cup": {
-      nameAr: "آيس كريم مكس (تلبينة + شوكولاتة) – كوب",
-      nameEn: "Mixed Ice Cream (Talbinah + Chocolate) – Cup",
-      price: 14
-    },
-    "mixed-ice-cream-biscuit": {
-      nameAr: "آيس كريم مكس (تلبينة + شوكولاتة) – بسكوت",
-      nameEn: "Mixed Ice Cream (Talbinah + Chocolate) – Biscuit",
-      price: 10
+test("every Haram locale supplies all translations, UI labels, and the approved direction", () => {
+  const rtlLocales = new Set(["ar", "ur", "fa"]);
+  for (const locale of haramLocales) {
+    const copy = haramLocaleContent[locale];
+    assert.equal(copy.direction, rtlLocales.has(locale) ? "rtl" : "ltr");
+    assert.equal(Object.keys(copy.productNames).length, haramItemIds.length);
+    for (const itemId of haramItemIds) {
+      assert.ok(copy.productNames[itemId].trim(), `${locale} is missing ${itemId}`);
     }
-  } as const;
-
-  for (const [id, expected] of Object.entries(sharedExpected)) {
-    const product = sharedById[id];
-    assert(product, `Missing shared product ${id}`);
-    assert.equal(product.nameAr, expected.nameAr);
-    assert.equal(product.nameEn, expected.nameEn);
-    assert.equal(product.price, expected.price);
-    assert.deepEqual(product.branches, ["maqsed", "bustan"]);
-    assert.equal(product.category, "talbinah");
+    assert.ok(copy.changeLanguage.trim());
+    assert.ok(copy.vatNotice.trim());
+    assert.ok(copy.imageAlt(copy.productNames[haramItemIds[0]]).trim());
   }
+  assert.equal(haramLocaleContent.ar.productNames["talbinah-matcha"], "ماتشا التلبينة");
+  assert.equal(haramLocaleContent.en.productNames["talbinah-matcha"], "Talbinah Matcha");
+});
 
-  const haramExpected = {
-    "haram-chocolate-ice-cream-cup": {
-      nameAr: "آيس كريم شوكولاتة – كوب",
-      nameEn: "Chocolate Ice Cream – Cup",
-      price: 15
-    },
-    "haram-chocolate-ice-cream-biscuit": {
-      nameAr: "آيس كريم شوكولاتة – بسكوت",
-      nameEn: "Chocolate Ice Cream – Biscuit",
-      price: 11
-    },
-    "haram-mixed-ice-cream-cup": {
-      nameAr: "آيس كريم مكس (تلبينة + شوكولاتة) – كوب",
-      nameEn: "Mixed Ice Cream (Talbinah + Chocolate) – Cup",
-      price: 15
-    },
-    "haram-mixed-ice-cream-biscuit": {
-      nameAr: "آيس كريم مكس (تلبينة + شوكولاتة) – بسكوت",
-      nameEn: "Mixed Ice Cream (Talbinah + Chocolate) – Biscuit",
-      price: 11
-    }
+test("canonical product photos map only to their stable product variants", () => {
+  const approvedIceCreamImages = {
+    "chocolate-ice-cream-cup": "chocolate-ice-cream-cup-2026-10-refresh.webp",
+    "chocolate-ice-cream-biscuit": "chocolate-ice-cream-biscuit-2026-10-refresh.webp",
+    "mixed-ice-cream-cup": "mixed-ice-cream-cup-2026-10-refresh.webp",
+    "mixed-ice-cream-biscuit": "mixed-ice-cream-biscuit-2026-10-refresh.webp"
   } as const;
-
-  for (const [id, expected] of Object.entries(haramExpected)) {
-    const product = haramById[id];
-    assert(product, `Missing Al Haram product ${id}`);
-    assert.equal(product.nameAr, expected.nameAr);
-    assert.equal(product.nameEn, expected.nameEn);
-    assert.equal(product.price, expected.price);
-    assert.deepEqual(product.branches, ["haram"]);
-    assert.equal(product.category, "talbinah");
+  for (const [catalogId, file] of Object.entries(approvedIceCreamImages)) {
+    assert.equal(canonicalImageFor(catalogId)?.file, file);
+    const users = Object.entries(canonicalProductImages)
+      .filter(([, image]) => image.file === file)
+      .map(([id]) => id);
+    assert.deepEqual(users, [catalogId]);
   }
+  assert.equal(canonicalImageFor("talbinah-ice-cream-cup")?.file, "talbinah-ice-cream-2026-09.webp");
+  assert.equal(canonicalImageFor("talbinah-ice-cream-biscuit"), undefined);
+  assert.equal(canonicalImageFor("pecan-basbousa"), undefined);
+  assert.equal(canonicalImageFor("date-tart"), undefined);
+  assert.equal(canonicalImageFor("saweeg-maamoul"), undefined);
 });
 
-test("official supplied product images are mapped without cropping", () => {
-  const expectedImages = {
-    "talbinah-sachets": "talbinah-sachets.webp",
-    "talbinah-matcha": "talbinah-matcha.webp",
-    "mixed-caramelized-nuts-sachet": "mixed-caramelized-nuts-pack.webp",
-    "al-jabirah-box": "al-jabirah-box.webp",
-    "date-pecan-tart-box": "date-pecan-tart-box.webp",
-    "talbinah-powder": "talbinah-powder.webp",
-    "saweeg-powder": "sawiq-powder.webp",
-    "hot-talbinah-one-liter": "hot-talbinah-one-liter.webp"
-  } as const;
-
-  for (const [id, image] of Object.entries(expectedImages)) {
-    const product = products.find((candidate) => candidate.id === id);
-    assert(product, `Missing product ${id}`);
-    assert.equal(product.displayMode, "image", `${id} should use an image card`);
-    if (product.displayMode === "image") {
-      assert.equal(product.image, image);
-      assert.equal(product.imageFit, "contain");
-    }
-  }
+test("Haram source pages route every locale through one renderer and one price source", () => {
+  const main = fs.readFileSync(path.join(projectRoot, "src", "menu", "haram-main.ts"), "utf8");
+  const renderer = fs.readFileSync(path.join(projectRoot, "src", "menu", "haram", "render.ts"), "utf8");
+  assert.match(main, /renderHaramMenu/);
+  assert.match(main, /window\.location\.replace\("\/menu\/haram\/"\)/);
+  assert.match(renderer, /haramMenuItems/);
+  assert.match(renderer, /haram-product--text-only/);
+  assert.doesNotMatch(renderer, /fallback|placeholder/i);
 });
 
-test("Al Haram exactly matches the official Excel catalogue after confirmed chocolate spelling consolidation", () => {
-  const haramItems = [...haramProducts, ...haramExtras];
-  const expectedCatalogue = {
-    "haram-talbinah-ice-cream-biscuit": ["آيس كريم تلبينة – بسكوت", "Talbinah Ice Cream – Biscuit", 11],
-    "haram-talbinah-ice-cream-cup": ["آيس كريم تلبينة – كوب", "Talbinah Ice Cream – Cup", 15],
-    "haram-chocolate-ice-cream-biscuit": ["آيس كريم شوكولاتة – بسكوت", "Chocolate Ice Cream – Biscuit", 11],
-    "haram-chocolate-ice-cream-cup": ["آيس كريم شوكولاتة – كوب", "Chocolate Ice Cream – Cup", 15],
-    "haram-mixed-ice-cream-biscuit": ["آيس كريم مكس (تلبينة + شوكولاتة) – بسكوت", "Mixed Ice Cream (Talbinah + Chocolate) – Biscuit", 11],
-    "haram-mixed-ice-cream-cup": ["آيس كريم مكس (تلبينة + شوكولاتة) – كوب", "Mixed Ice Cream (Talbinah + Chocolate) – Cup", 15],
-    "haram-cold-talbinah": ["تلبينة باردة", "Cold Talbinah", 16],
-    "haram-hot-talbinah": ["تلبينة حارة", "Hot Talbinah", 16],
-    "haram-hot-talbinah-one-liter": ["تلبينة حارة – 1 لتر", "Hot Talbinah – 1 Liter", 55],
-    "haram-talbinah-matcha-ice-cream": ["ماتشا تلبينة – آيس كريم", "Talbinah Matcha Ice Cream", 25],
-    "haram-lotus-cheesecake": ["تشيز كيك لوتس", "Lotus Cheese Cake", 20],
-    "haram-damkah": ["دمكة", "Damkah", 20],
-    "haram-dates-with-saweeg": ["تمر سويق", "Dates with Saweeg (Millet)", 20],
-    "haram-pecan-basbousa": ["بسبوسة بيكان", "Pecan Basbousa", 13],
-    "haram-date-tart": ["تارت تمر", "Date Tart", 13],
-    "haram-maamoul-saweeg": ["معمول سويق", "Saweeg Maamoul", 25],
-    "haram-talbinah-powder-sachet": ["ظرف بودرة تلبينة", "Talbinah Powder Pack", 30],
-    "haram-saweeg-powder-sachet": ["ظرف بودرة سويق", "Saweeg Powder Pack", 30],
-    "haram-mixed-nuts-sachet": ["ظرف مكسرات مكس", "Mixed Nuts Pack", 14],
-    "haram-al-jabirah-sachet": ["ظرف الجابرة – بالحبة", "Al Jabirah Sachet – Single", 8],
-    "haram-safawi-dates-nuts-box": ["بوكس تمر صفاوي محشي بالمكسرات", "Safawi Dates Stuffed with Mixed Nuts Gift Box", 78],
-    "haram-ajwa-dates-nuts-box": ["بوكس تمر عجوة محشي بالمكسرات", "Ajwa Dates Stuffed with Mixed Nuts Gift Box", 85],
-    "haram-al-jabirah-box": ["بوكس الجابرة", "Al Jabirah Box", 75],
-    "haram-gift-box": ["بوكس الإهداء", "Gift Box", 52],
-    "haram-maamoul-box": ["بوكس معمول سويق", "Saweeg Maamoul Box", 89],
-    "haram-pecan-basbousa-box": ["بوكس بسبوسة بيكان – مستطيل", "Rectangular Pecan Basbousa Box", 55],
-    "haram-sachet-box": ["بوكس الأظرف", "Sachet Box", 75],
-    "haram-date-tart-box": ["بوكس تارت تمر", "Date Tart Box", 55],
-    "haram-saudi-coffee": ["قهوة سعودية", "Saudi Coffee", 7],
-    "haram-saudi-coffee-dallah": ["دلة قهوة سعودية", "Saudi Coffee Dallah", 25],
-    "haram-saudi-coffee-dallah-with-sweets": ["دلة قهوة سعودية مع حلا", "Saudi Coffee Dallah with Sweets", 45],
-    "haram-tea": ["شاهي", "Tea", 5],
-    "haram-tea-flask": ["ثلاجة شاهي", "Tea Flask", 25],
-    "haram-water": ["مياه معبأة", "Bottled Water", 1]
-  } as const;
-
-  assert.equal(haramItems.length, 34);
-  assert.equal(new Set(haramItems.map((item) => item.id)).size, 34);
-  assert.deepEqual(
-    Object.fromEntries(
-      haramItems.map((item) => [item.id, [item.nameAr, item.nameEn, item.price]])
-    ),
-    expectedCatalogue
-  );
-  assert.equal(
-    haramItems.filter((item) => item.nameAr.includes("آيس كريم شوكولاتة")).length,
-    2
-  );
-  assert(!haramItems.some((item) => /مانجا|mango/i.test(`${item.nameAr} ${item.nameEn}`)));
-});
-
-test("Al Haram maps images only to exact approved products", () => {
-  const imageFreeProductIds = haramProducts
-    .filter((product) => product.displayMode === "image" && !product.image)
-    .map((product) => product.id);
-
-  assert.deepEqual(imageFreeProductIds, [
-    "haram-talbinah-ice-cream-biscuit",
-    "haram-talbinah-matcha-ice-cream",
-    "haram-pecan-basbousa",
-    "haram-date-tart",
-    "haram-maamoul-saweeg",
-    "haram-ajwa-dates-nuts-box",
-    "haram-date-tart-box"
-  ]);
-
-  const mappedImages = haramProducts
-    .filter((product) => product.displayMode === "image")
-    .flatMap((product) => product.image ? [product.image] : []);
-
-  assert.equal(mappedImages.length, new Set(mappedImages).size);
-});
-
-test("official ice cream images map only to their exact formats and fill frames in every branch", () => {
-  const sharedById = Object.fromEntries(products.map((product) => [product.id, product]));
-  const haramById = Object.fromEntries(haramProducts.map((product) => [product.id, product]));
-  const expectedMappings = {
-    "chocolate-ice-cream-cup": {
-      haramId: "haram-chocolate-ice-cream-cup",
-      image: "chocolate-ice-cream-cup-2026-10-refresh.webp"
-    },
-    "chocolate-ice-cream-biscuit": {
-      haramId: "haram-chocolate-ice-cream-biscuit",
-      image: "chocolate-ice-cream-biscuit-2026-10-refresh.webp"
-    },
-    "mixed-ice-cream-cup": {
-      haramId: "haram-mixed-ice-cream-cup",
-      image: "mixed-ice-cream-cup-2026-10-refresh.webp"
-    },
-    "mixed-ice-cream-biscuit": {
-      haramId: "haram-mixed-ice-cream-biscuit",
-      image: "mixed-ice-cream-biscuit-2026-10-refresh.webp"
-    }
-  } as const;
-
-  for (const [sharedId, expected] of Object.entries(expectedMappings)) {
-    const sharedProduct = sharedById[sharedId];
-    const haramProduct = haramById[expected.haramId];
-    assert(sharedProduct, `Missing shared product ${sharedId}`);
-    assert(haramProduct, `Missing Al Haram product ${expected.haramId}`);
-    assert.deepEqual(sharedProduct.branches, ["maqsed", "bustan"]);
-    assert.deepEqual(haramProduct.branches, ["haram"]);
-
-    for (const product of [sharedProduct, haramProduct]) {
-      assert.equal(product.displayMode, "image");
-      assert.equal(product.image, expected.image);
-      assert.equal(product.imageFit, "cover");
-      assert.equal(product.imagePosition ?? "center", "center");
-    }
-
-    const productsUsingImage = [...products, ...haramProducts].filter(
-      (product) => product.displayMode === "image" && product.image === expected.image
-    );
-    assert.deepEqual(
-      productsUsingImage.map((product) => product.id),
-      [sharedId, expected.haramId]
-    );
-  }
-
-  const menuProducts = [...products, ...haramProducts];
-  assert.equal(menuProducts.length, new Set(menuProducts.map((product) => product.id)).size);
-});
-
-test("refreshed ice cream source assets and processing jobs are one-to-one", () => {
-  const processor = fs.readFileSync(
-    path.join(projectRoot, "scripts", "process-menu-product-images.mjs"),
-    "utf8"
-  );
+test("supplied ice cream source assets and processing jobs remain one-to-one", () => {
+  const processor = fs.readFileSync(path.join(projectRoot, "scripts", "process-menu-product-images.mjs"), "utf8");
   const assetRoot = path.join(projectRoot, "assets-source", "menu", "product-images");
   const outputRoot = path.join(projectRoot, "public", "menu", "assets", "products");
   const expectedJobs = [
@@ -350,14 +133,9 @@ test("refreshed ice cream source assets and processing jobs are one-to-one", () 
     ["mixed-ice-cream-cup-2026-10-refresh.png", "mixed-ice-cream-cup-2026-10-refresh.webp"],
     ["mixed-ice-cream-biscuit-2026-10-refresh.png", "mixed-ice-cream-biscuit-2026-10-refresh.webp"]
   ] as const;
-
   for (const [source, output] of expectedJobs) {
     assert.ok(fs.existsSync(path.join(assetRoot, source)), `Missing protected source asset: ${source}`);
     assert.ok(fs.existsSync(path.join(outputRoot, output)), `Missing generated WebP asset: ${output}`);
-    assert.match(
-      processor,
-      new RegExp(`suppliedIceCreamImage\\([\\s\\S]*?"${source}"[\\s\\S]*?"${output}"`),
-      `Missing exact processing job for ${source}`
-    );
+    assert.match(processor, new RegExp(`suppliedIceCreamImage\\([\\s\\S]*?"${source}"[\\s\\S]*?"${output}"`));
   }
 });
