@@ -62,8 +62,8 @@ test("Al Haram has exactly the approved 34 priced variants without duplicates", 
     "date-tart": 13, "saweeg-maamoul": 25, "cold-talbinah": 16, "hot-talbinah": 16,
     "hot-talbinah-one-liter": 55, "saudi-coffee": 7, "saudi-coffee-dallah": 25,
     "saudi-coffee-dallah-with-sweets": 45, tea: 5, "tea-thermos": 25, "talbinah-matcha": 25,
-    "bottled-water": 1, "talbinah-powder-sachet": 30, "saweeg-powder-sachet": 30,
-    "mixed-nuts-sachet": 14, "al-jabirah-sachet": 8, "safawi-dates-nuts-box": 78,
+    "bottled-water": 1, "talbinah-powder-sachet": 25, "saweeg-powder-sachet": 25,
+    "mixed-nuts-sachet": 12, "al-jabirah-sachet": 6, "safawi-dates-nuts-box": 78,
     "ajwa-dates-nuts-box": 85, "al-jabirah-box": 75, "gift-box": 52,
     "saweeg-maamoul-box": 89, "pecan-basbousa-box": 55, "sachet-box": 75, "date-tart-box": 55
   } as const;
@@ -74,6 +74,47 @@ test("Al Haram has exactly the approved 34 priced variants without duplicates", 
   assert.equal(matcha?.category, "drinks");
   assert.equal(haramMenuItems.filter((item) => item.category === "iceCream").length, 6);
   assert.equal(haramMenuItems.filter((item) => item.category === "drinks").length, 10);
+});
+
+test("Al Haram shelf sachet prices are centralized, unique, and scoped to the approved products", () => {
+  const approvedShelfPrices = {
+    "mixed-nuts-sachet": 12,
+    "saweeg-powder-sachet": 25,
+    "talbinah-powder-sachet": 25,
+    "al-jabirah-sachet": 6
+  } as const;
+  const expectedNames = {
+    "mixed-nuts-sachet": { ar: "ظرف مكسرات مكس", en: "Mixed Nuts Sachet" },
+    "saweeg-powder-sachet": { ar: "ظرف بودرة سويق", en: "Saweeg Powder Sachet" },
+    "talbinah-powder-sachet": { ar: "ظرف بودرة تلبينة", en: "Talbinah Powder Sachet" },
+    "al-jabirah-sachet": { ar: "ظرف الجابرة", en: "Al Jabirah Sachet" }
+  } as const;
+
+  for (const [id, price] of Object.entries(approvedShelfPrices)) {
+    const matches = haramMenuItems.filter((item) => item.id === id);
+    assert.equal(matches.length, 1, `Expected one centralized Al Haram record for ${id}`);
+    assert.equal(matches[0]?.price, price);
+    assert.equal(matches[0]?.category, "powders");
+    assert.equal(matches[0]?.catalogId, id);
+    assert.equal(haramItemIds.indexOf(id as (typeof haramItemIds)[number]), haramMenuItems.indexOf(matches[0]!));
+
+    for (const locale of haramLocales) {
+      assert.ok(haramLocaleContent[locale].productNames[id as (typeof haramItemIds)[number]].trim());
+    }
+    assert.equal(haramLocaleContent.ar.productNames[id as (typeof haramItemIds)[number]], expectedNames[id as keyof typeof expectedNames].ar);
+    assert.equal(haramLocaleContent.en.productNames[id as (typeof haramItemIds)[number]], expectedNames[id as keyof typeof expectedNames].en);
+  }
+
+  const sharedCataloguePrices = Object.fromEntries(
+    products
+      .filter((product) => ["talbinah-powder-sachet", "saweeg-powder-sachet", "mixed-nuts-sachet"].includes(product.catalogId ?? product.id))
+      .map((product) => [product.catalogId ?? product.id, { price: product.price, branches: product.branches }])
+  );
+  assert.deepEqual(sharedCataloguePrices, {
+    "talbinah-powder-sachet": { price: 25, branches: ["maqsed", "bustan"] },
+    "saweeg-powder-sachet": { price: 25, branches: ["maqsed", "bustan"] },
+    "mixed-nuts-sachet": { price: 12, branches: ["maqsed", "bustan"] }
+  });
 });
 
 test("every Haram locale supplies all translations, UI labels, and the approved direction", () => {
