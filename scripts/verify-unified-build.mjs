@@ -24,7 +24,17 @@ const expectedFiles = [
   "menu/index.html",
   "menu/en/index.html",
   "menu/haram/index.html",
+  "menu/haram/ar/index.html",
   "menu/haram/en/index.html",
+  "menu/haram/ur/index.html",
+  "menu/haram/id/index.html",
+  "menu/haram/bn/index.html",
+  "menu/haram/tr/index.html",
+  "menu/haram/fa/index.html",
+  "menu/haram/fr/index.html",
+  "menu/haram/ms/index.html",
+  "menu/haram/ru/index.html",
+  "menu/haram/404.html",
   "menu/404.html",
   "menu/site.webmanifest",
   "menu/assets/brand/logo-saweeg.svg",
@@ -61,8 +71,13 @@ const readDist = (relative) =>
 
 const menuAr = readDist("menu/index.html");
 const menuEn = readDist("menu/en/index.html");
-const menuHaramAr = readDist("menu/haram/index.html");
-const menuHaramEn = readDist("menu/haram/en/index.html");
+const menuHaramSelector = readDist("menu/haram/index.html");
+const haramLocales = ["ar", "en", "ur", "id", "bn", "tr", "fa", "fr", "ms", "ru"];
+const menuHaramPages = Object.fromEntries(
+  haramLocales.map((locale) => [locale, readDist(`menu/haram/${locale}/index.html`)])
+);
+const menuHaramAr = menuHaramPages.ar;
+const menuHaramEn = menuHaramPages.en;
 const menuNotFound = readDist("menu/404.html");
 const homeAr = readDist("index.html");
 const homeEn = readDist("en/index.html");
@@ -89,7 +104,8 @@ const requiredHtmlSnippets = [
   [menuAr, "https://go.saweegsa.com/menu/en/", "Arabic menu alternate"],
   [menuEn, "https://go.saweegsa.com/menu/en/", "English menu canonical"],
   [menuEn, "https://go.saweegsa.com/menu/", "English menu alternate"],
-  [menuHaramAr, "https://go.saweegsa.com/menu/haram/", "Al Haram Arabic canonical"],
+  [menuHaramSelector, "https://go.saweegsa.com/menu/haram/", "Al Haram selector canonical"],
+  [menuHaramAr, "https://go.saweegsa.com/menu/haram/ar/", "Al Haram Arabic canonical"],
   [menuHaramAr, "https://go.saweegsa.com/menu/haram/en/", "Al Haram Arabic alternate"],
   [menuHaramEn, "https://go.saweegsa.com/menu/haram/en/", "Al Haram English canonical"],
   [menuHaramEn, "https://go.saweegsa.com/menu/haram/", "Al Haram English alternate"],
@@ -121,8 +137,8 @@ const socialMetadataPages = [
   [homeEn, "English homepage"],
   [menuAr, "Arabic menu"],
   [menuEn, "English menu"],
-  [menuHaramAr, "Al Haram Arabic menu"],
-  [menuHaramEn, "Al Haram English menu"],
+  [menuHaramSelector, "Al Haram language selector"],
+  ...haramLocales.map((locale) => [menuHaramPages[locale], `Al Haram ${locale} menu`]),
   [menuNotFound, "Menu not found page"]
 ];
 for (const [html, label] of socialMetadataPages) {
@@ -150,11 +166,12 @@ for (const relative of publicSeoPages) {
   const titleCount = (html.match(/<title>/g) ?? []).length;
   const descriptionCount = (html.match(/<meta\s+name="description"/g) ?? []).length;
   const canonicalMatch = html.match(/<link\s+rel="canonical"\s+href="(https:\/\/[^\"]+)"/);
-  const alternateCount = (html.match(/<link\s+rel="alternate"\s+hreflang="(?:ar|en|x-default)"\s+href="https:\/\//g) ?? []).length;
+  const alternateCount = (html.match(/<link\s+rel="alternate"\s+hreflang="(?:ar|en|ur|id|bn|tr|fa|fr|ms|ru|x-default)"\s+href="https:\/\//g) ?? []).length;
+  const expectedAlternates = relative.startsWith("menu/haram/") ? 11 : 3;
   if (titleCount !== 1) failures.push(`${relative} must contain exactly one title`);
   if (descriptionCount !== 1) failures.push(`${relative} must contain exactly one meta description`);
   if (!canonicalMatch) failures.push(`${relative} must contain an absolute HTTPS canonical URL`);
-  if (alternateCount !== 3) failures.push(`${relative} must contain Arabic, English, and x-default hreflang links`);
+  if (alternateCount !== expectedAlternates) failures.push(`${relative} must contain its expected hreflang links`);
 }
 
 const parseJsonLd = (html, label) => {
@@ -174,7 +191,7 @@ const parseJsonLd = (html, label) => {
 for (const [html, label, canonical] of [
   [menuAr, "Arabic menu", "https://go.saweegsa.com/menu/"],
   [menuEn, "English menu", "https://go.saweegsa.com/menu/en/"],
-  [menuHaramAr, "Al Haram Arabic menu", "https://go.saweegsa.com/menu/haram/"],
+  [menuHaramAr, "Al Haram Arabic menu", "https://go.saweegsa.com/menu/haram/ar/"],
   [menuHaramEn, "Al Haram English menu", "https://go.saweegsa.com/menu/haram/en/"]
 ]) {
   const jsonLd = parseJsonLd(html, label);
@@ -193,7 +210,7 @@ const sitemapUrls = [
   "https://go.saweegsa.com/menu/",
   "https://go.saweegsa.com/menu/en/",
   "https://go.saweegsa.com/menu/haram/",
-  "https://go.saweegsa.com/menu/haram/en/"
+  ...haramLocales.map((locale) => `https://go.saweegsa.com/menu/haram/${locale}/`)
 ];
 for (const url of sitemapUrls) {
   if (!sitemap.includes(url)) failures.push(`Missing sitemap URL: ${url}`);

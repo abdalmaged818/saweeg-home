@@ -23,6 +23,8 @@ export interface Category {
 
 interface ProductBase {
   id: string;
+  /** Stable cross-branch product/variant key used by the canonical photo catalogue. */
+  catalogId?: string;
   nameAr: string;
   nameEn: string;
   quantityAr?: string;

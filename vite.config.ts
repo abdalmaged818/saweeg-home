@@ -32,8 +32,18 @@ export default defineConfig({
         notFound: resolve(projectRoot, "404.html"),
         menuAr: resolve(projectRoot, "menu/index.html"),
         menuEn: resolve(projectRoot, "menu/en/index.html"),
-        menuHaramAr: resolve(projectRoot, "menu/haram/index.html"),
+        menuHaramSelector: resolve(projectRoot, "menu/haram/index.html"),
+        menuHaramAr: resolve(projectRoot, "menu/haram/ar/index.html"),
         menuHaramEn: resolve(projectRoot, "menu/haram/en/index.html"),
+        menuHaramUr: resolve(projectRoot, "menu/haram/ur/index.html"),
+        menuHaramId: resolve(projectRoot, "menu/haram/id/index.html"),
+        menuHaramBn: resolve(projectRoot, "menu/haram/bn/index.html"),
+        menuHaramTr: resolve(projectRoot, "menu/haram/tr/index.html"),
+        menuHaramFa: resolve(projectRoot, "menu/haram/fa/index.html"),
+        menuHaramFr: resolve(projectRoot, "menu/haram/fr/index.html"),
+        menuHaramMs: resolve(projectRoot, "menu/haram/ms/index.html"),
+        menuHaramRu: resolve(projectRoot, "menu/haram/ru/index.html"),
+        menuHaramNotFound: resolve(projectRoot, "menu/haram/404.html"),
         menuNotFound: resolve(projectRoot, "menu/404.html")
       }
     }

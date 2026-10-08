@@ -16,6 +16,8 @@ import { participationCanonicalFor, participationPathFor } from "../src/pages/ro
 import { publishedParticipations } from "../src/data/participations.ts";
 import { renderParticipationPage } from "../src/pages/participation.ts";
 import { participationsUi } from "../src/content/participations.ts";
+import { haramLocaleContent } from "../src/menu/haram/locales.ts";
+import { haramLocales, type HaramLocale } from "../src/menu/haram/types.ts";
 
 interface PageTarget {
   locale: Locale;
@@ -57,6 +59,102 @@ const participationTargets: PageTarget[] = publishedParticipations.flatMap((part
 ]);
 
 const targets: PageTarget[] = [...baseTargets, ...participationTargets];
+
+const haramUrl = (locale?: HaramLocale): string =>
+  `${siteConfig.brand.origin}/menu/haram/${locale ? `${locale}/` : ""}`;
+
+const escapeHtml = (value: string): string =>
+  value.replace(/[&<>"']/g, (character) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    "\"": "&quot;",
+    "'": "&#39;"
+  })[character] ?? character);
+
+const renderHaramDocument = (locale?: HaramLocale): string => {
+  const copy = locale ? haramLocaleContent[locale] : haramLocaleContent.ar;
+  const isSelector = !locale;
+  const title = isSelector
+    ? "فرع الحرم | سويق"
+    : `${copy.menuTitle} | ${copy.branchName} | Saweeg`;
+  const description = isSelector
+    ? "اختر لغتك لاستعراض منيو سويق لفرع الحرم."
+    : `${copy.menuTitle} — ${copy.branchName}. ${copy.vatNotice}`;
+  const canonical = haramUrl(locale);
+  const alternateLinks = haramLocales
+    .map((entry) => `<link rel="alternate" hreflang="${entry}" href="${haramUrl(entry)}" />`)
+    .join("\n  ");
+  const bodyData = isSelector
+    ? "data-haram-page=\"selector\""
+    : `data-haram-page=\"menu\" data-haram-locale=\"${locale}\"`;
+  const fallbackTitle = isSelector ? "اختر لغتك" : escapeHtml(copy.menuTitle);
+  const fallbackBody = isSelector
+    ? "اختر لغة منيو فرع الحرم."
+    : escapeHtml(copy.branchName);
+  const socialImage = `${siteConfig.brand.origin}/assets/social/saweeg-gateway-preview-20260910.png`;
+  const jsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${siteConfig.brand.origin}/#organization`,
+        name: "Saweeg",
+        url: `${siteConfig.brand.origin}/`,
+        logo: `${siteConfig.brand.origin}/menu/assets/brand/logo-saweeg.svg`
+      },
+      {
+        "@type": isSelector ? "WebPage" : "Menu",
+        "@id": `${canonical}#${isSelector ? "webpage" : "menu"}`,
+        name: title,
+        url: canonical,
+        inLanguage: locale ?? "ar",
+        provider: { "@id": `${siteConfig.brand.origin}/#organization` }
+      }
+    ]
+  });
+
+  return `<!doctype html>
+<html lang="${locale ?? "ar"}" dir="${copy.direction}">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="${escapeHtml(description)}" />
+  <meta name="theme-color" content="#5C6351" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="${locale ?? "ar"}" />
+  <meta property="og:site_name" content="Saweeg" />
+  <meta property="og:title" content="${escapeHtml(title)}" />
+  <meta property="og:description" content="${escapeHtml(description)}" />
+  <meta property="og:url" content="${canonical}" />
+  <meta property="og:image" content="${socialImage}" />
+  <meta property="og:image:secure_url" content="${socialImage}" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Saweeg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="${escapeHtml(title)}" />
+  <meta name="twitter:description" content="${escapeHtml(description)}" />
+  <meta name="twitter:image" content="${socialImage}" />
+  <meta name="twitter:image:alt" content="Saweeg" />
+  <link rel="canonical" href="${canonical}" />
+  ${alternateLinks}
+  <link rel="alternate" hreflang="x-default" href="${haramUrl()}" />
+  <link rel="icon" href="/menu/favicon-saweeg-202609.ico" sizes="any" />
+  <link rel="manifest" href="/menu/site.webmanifest?v=202609" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <title>${escapeHtml(title)}</title>
+  <script type="application/ld+json">${jsonLd}</script>
+</head>
+<body ${bodyData}>
+  <div id="app"><main><h1>${fallbackTitle}</h1><p>${fallbackBody}</p></main></div>
+  <script type="module" src="/src/menu/haram-main.ts"></script>
+</body>
+</html>
+`;
+};
 
 const renderHiddenPage = (locale: Locale, homePath: string): string => {
   const copy = getCopy(locale);
@@ -144,6 +242,23 @@ for (const target of targets) {
   await writeFile(outputPath, renderPage(target), "utf8");
 }
 
+await mkdir(resolve(projectRoot, "menu/haram"), { recursive: true });
+await writeFile(resolve(projectRoot, "menu/haram/index.html"), renderHaramDocument(), "utf8");
+for (const locale of haramLocales) {
+  const outputPath = resolve(projectRoot, `menu/haram/${locale}/index.html`);
+  await mkdir(dirname(outputPath), { recursive: true });
+  await writeFile(
+    outputPath,
+    renderHaramDocument(locale),
+    "utf8"
+  );
+}
+await writeFile(
+  resolve(projectRoot, "menu/haram/404.html"),
+  renderHaramDocument(),
+  "utf8"
+);
+
 const sitemapUrls = targets
   .filter(({ page }) => isPagePublic(page))
   .map(({ locale, page, participationSlug }) => participationSlug ? participationCanonicalFor(locale, participationSlug) : canonicalFor(locale, page));
@@ -151,7 +266,7 @@ const menuSitemapUrls = [
   `${siteConfig.brand.origin}/menu/`,
   `${siteConfig.brand.origin}/menu/en/`,
   `${siteConfig.brand.origin}/menu/haram/`,
-  `${siteConfig.brand.origin}/menu/haram/en/`
+  ...haramLocales.map((locale) => haramUrl(locale))
 ];
 const sitemapEntries = [...sitemapUrls, ...menuSitemapUrls]
   .map((url) => `  <url><loc>${url}</loc></url>`)
@@ -173,13 +288,21 @@ const notFoundContent = `
       <a class="button button-primary" href="./">${notFoundCopy.notFound.cta}</a>
     </div>
   </section>`;
-await writeFile(resolve(projectRoot, "404.html"), renderDocument({
+const rootNotFound = renderDocument({
   locale: "ar",
   page: "home",
   prefix: "./",
   content: notFoundContent,
   noIndex: true,
   dynamicBase: true
-}), "utf8");
+});
+await writeFile(
+  resolve(projectRoot, "404.html"),
+  rootNotFound.replace(
+    "</body>",
+    '<script>if (location.pathname.startsWith("/menu/haram/")) location.replace("/menu/haram/");</script></body>'
+  ),
+  "utf8"
+);
 
 console.log(`Generated ${targets.length + 1} HTML pages.`);
