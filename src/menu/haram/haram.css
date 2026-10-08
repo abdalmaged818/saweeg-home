@@ -161,7 +161,7 @@ body:has(.haram) {
 
 .haram-product__media {
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 4 / 3;
   display: block;
   min-height: 0;
   overflow: hidden;

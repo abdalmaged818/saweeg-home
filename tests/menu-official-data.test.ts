@@ -173,9 +173,10 @@ test("Haram refinement keeps the shared site shell and compact accessible menu p
   assert.match(renderer, /haram-language-card__arrow/);
   assert.doesNotMatch(renderer, /haram-language-card__flag|copy\.flag|copy\.vatNotice/);
   assert.doesNotMatch(styles, /haram-category__heading::after|haram-selector-hero|haram-menu-intro__vat/);
-  assert.match(styles, /\.haram-product__media\s*\{[\s\S]*?aspect-ratio:\s*1/);
+  assert.match(styles, /\.haram-product__media\s*\{[\s\S]*?aspect-ratio:\s*4\s*\/\s*3/);
   assert.match(styles, /\.haram-product__media\s*\{[\s\S]*?background:\s*#faf5ee/);
   assert.match(styles, /\.haram-product--text-only\s*\.haram-product__body/);
+  assert.match(renderer, /if \(!item\.image\) return undefined/);
   assert.match(styles, /\.haram-language-card\[dir="rtl"\]\s+\.haram-language-card__arrow/);
   assert.match(styles, /\.haram-language-grid\s*\{[\s\S]*?grid-auto-rows:\s*var\(--haram-language-card-block-size\)/);
   assert.match(styles, /\.haram-language-card\s*\{[\s\S]*?height:\s*100%/);
