@@ -245,24 +245,27 @@ const productDirectory = path.join(distRoot, "menu", "assets", "products");
 const productImages = fs.existsSync(productDirectory)
   ? fs.readdirSync(productDirectory).filter((name) => name.endsWith(".webp"))
   : [];
-const requiredIceCreamProductImages = [
-  "chocolate-ice-cream-cup-2026-10-refresh.webp",
-  "chocolate-ice-cream-biscuit-2026-10-refresh.webp",
-  "mixed-ice-cream-cup-2026-10-refresh.webp",
-  "mixed-ice-cream-biscuit-2026-10-refresh.webp"
-];
-if (productImages.length !== 26) {
-  failures.push(`Expected 26 menu product images, found ${productImages.length}`);
+const requiredProductImages = new Map([
+  ["chocolate-ice-cream-cup-2026-10-refresh.webp", [1080, 1080]],
+  ["chocolate-ice-cream-biscuit-2026-10-refresh.webp", [1080, 1080]],
+  ["mixed-ice-cream-cup-2026-10-refresh.webp", [1080, 1080]],
+  ["mixed-ice-cream-biscuit-2026-10-refresh.webp", [1080, 1080]],
+  ["talbinah-ice-cream-biscuit-2026-10.webp", [1400, 1050]],
+  ["talbinah-sachet-box-2026-10.webp", [1400, 1050]],
+  ["talbinah-matcha-2026-10.webp", [1400, 1050]]
+]);
+if (productImages.length !== 29) {
+  failures.push(`Expected 29 menu product images, found ${productImages.length}`);
 }
-for (const image of requiredIceCreamProductImages) {
+for (const [image, [width, height]] of requiredProductImages) {
   if (!productImages.includes(image)) {
     failures.push(`Missing required ice cream product image: ${image}`);
     continue;
   }
 
   const metadata = await sharp(path.join(productDirectory, image)).metadata();
-  if (metadata.format !== "webp" || metadata.width !== 1080 || metadata.height !== 1080) {
-    failures.push(`Unexpected refreshed ice cream image output: ${image} must be a 1080x1080 WebP`);
+  if (metadata.format !== "webp" || metadata.width !== width || metadata.height !== height) {
+    failures.push(`Unexpected product image output: ${image} must be a ${width}x${height} WebP`);
   }
 }
 
