@@ -2,9 +2,12 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
+import { execFileSync } from "node:child_process";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const distRoot = path.join(projectRoot, "dist");
+execFileSync(process.execPath, ["--experimental-strip-types", "--test",
+  "tests/menu-official-data.test.ts"], { cwd: projectRoot, stdio: "inherit" });
 
 const expectedFiles = [
   "index.html",

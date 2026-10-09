@@ -1,5 +1,4 @@
 import assert from "node:assert/strict";
-import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import test from "node:test";
@@ -21,10 +20,11 @@ test("Only the approved Gift Box price changes in centralized Haram data", () =>
   assert.equal(source, "import { canonicalImageFor } from \"../data/catalog-images.ts\";\nimport type { HaramMenuItem } from \"./types.ts\";\n\nconst item = (\n  id: HaramMenuItem[\"id\"],\n  category: HaramMenuItem[\"category\"],\n  price: number,\n  catalogId = id\n): HaramMenuItem => ({ id, category, price, catalogId, image: canonicalImageFor(catalogId) });\n\n// This is the single Al Haram price and availability source for every locale.\nexport const haramMenuItems: HaramMenuItem[] = [\n  item(\"talbinah-ice-cream-biscuit\", \"iceCream\", 11),\n  item(\"talbinah-ice-cream-cup\", \"iceCream\", 15),\n  item(\"chocolate-ice-cream-biscuit\", \"iceCream\", 11),\n  item(\"chocolate-ice-cream-cup\", \"iceCream\", 15),\n  item(\"mixed-ice-cream-biscuit\", \"iceCream\", 11),\n  item(\"mixed-ice-cream-cup\", \"iceCream\", 15),\n  item(\"lotus-cheesecake\", \"desserts\", 20),\n  item(\"damkah\", \"desserts\", 20),\n  item(\"dates-with-saweeg\", \"desserts\", 20),\n  item(\"pecan-basbousa\", \"desserts\", 13),\n  item(\"date-tart\", \"desserts\", 13),\n  item(\"saweeg-maamoul\", \"desserts\", 25),\n  item(\"cold-talbinah\", \"drinks\", 16),\n  item(\"hot-talbinah\", \"drinks\", 16),\n  item(\"hot-talbinah-one-liter\", \"drinks\", 55),\n  item(\"saudi-coffee\", \"drinks\", 7),\n  item(\"saudi-coffee-dallah\", \"drinks\", 25),\n  item(\"saudi-coffee-dallah-with-sweets\", \"drinks\", 45),\n  item(\"tea\", \"drinks\", 5),\n  item(\"tea-thermos\", \"drinks\", 25),\n  item(\"talbinah-matcha\", \"drinks\", 25),\n  item(\"bottled-water\", \"drinks\", 1),\n  item(\"talbinah-powder-sachet\", \"powders\", 25),\n  item(\"saweeg-powder-sachet\", \"powders\", 25),\n  item(\"mixed-nuts-sachet\", \"powders\", 12),\n  item(\"al-jabirah-sachet\", \"powders\", 6),\n  item(\"safawi-dates-nuts-box\", \"boxes\", 78),\n  item(\"ajwa-dates-nuts-box\", \"boxes\", 85),\n  item(\"al-jabirah-box\", \"boxes\", 75),\n  item(\"gift-box\", \"boxes\", 52),\n  item(\"saweeg-maamoul-box\", \"boxes\", 89),\n  item(\"pecan-basbousa-box\", \"boxes\", 55),\n  item(\"sachet-box\", \"boxes\", 75),\n  item(\"date-tart-box\", \"boxes\", 55)\n];\n");
 });
 test("Shared product prices, order, availability and image settings remain unchanged", () => {
-  const source = fs.readFileSync(path.join(projectRoot, "src/menu/data/products.ts"), "utf8")
-    .replace(/^\s*name(?:Ar|En):.*$/gm, "").replace(/\r/g, "");
-  assert.equal(createHash("sha256").update(source).digest("hex"),
-    "12190d47dc49ad6ce3c5a9ddbff7e64e59948cb757ef3575d17fa12f29836776");
+  // Approved PR #34 (a0384be), verified against its parent: only approved names changed.
+  // Compare every runtime field, including names and quantities, not platform-dependent whitespace.
+  const approved = JSON.parse(fs.readFileSync(
+    path.join(projectRoot, "tests/fixtures/shared-products-approved-pr34.json"), "utf8"));
+  assert.deepEqual(products, approved);
 });
 test("Management-approved terminology is consistent across all ten Haram locales", () => {
   const expected = {
