@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import test from "node:test";
@@ -14,6 +15,134 @@ import { haramItemIds, haramLocales } from "../src/menu/haram/types.ts";
 import type { BranchId } from "../src/menu/types/menu.ts";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+test("Only the approved Gift Box price changes in centralized Haram data", () => {
+  const source = fs.readFileSync(path.join(projectRoot, "src/menu/haram/data.ts"), "utf8")
+    .replace(/\r/g, "").replace('item("gift-box", "boxes", 45)', 'item("gift-box", "boxes", 52)');
+  assert.equal(source, "import { canonicalImageFor } from \"../data/catalog-images.ts\";\nimport type { HaramMenuItem } from \"./types.ts\";\n\nconst item = (\n  id: HaramMenuItem[\"id\"],\n  category: HaramMenuItem[\"category\"],\n  price: number,\n  catalogId = id\n): HaramMenuItem => ({ id, category, price, catalogId, image: canonicalImageFor(catalogId) });\n\n// This is the single Al Haram price and availability source for every locale.\nexport const haramMenuItems: HaramMenuItem[] = [\n  item(\"talbinah-ice-cream-biscuit\", \"iceCream\", 11),\n  item(\"talbinah-ice-cream-cup\", \"iceCream\", 15),\n  item(\"chocolate-ice-cream-biscuit\", \"iceCream\", 11),\n  item(\"chocolate-ice-cream-cup\", \"iceCream\", 15),\n  item(\"mixed-ice-cream-biscuit\", \"iceCream\", 11),\n  item(\"mixed-ice-cream-cup\", \"iceCream\", 15),\n  item(\"lotus-cheesecake\", \"desserts\", 20),\n  item(\"damkah\", \"desserts\", 20),\n  item(\"dates-with-saweeg\", \"desserts\", 20),\n  item(\"pecan-basbousa\", \"desserts\", 13),\n  item(\"date-tart\", \"desserts\", 13),\n  item(\"saweeg-maamoul\", \"desserts\", 25),\n  item(\"cold-talbinah\", \"drinks\", 16),\n  item(\"hot-talbinah\", \"drinks\", 16),\n  item(\"hot-talbinah-one-liter\", \"drinks\", 55),\n  item(\"saudi-coffee\", \"drinks\", 7),\n  item(\"saudi-coffee-dallah\", \"drinks\", 25),\n  item(\"saudi-coffee-dallah-with-sweets\", \"drinks\", 45),\n  item(\"tea\", \"drinks\", 5),\n  item(\"tea-thermos\", \"drinks\", 25),\n  item(\"talbinah-matcha\", \"drinks\", 25),\n  item(\"bottled-water\", \"drinks\", 1),\n  item(\"talbinah-powder-sachet\", \"powders\", 25),\n  item(\"saweeg-powder-sachet\", \"powders\", 25),\n  item(\"mixed-nuts-sachet\", \"powders\", 12),\n  item(\"al-jabirah-sachet\", \"powders\", 6),\n  item(\"safawi-dates-nuts-box\", \"boxes\", 78),\n  item(\"ajwa-dates-nuts-box\", \"boxes\", 85),\n  item(\"al-jabirah-box\", \"boxes\", 75),\n  item(\"gift-box\", \"boxes\", 52),\n  item(\"saweeg-maamoul-box\", \"boxes\", 89),\n  item(\"pecan-basbousa-box\", \"boxes\", 55),\n  item(\"sachet-box\", \"boxes\", 75),\n  item(\"date-tart-box\", \"boxes\", 55)\n];\n");
+});
+test("Shared product prices, order, availability and image settings remain unchanged", () => {
+  const source = fs.readFileSync(path.join(projectRoot, "src/menu/data/products.ts"), "utf8")
+    .replace(/^\s*name(?:Ar|En):.*$/gm, "").replace(/\r/g, "");
+  assert.equal(createHash("sha256").update(source).digest("hex"),
+    "12190d47dc49ad6ce3c5a9ddbff7e64e59948cb757ef3575d17fa12f29836776");
+});
+test("Management-approved terminology is consistent across all ten Haram locales", () => {
+  const expected = {
+  "ar": {
+    "chocolate-ice-cream-biscuit": "آيس كريم تلبينة شوكلت — بسكوت",
+    "chocolate-ice-cream-cup": "آيس كريم تلبينة شوكلت — كوب",
+    "lotus-cheesecake": "تشيز كيك بالتلبينة",
+    "talbinah-powder-sachet": "ظرف بودرة تلبينة",
+    "saweeg-powder-sachet": "ظرف بودرة سويق",
+    "mixed-nuts-sachet": "ظرف مكسرات مكس",
+    "al-jabirah-box": "بوكس أظرف الجابرة",
+    "pecan-basbousa-box": "بوكس بسبوسة بيكان"
+  },
+  "en": {
+    "chocolate-ice-cream-biscuit": "Talbinah Chocolate Ice Cream — Biscuit",
+    "chocolate-ice-cream-cup": "Talbinah Chocolate Ice Cream — Cup",
+    "lotus-cheesecake": "Talbinah Cheesecake",
+    "talbinah-powder-sachet": "Talbinah Powder Pack",
+    "saweeg-powder-sachet": "Saweeg Powder Pack",
+    "mixed-nuts-sachet": "Mixed Nuts Pack",
+    "al-jabirah-box": "Al Jabirah Sachet Box",
+    "pecan-basbousa-box": "Pecan Basbousa Box"
+  },
+  "ur": {
+    "chocolate-ice-cream-biscuit": "تلبینہ چاکلیٹ آئس کریم — کون",
+    "chocolate-ice-cream-cup": "تلبینہ چاکلیٹ آئس کریم — کپ",
+    "lotus-cheesecake": "تلبینہ چیز کیک",
+    "talbinah-powder-sachet": "تلبینہ پاؤڈر پیک",
+    "saweeg-powder-sachet": "سویق پاؤڈر پیک",
+    "mixed-nuts-sachet": "مکس خشک میوہ پیک",
+    "al-jabirah-box": "الجبیرہ ساشوں کا باکس",
+    "pecan-basbousa-box": "پیکان بسبوسہ باکس"
+  },
+  "id": {
+    "chocolate-ice-cream-biscuit": "Es Krim Talbinah Cokelat — Cone",
+    "chocolate-ice-cream-cup": "Es Krim Talbinah Cokelat — Cup",
+    "lotus-cheesecake": "Cheesecake Talbinah",
+    "talbinah-powder-sachet": "Kemasan Bubuk Talbinah",
+    "saweeg-powder-sachet": "Kemasan Bubuk Saweeg",
+    "mixed-nuts-sachet": "Kemasan Kacang Campur",
+    "al-jabirah-box": "Kotak Saset Al Jabirah",
+    "pecan-basbousa-box": "Kotak Basbousa Pecan"
+  },
+  "bn": {
+    "chocolate-ice-cream-biscuit": "তালবিনা চকলেট আইসক্রিম — কোন",
+    "chocolate-ice-cream-cup": "তালবিনা চকলেট আইসক্রিম — কাপ",
+    "lotus-cheesecake": "তালবিনা চিজকেক",
+    "talbinah-powder-sachet": "তালবিনা পাউডারের প্যাকেট",
+    "saweeg-powder-sachet": "Saweeg পাউডারের প্যাকেট",
+    "mixed-nuts-sachet": "মিশ্র বাদামের প্যাকেট",
+    "al-jabirah-box": "আল জাবিরাহ স্যাশের বক্স",
+    "pecan-basbousa-box": "পেকান বাদামের বাসবুসা বক্স"
+  },
+  "tr": {
+    "chocolate-ice-cream-biscuit": "Talbinah Çikolatalı Dondurma — Külah",
+    "chocolate-ice-cream-cup": "Talbinah Çikolatalı Dondurma — Kap",
+    "lotus-cheesecake": "Talbinah Cheesecake",
+    "talbinah-powder-sachet": "Talbina Tozu Paketi",
+    "saweeg-powder-sachet": "Saweeg Tozu Paketi",
+    "mixed-nuts-sachet": "Karışık Kuruyemiş Paketi",
+    "al-jabirah-box": "Al Jabirah Saşe Kutusu",
+    "pecan-basbousa-box": "Pekanlı Basbousa Kutusu"
+  },
+  "fa": {
+    "chocolate-ice-cream-biscuit": "بستنی تلبینه شکلاتی — قیفی",
+    "chocolate-ice-cream-cup": "بستنی تلبینه شکلاتی — لیوانی",
+    "lotus-cheesecake": "چیزکیک تلبینه",
+    "talbinah-powder-sachet": "بسته پودر تلبینه",
+    "saweeg-powder-sachet": "بسته پودر سوییق",
+    "mixed-nuts-sachet": "بسته آجیل مخلوط",
+    "al-jabirah-box": "باکس ساشه‌های الجابره",
+    "pecan-basbousa-box": "باکس بسبوسه پکان"
+  },
+  "fr": {
+    "chocolate-ice-cream-biscuit": "Glace à la talbinah au chocolat — Cornet",
+    "chocolate-ice-cream-cup": "Glace à la talbinah au chocolat — Pot",
+    "lotus-cheesecake": "Cheesecake à la talbinah",
+    "talbinah-powder-sachet": "Paquet de poudre de talbinah",
+    "saweeg-powder-sachet": "Paquet de poudre Saweeg",
+    "mixed-nuts-sachet": "Paquet de fruits à coque mélangés",
+    "al-jabirah-box": "Boîte de sachets Al Jabirah",
+    "pecan-basbousa-box": "Boîte de Basbousa aux noix de pécan"
+  },
+  "ms": {
+    "chocolate-ice-cream-biscuit": "Ais Krim Talbinah Coklat — Kon",
+    "chocolate-ice-cream-cup": "Ais Krim Talbinah Coklat — Cawan",
+    "lotus-cheesecake": "Kek Keju Talbinah",
+    "talbinah-powder-sachet": "Pek Serbuk Talbinah",
+    "saweeg-powder-sachet": "Pek Serbuk Saweeg",
+    "mixed-nuts-sachet": "Pek Kacang Campuran",
+    "al-jabirah-box": "Kotak Saset Al Jabirah",
+    "pecan-basbousa-box": "Kotak Basbousa Pecan"
+  },
+  "ru": {
+    "chocolate-ice-cream-biscuit": "Шоколадное мороженое из тальбины — рожок",
+    "chocolate-ice-cream-cup": "Шоколадное мороженое из тальбины — стаканчик",
+    "lotus-cheesecake": "Чизкейк из тальбины",
+    "talbinah-powder-sachet": "Упаковка порошка тальбины",
+    "saweeg-powder-sachet": "Упаковка порошка Saweeg",
+    "mixed-nuts-sachet": "Упаковка ореховой смеси",
+    "al-jabirah-box": "Коробка саше Al Jabirah",
+    "pecan-basbousa-box": "Набор басбусы с пеканом"
+  }
+};
+  const shelfTitles = {"ar":"منتجات رف","en":"Packaged Products","ur":"پیک شدہ مصنوعات","id":"Produk Kemasan","bn":"প্যাকেটজাত পণ্য","tr":"Paketli Ürünler","fa":"محصولات بسته‌بندی‌شده","fr":"Produits emballés","ms":"Produk Berbungkus","ru":"Упакованные продукты"};
+  for (const locale of haramLocales) {
+    const content = haramLocaleContent[locale];
+    for (const [id, name] of Object.entries(expected[locale])) {
+      assert.equal(content.productNames[id as keyof typeof content.productNames], name);
+      assert.equal(haramMenuItems.filter(item => item.id === id).length, 1);
+    }
+    assert.equal(content.categories.powders, shelfTitles[locale]);
+  }
+  assert.equal(haramLocaleContent.ar.categories.desserts, "الحلويات");
+  assert.equal(haramMenuItems.find(item => item.id === "gift-box")?.price, 45);
+  assert.equal(products.find(item => item.id === "gift-box")?.price, 42);
+  assert.equal(haramLocaleContent.tr.productNames["talbinah-ice-cream-cup"], "Talbinah Dondurma — Kap");
+});
 
 const branchProductIds = (branch: BranchId): string[] =>
   products.filter((product) => product.branches.includes(branch)).map((product) => product.id);
@@ -64,7 +193,7 @@ test("Al Haram has exactly the approved 34 priced variants without duplicates", 
     "saudi-coffee-dallah-with-sweets": 45, tea: 5, "tea-thermos": 25, "talbinah-matcha": 25,
     "bottled-water": 1, "talbinah-powder-sachet": 25, "saweeg-powder-sachet": 25,
     "mixed-nuts-sachet": 12, "al-jabirah-sachet": 6, "safawi-dates-nuts-box": 78,
-    "ajwa-dates-nuts-box": 85, "al-jabirah-box": 75, "gift-box": 52,
+    "ajwa-dates-nuts-box": 85, "al-jabirah-box": 75, "gift-box": 45,
     "saweeg-maamoul-box": 89, "pecan-basbousa-box": 55, "sachet-box": 75, "date-tart-box": 55
   } as const;
   assert.equal(haramMenuItems.length, 34);
@@ -84,9 +213,9 @@ test("Al Haram shelf sachet prices are centralized, unique, and scoped to the ap
     "al-jabirah-sachet": 6
   } as const;
   const expectedNames = {
-    "mixed-nuts-sachet": { ar: "ظرف مكسرات مكس", en: "Mixed Nuts Sachet" },
-    "saweeg-powder-sachet": { ar: "ظرف بودرة سويق", en: "Saweeg Powder Sachet" },
-    "talbinah-powder-sachet": { ar: "ظرف بودرة تلبينة", en: "Talbinah Powder Sachet" },
+    "mixed-nuts-sachet": { ar: "ظرف مكسرات مكس", en: "Mixed Nuts Pack" },
+    "saweeg-powder-sachet": { ar: "ظرف بودرة سويق", en: "Saweeg Powder Pack" },
+    "talbinah-powder-sachet": { ar: "ظرف بودرة تلبينة", en: "Talbinah Powder Pack" },
     "al-jabirah-sachet": { ar: "ظرف الجابرة", en: "Al Jabirah Sachet" }
   } as const;
 
