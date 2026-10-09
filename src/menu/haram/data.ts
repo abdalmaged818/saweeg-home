@@ -39,7 +39,7 @@ export const haramMenuItems: HaramMenuItem[] = [
   item("safawi-dates-nuts-box", "boxes", 78),
   item("ajwa-dates-nuts-box", "boxes", 85),
   item("al-jabirah-box", "boxes", 75),
-  item("gift-box", "boxes", 52),
+  item("gift-box", "boxes", 45),
   item("saweeg-maamoul-box", "boxes", 89),
   item("pecan-basbousa-box", "boxes", 55),
   item("sachet-box", "boxes", 75),

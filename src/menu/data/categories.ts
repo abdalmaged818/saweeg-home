@@ -8,7 +8,7 @@ export const categories: Category[] = [
   },
   {
     id: "sweets",
-    nameAr: "الحلى",
+    nameAr: "الحلويات",
     nameEn: "Desserts"
   },
   {
@@ -18,8 +18,8 @@ export const categories: Category[] = [
   },
   {
     id: "ready",
-    nameAr: "المنتجات الجاهزة",
-    nameEn: "Ready Products"
+    nameAr: "منتجات رف",
+    nameEn: "Packaged Products"
   },
   {
     id: "drinks",
