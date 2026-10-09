@@ -1,4 +1,6 @@
 import "./styles/main.css";
+import "./styles/sabtiya.css";
+import { initializeSabtiya } from "./components/sabtiya.ts";
 import { bindSharedHeader } from "./components/header-controller.ts";
 import { siteConfig } from "./config/site.ts";
 import type { Locale } from "./types/site.ts";
@@ -8,6 +10,7 @@ initAnalytics();
 bindAnalyticsEvents();
 
 bindSharedHeader();
+initializeSabtiya();
 
 document.querySelectorAll<HTMLElement>("[data-locale-switch]").forEach((link) => {
   link.addEventListener("click", () => {
