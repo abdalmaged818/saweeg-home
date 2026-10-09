@@ -8,6 +8,7 @@ fs.mkdirSync(output, { recursive: true });
 const server = spawn(process.execPath, ["node_modules/vite/bin/vite.js", "preview", "--host", "127.0.0.1", "--port", "4173"], { stdio: "inherit" });
 let browser;
 const results = [];
+let existingFontStylesheets;
 try {
   let ready = false;
   for (let attempt = 0; attempt < 60; attempt++) {
@@ -87,7 +88,9 @@ try {
       await page.waitForTimeout(300);
       assert.equal(await page.locator("img").evaluateAll(images => images.filter(i => i.complete && !i.naturalWidth).length), 0);
       assert.deepEqual(errors, []);
-      assert.deepEqual(externalFonts, []);
+      const fontStylesheets = [...new Set(externalFonts.filter(url => url.includes("fonts.googleapis.com")))].sort();
+      if (state.name === "before" && existingFontStylesheets === undefined) existingFontStylesheets = fontStylesheets;
+      assert.deepEqual(fontStylesheets, existingFontStylesheets, "Sabtiya must not add a font import beyond the existing site fonts");
       assert.deepEqual(failed, []);
       results.push({ width, state: state.name, status: "passed", metrics });
       console.log("PASS", width, state.name);
