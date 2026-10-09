@@ -7,7 +7,12 @@ import { execFileSync } from "node:child_process";
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const distRoot = path.join(projectRoot, "dist");
 execFileSync(process.execPath, ["--experimental-strip-types", "--test",
-  "tests/menu-official-data.test.ts"], { cwd: projectRoot, stdio: "inherit" });
+  "tests/sabtiya.test.ts", "tests/menu-official-data.test.ts"], { cwd: projectRoot, stdio: "inherit" });
+const sabtiyaHome = fs.readFileSync(path.join(distRoot, "index.html"), "utf8");
+const sabtiyaEnglishHome = fs.readFileSync(path.join(distRoot, "en/index.html"), "utf8");
+if (!sabtiyaHome.includes('id="sabtiya-slot"') || sabtiyaEnglishHome.includes('id="sabtiya-slot"')) {
+  throw new Error("Sabtiya mount must exist only on the Arabic homepage.");
+}
 
 const expectedFiles = [
   "index.html",

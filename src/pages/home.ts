@@ -11,6 +11,7 @@ import { renderHomeParticipations } from "../components/participations.ts";
 
 export const renderHomePage = (locale: Locale, copy: SiteCopy, prefix: string, aboutPath: string, opportunitiesPath: string): string => `
   ${renderHero(copy)}
+  ${locale === "ar" ? '<template id="sabtiya-slot"></template>' : ""}
   <section class="destinations-section" id="destinations" aria-label="${copy.destinations.title}">
     <div class="container">
       <div class="destinations-grid">
