@@ -9,6 +9,7 @@ import { fileURLToPath } from "node:url";
 import { canonicalImageFor, canonicalProductImages } from "../src/menu/data/catalog-images.ts";
 import { extras } from "../src/menu/data/extras.ts";
 import { categories } from "../src/menu/data/categories.ts";
+import { ar as sharedArabic } from "../src/menu/i18n/ar.ts";
 import { products } from "../src/menu/data/products.ts";
 import { haramMenuItems } from "../src/menu/haram/data.ts";
 import { haramLocaleContent } from "../src/menu/haram/locales.ts";
@@ -17,6 +18,7 @@ import type { BranchId } from "../src/menu/types/menu.ts";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 test("Arabic terminology changes are targeted to approved categories and stable products", () => {
+  assert.equal(sharedArabic.extrasTitle, "مشروبات وإضافات");
   assert.deepEqual(categories.map(category => [category.id, category.nameAr, category.nameEn]), [
     ["talbinah", "تلبينة وآيس كريم", "Talbinah & Ice Cream"],
     ["sweets", "حلويات", "Desserts"],

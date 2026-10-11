@@ -18,7 +18,7 @@ export const ar = {
   openBranchLocation: "موقع الفرع",
   branchLocationsTitle: "فروع سويق",
   menuSectionTitle: "أقسام منيو سويق",
-  extrasTitle: "المشروبات والإضافات",
+  extrasTitle: "مشروبات وإضافات",
   storeEyebrow: "متجر سويق",
   storeTitle: "منتجات سويق إلى باب بيتك",
   storeBody: "استكشف منتجات سويق عبر متجرنا الإلكتروني.",
