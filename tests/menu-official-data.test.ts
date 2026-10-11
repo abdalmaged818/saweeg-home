@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import test from "node:test";
@@ -7,6 +8,8 @@ import { fileURLToPath } from "node:url";
 
 import { canonicalImageFor, canonicalProductImages } from "../src/menu/data/catalog-images.ts";
 import { extras } from "../src/menu/data/extras.ts";
+import { categories } from "../src/menu/data/categories.ts";
+import { ar as sharedArabic } from "../src/menu/i18n/ar.ts";
 import { products } from "../src/menu/data/products.ts";
 import { haramMenuItems } from "../src/menu/haram/data.ts";
 import { haramLocaleContent } from "../src/menu/haram/locales.ts";
@@ -14,6 +17,55 @@ import { haramItemIds, haramLocales } from "../src/menu/haram/types.ts";
 import type { BranchId } from "../src/menu/types/menu.ts";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+test("Arabic terminology changes are targeted to approved categories and stable products", () => {
+  assert.equal(sharedArabic.extrasTitle, "مشروبات وإضافات");
+  assert.deepEqual(categories.map(category => [category.id, category.nameAr, category.nameEn]), [
+    ["talbinah", "تلبينة وآيس كريم", "Talbinah & Ice Cream"],
+    ["sweets", "حلويات", "Desserts"],
+    ["boxes", "بوكسات وهدايا", "Boxes & Gifts"],
+    ["ready", "منتجات رف", "Packaged Products"],
+    ["drinks", "مشروبات وإضافات", "Drinks & Extras"]
+  ]);
+  assert.deepEqual(haramLocaleContent.ar.categories, {
+    iceCream: "آيس كريم", desserts: "حلويات", drinks: "مشروبات",
+    powders: "منتجات رف", boxes: "بوكسات وهدايا"
+  });
+  for (const title of [...categories.map(category => category.nameAr), ...Object.values(haramLocaleContent.ar.categories)]) {
+    assert.ok(!title.startsWith("ال"), title);
+    assert.doesNotMatch(title, /(?:^|\s)وال|آيسكريم|الآيس كريم/);
+  }
+  const expected = {
+    "talbinah-ice-cream-biscuit": "آيس كريم تلبينة — بسكوت",
+    "talbinah-ice-cream-cup": "آيس كريم تلبينة — كوب",
+    "lotus-cheesecake": "تشيز كيك تلبينة",
+    "talbinah-matcha": "ماتشا تلبينة"
+  };
+  for (const [id, name] of Object.entries(expected)) {
+    assert.equal(haramLocaleContent.ar.productNames[id as keyof typeof haramLocaleContent.ar.productNames], name);
+    assert.equal(haramMenuItems.filter(item => item.id === id).length, 1);
+  }
+  assert.equal(new Set(products.map(product => product.id)).size, products.length);
+  assert.equal(products.find(product => product.id === "talbinah-ice-cream")?.nameAr, "آيس كريم تلبينة");
+  assert.equal(products.find(product => product.id === "al-jabirah-box")?.nameAr.includes("الجابرة"), true);
+  const renderer = fs.readFileSync(path.join(projectRoot, "src/menu/haram/render.ts"), "utf8");
+  assert.match(renderer, /copy\.productNames/);
+  assert.match(renderer, /copy\.categories/);
+  for (const name of [...products.map(product => product.nameAr), ...Object.values(haramLocaleContent.ar.productNames)]) {
+    assert.doesNotMatch(name, /آيس\s*كريم التلبينة|آيس كريم تلبينة النبوية|تشيز\s*كيك (?:بالتلبينة|التلبينة)|ماتشا التلبينة/);
+  }
+  // Normalize line endings only, then reverse the exact approved Arabic edits.
+  // The baseline is latest main fcf68c2: all other Arabic/UI and all nine other locales stay byte-identical.
+  const source = fs.readFileSync(path.join(projectRoot, "src/menu/haram/locales.ts"), "utf8").replace(/\r/g, "");
+  const restored = source
+    .replace('iceCream: "آيس كريم", desserts: "حلويات", drinks: "مشروبات"', 'iceCream: "الآيس كريم", desserts: "الحلويات", drinks: "المشروبات"')
+    .replace('boxes: "بوكسات وهدايا"', 'boxes: "البوكسات والهدايا"')
+    .replace("آيس كريم تلبينة — بسكوت", "آيس كريم التلبينة — بسكوت")
+    .replace("آيس كريم تلبينة — كوب", "آيس كريم التلبينة — كوب")
+    .replace("تشيز كيك تلبينة", "تشيز كيك بالتلبينة")
+    .replace("ماتشا تلبينة", "ماتشا التلبينة");
+  assert.equal(createHash("sha256").update(restored).digest("hex"),
+    "2203a2c5b23fac6df2e2188ca17381b7435caa5de851f0e8b438fe564189a32f");
+});
 test("Only the approved Gift Box price changes in centralized Haram data", () => {
   const source = fs.readFileSync(path.join(projectRoot, "src/menu/haram/data.ts"), "utf8")
     .replace(/\r/g, "").replace('item("gift-box", "boxes", 45)', 'item("gift-box", "boxes", 52)');
@@ -24,6 +76,14 @@ test("Shared product prices, order, availability and image settings remain uncha
   // Compare every runtime field, including names and quantities, not platform-dependent whitespace.
   const approved = JSON.parse(fs.readFileSync(
     path.join(projectRoot, "tests/fixtures/shared-products-approved-pr34.json"), "utf8"));
+  const approvedArabicNames: Record<string, string> = {
+    "talbinah-ice-cream": "آيس كريم تلبينة",
+    "talbinah-lotus-cheesecake": "تشيز كيك تلبينة",
+    "talbinah-matcha": "ماتشا تلبينة"
+  };
+  for (const product of approved) {
+    if (approvedArabicNames[product.id]) product.nameAr = approvedArabicNames[product.id];
+  }
   assert.deepEqual(products, approved);
 });
 test("Management-approved terminology is consistent across all ten Haram locales", () => {
@@ -31,7 +91,7 @@ test("Management-approved terminology is consistent across all ten Haram locales
   "ar": {
     "chocolate-ice-cream-biscuit": "آيس كريم تلبينة شوكلت — بسكوت",
     "chocolate-ice-cream-cup": "آيس كريم تلبينة شوكلت — كوب",
-    "lotus-cheesecake": "تشيز كيك بالتلبينة",
+    "lotus-cheesecake": "تشيز كيك تلبينة",
     "talbinah-powder-sachet": "ظرف بودرة تلبينة",
     "saweeg-powder-sachet": "ظرف بودرة سويق",
     "mixed-nuts-sachet": "ظرف مكسرات مكس",
@@ -138,7 +198,7 @@ test("Management-approved terminology is consistent across all ten Haram locales
     }
     assert.equal(content.categories.powders, shelfTitles[locale]);
   }
-  assert.equal(haramLocaleContent.ar.categories.desserts, "الحلويات");
+  assert.equal(haramLocaleContent.ar.categories.desserts, "حلويات");
   assert.equal(haramMenuItems.find(item => item.id === "gift-box")?.price, 45);
   assert.equal(products.find(item => item.id === "gift-box")?.price, 42);
   assert.equal(haramLocaleContent.tr.productNames["talbinah-ice-cream-cup"], "Talbinah Dondurma — Kap");
@@ -259,7 +319,7 @@ test("every Haram locale supplies all translations, UI labels, and the approved 
     assert.ok(copy.vatNotice.trim());
     assert.ok(copy.imageAlt(copy.productNames[haramItemIds[0]]).trim());
   }
-  assert.equal(haramLocaleContent.ar.productNames["talbinah-matcha"], "ماتشا التلبينة");
+  assert.equal(haramLocaleContent.ar.productNames["talbinah-matcha"], "ماتشا تلبينة");
   assert.equal(haramLocaleContent.en.productNames["talbinah-matcha"], "Talbinah Matcha");
 });
 

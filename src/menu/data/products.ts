@@ -6,7 +6,7 @@ export const products: Product[] = [
   {
     id: "talbinah-ice-cream",
     catalogId: "talbinah-ice-cream-cup",
-    nameAr: "آيسكريم التلبينة النبوية",
+    nameAr: "آيس كريم تلبينة",
     nameEn: "Talbinah Ice Cream",
     price: 14,
     category: "talbinah",
@@ -90,7 +90,7 @@ export const products: Product[] = [
   },
   {
     id: "talbinah-matcha",
-    nameAr: "ماتشا التلبينة",
+    nameAr: "ماتشا تلبينة",
     nameEn: "Talbinah Matcha",
     price: 22,
     category: "talbinah",
@@ -117,7 +117,7 @@ export const products: Product[] = [
   {
     id: "talbinah-lotus-cheesecake",
     catalogId: "lotus-cheesecake",
-    nameAr: "تشيز كيك بالتلبينة",
+    nameAr: "تشيز كيك تلبينة",
     nameEn: "Talbinah Cheesecake",
     price: 19,
     category: "sweets",
