@@ -3,7 +3,7 @@ import type { Category } from "../types/menu";
 export const categories: Category[] = [
   {
     id: "talbinah",
-    nameAr: "تلبينة والآيسكريم",
+    nameAr: "تلبينة وآيس كريم",
     nameEn: "Talbinah & Ice Cream"
   },
   {
@@ -13,7 +13,7 @@ export const categories: Category[] = [
   },
   {
     id: "boxes",
-    nameAr: "بوكسات والهدايا",
+    nameAr: "بوكسات وهدايا",
     nameEn: "Boxes & Gifts"
   },
   {
@@ -23,7 +23,7 @@ export const categories: Category[] = [
   },
   {
     id: "drinks",
-    nameAr: "مشروبات والإضافات",
+    nameAr: "مشروبات وإضافات",
     nameEn: "Drinks & Extras"
   }
 ];

@@ -18,18 +18,19 @@ import type { BranchId } from "../src/menu/types/menu.ts";
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 test("Arabic terminology changes are targeted to approved categories and stable products", () => {
   assert.deepEqual(categories.map(category => [category.id, category.nameAr, category.nameEn]), [
-    ["talbinah", "تلبينة والآيسكريم", "Talbinah & Ice Cream"],
+    ["talbinah", "تلبينة وآيس كريم", "Talbinah & Ice Cream"],
     ["sweets", "حلويات", "Desserts"],
-    ["boxes", "بوكسات والهدايا", "Boxes & Gifts"],
+    ["boxes", "بوكسات وهدايا", "Boxes & Gifts"],
     ["ready", "منتجات رف", "Packaged Products"],
-    ["drinks", "مشروبات والإضافات", "Drinks & Extras"]
+    ["drinks", "مشروبات وإضافات", "Drinks & Extras"]
   ]);
   assert.deepEqual(haramLocaleContent.ar.categories, {
     iceCream: "آيس كريم", desserts: "حلويات", drinks: "مشروبات",
-    powders: "منتجات رف", boxes: "بوكسات والهدايا"
+    powders: "منتجات رف", boxes: "بوكسات وهدايا"
   });
   for (const title of [...categories.map(category => category.nameAr), ...Object.values(haramLocaleContent.ar.categories)]) {
     assert.ok(!title.startsWith("ال"), title);
+    assert.doesNotMatch(title, /(?:^|\s)وال|آيسكريم|الآيس كريم/);
   }
   const expected = {
     "talbinah-ice-cream-biscuit": "آيس كريم تلبينة — بسكوت",
@@ -42,19 +43,20 @@ test("Arabic terminology changes are targeted to approved categories and stable 
     assert.equal(haramMenuItems.filter(item => item.id === id).length, 1);
   }
   assert.equal(new Set(products.map(product => product.id)).size, products.length);
+  assert.equal(products.find(product => product.id === "talbinah-ice-cream")?.nameAr, "آيس كريم تلبينة");
   assert.equal(products.find(product => product.id === "al-jabirah-box")?.nameAr.includes("الجابرة"), true);
   const renderer = fs.readFileSync(path.join(projectRoot, "src/menu/haram/render.ts"), "utf8");
   assert.match(renderer, /copy\.productNames/);
   assert.match(renderer, /copy\.categories/);
   for (const name of [...products.map(product => product.nameAr), ...Object.values(haramLocaleContent.ar.productNames)]) {
-    assert.doesNotMatch(name, /آيس\s*كريم التلبينة|تشيز\s*كيك (?:بالتلبينة|التلبينة)|ماتشا التلبينة/);
+    assert.doesNotMatch(name, /آيس\s*كريم التلبينة|آيس كريم تلبينة النبوية|تشيز\s*كيك (?:بالتلبينة|التلبينة)|ماتشا التلبينة/);
   }
   // Normalize line endings only, then reverse the exact approved Arabic edits.
   // The baseline is latest main fcf68c2: all other Arabic/UI and all nine other locales stay byte-identical.
   const source = fs.readFileSync(path.join(projectRoot, "src/menu/haram/locales.ts"), "utf8").replace(/\r/g, "");
   const restored = source
     .replace('iceCream: "آيس كريم", desserts: "حلويات", drinks: "مشروبات"', 'iceCream: "الآيس كريم", desserts: "الحلويات", drinks: "المشروبات"')
-    .replace('boxes: "بوكسات والهدايا"', 'boxes: "البوكسات والهدايا"')
+    .replace('boxes: "بوكسات وهدايا"', 'boxes: "البوكسات والهدايا"')
     .replace("آيس كريم تلبينة — بسكوت", "آيس كريم التلبينة — بسكوت")
     .replace("آيس كريم تلبينة — كوب", "آيس كريم التلبينة — كوب")
     .replace("تشيز كيك تلبينة", "تشيز كيك بالتلبينة")
@@ -73,7 +75,7 @@ test("Shared product prices, order, availability and image settings remain uncha
   const approved = JSON.parse(fs.readFileSync(
     path.join(projectRoot, "tests/fixtures/shared-products-approved-pr34.json"), "utf8"));
   const approvedArabicNames: Record<string, string> = {
-    "talbinah-ice-cream": "آيس كريم تلبينة النبوية",
+    "talbinah-ice-cream": "آيس كريم تلبينة",
     "talbinah-lotus-cheesecake": "تشيز كيك تلبينة",
     "talbinah-matcha": "ماتشا تلبينة"
   };

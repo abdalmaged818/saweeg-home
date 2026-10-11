@@ -6,7 +6,7 @@ export const products: Product[] = [
   {
     id: "talbinah-ice-cream",
     catalogId: "talbinah-ice-cream-cup",
-    nameAr: "آيس كريم تلبينة النبوية",
+    nameAr: "آيس كريم تلبينة",
     nameEn: "Talbinah Ice Cream",
     price: 14,
     category: "talbinah",
