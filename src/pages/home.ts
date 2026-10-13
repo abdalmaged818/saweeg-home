@@ -5,12 +5,14 @@ import { renderBranches } from "../components/branches.ts";
 import { renderContact } from "../components/contact.ts";
 import { renderDestinationCard } from "../components/destination-card.ts";
 import { renderHero } from "../components/hero.ts";
+import { renderHaramStoreCard } from "../components/haram-store-card.ts";
 import { renderOpportunityPreview } from "../components/opportunities.ts";
 import { pageAvailability } from "../config/features.ts";
 import { renderHomeParticipations } from "../components/participations.ts";
 
 export const renderHomePage = (locale: Locale, copy: SiteCopy, prefix: string, aboutPath: string, opportunitiesPath: string): string => `
   ${renderHero(copy)}
+  ${locale === "ar" ? renderHaramStoreCard() : ""}
   ${locale === "ar" ? '<template id="sabtiya-slot"></template>' : ""}
   <section class="destinations-section" id="destinations" aria-label="${copy.destinations.title}">
     <div class="container">

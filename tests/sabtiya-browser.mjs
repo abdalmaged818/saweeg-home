@@ -36,6 +36,7 @@ try {
       await page.reload({ waitUntil: "networkidle" });
       const metrics = await page.evaluate(() => {
         const section = document.querySelector("#sabtiya"), hero = document.querySelector(".hero"), destinations = document.querySelector("#destinations");
+        const introduction = document.querySelector(".swg-haram");
         const bounds = element => element?.getBoundingClientRect();
         return {
           count: document.querySelectorAll("#sabtiya").length,
@@ -48,18 +49,44 @@ try {
           fontInherited: !section || getComputedStyle(section.querySelector(".sab-card")).fontFamily === getComputedStyle(document.body).fontFamily,
           direction: section && getComputedStyle(section).direction,
           positioned: !section || bounds(section).top >= bounds(hero).bottom - 1 && bounds(section).bottom <= bounds(destinations).top + 1,
-          beforeGap: bounds(destinations).top - bounds(hero).bottom,
+          beforeGap: bounds(destinations).top - bounds(introduction).bottom,
+          introduction: (() => {
+            const media = introduction.querySelector(".swg-haram__media"), body = introduction.querySelector(".swg-haram__body");
+            const image = media.querySelector("img"), button = introduction.querySelector("a");
+            return { count: document.querySelectorAll(".swg-haram").length,
+              positioned: bounds(introduction).top >= bounds(hero).bottom - 1 && bounds(introduction).bottom <= bounds(section ?? destinations).top,
+              ratio: bounds(media).width / bounds(media).height,
+              stacked: bounds(media).bottom <= bounds(body).top + 1,
+              leftPhoto: bounds(media).right <= bounds(body).left + 1,
+              fit: getComputedStyle(image).objectFit, position: getComputedStyle(image).objectPosition,
+              font: getComputedStyle(introduction).fontFamily === getComputedStyle(document.body).fontFamily,
+              clipped: [...introduction.querySelectorAll("h2,p,li,a")].filter(e => e.scrollWidth > e.clientWidth + 1).map(e => e.textContent),
+              placeholder: media.querySelectorAll("svg").length,
+              height: bounds(button).height, href: button.href, target: button.target, rel: button.rel };
+          })(),
           columns: section?.querySelector(".sab-offers") && getComputedStyle(section.querySelector(".sab-offers")).gridTemplateColumns.split(" ").length,
           media: section?.querySelectorAll("img,.sab-logo").length ?? 0
         };
       });
       assert(!metrics.overflow && !metrics.clipped.length, JSON.stringify(metrics));
       assert(metrics.fontInherited && metrics.positioned);
+      const intro = metrics.introduction;
+      assert.equal(intro.count, 1);
+      assert(intro.positioned && intro.font && !intro.clipped.length);
+      assert(Math.abs(intro.ratio - 4 / 3) < 0.01);
+      assert(width < 1100 ? intro.stacked : intro.leftPhoto);
+      assert.equal(intro.fit, "cover");
+      assert.equal(intro.position, "50% 58%");
+      assert.equal(intro.placeholder, 0);
+      assert(intro.height >= 44 && intro.target === "_blank" && intro.rel.includes("noopener") && intro.rel.includes("noreferrer"));
+      assert.equal(intro.href, "https://maps.app.goo.gl/t7VQtDZSWHREcnXL6?g_st=ic");
+      await page.locator(".swg-haram__btn").focus();
+      assert(await page.locator(".swg-haram__btn").evaluate(e => getComputedStyle(e).outlineStyle !== "none"));
       assert.equal(metrics.media, 0);
       assert(!/النسخة|REPLACE|data-replace/.test(metrics.text));
       if (state.name === "before") {
         assert.equal(metrics.count, 0);
-        assert.equal(metrics.beforeGap, 0, "Inert mount must create no layout gap");
+        assert(Math.abs(metrics.beforeGap - 32) < 1, "Only the approved introduction margin remains before destinations");
       } else {
         assert.equal(metrics.count, 1);
         assert.equal(metrics.direction, "rtl");
@@ -105,6 +132,7 @@ try {
     assert((await page.goto("http://127.0.0.1:4173" + route)).ok(), route);
     assert((await page.reload()).ok(), route);
     assert.equal(await page.locator("#sabtiya").count(), 0);
+    assert.equal(await page.locator(".swg-haram").count(), 0);
     results.push({ route, status: "passed" });
   }
   assert.deepEqual(routeErrors, []);
