@@ -7,9 +7,25 @@ import { execFileSync } from "node:child_process";
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const distRoot = path.join(projectRoot, "dist");
 execFileSync(process.execPath, ["--experimental-strip-types", "--test",
-  "tests/sabtiya.test.ts", "tests/menu-official-data.test.ts"], { cwd: projectRoot, stdio: "inherit" });
+  "tests/sabtiya.test.ts", "tests/menu-official-data.test.ts", "tests/haram-store-card.test.ts"], { cwd: projectRoot, stdio: "inherit" });
 const sabtiyaHome = fs.readFileSync(path.join(distRoot, "index.html"), "utf8");
 const sabtiyaEnglishHome = fs.readFileSync(path.join(distRoot, "en/index.html"), "utf8");
+if ((sabtiyaHome.match(/class="swg-haram container"/g) ?? []).length !== 1 ||
+    sabtiyaEnglishHome.includes('class="swg-haram container"') ||
+    sabtiyaHome.indexOf('class="swg-haram container"') > sabtiyaHome.indexOf('id="sabtiya-slot"')) {
+  throw new Error("Haram introduction must exist once, on Arabic home only, before Sabtiya.");
+}
+for (const value of ["جديدنا", "جرعة سلام من جوار خير الأنام", "باب السلام ٣١٤",
+  "نستقبلكم على مدار الساعة", "https://maps.app.goo.gl/t7VQtDZSWHREcnXL6?g_st=ic",
+  "saweeg-haram-storefront-2026-10.webp"]) {
+  if (!sabtiyaHome.includes(value)) throw new Error("Missing Haram introduction content: " + value);
+}
+if (/swg-preview|media-mark|PUT-REAL-PHOTO|COMPONENT START|Salla insertion/.test(sabtiyaHome)) {
+  throw new Error("Preview/placeholder guidance must never reach generated home.");
+}
+if (!fs.existsSync(path.join(distRoot, "assets/images/saweeg-haram-storefront-2026-10.webp"))) {
+  throw new Error("Missing approved Haram storefront photograph.");
+}
 if (!sabtiyaHome.includes('id="sabtiya-slot"') || sabtiyaEnglishHome.includes('id="sabtiya-slot"')) {
   throw new Error("Sabtiya mount must exist only on the Arabic homepage.");
 }

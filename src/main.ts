@@ -1,5 +1,6 @@
 import "./styles/main.css";
 import "./styles/sabtiya.css";
+import "./styles/haram-store-card.css";
 import { initializeSabtiya } from "./components/sabtiya.ts";
 import { bindSharedHeader } from "./components/header-controller.ts";
 import { siteConfig } from "./config/site.ts";
