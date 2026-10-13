@@ -13,7 +13,7 @@ test("Haram introduction contains only exact approved customer content and safe 
   assert.equal((html.match(/<img /g) ?? []).length, 1);
   assert.equal((html.match(/<svg /g) ?? []).length, 3);
   assert.doesNotMatch(html, /media-mark|fallback|placeholder|PUT-REAL|COMPONENT|معاينة|<!--|<link|<script|<style/);
-  assert.match(html, /width="1320" height="1592" loading="lazy" decoding="async"/);
+  assert.match(html, /width="1142" height="1377" loading="lazy" decoding="async"/);
 });
 
 test("Haram introduction is Arabic-only, between hero and unchanged Sabtiya mount", () => {
@@ -28,7 +28,7 @@ test("Haram photo preserves full original proportions, and CSS stays isolated", 
   const source = await sharp(haramStorePhoto.source).metadata();
   const output = await sharp("public" + haramStorePhoto.output).metadata();
   assert.equal(output.format, "webp");
-  assert.deepEqual([source.width, source.height], [1320, 1592]);
+  assert.deepEqual([source.width, source.height], [1142, 1377]);
   assert.deepEqual([output.width, output.height], [source.width, source.height]);
   const styles = fs.readFileSync(new URL("../src/styles/haram-store-card.css", import.meta.url), "utf8");
   assert.match(styles, /aspect-ratio: 4 \/ 3/);
