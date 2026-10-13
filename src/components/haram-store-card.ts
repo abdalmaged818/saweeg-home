@@ -7,7 +7,7 @@ export const renderHaramStoreCard = (): string => `
   <section class="swg-haram container" aria-labelledby="swg-haram-title" dir="rtl">
     <div class="swg-haram__card">
       <div class="swg-haram__media">
-        <img src="${haramStorePhoto.output}" alt="واجهة سويق في فرع الحرم عند باب السلام" width="1320" height="1592" loading="lazy" decoding="async">
+        <img src="${haramStorePhoto.output}" alt="واجهة سويق في فرع الحرم عند باب السلام" width="1142" height="1377" loading="lazy" decoding="async">
       </div>
       <div class="swg-haram__body">
         <span class="swg-haram__label">جديدنا</span>
