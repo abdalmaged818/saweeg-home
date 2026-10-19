@@ -20,7 +20,7 @@ const renderCard = (item: Participation, locale: Locale, prefix: string, variant
         alt: altFor(item, locale),
         width: item.heroWidth,
         height: item.heroHeight,
-        sizes: variant === "home" ? "(max-width: 699px) 112px, 31vw" : "(max-width: 699px) 100vw, 46vw",
+        sizes: variant === "home" ? "(max-width: 639px) 100vw, (max-width: 1023px) 46vw, 31vw" : "(max-width: 699px) 100vw, 46vw",
         className: mediaClass,
         position: item.heroPosition
       })}

@@ -4,9 +4,9 @@
   --sab-ink: var(--color-sabtiya-ink); --sab-neutral: var(--color-sabtiya-neutral); --sab-gold-text: var(--color-sabtiya-gold-text);
   direction: rtl; text-align: right; font-family: inherit;
   background: var(--sab-ivory); color: var(--sab-ink);
-  border-radius: 28px; padding: 28px 22px; width: 100%;
+  border-radius: var(--radius-lg); padding: clamp(24px, 3.5vw, 40px); width: 100%;
 }
-.sabtiya-section h2 { font-weight: 600; font-size: clamp(28px, 6vw, 40px); line-height: 1.2; margin: 0; text-align: center; color: var(--sab-ink); }
+.sabtiya-section h2 { font-weight: 600; font-size: clamp(1.375rem, 1.1rem + 1.2vw, 1.875rem); line-height: 1.4; margin: 0; text-align: center; color: var(--sab-ink); }
 .sabtiya-section h2 span { display: block; color: var(--sab-green); }
 .sabtiya-section .sab-intro { font-weight: 500; font-size: 18px; line-height: 1.6; text-align: center; margin: 10px 0 0; }
 .sabtiya-section .sab-offers { display: grid; gap: 16px; margin-top: 22px; }
@@ -29,3 +29,10 @@
 .sabtiya-section .sab-common { margin: 18px 0 0; padding: 14px 18px; border-radius: 18px; background: var(--sab-neutral); list-style: none; font-size: 15px; line-height: 1.7; }
 .sabtiya-section .sab-date { display: block; width: max-content; max-width: 100%; margin: 16px auto 0; padding: 8px 22px; border-radius: 999px; background: var(--sab-green); color: var(--sab-ivory); font-weight: 500; font-size: 17px; text-align: center; }
 .sabtiya-section .sab-actions--center { justify-content: center; margin-top: 18px; }
+.sabtiya-section .sab-card:has(.sab-common) { display: grid; gap: 10px; }
+.sabtiya-section .sab-card:has(.sab-common) h2, .sabtiya-section .sab-card:has(.sab-common) .sab-intro { text-align: start; margin: 0; }
+.sabtiya-section .sab-card:has(.sab-common) .sab-common { background: transparent; padding: 0; margin: 0; }
+.sabtiya-section .sab-card:has(.sab-common) .sab-actions { margin: 8px 0 0; padding: 0; justify-content: start; }
+.sabtiya-section .sab-card:has(.sab-common) .sab-btn { flex: 0 1 auto; font-size: 0.9375rem; }
+@media (min-width: 900px) { .sabtiya-section .sab-card:has(.sab-common) { grid-template-columns: minmax(0, 1fr) auto; column-gap: 24px; } .sabtiya-section .sab-card:has(.sab-common) > :not(.sab-actions) { grid-column: 1; } .sabtiya-section .sab-card:has(.sab-common) .sab-actions { grid-column: 2; grid-row: 1 / 4; align-self: center; } }
+
