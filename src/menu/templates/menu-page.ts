@@ -1,3 +1,7 @@
+import { getCopy } from "../../i18n/index.ts";
+import { renderHeader } from "../../components/header.ts";
+import { renderFooter } from "../../components/footer.ts";
+import { createPathFor } from "../../pages/routes.ts";
 import { sharedNameFor, sharedItemText } from "../i18n/catalog.ts";
 import { assetUrl, branchMapUrl, menuBasePath, siteConfig } from "../config/site";
 import { branches } from "../data/branches";
@@ -126,42 +130,24 @@ const createBrand = (
 };
 
 const createHeader = (state: AppState): HTMLElement => {
-  const messages = getMessages(state.language);
-  const header = createElement("header", "site-header");
-  const shell = createElement("div", "header-shell container");
-  const actions = createElement("div", "header-actions");
-
-  const languageLink = createElement(
-    "a",
-    "language-link",
-    messages.desktopLanguage
-  );
-  languageLink.href = appHref(
-    state.language === "ar" ? "en" : "ar",
-    state.branch
-  );
-  languageLink.dataset.languageLink = "";
-
-  const menuButton = createElement(
-    "button",
-    "mobile-menu-button"
-  ) as HTMLButtonElement;
-  menuButton.type = "button";
-  menuButton.setAttribute("aria-label", messages.mobileMenuOpen);
-  menuButton.setAttribute("aria-expanded", "false");
-  menuButton.setAttribute("aria-controls", "mobile-menu");
-  menuButton.dataset.mobileMenuButton = "";
-  const menuIcon = createElement("span", "mobile-menu-button__icon");
-  menuIcon.setAttribute("aria-hidden", "true");
-  menuIcon.append(
-    createElement("span"),
-    createElement("span"),
-    createElement("span")
-  );
-  menuButton.append(menuIcon);
-  actions.append(languageLink, menuButton);
-  shell.append(createBrand(state.language, state.branch), actions);
-  header.append(shell);
+  const copy = getCopy(state.language);
+  const holder = createElement("div");
+  holder.innerHTML = renderHeader({
+    locale: state.language, page: "home", copy, prefix: "/",
+    pathFor: createPathFor("/"),
+    localeSwitchPath: appHref(state.language === "ar" ? "en" : "ar", state.branch)
+  });
+  const header = holder.firstElementChild as HTMLElement;
+  header.querySelector(".header-inner")?.classList.add("header-shell");
+  header.querySelector(".brand")?.replaceWith(createBrand(state.language, state.branch));
+  header.querySelector(".mobile-navigation")?.remove();
+  header.querySelector('[aria-current="page"]')?.removeAttribute("aria-current");
+  const button = header.querySelector<HTMLButtonElement>("[data-menu-button]")!;
+  button.dataset.mobileMenuButton = "";
+  button.setAttribute("aria-controls", "mobile-menu");
+  button.setAttribute("aria-label", getMessages(state.language).mobileMenuOpen);
+  const language = header.querySelector<HTMLAnchorElement>(".language-link")!;
+  language.dataset.languageLink = "";
   return header;
 };
 
@@ -443,52 +429,24 @@ const createContactSection = (state: AppState): HTMLElement => {
 
 const createFooter = (state: AppState): HTMLElement => {
   const messages = getMessages(state.language);
-  const footer = createElement("footer", "site-footer");
-  const inner = createElement("div", "container footer-grid");
-  const brandColumn = createElement("div", "footer-brand");
-  const logoWrap = createElement("div", "footer-logo-wrap");
-  const logo = createElement("img", "footer-logo");
-  logo.src = assetUrl(siteConfig.logoPath);
-  logo.alt = messages.logoAlt;
-  logo.width = 68;
-  logo.height = 68;
-  logo.loading = "lazy";
-  logo.decoding = "async";
-  logoWrap.append(logo);
-  brandColumn.append(logoWrap, createElement("p", "footer-tagline", messages.footerTagline));
-
-  const nav = createElement("nav", "footer-nav");
-  nav.setAttribute(
-    "aria-label",
-    messages.footerNavLabel
-  );
-  const footerLinks = [
-    { label: messages.store, href: siteConfig.links.onlineStore },
-    { label: messages.contactWhatsapp, href: siteConfig.links.whatsapp },
-    { label: messages.saweegLinks, href: siteConfig.links.linktree }
-  ];
-  footerLinks.forEach(({ label, href }) => {
-    const link = createElement("a", "footer-link", label);
-    link.href = href;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    nav.append(link);
+  const holder = createElement("div");
+  holder.innerHTML = renderFooter({
+    locale: state.language, page: "home", copy: getCopy(state.language), prefix: "/",
+    pathFor: createPathFor("/"),
+    localeSwitchPath: appHref(state.language === "ar" ? "en" : "ar", state.branch)
   });
-  const language = createElement("a", "footer-link", messages.language);
-  language.href = appHref(
-    state.language === "ar" ? "en" : "ar",
-    state.branch
-  );
-  language.dataset.languageLink = "";
-  nav.append(language);
-
-  const copyright = createElement(
-    "p",
-    "copyright",
-    `© ${new Date().getFullYear()} ${siteConfig.copyrightName[state.language]}. ${messages.copyright}`
-  );
-  inner.append(brandColumn, nav, copyright);
-  footer.append(inner);
+  const footer = holder.firstElementChild as HTMLElement;
+  const legacy = createElement("nav", "menu-footer-context-links");
+  legacy.setAttribute("aria-label", messages.footerNavLabel);
+  for (const [label, href] of [
+    [messages.store, siteConfig.links.onlineStore],
+    [messages.contactWhatsapp, siteConfig.links.whatsapp],
+    [messages.saweegLinks, siteConfig.links.linktree]
+  ]) legacy.append(createExternalMenuLink(label, href));
+  footer.querySelector(".footer-nav")!.append(legacy);
+  footer.querySelector<HTMLAnchorElement>(".footer-language")!.dataset.languageLink = "";
+  footer.querySelector(".footer-bottom span")!.textContent =
+    `© ${new Date().getFullYear()} ${siteConfig.copyrightName[state.language]}. ${messages.copyright}`;
   return footer;
 };
 
@@ -588,6 +546,24 @@ export const renderMenuSections = (
   productData: Product[] = defaultProducts
 ): void => {
   const fragment = document.createDocumentFragment();
+  const navigation = createElement("nav", "category-navigation");
+  navigation.setAttribute("aria-label", getMessages(state.language).menuSectionTitle);
+  const available = categories.filter(category => category.id !== "drinks" &&
+    productData.some(product => product.category === category.id && product.branches.includes(state.branch)));
+  for (const category of available) {
+    const link = createElement("a", undefined, localName(category, state.language));
+    link.href = `#category-${category.id}`;
+    navigation.append(link);
+  }
+  const extraLink = createElement("a", undefined, getMessages(state.language).extrasTitle);
+  extraLink.href = "#extras";
+  navigation.append(extraLink);
+  navigation.querySelectorAll("a").forEach((link, index) => {
+    link.setAttribute("aria-current", String(index === 0));
+    link.addEventListener("click", () => navigation.querySelectorAll("a").forEach(
+      current => current.setAttribute("aria-current", String(current === link))));
+  });
+  fragment.append(navigation);
   categories
     .filter((category) => category.id !== "drinks")
     .forEach((category) => {

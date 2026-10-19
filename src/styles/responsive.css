@@ -40,15 +40,6 @@
     overflow: auto;
   }
 
-  .desktop-nav {
-    display: flex;
-  }
-
-  .menu-button,
-  .mobile-navigation {
-    display: none !important;
-  }
-
   .values-grid {
     grid-template-columns: 1fr 1fr 0.84fr;
   }
@@ -88,22 +79,19 @@
 
 @media (max-width: 359px) {
 
-  .language-link {
-    padding-inline: 11px;
-  }
-
   .branch-actions .button,
   .contact-card .button {
     width: 100%;
   }
 }
 
-@media (min-width: 900px) { .header-actions { margin-inline-start: 0; } .footer-content { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1.4fr); } }
+@media (min-width: 900px) { }
 
 @media (min-width: 760px) { .destinations-grid, .branches-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .destination-card--delivery, .branches-grid .branch-card:last-child { grid-column: 1 / -1; } }
 
 @media (min-width: 900px) { .hero-grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); } .hero-media { aspect-ratio: auto; height: min(560px, 44vw); } .about-preview-grid { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); } .about-preview-media { aspect-ratio: 4 / 5; max-height: 560px; } .contact-card { grid-template-columns: minmax(0, 1fr) auto; column-gap: 24px; align-items: center; } .contact-card > :not(.button-row) { grid-column: 1; } .contact-card .button-row { grid-column: 2; grid-row: 1 / 4; margin: 0; } }
 
 @media (min-width: 1024px) { .destinations-grid, .branches-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .destination-card--delivery, .branches-grid .branch-card:last-child { grid-column: auto; } }
+
 
 
