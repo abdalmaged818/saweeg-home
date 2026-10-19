@@ -1,29 +1,19 @@
-import type { Category } from "../types/menu";
-
+import type { Category } from "../types/menu.ts";
+import { sharedNameFor } from "../i18n/catalog.ts";
 export const categories: Category[] = [
   {
-    id: "talbinah",
-    nameAr: "تلبينة وآيس كريم",
-    nameEn: "Talbinah & Ice Cream"
+    "id": "talbinah"
   },
   {
-    id: "sweets",
-    nameAr: "حلويات",
-    nameEn: "Desserts"
+    "id": "sweets"
   },
   {
-    id: "boxes",
-    nameAr: "بوكسات وهدايا",
-    nameEn: "Boxes & Gifts"
+    "id": "boxes"
   },
   {
-    id: "ready",
-    nameAr: "منتجات رف",
-    nameEn: "Packaged Products"
+    "id": "ready"
   },
   {
-    id: "drinks",
-    nameAr: "مشروبات وإضافات",
-    nameEn: "Drinks & Extras"
+    "id": "drinks"
   }
-];
+].map(record => ({ id: record.id as Category["id"], nameAr: sharedNameFor(record.id, "ar"), nameEn: sharedNameFor(record.id, "en") }));

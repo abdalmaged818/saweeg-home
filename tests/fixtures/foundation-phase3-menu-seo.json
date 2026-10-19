@@ -1,0 +1,955 @@
+{
+  "menu/index.html": {
+    "title": "منيو سويق | التلبينة والسويق في المدينة المنورة",
+    "description": "استكشف منيو سويق لفرعي المقصد وبستان المستظل، وتعرّف على التلبينة، السويق، الحلى، البوكسات والمشروبات مع الأسعار.",
+    "canonical": "https://go.saweegsa.com/menu/",
+    "alternates": [
+      [
+        "ar",
+        "https://go.saweegsa.com/menu/"
+      ],
+      [
+        "en",
+        "https://go.saweegsa.com/menu/en/"
+      ],
+      [
+        "x-default",
+        "https://go.saweegsa.com/menu/"
+      ]
+    ],
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://go.saweegsa.com/#organization",
+            "name": "سويق",
+            "url": "https://go.saweegsa.com/",
+            "logo": "https://go.saweegsa.com/menu/assets/brand/logo-saweeg.svg"
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://go.saweegsa.com/#website",
+            "url": "https://go.saweegsa.com/",
+            "name": "بوابة سويق الرسمية",
+            "inLanguage": "ar",
+            "publisher": {
+              "@id": "https://go.saweegsa.com/#organization"
+            }
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://go.saweegsa.com/menu/#webpage",
+            "url": "https://go.saweegsa.com/menu/",
+            "name": "منيو سويق | التلبينة والسويق في المدينة المنورة",
+            "description": "استكشف منيو سويق لفرعي المقصد وبستان المستظل، وتعرّف على التلبينة، السويق، الحلى، البوكسات والمشروبات مع الأسعار.",
+            "inLanguage": "ar",
+            "isPartOf": {
+              "@id": "https://go.saweegsa.com/#website"
+            }
+          },
+          {
+            "@type": "Menu",
+            "@id": "https://go.saweegsa.com/menu/#menu",
+            "name": "منيو سويق",
+            "url": "https://go.saweegsa.com/menu/",
+            "inLanguage": "ar",
+            "provider": {
+              "@id": "https://go.saweegsa.com/#organization"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "menu/en/index.html": {
+    "title": "Saweeg Menu | Talbinah and Sawiq in Madinah",
+    "description": "Explore Saweeg’s menu for Al-Maqsad and Bustan Al-Mustazal branches, including Talbinah, Sawiq, desserts, gift boxes, drinks, and prices.",
+    "canonical": "https://go.saweegsa.com/menu/en/",
+    "alternates": [
+      [
+        "ar",
+        "https://go.saweegsa.com/menu/"
+      ],
+      [
+        "en",
+        "https://go.saweegsa.com/menu/en/"
+      ],
+      [
+        "x-default",
+        "https://go.saweegsa.com/menu/"
+      ]
+    ],
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://go.saweegsa.com/#organization",
+            "name": "Saweeg",
+            "url": "https://go.saweegsa.com/",
+            "logo": "https://go.saweegsa.com/menu/assets/brand/logo-saweeg.svg"
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://go.saweegsa.com/#website",
+            "url": "https://go.saweegsa.com/",
+            "name": "Official Saweeg Gateway",
+            "inLanguage": "en",
+            "publisher": {
+              "@id": "https://go.saweegsa.com/#organization"
+            }
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://go.saweegsa.com/menu/en/#webpage",
+            "url": "https://go.saweegsa.com/menu/en/",
+            "name": "Saweeg Menu | Talbinah and Sawiq in Madinah",
+            "description": "Explore Saweeg’s menu for Al-Maqsad and Bustan Al-Mustazal branches, including Talbinah, Sawiq, desserts, gift boxes, drinks, and prices.",
+            "inLanguage": "en",
+            "isPartOf": {
+              "@id": "https://go.saweegsa.com/#website"
+            }
+          },
+          {
+            "@type": "Menu",
+            "@id": "https://go.saweegsa.com/menu/en/#menu",
+            "name": "Saweeg Menu",
+            "url": "https://go.saweegsa.com/menu/en/",
+            "inLanguage": "en",
+            "provider": {
+              "@id": "https://go.saweegsa.com/#organization"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "menu/haram/index.html": {
+    "title": "فرع الحرم | سويق",
+    "description": "اختر لغتك لاستعراض منيو سويق لفرع الحرم.",
+    "canonical": "https://go.saweegsa.com/menu/haram/",
+    "alternates": [
+      [
+        "ar",
+        "https://go.saweegsa.com/menu/haram/ar/"
+      ],
+      [
+        "en",
+        "https://go.saweegsa.com/menu/haram/en/"
+      ],
+      [
+        "ur",
+        "https://go.saweegsa.com/menu/haram/ur/"
+      ],
+      [
+        "id",
+        "https://go.saweegsa.com/menu/haram/id/"
+      ],
+      [
+        "bn",
+        "https://go.saweegsa.com/menu/haram/bn/"
+      ],
+      [
+        "tr",
+        "https://go.saweegsa.com/menu/haram/tr/"
+      ],
+      [
+        "fa",
+        "https://go.saweegsa.com/menu/haram/fa/"
+      ],
+      [
+        "fr",
+        "https://go.saweegsa.com/menu/haram/fr/"
+      ],
+      [
+        "ms",
+        "https://go.saweegsa.com/menu/haram/ms/"
+      ],
+      [
+        "ru",
+        "https://go.saweegsa.com/menu/haram/ru/"
+      ],
+      [
+        "x-default",
+        "https://go.saweegsa.com/menu/haram/"
+      ]
+    ],
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://go.saweegsa.com/#organization",
+            "name": "Saweeg",
+            "url": "https://go.saweegsa.com/",
+            "logo": "https://go.saweegsa.com/menu/assets/brand/logo-saweeg.svg"
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://go.saweegsa.com/menu/haram/#webpage",
+            "name": "فرع الحرم | سويق",
+            "url": "https://go.saweegsa.com/menu/haram/",
+            "inLanguage": "ar",
+            "provider": {
+              "@id": "https://go.saweegsa.com/#organization"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "menu/haram/ar/index.html": {
+    "title": "منيو | فرع الحرم | Saweeg",
+    "description": "منيو — فرع الحرم. جميع الأسعار بالريال السعودي وشاملة ضريبة القيمة المضافة",
+    "canonical": "https://go.saweegsa.com/menu/haram/ar/",
+    "alternates": [
+      [
+        "ar",
+        "https://go.saweegsa.com/menu/haram/ar/"
+      ],
+      [
+        "en",
+        "https://go.saweegsa.com/menu/haram/en/"
+      ],
+      [
+        "ur",
+        "https://go.saweegsa.com/menu/haram/ur/"
+      ],
+      [
+        "id",
+        "https://go.saweegsa.com/menu/haram/id/"
+      ],
+      [
+        "bn",
+        "https://go.saweegsa.com/menu/haram/bn/"
+      ],
+      [
+        "tr",
+        "https://go.saweegsa.com/menu/haram/tr/"
+      ],
+      [
+        "fa",
+        "https://go.saweegsa.com/menu/haram/fa/"
+      ],
+      [
+        "fr",
+        "https://go.saweegsa.com/menu/haram/fr/"
+      ],
+      [
+        "ms",
+        "https://go.saweegsa.com/menu/haram/ms/"
+      ],
+      [
+        "ru",
+        "https://go.saweegsa.com/menu/haram/ru/"
+      ],
+      [
+        "x-default",
+        "https://go.saweegsa.com/menu/haram/"
+      ]
+    ],
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://go.saweegsa.com/#organization",
+            "name": "Saweeg",
+            "url": "https://go.saweegsa.com/",
+            "logo": "https://go.saweegsa.com/menu/assets/brand/logo-saweeg.svg"
+          },
+          {
+            "@type": "Menu",
+            "@id": "https://go.saweegsa.com/menu/haram/ar/#menu",
+            "name": "منيو | فرع الحرم | Saweeg",
+            "url": "https://go.saweegsa.com/menu/haram/ar/",
+            "inLanguage": "ar",
+            "provider": {
+              "@id": "https://go.saweegsa.com/#organization"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "menu/haram/en/index.html": {
+    "title": "Menu | Al Haram Branch | Saweeg",
+    "description": "Menu — Al Haram Branch. All prices are in Saudi riyals and include VAT",
+    "canonical": "https://go.saweegsa.com/menu/haram/en/",
+    "alternates": [
+      [
+        "ar",
+        "https://go.saweegsa.com/menu/haram/ar/"
+      ],
+      [
+        "en",
+        "https://go.saweegsa.com/menu/haram/en/"
+      ],
+      [
+        "ur",
+        "https://go.saweegsa.com/menu/haram/ur/"
+      ],
+      [
+        "id",
+        "https://go.saweegsa.com/menu/haram/id/"
+      ],
+      [
+        "bn",
+        "https://go.saweegsa.com/menu/haram/bn/"
+      ],
+      [
+        "tr",
+        "https://go.saweegsa.com/menu/haram/tr/"
+      ],
+      [
+        "fa",
+        "https://go.saweegsa.com/menu/haram/fa/"
+      ],
+      [
+        "fr",
+        "https://go.saweegsa.com/menu/haram/fr/"
+      ],
+      [
+        "ms",
+        "https://go.saweegsa.com/menu/haram/ms/"
+      ],
+      [
+        "ru",
+        "https://go.saweegsa.com/menu/haram/ru/"
+      ],
+      [
+        "x-default",
+        "https://go.saweegsa.com/menu/haram/"
+      ]
+    ],
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://go.saweegsa.com/#organization",
+            "name": "Saweeg",
+            "url": "https://go.saweegsa.com/",
+            "logo": "https://go.saweegsa.com/menu/assets/brand/logo-saweeg.svg"
+          },
+          {
+            "@type": "Menu",
+            "@id": "https://go.saweegsa.com/menu/haram/en/#menu",
+            "name": "Menu | Al Haram Branch | Saweeg",
+            "url": "https://go.saweegsa.com/menu/haram/en/",
+            "inLanguage": "en",
+            "provider": {
+              "@id": "https://go.saweegsa.com/#organization"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "menu/haram/ur/index.html": {
+    "title": "مینو | الحرم برانچ | Saweeg",
+    "description": "مینو — الحرم برانچ. تمام قیمتیں سعودی ریال میں ہیں اور ویلیو ایڈڈ ٹیکس شامل ہے",
+    "canonical": "https://go.saweegsa.com/menu/haram/ur/",
+    "alternates": [
+      [
+        "ar",
+        "https://go.saweegsa.com/menu/haram/ar/"
+      ],
+      [
+        "en",
+        "https://go.saweegsa.com/menu/haram/en/"
+      ],
+      [
+        "ur",
+        "https://go.saweegsa.com/menu/haram/ur/"
+      ],
+      [
+        "id",
+        "https://go.saweegsa.com/menu/haram/id/"
+      ],
+      [
+        "bn",
+        "https://go.saweegsa.com/menu/haram/bn/"
+      ],
+      [
+        "tr",
+        "https://go.saweegsa.com/menu/haram/tr/"
+      ],
+      [
+        "fa",
+        "https://go.saweegsa.com/menu/haram/fa/"
+      ],
+      [
+        "fr",
+        "https://go.saweegsa.com/menu/haram/fr/"
+      ],
+      [
+        "ms",
+        "https://go.saweegsa.com/menu/haram/ms/"
+      ],
+      [
+        "ru",
+        "https://go.saweegsa.com/menu/haram/ru/"
+      ],
+      [
+        "x-default",
+        "https://go.saweegsa.com/menu/haram/"
+      ]
+    ],
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://go.saweegsa.com/#organization",
+            "name": "Saweeg",
+            "url": "https://go.saweegsa.com/",
+            "logo": "https://go.saweegsa.com/menu/assets/brand/logo-saweeg.svg"
+          },
+          {
+            "@type": "Menu",
+            "@id": "https://go.saweegsa.com/menu/haram/ur/#menu",
+            "name": "مینو | الحرم برانچ | Saweeg",
+            "url": "https://go.saweegsa.com/menu/haram/ur/",
+            "inLanguage": "ur",
+            "provider": {
+              "@id": "https://go.saweegsa.com/#organization"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "menu/haram/id/index.html": {
+    "title": "Menu | Cabang Al Haram | Saweeg",
+    "description": "Menu — Cabang Al Haram. Semua harga dalam riyal Saudi dan sudah termasuk PPN",
+    "canonical": "https://go.saweegsa.com/menu/haram/id/",
+    "alternates": [
+      [
+        "ar",
+        "https://go.saweegsa.com/menu/haram/ar/"
+      ],
+      [
+        "en",
+        "https://go.saweegsa.com/menu/haram/en/"
+      ],
+      [
+        "ur",
+        "https://go.saweegsa.com/menu/haram/ur/"
+      ],
+      [
+        "id",
+        "https://go.saweegsa.com/menu/haram/id/"
+      ],
+      [
+        "bn",
+        "https://go.saweegsa.com/menu/haram/bn/"
+      ],
+      [
+        "tr",
+        "https://go.saweegsa.com/menu/haram/tr/"
+      ],
+      [
+        "fa",
+        "https://go.saweegsa.com/menu/haram/fa/"
+      ],
+      [
+        "fr",
+        "https://go.saweegsa.com/menu/haram/fr/"
+      ],
+      [
+        "ms",
+        "https://go.saweegsa.com/menu/haram/ms/"
+      ],
+      [
+        "ru",
+        "https://go.saweegsa.com/menu/haram/ru/"
+      ],
+      [
+        "x-default",
+        "https://go.saweegsa.com/menu/haram/"
+      ]
+    ],
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://go.saweegsa.com/#organization",
+            "name": "Saweeg",
+            "url": "https://go.saweegsa.com/",
+            "logo": "https://go.saweegsa.com/menu/assets/brand/logo-saweeg.svg"
+          },
+          {
+            "@type": "Menu",
+            "@id": "https://go.saweegsa.com/menu/haram/id/#menu",
+            "name": "Menu | Cabang Al Haram | Saweeg",
+            "url": "https://go.saweegsa.com/menu/haram/id/",
+            "inLanguage": "id",
+            "provider": {
+              "@id": "https://go.saweegsa.com/#organization"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "menu/haram/bn/index.html": {
+    "title": "মেনু | হারাম শাখা | Saweeg",
+    "description": "মেনু — হারাম শাখা. সব মূল্য সৌদি রিয়ালে এবং ভ্যাটসহ",
+    "canonical": "https://go.saweegsa.com/menu/haram/bn/",
+    "alternates": [
+      [
+        "ar",
+        "https://go.saweegsa.com/menu/haram/ar/"
+      ],
+      [
+        "en",
+        "https://go.saweegsa.com/menu/haram/en/"
+      ],
+      [
+        "ur",
+        "https://go.saweegsa.com/menu/haram/ur/"
+      ],
+      [
+        "id",
+        "https://go.saweegsa.com/menu/haram/id/"
+      ],
+      [
+        "bn",
+        "https://go.saweegsa.com/menu/haram/bn/"
+      ],
+      [
+        "tr",
+        "https://go.saweegsa.com/menu/haram/tr/"
+      ],
+      [
+        "fa",
+        "https://go.saweegsa.com/menu/haram/fa/"
+      ],
+      [
+        "fr",
+        "https://go.saweegsa.com/menu/haram/fr/"
+      ],
+      [
+        "ms",
+        "https://go.saweegsa.com/menu/haram/ms/"
+      ],
+      [
+        "ru",
+        "https://go.saweegsa.com/menu/haram/ru/"
+      ],
+      [
+        "x-default",
+        "https://go.saweegsa.com/menu/haram/"
+      ]
+    ],
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://go.saweegsa.com/#organization",
+            "name": "Saweeg",
+            "url": "https://go.saweegsa.com/",
+            "logo": "https://go.saweegsa.com/menu/assets/brand/logo-saweeg.svg"
+          },
+          {
+            "@type": "Menu",
+            "@id": "https://go.saweegsa.com/menu/haram/bn/#menu",
+            "name": "মেনু | হারাম শাখা | Saweeg",
+            "url": "https://go.saweegsa.com/menu/haram/bn/",
+            "inLanguage": "bn",
+            "provider": {
+              "@id": "https://go.saweegsa.com/#organization"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "menu/haram/tr/index.html": {
+    "title": "Menü | Al Haram Şubesi | Saweeg",
+    "description": "Menü — Al Haram Şubesi. Tüm fiyatlar Suudi riyali cinsindendir ve KDV dahildir",
+    "canonical": "https://go.saweegsa.com/menu/haram/tr/",
+    "alternates": [
+      [
+        "ar",
+        "https://go.saweegsa.com/menu/haram/ar/"
+      ],
+      [
+        "en",
+        "https://go.saweegsa.com/menu/haram/en/"
+      ],
+      [
+        "ur",
+        "https://go.saweegsa.com/menu/haram/ur/"
+      ],
+      [
+        "id",
+        "https://go.saweegsa.com/menu/haram/id/"
+      ],
+      [
+        "bn",
+        "https://go.saweegsa.com/menu/haram/bn/"
+      ],
+      [
+        "tr",
+        "https://go.saweegsa.com/menu/haram/tr/"
+      ],
+      [
+        "fa",
+        "https://go.saweegsa.com/menu/haram/fa/"
+      ],
+      [
+        "fr",
+        "https://go.saweegsa.com/menu/haram/fr/"
+      ],
+      [
+        "ms",
+        "https://go.saweegsa.com/menu/haram/ms/"
+      ],
+      [
+        "ru",
+        "https://go.saweegsa.com/menu/haram/ru/"
+      ],
+      [
+        "x-default",
+        "https://go.saweegsa.com/menu/haram/"
+      ]
+    ],
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://go.saweegsa.com/#organization",
+            "name": "Saweeg",
+            "url": "https://go.saweegsa.com/",
+            "logo": "https://go.saweegsa.com/menu/assets/brand/logo-saweeg.svg"
+          },
+          {
+            "@type": "Menu",
+            "@id": "https://go.saweegsa.com/menu/haram/tr/#menu",
+            "name": "Menü | Al Haram Şubesi | Saweeg",
+            "url": "https://go.saweegsa.com/menu/haram/tr/",
+            "inLanguage": "tr",
+            "provider": {
+              "@id": "https://go.saweegsa.com/#organization"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "menu/haram/fa/index.html": {
+    "title": "منو | شعبه الحرم | Saweeg",
+    "description": "منو — شعبه الحرم. همه قیمت‌ها به ریال سعودی و شامل مالیات بر ارزش افزوده هستند",
+    "canonical": "https://go.saweegsa.com/menu/haram/fa/",
+    "alternates": [
+      [
+        "ar",
+        "https://go.saweegsa.com/menu/haram/ar/"
+      ],
+      [
+        "en",
+        "https://go.saweegsa.com/menu/haram/en/"
+      ],
+      [
+        "ur",
+        "https://go.saweegsa.com/menu/haram/ur/"
+      ],
+      [
+        "id",
+        "https://go.saweegsa.com/menu/haram/id/"
+      ],
+      [
+        "bn",
+        "https://go.saweegsa.com/menu/haram/bn/"
+      ],
+      [
+        "tr",
+        "https://go.saweegsa.com/menu/haram/tr/"
+      ],
+      [
+        "fa",
+        "https://go.saweegsa.com/menu/haram/fa/"
+      ],
+      [
+        "fr",
+        "https://go.saweegsa.com/menu/haram/fr/"
+      ],
+      [
+        "ms",
+        "https://go.saweegsa.com/menu/haram/ms/"
+      ],
+      [
+        "ru",
+        "https://go.saweegsa.com/menu/haram/ru/"
+      ],
+      [
+        "x-default",
+        "https://go.saweegsa.com/menu/haram/"
+      ]
+    ],
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://go.saweegsa.com/#organization",
+            "name": "Saweeg",
+            "url": "https://go.saweegsa.com/",
+            "logo": "https://go.saweegsa.com/menu/assets/brand/logo-saweeg.svg"
+          },
+          {
+            "@type": "Menu",
+            "@id": "https://go.saweegsa.com/menu/haram/fa/#menu",
+            "name": "منو | شعبه الحرم | Saweeg",
+            "url": "https://go.saweegsa.com/menu/haram/fa/",
+            "inLanguage": "fa",
+            "provider": {
+              "@id": "https://go.saweegsa.com/#organization"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "menu/haram/fr/index.html": {
+    "title": "Menu | Succursale Al Haram | Saweeg",
+    "description": "Menu — Succursale Al Haram. Tous les prix sont en riyals saoudiens, TVA comprise",
+    "canonical": "https://go.saweegsa.com/menu/haram/fr/",
+    "alternates": [
+      [
+        "ar",
+        "https://go.saweegsa.com/menu/haram/ar/"
+      ],
+      [
+        "en",
+        "https://go.saweegsa.com/menu/haram/en/"
+      ],
+      [
+        "ur",
+        "https://go.saweegsa.com/menu/haram/ur/"
+      ],
+      [
+        "id",
+        "https://go.saweegsa.com/menu/haram/id/"
+      ],
+      [
+        "bn",
+        "https://go.saweegsa.com/menu/haram/bn/"
+      ],
+      [
+        "tr",
+        "https://go.saweegsa.com/menu/haram/tr/"
+      ],
+      [
+        "fa",
+        "https://go.saweegsa.com/menu/haram/fa/"
+      ],
+      [
+        "fr",
+        "https://go.saweegsa.com/menu/haram/fr/"
+      ],
+      [
+        "ms",
+        "https://go.saweegsa.com/menu/haram/ms/"
+      ],
+      [
+        "ru",
+        "https://go.saweegsa.com/menu/haram/ru/"
+      ],
+      [
+        "x-default",
+        "https://go.saweegsa.com/menu/haram/"
+      ]
+    ],
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://go.saweegsa.com/#organization",
+            "name": "Saweeg",
+            "url": "https://go.saweegsa.com/",
+            "logo": "https://go.saweegsa.com/menu/assets/brand/logo-saweeg.svg"
+          },
+          {
+            "@type": "Menu",
+            "@id": "https://go.saweegsa.com/menu/haram/fr/#menu",
+            "name": "Menu | Succursale Al Haram | Saweeg",
+            "url": "https://go.saweegsa.com/menu/haram/fr/",
+            "inLanguage": "fr",
+            "provider": {
+              "@id": "https://go.saweegsa.com/#organization"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "menu/haram/ms/index.html": {
+    "title": "Menu | Cawangan Al Haram | Saweeg",
+    "description": "Menu — Cawangan Al Haram. Semua harga dalam riyal Saudi dan termasuk cukai nilai tambah (VAT)",
+    "canonical": "https://go.saweegsa.com/menu/haram/ms/",
+    "alternates": [
+      [
+        "ar",
+        "https://go.saweegsa.com/menu/haram/ar/"
+      ],
+      [
+        "en",
+        "https://go.saweegsa.com/menu/haram/en/"
+      ],
+      [
+        "ur",
+        "https://go.saweegsa.com/menu/haram/ur/"
+      ],
+      [
+        "id",
+        "https://go.saweegsa.com/menu/haram/id/"
+      ],
+      [
+        "bn",
+        "https://go.saweegsa.com/menu/haram/bn/"
+      ],
+      [
+        "tr",
+        "https://go.saweegsa.com/menu/haram/tr/"
+      ],
+      [
+        "fa",
+        "https://go.saweegsa.com/menu/haram/fa/"
+      ],
+      [
+        "fr",
+        "https://go.saweegsa.com/menu/haram/fr/"
+      ],
+      [
+        "ms",
+        "https://go.saweegsa.com/menu/haram/ms/"
+      ],
+      [
+        "ru",
+        "https://go.saweegsa.com/menu/haram/ru/"
+      ],
+      [
+        "x-default",
+        "https://go.saweegsa.com/menu/haram/"
+      ]
+    ],
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://go.saweegsa.com/#organization",
+            "name": "Saweeg",
+            "url": "https://go.saweegsa.com/",
+            "logo": "https://go.saweegsa.com/menu/assets/brand/logo-saweeg.svg"
+          },
+          {
+            "@type": "Menu",
+            "@id": "https://go.saweegsa.com/menu/haram/ms/#menu",
+            "name": "Menu | Cawangan Al Haram | Saweeg",
+            "url": "https://go.saweegsa.com/menu/haram/ms/",
+            "inLanguage": "ms",
+            "provider": {
+              "@id": "https://go.saweegsa.com/#organization"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "menu/haram/ru/index.html": {
+    "title": "Меню | Филиал «Аль-Харам» | Saweeg",
+    "description": "Меню — Филиал «Аль-Харам». Все цены указаны в саудовских риялах и включают НДС",
+    "canonical": "https://go.saweegsa.com/menu/haram/ru/",
+    "alternates": [
+      [
+        "ar",
+        "https://go.saweegsa.com/menu/haram/ar/"
+      ],
+      [
+        "en",
+        "https://go.saweegsa.com/menu/haram/en/"
+      ],
+      [
+        "ur",
+        "https://go.saweegsa.com/menu/haram/ur/"
+      ],
+      [
+        "id",
+        "https://go.saweegsa.com/menu/haram/id/"
+      ],
+      [
+        "bn",
+        "https://go.saweegsa.com/menu/haram/bn/"
+      ],
+      [
+        "tr",
+        "https://go.saweegsa.com/menu/haram/tr/"
+      ],
+      [
+        "fa",
+        "https://go.saweegsa.com/menu/haram/fa/"
+      ],
+      [
+        "fr",
+        "https://go.saweegsa.com/menu/haram/fr/"
+      ],
+      [
+        "ms",
+        "https://go.saweegsa.com/menu/haram/ms/"
+      ],
+      [
+        "ru",
+        "https://go.saweegsa.com/menu/haram/ru/"
+      ],
+      [
+        "x-default",
+        "https://go.saweegsa.com/menu/haram/"
+      ]
+    ],
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://go.saweegsa.com/#organization",
+            "name": "Saweeg",
+            "url": "https://go.saweegsa.com/",
+            "logo": "https://go.saweegsa.com/menu/assets/brand/logo-saweeg.svg"
+          },
+          {
+            "@type": "Menu",
+            "@id": "https://go.saweegsa.com/menu/haram/ru/#menu",
+            "name": "Меню | Филиал «Аль-Харам» | Saweeg",
+            "url": "https://go.saweegsa.com/menu/haram/ru/",
+            "inLanguage": "ru",
+            "provider": {
+              "@id": "https://go.saweegsa.com/#organization"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

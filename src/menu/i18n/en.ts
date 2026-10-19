@@ -1,4 +1,10 @@
+import { sharedNameFor } from "./catalog.ts";
 export const en = {
+  backToMenu: "Back to Saweeg menu",
+  logoAlt: "Saweeg logo",
+  desktopLanguage: "العربية",
+  footerNavLabel: "Footer links",
+  activeSeparator: ", ",
   skipToContent: "Skip to content",
   navLabel: "Saweeg links",
   store: "Online Store",
@@ -18,7 +24,7 @@ export const en = {
   openBranchLocation: "Branch Location",
   branchLocationsTitle: "Saweeg Branches",
   menuSectionTitle: "Saweeg menu sections",
-  extrasTitle: "Drinks & Extras",
+  extrasTitle: sharedNameFor("drinks", "en"),
   storeEyebrow: "Saweeg Store",
   storeTitle: "Saweeg Products Delivered to Your Door",
   storeBody: "Explore Saweeg products through our online store.",

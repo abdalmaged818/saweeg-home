@@ -1,3 +1,4 @@
+import { localizationSnapshot } from "./helpers/menu-localization-snapshot.ts";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
@@ -92,7 +93,10 @@ test("all non-image product data, availability, ordering, categories and transla
   assert.deepEqual(products.map(dataOnly), baseline.sharedProducts);
   assert.deepEqual(extras, baseline.sharedExtras);
   assert.deepEqual(haramMenuItems.map(dataOnly), baseline.haramProducts);
-  for (const [file, expected] of Object.entries(baseline.protectedFiles)) assert.equal(createHash("sha256").update(fs.readFileSync(path.join(root, file), "utf8").replace(/\r\n/g, "\n")).digest("hex"), expected, file);
+  // Source layout changes in Phase 3; preserve all resolved values rather than source bytes.
+  const { protectedFileHashes, ...semanticBaseline } = JSON.parse(fs.readFileSync(path.join(root, "tests/fixtures/foundation-phase3-localization-baseline.json"), "utf8"));
+  assert.deepEqual(localizationSnapshot(), semanticBaseline);
+  for (const [file, expected] of Object.entries(baseline.protectedFiles)) assert.equal(protectedFileHashes[file], expected, file + ": original baseline provenance");
 });
 
 test("all approved source and generated product-image assets remain byte-for-byte unchanged", () => {

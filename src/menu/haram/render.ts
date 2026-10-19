@@ -1,6 +1,6 @@
 import { assetUrl, siteConfig } from "../config/site";
 import { haramMenuItems } from "./data";
-import { haramLocaleContent } from "./locales";
+import { haramLocaleContent, getHaramLocale, haramProductName } from "./locales";
 import type { HaramCategoryId, HaramLocale, HaramLocaleContent, HaramMenuItem } from "./types";
 
 const selectorPath = "/menu/haram/";
@@ -32,17 +32,17 @@ const createSharedHeader = (copy: HaramLocaleContent, isSelector = false): HTMLE
   const welcome = create("div", "welcome-strip haram-welcome-strip");
   welcome.lang = "ar";
   welcome.dir = "rtl";
-  welcome.append(create("p", "welcome-strip__text", "سلام من لدن أرض السلام"));
+  welcome.append(create("p", "welcome-strip__text", copy.welcomeStrip));
 
   const header = create("header", "site-header haram-site-header");
   header.dataset.siteHeader = "";
   const inner = create("div", "container header-inner");
   const brand = create("a", "brand") as HTMLAnchorElement;
   brand.href = "/";
-  brand.setAttribute("aria-label", copy.locale === "ar" ? "الصفحة الرئيسية لسويق" : "Saweeg home");
+  brand.setAttribute("aria-label", copy.homeLabel);
   const image = create("img") as HTMLImageElement;
   image.src = assetUrl(siteConfig.logoPath);
-  image.alt = copy.locale === "ar" ? "شعار سويق" : "Saweeg logo";
+  image.alt = copy.logoAlt;
   image.width = 72;
   image.height = 72;
   image.decoding = "async";
@@ -117,7 +117,7 @@ const createImageMedia = (
 };
 
 const createProduct = (item: HaramMenuItem, copy: HaramLocaleContent): HTMLElement => {
-  const name = copy.productNames[item.id];
+  const name = haramProductName(copy, item.id);
   const article = create(
     "article",
     item.image ? "haram-product" : "haram-product haram-product--text-only"
@@ -169,7 +169,7 @@ const createFooter = (copy: HaramLocaleContent): HTMLElement => {
   const inner = create("div", "haram-shell haram-footer__inner");
   const logo = create("img", "haram-footer__logo") as HTMLImageElement;
   logo.src = assetUrl(siteConfig.logoPath);
-  logo.alt = copy.locale === "ar" ? "شعار سويق" : "Saweeg logo";
+  logo.alt = copy.logoAlt;
   logo.width = 72;
   logo.height = 48;
   logo.loading = "lazy";
@@ -211,7 +211,7 @@ export const renderHaramSelector = (root: HTMLElement): void => {
   const arabic = haramLocaleContent.ar;
   document.documentElement.lang = "ar";
   document.documentElement.dir = "rtl";
-  document.title = "فرع الحرم | سويق";
+  document.title = arabic.selectorTitle;
   const page = create("div", "haram haram--selector");
   const main = create("main", "haram-selector-main");
   const shell = create("div", "container haram-selector-main__inner");
@@ -241,7 +241,7 @@ export const renderHaramSelector = (root: HTMLElement): void => {
 };
 
 export const renderHaramMenu = (root: HTMLElement, locale: HaramLocale): void => {
-  const copy = haramLocaleContent[locale];
+  const copy = getHaramLocale(locale);
   document.documentElement.lang = locale;
   document.documentElement.dir = copy.direction;
   document.title = `${copy.menuTitle} | ${copy.branchName} | Saweeg`;

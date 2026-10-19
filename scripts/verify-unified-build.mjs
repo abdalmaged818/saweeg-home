@@ -9,7 +9,7 @@ const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "
 const distRoot = path.join(projectRoot, "dist");
 execFileSync(process.execPath, ["--experimental-strip-types", "--test",
   "tests/sabtiya.test.ts", "tests/menu-official-data.test.ts", "tests/haram-store-card.test.ts",
-  "tests/brand-color-tokens.test.mjs", "tests/product-image-catalog.test.ts"], { cwd: projectRoot, stdio: "inherit" });
+  "tests/brand-color-tokens.test.mjs", "tests/product-image-catalog.test.ts", "tests/menu-localization.test.ts"], { cwd: projectRoot, stdio: "inherit" });
 const sabtiyaHome = fs.readFileSync(path.join(distRoot, "index.html"), "utf8");
 const sabtiyaEnglishHome = fs.readFileSync(path.join(distRoot, "en/index.html"), "utf8");
 if ((sabtiyaHome.match(/class="swg-haram container"/g) ?? []).length !== 1 ||
@@ -335,6 +335,13 @@ const verifyLocalReferences = (relative, html) => {
 
 for (const relative of expectedFiles.filter((file) => file.endsWith(".html"))) {
   verifyLocalReferences(relative, readDist(relative));
+}
+
+const localeSeoBaseline = JSON.parse(fs.readFileSync(path.join(projectRoot,"tests/fixtures/foundation-phase3-menu-seo.json"),"utf8"));
+const localeMetadata = html=>({title:html.match(/<title>([\s\S]*?)<\/title>/)?.[1],description:html.match(/<meta\s+name="description"\s+content="([^"]*)"/)?.[1],canonical:html.match(/<link\s+rel="canonical"\s+href="([^"]*)"/)?.[1],alternates:[...html.matchAll(/<link\s+rel="alternate"\s+hreflang="([^"]*)"\s+href="([^"]*)"/g)].map(x=>[x[1],x[2]]),jsonLd:[...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(x=>JSON.parse(x[1]))});
+for (const [file, expected] of Object.entries(localeSeoBaseline)) {
+  const actual = localeMetadata(readDist(file));
+  if (JSON.stringify(actual) !== JSON.stringify(expected)) failures.push("Localization SEO/structured-data regression: " + file);
 }
 
 const result = {

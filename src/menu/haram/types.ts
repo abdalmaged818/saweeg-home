@@ -57,6 +57,10 @@ export interface HaramLocaleContent {
   direction: "rtl" | "ltr";
   nativeLabel: string;
   flag: string;
+  welcomeStrip: string;
+  homeLabel: string;
+  logoAlt: string;
+  selectorTitle: string;
   menuTitle: string;
   branchName: string;
   welcome: string;

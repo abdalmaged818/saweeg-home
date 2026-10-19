@@ -1,13 +1,12 @@
+import { sharedItemFields } from "../i18n/catalog.ts";
 import type { Product } from "../types/menu";
 
 const sharedBranches = ["maqsed", "bustan"] as const;
 
-export const products: Product[] = [
+const records: Omit<Product, "nameAr" | "nameEn" | "quantityAr" | "quantityEn" | "noteAr" | "noteEn">[] = [
   {
     id: "talbinah-ice-cream",
     catalogId: "talbinah-ice-cream-cup",
-    nameAr: "آيس كريم تلبينة",
-    nameEn: "Talbinah Ice Cream",
     price: 14,
     category: "talbinah",
     displayMode: "image",
@@ -15,8 +14,6 @@ export const products: Product[] = [
   },
   {
     id: "chocolate-ice-cream-cup",
-    nameAr: "آيس كريم تلبينة شوكلت – كوب",
-    nameEn: "Talbinah Chocolate Ice Cream – Cup",
     price: 14,
     category: "talbinah",
     displayMode: "image",
@@ -24,8 +21,6 @@ export const products: Product[] = [
   },
   {
     id: "chocolate-ice-cream-biscuit",
-    nameAr: "آيس كريم تلبينة شوكلت – بسكوت",
-    nameEn: "Talbinah Chocolate Ice Cream – Biscuit",
     price: 10,
     category: "talbinah",
     displayMode: "image",
@@ -33,8 +28,6 @@ export const products: Product[] = [
   },
   {
     id: "mixed-ice-cream-cup",
-    nameAr: "آيس كريم مكس (تلبينة + شوكولاتة) – كوب",
-    nameEn: "Mixed Ice Cream (Talbinah + Chocolate) – Cup",
     price: 14,
     category: "talbinah",
     displayMode: "image",
@@ -42,8 +35,6 @@ export const products: Product[] = [
   },
   {
     id: "mixed-ice-cream-biscuit",
-    nameAr: "آيس كريم مكس (تلبينة + شوكولاتة) – بسكوت",
-    nameEn: "Mixed Ice Cream (Talbinah + Chocolate) – Biscuit",
     price: 10,
     category: "talbinah",
     displayMode: "image",
@@ -51,8 +42,6 @@ export const products: Product[] = [
   },
   {
     id: "cold-talbinah",
-    nameAr: "تلبينة باردة",
-    nameEn: "Cold Talbinah",
     price: 15,
     category: "talbinah",
     displayMode: "image",
@@ -60,8 +49,6 @@ export const products: Product[] = [
   },
   {
     id: "hot-talbinah",
-    nameAr: "تلبينة حارة",
-    nameEn: "Hot Talbinah",
     price: 15,
     category: "talbinah",
     displayMode: "image",
@@ -69,8 +56,6 @@ export const products: Product[] = [
   },
   {
     id: "talbinah-matcha",
-    nameAr: "ماتشا تلبينة",
-    nameEn: "Talbinah Matcha",
     price: 22,
     category: "talbinah",
     displayMode: "image",
@@ -78,10 +63,6 @@ export const products: Product[] = [
   },
   {
     id: "hot-talbinah-one-liter",
-    nameAr: "تلبينة حارة – 1 لتر",
-    nameEn: "Hot Talbinah – 1 Liter",
-    quantityAr: "1 لتر",
-    quantityEn: "1 Liter",
     price: 49,
     category: "talbinah",
     displayMode: "image",
@@ -90,8 +71,6 @@ export const products: Product[] = [
   {
     id: "talbinah-lotus-cheesecake",
     catalogId: "lotus-cheesecake",
-    nameAr: "تشيز كيك تلبينة",
-    nameEn: "Talbinah Cheesecake",
     price: 19,
     category: "sweets",
     displayMode: "image",
@@ -99,8 +78,6 @@ export const products: Product[] = [
   },
   {
     id: "dates-with-saweeg",
-    nameAr: "تمر بالسويق",
-    nameEn: "Dates with Saweeg (Millet)",
     price: 19,
     category: "sweets",
     displayMode: "image",
@@ -108,10 +85,6 @@ export const products: Product[] = [
   },
   {
     id: "damkah",
-    nameAr: "الدمكة",
-    nameEn: "Damkah",
-    quantityAr: "8 قطع",
-    quantityEn: "8 Pieces",
     price: 19,
     category: "sweets",
     displayMode: "image",
@@ -119,8 +92,6 @@ export const products: Product[] = [
   },
   {
     id: "madini-crepe-cheese",
-    nameAr: "كريب مديني أجبان",
-    nameEn: "Madini Crepe Cheese",
     price: 9,
     category: "sweets",
     displayMode: "image",
@@ -128,8 +99,6 @@ export const products: Product[] = [
   },
   {
     id: "madini-crepe-signature",
-    nameAr: "كريب مديني سجنتشر",
-    nameEn: "Madini Crepe Signature",
     price: 9,
     category: "sweets",
     displayMode: "image",
@@ -138,10 +107,6 @@ export const products: Product[] = [
   {
     id: "maamoul-box",
     catalogId: "saweeg-maamoul-box",
-    nameAr: "بوكس معمول",
-    nameEn: "Maamoul Box",
-    quantityAr: "27 قطعة",
-    quantityEn: "27 Pieces",
     price: 78,
     category: "boxes",
     displayMode: "image",
@@ -150,8 +115,6 @@ export const products: Product[] = [
   {
     id: "safawi-dates-gift-box",
     catalogId: "safawi-dates-nuts-box",
-    nameAr: "بوكس تمر صفاوي محشي مكسرات",
-    nameEn: "Safawi Dates Stuffed with Mixed Nuts Gift Box",
     price: 78,
     category: "boxes",
     displayMode: "image",
@@ -159,10 +122,6 @@ export const products: Product[] = [
   },
   {
     id: "date-pecan-tart-box",
-    nameAr: "بوكس تارت التمر والبيكان",
-    nameEn: "Date Pecan Tart Box",
-    quantityAr: "14 قطعة",
-    quantityEn: "14 Pieces",
     price: 51,
     category: "boxes",
     displayMode: "image",
@@ -171,10 +130,6 @@ export const products: Product[] = [
   {
     id: "talbinah-sachet-box",
     catalogId: "sachet-box",
-    nameAr: "بوكس أظرف التلبينة",
-    nameEn: "Talbinah Sachet Box",
-    quantityAr: "12 ظرف",
-    quantityEn: "12 Sachets",
     price: 68,
     category: "boxes",
     displayMode: "image",
@@ -182,8 +137,6 @@ export const products: Product[] = [
   },
   {
     id: "al-jabirah-box",
-    nameAr: "بوكس أظرف الجابرة",
-    nameEn: "Al Jabirah Sachet Box",
     price: 68,
     category: "boxes",
     displayMode: "image",
@@ -191,10 +144,6 @@ export const products: Product[] = [
   },
   {
     id: "gift-box",
-    nameAr: "بوكس الإهداء",
-    nameEn: "Gift Box",
-    quantityAr: "عبوتان من اختيارك",
-    quantityEn: "2 Containers of Your Choice",
     price: 42,
     category: "boxes",
     displayMode: "image",
@@ -203,8 +152,6 @@ export const products: Product[] = [
   {
     id: "talbinah-powder",
     catalogId: "talbinah-powder-sachet",
-    nameAr: "بودرة تلبينة نبوية",
-    nameEn: "Talbinah Powder Pack",
     price: 25,
     category: "ready",
     displayMode: "image",
@@ -213,8 +160,6 @@ export const products: Product[] = [
   {
     id: "saweeg-powder",
     catalogId: "saweeg-powder-sachet",
-    nameAr: "بودرة سويق",
-    nameEn: "Saweeg Powder Pack",
     price: 25,
     category: "ready",
     displayMode: "image",
@@ -222,10 +167,6 @@ export const products: Product[] = [
   },
   {
     id: "talbinah-sachets",
-    nameAr: "أظرف التلبينة",
-    nameEn: "Talbinah Sachets",
-    quantityAr: "ظرف واحد",
-    quantityEn: "1 Sachet",
     price: 6,
     category: "ready",
     displayMode: "image",
@@ -234,11 +175,11 @@ export const products: Product[] = [
   {
     id: "mixed-caramelized-nuts-sachet",
     catalogId: "mixed-nuts-sachet",
-    nameAr: "ظرف مكسرات مكرملة مكس",
-    nameEn: "Mixed Nuts Pack",
     price: 12,
     category: "ready",
     displayMode: "image",
     branches: [...sharedBranches]
   }
 ];
+
+export const products: Product[] = records.map(record => ({ ...record, ...sharedItemFields(record.id) }));

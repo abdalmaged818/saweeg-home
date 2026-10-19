@@ -1,3 +1,4 @@
+import { localizationSnapshot } from "./helpers/menu-localization-snapshot.ts";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import fs from "node:fs";
@@ -48,23 +49,14 @@ test("Arabic terminology changes are targeted to approved categories and stable 
   assert.equal(products.find(product => product.id === "talbinah-ice-cream")?.nameAr, "آيس كريم تلبينة");
   assert.equal(products.find(product => product.id === "al-jabirah-box")?.nameAr.includes("الجابرة"), true);
   const renderer = fs.readFileSync(path.join(projectRoot, "src/menu/haram/render.ts"), "utf8");
-  assert.match(renderer, /copy\.productNames/);
+  assert.match(renderer, /haramProductName\(copy, item\.id\)/);
   assert.match(renderer, /copy\.categories/);
   for (const name of [...products.map(product => product.nameAr), ...Object.values(haramLocaleContent.ar.productNames)]) {
     assert.doesNotMatch(name, /آيس\s*كريم التلبينة|آيس كريم تلبينة النبوية|تشيز\s*كيك (?:بالتلبينة|التلبينة)|ماتشا التلبينة/);
   }
-  // Normalize line endings only, then reverse the exact approved Arabic edits.
-  // The baseline is latest main fcf68c2: all other Arabic/UI and all nine other locales stay byte-identical.
-  const source = fs.readFileSync(path.join(projectRoot, "src/menu/haram/locales.ts"), "utf8").replace(/\r/g, "");
-  const restored = source
-    .replace('iceCream: "آيس كريم", desserts: "حلويات", drinks: "مشروبات"', 'iceCream: "الآيس كريم", desserts: "الحلويات", drinks: "المشروبات"')
-    .replace('boxes: "بوكسات وهدايا"', 'boxes: "البوكسات والهدايا"')
-    .replace("آيس كريم تلبينة — بسكوت", "آيس كريم التلبينة — بسكوت")
-    .replace("آيس كريم تلبينة — كوب", "آيس كريم التلبينة — كوب")
-    .replace("تشيز كيك تلبينة", "تشيز كيك بالتلبينة")
-    .replace("ماتشا تلبينة", "ماتشا التلبينة");
-  assert.equal(createHash("sha256").update(restored).digest("hex"),
-    "2203a2c5b23fac6df2e2188ca17381b7435caa5de851f0e8b438fe564189a32f");
+  // Protect every resolved locale value while allowing the approved ID-keyed source representation.
+  const expectedLocales = JSON.parse(fs.readFileSync(path.join(projectRoot, "tests/fixtures/foundation-phase3-localization-baseline.json"), "utf8")).haramLocales;
+  assert.deepEqual(localizationSnapshot().haramLocales, expectedLocales);
 });
 test("Only the approved Gift Box price changes in centralized Haram data", () => {
   const source = fs.readFileSync(path.join(projectRoot, "src/menu/haram/data.ts"), "utf8")
