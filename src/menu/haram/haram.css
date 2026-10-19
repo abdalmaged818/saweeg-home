@@ -165,7 +165,7 @@ body:has(.haram) {
   display: block;
   min-height: 0;
   overflow: hidden;
-  background: #faf5ee;
+  background: var(--color-product-media);
 }
 
 .haram-product__image {

@@ -1,6 +1,6 @@
 .swg-haram {
-  --swg-olive: #5C6351; --swg-ivory: #E8E5DC; --swg-gold: #C4A972;
-  --swg-ink: #1D211A; --swg-gold-tint: #F3ECDD;
+  --swg-olive: var(--color-olive); --swg-ivory: var(--color-haram-light); --swg-gold: var(--color-gold);
+  --swg-ink: var(--color-storefront-ink); --swg-gold-tint: var(--color-storefront-gold-tint);
   direction: rtl; text-align: right; font-family: inherit; color: var(--swg-ink);
   margin-block-end: 32px;
 }
@@ -16,8 +16,8 @@
 .swg-haram .swg-haram__info { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 10px; }
 .swg-haram .swg-haram__info li { display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 17px; line-height: 1.5; }
 .swg-haram .swg-haram__icon { flex: 0 0 auto; width: 24px; height: 24px; }
-.swg-haram .swg-haram__btn { margin-top: 8px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 12px 28px; border-radius: 999px; background: var(--swg-olive); color: #fff; font-family: inherit; font-weight: 600; font-size: 17px; line-height: 1.2; text-decoration: none; transition: background-color .15s ease; width: 100%; }
-.swg-haram .swg-haram__btn:hover { background: #4B5242; color: #fff; }
+.swg-haram .swg-haram__btn { margin-top: 8px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 12px 28px; border-radius: 999px; background: var(--swg-olive); color: var(--color-white); font-family: inherit; font-weight: 600; font-size: 17px; line-height: 1.2; text-decoration: none; transition: background-color .15s ease; width: 100%; }
+.swg-haram .swg-haram__btn:hover { background: var(--color-storefront-button-hover); color: var(--color-white); }
 .swg-haram .swg-haram__btn:focus-visible { outline: 3px solid var(--swg-ink); outline-offset: 3px; }
 .swg-haram .swg-haram__btn svg { width: 20px; height: 20px; flex: 0 0 auto; }
 @media (min-width: 1100px) {

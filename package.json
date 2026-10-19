@@ -15,6 +15,7 @@
     "images:generate:social-preview": "node scripts/generate-social-preview.mjs",
     "icons:generate": "node scripts/generate-favicons.mjs",
     "test:menu": "node --experimental-strip-types --test tests/menu-official-data.test.ts",
+    "test:brand": "node --test tests/brand-color-tokens.test.mjs",
     "typecheck": "tsc --noEmit",
     "build": "node scripts/generate-favicons.mjs && node scripts/generate-social-preview.mjs && node --experimental-strip-types scripts/generate-pages.ts && tsc --noEmit && vite build && node scripts/verify-unified-build.mjs",
     "verify:build": "node scripts/verify-unified-build.mjs",
