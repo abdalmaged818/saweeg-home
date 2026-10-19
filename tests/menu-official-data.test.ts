@@ -84,7 +84,8 @@ test("Shared product prices, order, availability and image settings remain uncha
   for (const product of approved) {
     if (approvedArabicNames[product.id]) product.nameAr = approvedArabicNames[product.id];
   }
-  assert.deepEqual(products, approved);
+  const withoutLegacyImageFields = ({ image, imageFit, imagePosition, imageScale, ...data }: Record<string, unknown>) => data;
+  assert.deepEqual(products.map(product => withoutLegacyImageFields({ ...product })), approved.map(withoutLegacyImageFields));
 });
 test("Management-approved terminology is consistent across all ten Haram locales", () => {
   const expected = {
@@ -336,7 +337,7 @@ test("canonical product photos map only to their stable product variants", () =>
   for (const [catalogId, file] of Object.entries(approvedCanonicalImages)) {
     assert.equal(canonicalImageFor(catalogId)?.file, file);
     const users = Object.entries(canonicalProductImages)
-      .filter(([, image]) => image.file === file)
+      .filter(([, image]) => image?.file === file)
       .map(([id]) => id);
     assert.deepEqual(users, [catalogId]);
   }

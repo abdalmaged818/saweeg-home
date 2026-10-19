@@ -129,7 +129,15 @@ const fileExists = async (filePath) => {
   }
 };
 
-await fs.mkdir(outputDirectory, { recursive: true });
+const verifyOnly = process.argv.includes("--verify");
+if (new Set(imageJobs.map(job => job.outputName)).size !== imageJobs.length) {
+  throw new Error("Duplicate image processor output filename");
+}
+if (process.argv.includes("--manifest")) {
+  console.log(JSON.stringify(imageJobs));
+  process.exit(0);
+}
+if (!verifyOnly) await fs.mkdir(outputDirectory, { recursive: true });
 
 for (const job of imageJobs) {
   const sourcePath = path.join(sourceDirectory, job.sourceName);
@@ -187,7 +195,12 @@ for (const job of imageJobs) {
     throw new Error(`Image verification failed: ${job.outputName}`);
   }
 
-  await fs.writeFile(outputPath, outputBuffer);
+  if (verifyOnly) {
+    const existing = await fs.readFile(outputPath);
+    if (!existing.equals(outputBuffer)) throw new Error(`Processed image differs from approved bytes: ${job.outputName}`);
+  } else {
+    await fs.writeFile(outputPath, outputBuffer);
+  }
   const outputStats = await fs.stat(outputPath);
   console.log(`${job.sourceName} -> ${job.outputName} (${outputWidth}x${outputHeight}, ${summary}, ${Math.round(outputStats.size / 1024)} KB)`);
 }

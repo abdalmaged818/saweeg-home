@@ -26,13 +26,7 @@ export const haramProducts: Product[] = haramMenuItems
       price: item.price,
       category: genericCategory[item.category],
       displayMode: "image" as const,
-      ...(item.image
-        ? {
-            image: item.image.file,
-            imageFit: item.image.fit,
-            imagePosition: item.image.position,
-          }
-        : {}),
+      catalogId: item.catalogId,
       branches: [...haram],
     };
   });

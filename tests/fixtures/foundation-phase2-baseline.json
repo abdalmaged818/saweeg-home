@@ -1,0 +1,2156 @@
+{
+  "baseline": "d76a18bcbcac650289c585e5573009580dc6243e",
+  "sharedProducts": [
+    {
+      "id": "talbinah-ice-cream",
+      "catalogId": "talbinah-ice-cream-cup",
+      "nameAr": "آيس كريم تلبينة",
+      "nameEn": "Talbinah Ice Cream",
+      "price": 14,
+      "category": "talbinah",
+      "displayMode": "image",
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "chocolate-ice-cream-cup",
+      "nameAr": "آيس كريم تلبينة شوكلت – كوب",
+      "nameEn": "Talbinah Chocolate Ice Cream – Cup",
+      "price": 14,
+      "category": "talbinah",
+      "displayMode": "image",
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "chocolate-ice-cream-biscuit",
+      "nameAr": "آيس كريم تلبينة شوكلت – بسكوت",
+      "nameEn": "Talbinah Chocolate Ice Cream – Biscuit",
+      "price": 10,
+      "category": "talbinah",
+      "displayMode": "image",
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "mixed-ice-cream-cup",
+      "nameAr": "آيس كريم مكس (تلبينة + شوكولاتة) – كوب",
+      "nameEn": "Mixed Ice Cream (Talbinah + Chocolate) – Cup",
+      "price": 14,
+      "category": "talbinah",
+      "displayMode": "image",
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "mixed-ice-cream-biscuit",
+      "nameAr": "آيس كريم مكس (تلبينة + شوكولاتة) – بسكوت",
+      "nameEn": "Mixed Ice Cream (Talbinah + Chocolate) – Biscuit",
+      "price": 10,
+      "category": "talbinah",
+      "displayMode": "image",
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "cold-talbinah",
+      "nameAr": "تلبينة باردة",
+      "nameEn": "Cold Talbinah",
+      "price": 15,
+      "category": "talbinah",
+      "displayMode": "image",
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "hot-talbinah",
+      "nameAr": "تلبينة حارة",
+      "nameEn": "Hot Talbinah",
+      "price": 15,
+      "category": "talbinah",
+      "displayMode": "image",
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "talbinah-matcha",
+      "nameAr": "ماتشا تلبينة",
+      "nameEn": "Talbinah Matcha",
+      "price": 22,
+      "category": "talbinah",
+      "displayMode": "image",
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "hot-talbinah-one-liter",
+      "nameAr": "تلبينة حارة – 1 لتر",
+      "nameEn": "Hot Talbinah – 1 Liter",
+      "quantityAr": "1 لتر",
+      "quantityEn": "1 Liter",
+      "price": 49,
+      "category": "talbinah",
+      "displayMode": "image",
+      "branches": [
+        "maqsed"
+      ]
+    },
+    {
+      "id": "talbinah-lotus-cheesecake",
+      "catalogId": "lotus-cheesecake",
+      "nameAr": "تشيز كيك تلبينة",
+      "nameEn": "Talbinah Cheesecake",
+      "price": 19,
+      "category": "sweets",
+      "displayMode": "image",
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "dates-with-saweeg",
+      "nameAr": "تمر بالسويق",
+      "nameEn": "Dates with Saweeg (Millet)",
+      "price": 19,
+      "category": "sweets",
+      "displayMode": "image",
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "damkah",
+      "nameAr": "الدمكة",
+      "nameEn": "Damkah",
+      "quantityAr": "8 قطع",
+      "quantityEn": "8 Pieces",
+      "price": 19,
+      "category": "sweets",
+      "displayMode": "image",
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "madini-crepe-cheese",
+      "nameAr": "كريب مديني أجبان",
+      "nameEn": "Madini Crepe Cheese",
+      "price": 9,
+      "category": "sweets",
+      "displayMode": "image",
+      "branches": [
+        "bustan"
+      ]
+    },
+    {
+      "id": "madini-crepe-signature",
+      "nameAr": "كريب مديني سجنتشر",
+      "nameEn": "Madini Crepe Signature",
+      "price": 9,
+      "category": "sweets",
+      "displayMode": "image",
+      "branches": [
+        "bustan"
+      ]
+    },
+    {
+      "id": "maamoul-box",
+      "catalogId": "saweeg-maamoul-box",
+      "nameAr": "بوكس معمول",
+      "nameEn": "Maamoul Box",
+      "quantityAr": "27 قطعة",
+      "quantityEn": "27 Pieces",
+      "price": 78,
+      "category": "boxes",
+      "displayMode": "image",
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "safawi-dates-gift-box",
+      "catalogId": "safawi-dates-nuts-box",
+      "nameAr": "بوكس تمر صفاوي محشي مكسرات",
+      "nameEn": "Safawi Dates Stuffed with Mixed Nuts Gift Box",
+      "price": 78,
+      "category": "boxes",
+      "displayMode": "image",
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "date-pecan-tart-box",
+      "nameAr": "بوكس تارت التمر والبيكان",
+      "nameEn": "Date Pecan Tart Box",
+      "quantityAr": "14 قطعة",
+      "quantityEn": "14 Pieces",
+      "price": 51,
+      "category": "boxes",
+      "displayMode": "image",
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "talbinah-sachet-box",
+      "catalogId": "sachet-box",
+      "nameAr": "بوكس أظرف التلبينة",
+      "nameEn": "Talbinah Sachet Box",
+      "quantityAr": "12 ظرف",
+      "quantityEn": "12 Sachets",
+      "price": 68,
+      "category": "boxes",
+      "displayMode": "image",
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "al-jabirah-box",
+      "nameAr": "بوكس أظرف الجابرة",
+      "nameEn": "Al Jabirah Sachet Box",
+      "price": 68,
+      "category": "boxes",
+      "displayMode": "image",
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "gift-box",
+      "nameAr": "بوكس الإهداء",
+      "nameEn": "Gift Box",
+      "quantityAr": "عبوتان من اختيارك",
+      "quantityEn": "2 Containers of Your Choice",
+      "price": 42,
+      "category": "boxes",
+      "displayMode": "image",
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "talbinah-powder",
+      "catalogId": "talbinah-powder-sachet",
+      "nameAr": "بودرة تلبينة نبوية",
+      "nameEn": "Talbinah Powder Pack",
+      "price": 25,
+      "category": "ready",
+      "displayMode": "image",
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "saweeg-powder",
+      "catalogId": "saweeg-powder-sachet",
+      "nameAr": "بودرة سويق",
+      "nameEn": "Saweeg Powder Pack",
+      "price": 25,
+      "category": "ready",
+      "displayMode": "image",
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "talbinah-sachets",
+      "nameAr": "أظرف التلبينة",
+      "nameEn": "Talbinah Sachets",
+      "quantityAr": "ظرف واحد",
+      "quantityEn": "1 Sachet",
+      "price": 6,
+      "category": "ready",
+      "displayMode": "image",
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "mixed-caramelized-nuts-sachet",
+      "catalogId": "mixed-nuts-sachet",
+      "nameAr": "ظرف مكسرات مكرملة مكس",
+      "nameEn": "Mixed Nuts Pack",
+      "price": 12,
+      "category": "ready",
+      "displayMode": "image",
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    }
+  ],
+  "sharedExtras": [
+    {
+      "id": "saudi-coffee-cup",
+      "nameAr": "كوب قهوة سعودية",
+      "nameEn": "Saudi Coffee",
+      "quantityAr": "كوب",
+      "quantityEn": "Cup",
+      "price": 6,
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "saudi-coffee-dallah",
+      "nameAr": "دلة قهوة سعودية",
+      "nameEn": "Saudi Coffee",
+      "quantityAr": "دلة",
+      "quantityEn": "Dallah",
+      "price": 21,
+      "branches": [
+        "maqsed"
+      ]
+    },
+    {
+      "id": "saudi-coffee-dallah-with-sweets",
+      "nameAr": "دلة قهوة سعودية مع حلى",
+      "nameEn": "Saudi Coffee",
+      "quantityAr": "دلة مع حلى",
+      "quantityEn": "Dallah with Sweets",
+      "price": 39,
+      "branches": [
+        "maqsed"
+      ]
+    },
+    {
+      "id": "water",
+      "nameAr": "ماء",
+      "nameEn": "Water",
+      "quantityAr": "عبوة",
+      "quantityEn": "Bottle",
+      "price": 1,
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "maamoul",
+      "nameAr": "معمول",
+      "nameEn": "Maamoul",
+      "quantityAr": "5 قطع",
+      "quantityEn": "5 Pieces",
+      "price": 21,
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "tart",
+      "nameAr": "تارت",
+      "nameEn": "Tart",
+      "quantityAr": "قطعتان",
+      "quantityEn": "2 Pieces",
+      "price": 11,
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "basbousa",
+      "nameAr": "بسبوسة",
+      "nameEn": "Basbousa",
+      "quantityAr": "قطعتان",
+      "quantityEn": "2 Pieces",
+      "price": 11,
+      "branches": [
+        "maqsed",
+        "bustan"
+      ]
+    },
+    {
+      "id": "coffee-of-the-day-maqsed",
+      "nameAr": "قهوة اليوم",
+      "nameEn": "Coffee of the Day",
+      "price": 6,
+      "branches": []
+    },
+    {
+      "id": "coffee-of-the-day-bustan",
+      "nameAr": "قهوة اليوم",
+      "nameEn": "Coffee of the Day",
+      "price": 10,
+      "branches": [
+        "bustan"
+      ]
+    },
+    {
+      "id": "tea",
+      "nameAr": "شاهي",
+      "nameEn": "Tea",
+      "quantityAr": "كوب",
+      "quantityEn": "Cup",
+      "price": 5,
+      "branches": [
+        "bustan"
+      ]
+    },
+    {
+      "id": "tea-flask",
+      "nameAr": "شاهي",
+      "nameEn": "Tea",
+      "quantityAr": "ثلاجة",
+      "quantityEn": "Flask",
+      "price": 25,
+      "branches": [
+        "bustan"
+      ]
+    }
+  ],
+  "haramProducts": [
+    {
+      "id": "talbinah-ice-cream-biscuit",
+      "category": "iceCream",
+      "price": 11,
+      "catalogId": "talbinah-ice-cream-biscuit"
+    },
+    {
+      "id": "talbinah-ice-cream-cup",
+      "category": "iceCream",
+      "price": 15,
+      "catalogId": "talbinah-ice-cream-cup"
+    },
+    {
+      "id": "chocolate-ice-cream-biscuit",
+      "category": "iceCream",
+      "price": 11,
+      "catalogId": "chocolate-ice-cream-biscuit"
+    },
+    {
+      "id": "chocolate-ice-cream-cup",
+      "category": "iceCream",
+      "price": 15,
+      "catalogId": "chocolate-ice-cream-cup"
+    },
+    {
+      "id": "mixed-ice-cream-biscuit",
+      "category": "iceCream",
+      "price": 11,
+      "catalogId": "mixed-ice-cream-biscuit"
+    },
+    {
+      "id": "mixed-ice-cream-cup",
+      "category": "iceCream",
+      "price": 15,
+      "catalogId": "mixed-ice-cream-cup"
+    },
+    {
+      "id": "lotus-cheesecake",
+      "category": "desserts",
+      "price": 20,
+      "catalogId": "lotus-cheesecake"
+    },
+    {
+      "id": "damkah",
+      "category": "desserts",
+      "price": 20,
+      "catalogId": "damkah"
+    },
+    {
+      "id": "dates-with-saweeg",
+      "category": "desserts",
+      "price": 20,
+      "catalogId": "dates-with-saweeg"
+    },
+    {
+      "id": "pecan-basbousa",
+      "category": "desserts",
+      "price": 13,
+      "catalogId": "pecan-basbousa"
+    },
+    {
+      "id": "date-tart",
+      "category": "desserts",
+      "price": 13,
+      "catalogId": "date-tart"
+    },
+    {
+      "id": "saweeg-maamoul",
+      "category": "desserts",
+      "price": 25,
+      "catalogId": "saweeg-maamoul"
+    },
+    {
+      "id": "cold-talbinah",
+      "category": "drinks",
+      "price": 16,
+      "catalogId": "cold-talbinah"
+    },
+    {
+      "id": "hot-talbinah",
+      "category": "drinks",
+      "price": 16,
+      "catalogId": "hot-talbinah"
+    },
+    {
+      "id": "hot-talbinah-one-liter",
+      "category": "drinks",
+      "price": 55,
+      "catalogId": "hot-talbinah-one-liter"
+    },
+    {
+      "id": "saudi-coffee",
+      "category": "drinks",
+      "price": 7,
+      "catalogId": "saudi-coffee"
+    },
+    {
+      "id": "saudi-coffee-dallah",
+      "category": "drinks",
+      "price": 25,
+      "catalogId": "saudi-coffee-dallah"
+    },
+    {
+      "id": "saudi-coffee-dallah-with-sweets",
+      "category": "drinks",
+      "price": 45,
+      "catalogId": "saudi-coffee-dallah-with-sweets"
+    },
+    {
+      "id": "tea",
+      "category": "drinks",
+      "price": 5,
+      "catalogId": "tea"
+    },
+    {
+      "id": "tea-thermos",
+      "category": "drinks",
+      "price": 25,
+      "catalogId": "tea-thermos"
+    },
+    {
+      "id": "talbinah-matcha",
+      "category": "drinks",
+      "price": 25,
+      "catalogId": "talbinah-matcha"
+    },
+    {
+      "id": "bottled-water",
+      "category": "drinks",
+      "price": 1,
+      "catalogId": "bottled-water"
+    },
+    {
+      "id": "talbinah-powder-sachet",
+      "category": "powders",
+      "price": 25,
+      "catalogId": "talbinah-powder-sachet"
+    },
+    {
+      "id": "saweeg-powder-sachet",
+      "category": "powders",
+      "price": 25,
+      "catalogId": "saweeg-powder-sachet"
+    },
+    {
+      "id": "mixed-nuts-sachet",
+      "category": "powders",
+      "price": 12,
+      "catalogId": "mixed-nuts-sachet"
+    },
+    {
+      "id": "al-jabirah-sachet",
+      "category": "powders",
+      "price": 6,
+      "catalogId": "al-jabirah-sachet"
+    },
+    {
+      "id": "safawi-dates-nuts-box",
+      "category": "boxes",
+      "price": 78,
+      "catalogId": "safawi-dates-nuts-box"
+    },
+    {
+      "id": "ajwa-dates-nuts-box",
+      "category": "boxes",
+      "price": 85,
+      "catalogId": "ajwa-dates-nuts-box"
+    },
+    {
+      "id": "al-jabirah-box",
+      "category": "boxes",
+      "price": 75,
+      "catalogId": "al-jabirah-box"
+    },
+    {
+      "id": "gift-box",
+      "category": "boxes",
+      "price": 45,
+      "catalogId": "gift-box"
+    },
+    {
+      "id": "saweeg-maamoul-box",
+      "category": "boxes",
+      "price": 89,
+      "catalogId": "saweeg-maamoul-box"
+    },
+    {
+      "id": "pecan-basbousa-box",
+      "category": "boxes",
+      "price": 55,
+      "catalogId": "pecan-basbousa-box"
+    },
+    {
+      "id": "sachet-box",
+      "category": "boxes",
+      "price": 75,
+      "catalogId": "sachet-box"
+    },
+    {
+      "id": "date-tart-box",
+      "category": "boxes",
+      "price": 55,
+      "catalogId": "date-tart-box"
+    }
+  ],
+  "prices": {
+    "maqsed": [
+      [
+        "product",
+        "talbinah-ice-cream",
+        14
+      ],
+      [
+        "product",
+        "chocolate-ice-cream-cup",
+        14
+      ],
+      [
+        "product",
+        "chocolate-ice-cream-biscuit",
+        10
+      ],
+      [
+        "product",
+        "mixed-ice-cream-cup",
+        14
+      ],
+      [
+        "product",
+        "mixed-ice-cream-biscuit",
+        10
+      ],
+      [
+        "product",
+        "cold-talbinah",
+        15
+      ],
+      [
+        "product",
+        "hot-talbinah",
+        15
+      ],
+      [
+        "product",
+        "talbinah-matcha",
+        22
+      ],
+      [
+        "product",
+        "hot-talbinah-one-liter",
+        49
+      ],
+      [
+        "product",
+        "talbinah-lotus-cheesecake",
+        19
+      ],
+      [
+        "product",
+        "dates-with-saweeg",
+        19
+      ],
+      [
+        "product",
+        "damkah",
+        19
+      ],
+      [
+        "product",
+        "maamoul-box",
+        78
+      ],
+      [
+        "product",
+        "safawi-dates-gift-box",
+        78
+      ],
+      [
+        "product",
+        "date-pecan-tart-box",
+        51
+      ],
+      [
+        "product",
+        "talbinah-sachet-box",
+        68
+      ],
+      [
+        "product",
+        "al-jabirah-box",
+        68
+      ],
+      [
+        "product",
+        "gift-box",
+        42
+      ],
+      [
+        "product",
+        "talbinah-powder",
+        25
+      ],
+      [
+        "product",
+        "saweeg-powder",
+        25
+      ],
+      [
+        "product",
+        "talbinah-sachets",
+        6
+      ],
+      [
+        "product",
+        "mixed-caramelized-nuts-sachet",
+        12
+      ],
+      [
+        "extra",
+        "saudi-coffee-cup",
+        6
+      ],
+      [
+        "extra",
+        "saudi-coffee-dallah",
+        21
+      ],
+      [
+        "extra",
+        "saudi-coffee-dallah-with-sweets",
+        39
+      ],
+      [
+        "extra",
+        "water",
+        1
+      ],
+      [
+        "extra",
+        "maamoul",
+        21
+      ],
+      [
+        "extra",
+        "tart",
+        11
+      ],
+      [
+        "extra",
+        "basbousa",
+        11
+      ]
+    ],
+    "bustan": [
+      [
+        "product",
+        "talbinah-ice-cream",
+        14
+      ],
+      [
+        "product",
+        "chocolate-ice-cream-cup",
+        14
+      ],
+      [
+        "product",
+        "chocolate-ice-cream-biscuit",
+        10
+      ],
+      [
+        "product",
+        "mixed-ice-cream-cup",
+        14
+      ],
+      [
+        "product",
+        "mixed-ice-cream-biscuit",
+        10
+      ],
+      [
+        "product",
+        "cold-talbinah",
+        15
+      ],
+      [
+        "product",
+        "hot-talbinah",
+        15
+      ],
+      [
+        "product",
+        "talbinah-matcha",
+        22
+      ],
+      [
+        "product",
+        "talbinah-lotus-cheesecake",
+        19
+      ],
+      [
+        "product",
+        "dates-with-saweeg",
+        19
+      ],
+      [
+        "product",
+        "damkah",
+        19
+      ],
+      [
+        "product",
+        "madini-crepe-cheese",
+        9
+      ],
+      [
+        "product",
+        "madini-crepe-signature",
+        9
+      ],
+      [
+        "product",
+        "maamoul-box",
+        78
+      ],
+      [
+        "product",
+        "safawi-dates-gift-box",
+        78
+      ],
+      [
+        "product",
+        "date-pecan-tart-box",
+        51
+      ],
+      [
+        "product",
+        "talbinah-sachet-box",
+        68
+      ],
+      [
+        "product",
+        "al-jabirah-box",
+        68
+      ],
+      [
+        "product",
+        "gift-box",
+        42
+      ],
+      [
+        "product",
+        "talbinah-powder",
+        25
+      ],
+      [
+        "product",
+        "saweeg-powder",
+        25
+      ],
+      [
+        "product",
+        "talbinah-sachets",
+        6
+      ],
+      [
+        "product",
+        "mixed-caramelized-nuts-sachet",
+        12
+      ],
+      [
+        "extra",
+        "saudi-coffee-cup",
+        6
+      ],
+      [
+        "extra",
+        "water",
+        1
+      ],
+      [
+        "extra",
+        "maamoul",
+        21
+      ],
+      [
+        "extra",
+        "tart",
+        11
+      ],
+      [
+        "extra",
+        "basbousa",
+        11
+      ],
+      [
+        "extra",
+        "coffee-of-the-day-bustan",
+        10
+      ],
+      [
+        "extra",
+        "tea",
+        5
+      ],
+      [
+        "extra",
+        "tea-flask",
+        25
+      ]
+    ],
+    "haram": [
+      [
+        "product",
+        "talbinah-ice-cream-biscuit",
+        11
+      ],
+      [
+        "product",
+        "talbinah-ice-cream-cup",
+        15
+      ],
+      [
+        "product",
+        "chocolate-ice-cream-biscuit",
+        11
+      ],
+      [
+        "product",
+        "chocolate-ice-cream-cup",
+        15
+      ],
+      [
+        "product",
+        "mixed-ice-cream-biscuit",
+        11
+      ],
+      [
+        "product",
+        "mixed-ice-cream-cup",
+        15
+      ],
+      [
+        "product",
+        "lotus-cheesecake",
+        20
+      ],
+      [
+        "product",
+        "damkah",
+        20
+      ],
+      [
+        "product",
+        "dates-with-saweeg",
+        20
+      ],
+      [
+        "product",
+        "pecan-basbousa",
+        13
+      ],
+      [
+        "product",
+        "date-tart",
+        13
+      ],
+      [
+        "product",
+        "saweeg-maamoul",
+        25
+      ],
+      [
+        "product",
+        "cold-talbinah",
+        16
+      ],
+      [
+        "product",
+        "hot-talbinah",
+        16
+      ],
+      [
+        "product",
+        "hot-talbinah-one-liter",
+        55
+      ],
+      [
+        "product",
+        "saudi-coffee",
+        7
+      ],
+      [
+        "product",
+        "saudi-coffee-dallah",
+        25
+      ],
+      [
+        "product",
+        "saudi-coffee-dallah-with-sweets",
+        45
+      ],
+      [
+        "product",
+        "tea",
+        5
+      ],
+      [
+        "product",
+        "tea-thermos",
+        25
+      ],
+      [
+        "product",
+        "talbinah-matcha",
+        25
+      ],
+      [
+        "product",
+        "bottled-water",
+        1
+      ],
+      [
+        "product",
+        "talbinah-powder-sachet",
+        25
+      ],
+      [
+        "product",
+        "saweeg-powder-sachet",
+        25
+      ],
+      [
+        "product",
+        "mixed-nuts-sachet",
+        12
+      ],
+      [
+        "product",
+        "al-jabirah-sachet",
+        6
+      ],
+      [
+        "product",
+        "safawi-dates-nuts-box",
+        78
+      ],
+      [
+        "product",
+        "ajwa-dates-nuts-box",
+        85
+      ],
+      [
+        "product",
+        "al-jabirah-box",
+        75
+      ],
+      [
+        "product",
+        "gift-box",
+        45
+      ],
+      [
+        "product",
+        "saweeg-maamoul-box",
+        89
+      ],
+      [
+        "product",
+        "pecan-basbousa-box",
+        55
+      ],
+      [
+        "product",
+        "sachet-box",
+        75
+      ],
+      [
+        "product",
+        "date-tart-box",
+        55
+      ]
+    ]
+  },
+  "sharedImages": [
+    {
+      "id": "talbinah-ice-cream",
+      "key": "talbinah-ice-cream-cup",
+      "image": {
+        "file": "talbinah-ice-cream-2026-09.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "chocolate-ice-cream-cup",
+      "key": "chocolate-ice-cream-cup",
+      "image": {
+        "file": "chocolate-ice-cream-cup-2026-10-refresh.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "chocolate-ice-cream-biscuit",
+      "key": "chocolate-ice-cream-biscuit",
+      "image": {
+        "file": "chocolate-ice-cream-biscuit-2026-10-refresh.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "mixed-ice-cream-cup",
+      "key": "mixed-ice-cream-cup",
+      "image": {
+        "file": "mixed-ice-cream-cup-2026-10-refresh.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "mixed-ice-cream-biscuit",
+      "key": "mixed-ice-cream-biscuit",
+      "image": {
+        "file": "mixed-ice-cream-biscuit-2026-10-refresh.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "cold-talbinah",
+      "key": "cold-talbinah",
+      "image": {
+        "file": "cold-talbinah-2026-09.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "hot-talbinah",
+      "key": "hot-talbinah",
+      "image": {
+        "file": "hot-talbinah-2026-09.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "talbinah-matcha",
+      "key": "talbinah-matcha",
+      "image": {
+        "file": "talbinah-matcha-2026-10.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "hot-talbinah-one-liter",
+      "key": "hot-talbinah-one-liter",
+      "image": {
+        "file": "hot-talbinah-one-liter.webp",
+        "fit": "contain",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "talbinah-lotus-cheesecake",
+      "key": "lotus-cheesecake",
+      "image": {
+        "file": "talbinah-lotus-cheesecake-2026-09.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "dates-with-saweeg",
+      "key": "dates-with-saweeg",
+      "image": {
+        "file": "dates-with-saweeg-2026-09.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "damkah",
+      "key": "damkah",
+      "image": {
+        "file": "damkah-2026-09.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "madini-crepe-cheese",
+      "key": "madini-crepe-cheese",
+      "image": {
+        "file": "madini-crepe-cheese.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "madini-crepe-signature",
+      "key": "madini-crepe-signature",
+      "image": {
+        "file": "madini-crepe-signature.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "maamoul-box",
+      "key": "saweeg-maamoul-box",
+      "image": {
+        "file": "maamoul-box-2026-09.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "safawi-dates-gift-box",
+      "key": "safawi-dates-nuts-box",
+      "image": {
+        "file": "safawi-dates-gift-box-2026-09.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "date-pecan-tart-box",
+      "key": "date-pecan-tart-box",
+      "image": {
+        "file": "date-pecan-tart-box.webp",
+        "fit": "contain",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "talbinah-sachet-box",
+      "key": "sachet-box",
+      "image": {
+        "file": "talbinah-sachet-box-2026-10.webp",
+        "fit": "contain",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "al-jabirah-box",
+      "key": "al-jabirah-box",
+      "image": {
+        "file": "al-jabirah-box.webp",
+        "fit": "contain",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "gift-box",
+      "key": "gift-box",
+      "image": {
+        "file": "gift-box-2026-09.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "talbinah-powder",
+      "key": "talbinah-powder-sachet",
+      "image": {
+        "file": "talbinah-powder.webp",
+        "fit": "contain",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "saweeg-powder",
+      "key": "saweeg-powder-sachet",
+      "image": {
+        "file": "sawiq-powder.webp",
+        "fit": "contain",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "talbinah-sachets",
+      "key": "talbinah-sachets",
+      "image": {
+        "file": "talbinah-sachets.webp",
+        "fit": "contain",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "mixed-caramelized-nuts-sachet",
+      "key": "mixed-nuts-sachet",
+      "image": {
+        "file": "mixed-caramelized-nuts-pack.webp",
+        "fit": "contain",
+        "position": "center",
+        "scale": 1
+      }
+    }
+  ],
+  "haramImages": [
+    {
+      "id": "talbinah-ice-cream-biscuit",
+      "key": "talbinah-ice-cream-biscuit",
+      "image": {
+        "file": "talbinah-ice-cream-biscuit-2026-10.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "talbinah-ice-cream-cup",
+      "key": "talbinah-ice-cream-cup",
+      "image": {
+        "file": "talbinah-ice-cream-2026-09.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "chocolate-ice-cream-biscuit",
+      "key": "chocolate-ice-cream-biscuit",
+      "image": {
+        "file": "chocolate-ice-cream-biscuit-2026-10-refresh.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "chocolate-ice-cream-cup",
+      "key": "chocolate-ice-cream-cup",
+      "image": {
+        "file": "chocolate-ice-cream-cup-2026-10-refresh.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "mixed-ice-cream-biscuit",
+      "key": "mixed-ice-cream-biscuit",
+      "image": {
+        "file": "mixed-ice-cream-biscuit-2026-10-refresh.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "mixed-ice-cream-cup",
+      "key": "mixed-ice-cream-cup",
+      "image": {
+        "file": "mixed-ice-cream-cup-2026-10-refresh.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "lotus-cheesecake",
+      "key": "lotus-cheesecake",
+      "image": {
+        "file": "talbinah-lotus-cheesecake-2026-09.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "damkah",
+      "key": "damkah",
+      "image": {
+        "file": "damkah-2026-09.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "dates-with-saweeg",
+      "key": "dates-with-saweeg",
+      "image": {
+        "file": "dates-with-saweeg-2026-09.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "pecan-basbousa",
+      "key": "pecan-basbousa",
+      "image": null
+    },
+    {
+      "id": "date-tart",
+      "key": "date-tart",
+      "image": null
+    },
+    {
+      "id": "saweeg-maamoul",
+      "key": "saweeg-maamoul",
+      "image": null
+    },
+    {
+      "id": "cold-talbinah",
+      "key": "cold-talbinah",
+      "image": {
+        "file": "cold-talbinah-2026-09.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "hot-talbinah",
+      "key": "hot-talbinah",
+      "image": {
+        "file": "hot-talbinah-2026-09.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "hot-talbinah-one-liter",
+      "key": "hot-talbinah-one-liter",
+      "image": {
+        "file": "hot-talbinah-one-liter.webp",
+        "fit": "contain",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "saudi-coffee",
+      "key": "saudi-coffee",
+      "image": null
+    },
+    {
+      "id": "saudi-coffee-dallah",
+      "key": "saudi-coffee-dallah",
+      "image": null
+    },
+    {
+      "id": "saudi-coffee-dallah-with-sweets",
+      "key": "saudi-coffee-dallah-with-sweets",
+      "image": null
+    },
+    {
+      "id": "tea",
+      "key": "tea",
+      "image": null
+    },
+    {
+      "id": "tea-thermos",
+      "key": "tea-thermos",
+      "image": null
+    },
+    {
+      "id": "talbinah-matcha",
+      "key": "talbinah-matcha",
+      "image": {
+        "file": "talbinah-matcha-2026-10.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "bottled-water",
+      "key": "bottled-water",
+      "image": null
+    },
+    {
+      "id": "talbinah-powder-sachet",
+      "key": "talbinah-powder-sachet",
+      "image": {
+        "file": "talbinah-powder.webp",
+        "fit": "contain",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "saweeg-powder-sachet",
+      "key": "saweeg-powder-sachet",
+      "image": {
+        "file": "sawiq-powder.webp",
+        "fit": "contain",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "mixed-nuts-sachet",
+      "key": "mixed-nuts-sachet",
+      "image": {
+        "file": "mixed-caramelized-nuts-pack.webp",
+        "fit": "contain",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "al-jabirah-sachet",
+      "key": "al-jabirah-sachet",
+      "image": {
+        "file": "haram-al-jabirah-sachet.webp",
+        "fit": "contain",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "safawi-dates-nuts-box",
+      "key": "safawi-dates-nuts-box",
+      "image": {
+        "file": "safawi-dates-gift-box-2026-09.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "ajwa-dates-nuts-box",
+      "key": "ajwa-dates-nuts-box",
+      "image": null
+    },
+    {
+      "id": "al-jabirah-box",
+      "key": "al-jabirah-box",
+      "image": {
+        "file": "al-jabirah-box.webp",
+        "fit": "contain",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "gift-box",
+      "key": "gift-box",
+      "image": {
+        "file": "gift-box-2026-09.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "saweeg-maamoul-box",
+      "key": "saweeg-maamoul-box",
+      "image": {
+        "file": "maamoul-box-2026-09.webp",
+        "fit": "cover",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "pecan-basbousa-box",
+      "key": "pecan-basbousa-box",
+      "image": {
+        "file": "haram-pecan-basbousa-box.webp",
+        "fit": "contain",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "sachet-box",
+      "key": "sachet-box",
+      "image": {
+        "file": "talbinah-sachet-box-2026-10.webp",
+        "fit": "contain",
+        "position": "center",
+        "scale": 1
+      }
+    },
+    {
+      "id": "date-tart-box",
+      "key": "date-tart-box",
+      "image": null
+    }
+  ],
+  "assetHashes": {
+    "assets-source/menu/product-images/al-jabirah-box.png": "0d32ca04936ca4e0c66a86032949cfe2c4f2a308f8fc840759e983adf0838cc7",
+    "assets-source/menu/product-images/chocolate-ice-cream-biscuit-2026-10-refresh.png": "0bbca2b2a36552bab8bd5d018579bcb680f401e974349da18259e95264be7abf",
+    "assets-source/menu/product-images/chocolate-ice-cream-biscuit-2026-10.png": "b6e547a2098c8754ee2a76f80398c6d62c9f114eeb44139022fa0e48ca096db1",
+    "assets-source/menu/product-images/chocolate-ice-cream-cup-2026-10-refresh.png": "8f47e41349cd3b670c57fe475a3c33a00400f1caf3b15304012d7a769fb351ae",
+    "assets-source/menu/product-images/chocolate-ice-cream-cup-2026-10.png": "67240a2360810b93d2c178f5ca8c4d3e2d2bdde9c2ac060d8e3f7e8947d5fee2",
+    "assets-source/menu/product-images/cold-talbinah-2026-09.png": "0dbb922234b1335d5989c5ef7729b264e8e1cb15ec249af4504f7b089d1def52",
+    "assets-source/menu/product-images/damkah-2026-09.png": "0ae6daabc210c35937ec52042191a144d1b77b98d593d42381a45a432aa13dc4",
+    "assets-source/menu/product-images/date-pecan-tart-box.png": "a082f64f01fa55c6dd6ff9ff6f18d067cc358d184a54bc806eac179f7ac5acdf",
+    "assets-source/menu/product-images/dates-with-saweeg-2026-09.png": "acc61169e849400f437f7834c8e13105b8d644841f57eb7233e2228af0554f68",
+    "assets-source/menu/product-images/gift-box-2026-09.png": "af706c6b36e908bd0421b8bdbbe077a67af4c47311b8b2a537f5126950c80753",
+    "assets-source/menu/product-images/hot-talbinah-2026-09.png": "367fe5fc40cfc3d1938da94fe8bdc5bbb0895086ba5df05b72546bac1ba82428",
+    "assets-source/menu/product-images/hot-talbinah-one-liter.png": "20bf4ee242790843247a627e90fb12f06f1f5d5308eafa2d6e5128faa54d466c",
+    "assets-source/menu/product-images/maamoul-box-2026-09.png": "517cf9ba9171377c4e7c2c4b45d5799280e77337f1759ddd6673c0cebc4e94b6",
+    "assets-source/menu/product-images/mixed-caramelized-nuts-pack.png": "9885e77680908e082f61b93ac18c06bf6c9bbd91b57f473757d5f23df19c20b8",
+    "assets-source/menu/product-images/mixed-ice-cream-biscuit-2026-10-refresh.png": "841f2105085f47951d94f9f17d75022feaaed5ac70c21f3f9f6bb84a1cb1ab8b",
+    "assets-source/menu/product-images/mixed-ice-cream-biscuit-2026-10.png": "f201a47c2fde6ce246ba98f02924047bb3f70df0a7e662a69443a40fe1f29af5",
+    "assets-source/menu/product-images/mixed-ice-cream-cup-2026-10-refresh.png": "dd8af79486bd439e188e301af0c1662a664dd182261c1272ed02cfa6d3f5eda2",
+    "assets-source/menu/product-images/mixed-ice-cream-cup-2026-10.png": "5c8cb29a4bc9cfa2bc68716d68afb577aad1dd169a07afdfdc759fc2bdbe5283",
+    "assets-source/menu/product-images/safawi-dates-gift-box-2026-09.png": "ba1e2f529baebf5b688025f4b1dc41b52c10fd0e1a03e7aa356ab7ffd76d804e",
+    "assets-source/menu/product-images/saweeg-powder.png": "4ca2c8a1d15c15bd9a916a7bb04eaf99b9739828eed4d7c30b54b6a38a34ea37",
+    "assets-source/menu/product-images/talbinah-ice-cream-2026-09.png": "8b96c57943ad98fcff5f7b762d91a6b3d4844ac74b190c79719456565efdc11d",
+    "assets-source/menu/product-images/talbinah-ice-cream-biscuit-2026-10.png": "3aa41532a311b30a8eac6bf925d6b6392b3573792222d91c1fa7d48d2dddaca9",
+    "assets-source/menu/product-images/talbinah-lotus-cheesecake-2026-09.png": "218ec0056d068f2e7589c5a55c9258ca722594f6ae89c3027a8f29885991b5a6",
+    "assets-source/menu/product-images/talbinah-matcha-2026-10.png": "182086891a0713edea5ec71787ed401eb2d888baa3ba9c1917804000e157b085",
+    "assets-source/menu/product-images/talbinah-matcha.png": "0339dcfb56d6abc2a2ae7203bb00958cae8b563d3cb18eb59922924919738a12",
+    "assets-source/menu/product-images/talbinah-nabawi-powder.png": "a234b1e62d2dee45e437a9fe7db85f22f6d6d33b1250a20a5dd494620c8b0ff2",
+    "assets-source/menu/product-images/talbinah-sachet-box-12-2026-09.png": "6b43d8bee951f5f962ea9bcd19c8f378342e0ebd2a94ffffcf746f2f60945f87",
+    "assets-source/menu/product-images/talbinah-sachet-box-2026-10.png": "d4d9074477c9e1b90354c697d235cc4c64724ebd831f7dee59d4283d95a8af7c",
+    "assets-source/menu/product-images/talbinah-sachets.png": "74bfc673f1bf3955679b0fb2784e42cbfd7a6742ab8639e3b18af0ebb390a9f2",
+    "assets-source/menu/product-images/أظرف التلبينة.JPG": "3fed90fef0297e3dc693b2a3b46d8eed375958235b25d1511e33277d557a9271",
+    "assets-source/menu/product-images/الجابرة تلبينة.jpg": "7870a1292a43c800a5576930e2b0c6046f95771bc9fb76582e87c5597f968605",
+    "assets-source/menu/product-images/الدمكة.jpg": "828963f3b79ca084dcde768bcb9a95778563b2bd66e254dfa017dbd924ffbd3a",
+    "assets-source/menu/product-images/ايسكريم المانجو.jpg": "07f93284208f96d69e77d719ff26ef65747f16183e73c12104bd21f3477f6541",
+    "assets-source/menu/product-images/ايسكريم بالتلبينة النبوية مع مكسرات.jpg": "c31e1023d2d2cb298404071f2276c30674b9551d55388451768b11d6b0e038f0",
+    "assets-source/menu/product-images/ايسكريم تلبينة نبوية.jpg": "f513d6a849cd48bbf8de346ac425b234c4aa221025330d04db47c4be4e56fa32",
+    "assets-source/menu/product-images/ايسكريم مكس.jpg": "a3abd4332f0f78e212239557a42b1093b65984caf27087122b116b45b5579635",
+    "assets-source/menu/product-images/بودرة سويق.jpg": "f45585b0004d43dab6c0420efb9effcb66fcc2224d4f5e974a062a81ea73b591",
+    "assets-source/menu/product-images/بوكس الاهداء.jpg": "083c7afb102135caf41b0945080f117618fca2f5344a85f756e2e3d418e9268d",
+    "assets-source/menu/product-images/بوكس التلبينة.jpg": "f12b0808b5177e361b6ae44f36d439e9f6b251b3d586257b2df9d25ba80e306d",
+    "assets-source/menu/product-images/بوكس بسبوسه.jpg": "003fda1159cd35b561a28f3d3e840429e147410fd0ff34d41164cc4604d0dccd",
+    "assets-source/menu/product-images/بوكس معمول.jpg": "74939a8502517b77443e06c3a154bf401df9ef6e35f7082410fa7485a5a53c4f",
+    "assets-source/menu/product-images/تشيز كيك.jpg": "393897beb360477a5f708098b87d18a68cf0cf67a2521f19c316fdc5fde9e619",
+    "assets-source/menu/product-images/تلبينة باردة.jpg": "60df12aeea831cb9bc6293654294b9b2dfaaac5f8099a8ee60271c2886c14cd2",
+    "assets-source/menu/product-images/تلبينة حاره.jpg": "a3ef951a2333a9e63eeeedf481a76e90e8fb427b9a5460ed280fc44b0ecd570c",
+    "assets-source/menu/product-images/تلبينه لوتس تشيز كيك.jpg": "393897beb360477a5f708098b87d18a68cf0cf67a2521f19c316fdc5fde9e619",
+    "assets-source/menu/product-images/تمر بالسويق.JPG": "416853bf6381e4af88af244c298af7f9424a224efb03821c6dba517028bde76e",
+    "assets-source/menu/product-images/تمر صفاوي.jpg": "e74241b43b6bb42553b318ad3a80500961a3d312cb4086ba0a13b4353978c7f7",
+    "assets-source/menu/product-images/ظرف التلبينة.JPG": "9c45c9cfe869a8e5a46936014357b09efbda9a09115781058c0607a663cac418",
+    "assets-source/menu/product-images/كريب مديني أجبان.jpg": "d2d3a23e6f341e8cf2f78bd16c9500153e62000ae5674a1a6f07ab2d42c169a1",
+    "assets-source/menu/product-images/كريب مديني سجنتشر.jpg": "ae2568184417e99f648830cc25e1a9a7608a552947ce836515b05cc86fc904c7",
+    "public/menu/assets/products/al-jabirah-box.webp": "73e79adb9e49539a11e4055ada05faf2fd45c2d0e4a0c2f954f903ae3cdfb0f6",
+    "public/menu/assets/products/chocolate-ice-cream-biscuit-2026-10-refresh.webp": "4379874344dde5e0be96e8d424ba2bff4ed7637e5ea84f1f0f5e0833fb856fce",
+    "public/menu/assets/products/chocolate-ice-cream-cup-2026-10-refresh.webp": "01ad3fe6aa288c3724f5c7a0e7b4b8a921a733b55f68081d981e200611ac842d",
+    "public/menu/assets/products/cold-talbinah-2026-09.webp": "ab9127f7ad40434e774838227d2b0bf459bcda33dbba9e055c43dabb582515a6",
+    "public/menu/assets/products/damkah-2026-09.webp": "a2a0e9b925370cf1d866870e2bc36fbde566fe52e679a5ecfde46c93c8259889",
+    "public/menu/assets/products/date-pecan-tart-box.webp": "d30a080345b1fc0dd1fa985ff9e1721f6e2530637685937db0e44f33db2fc74d",
+    "public/menu/assets/products/dates-with-saweeg-2026-09.webp": "26bf80d2032856483a1c07eace7b7dcc3247ae22892db060855524ca17cf0e79",
+    "public/menu/assets/products/gift-box-2026-09.webp": "771d20ef4bc7de038de7c4ffb962d6b5574adfbc84320cdb2c0db9afa8375e9f",
+    "public/menu/assets/products/haram-al-jabirah-sachet.webp": "2dd2fb20cb7c8510edd64b5dde574eb48c9c2bd21e03ff07d73ba68b108e33ad",
+    "public/menu/assets/products/haram-pecan-basbousa-box.webp": "4e7a203db8592c133a829ac4b229e871259f4ac146a49c2a3a0cf226b2cb5348",
+    "public/menu/assets/products/hot-talbinah-2026-09.webp": "7308e1c64beecd6764bfcb951cc555dd485d736a9899eb72dcfbd25eb622b230",
+    "public/menu/assets/products/hot-talbinah-one-liter.webp": "38f52f7ab901d9adea91ec7c53d6aee01ae17e1c2182653f02b17a64c0e92405",
+    "public/menu/assets/products/maamoul-box-2026-09.webp": "6685907abb2f6ebb1f68e7c4dc4746dea3be8e8eb9ff8054a93fd8c32b448cf8",
+    "public/menu/assets/products/madini-crepe-cheese.webp": "9ddd44af678bcfb84182319cffda38d15de01f473917ef1f3d7d9cb5d37f2a23",
+    "public/menu/assets/products/madini-crepe-signature.webp": "4400f332753f49ab965269595a9e78f248c801ea1d0e029647233b8aebc0b10e",
+    "public/menu/assets/products/mixed-caramelized-nuts-pack.webp": "8002d25e27d016dfc33c232f7b222f8902d914ee28faacdc2426d501db9a9e2a",
+    "public/menu/assets/products/mixed-ice-cream-biscuit-2026-10-refresh.webp": "d65ea604d9e95e591918229cebbd64528e6d95c170de8c7c7da7a879abf37e46",
+    "public/menu/assets/products/mixed-ice-cream-cup-2026-10-refresh.webp": "09dafa34f76bb6564afcd27a7e6af57cc6501fe2cdd140485fc660df55a80841",
+    "public/menu/assets/products/safawi-dates-gift-box-2026-09.webp": "9103222d6a98ac2f4000bdb2d94b2f9f202e09e092e09a76860e07bd9ee46637",
+    "public/menu/assets/products/sawiq-powder.webp": "fd819f9ca67ace2529ceedbdb5f82bc8790da73cd8cde99484a8269672b4b40f",
+    "public/menu/assets/products/talbinah-ice-cream-2026-09.webp": "c8395e7e9c26fef4f9eeae3f364e652ef27368157b9cfb9dca8b3060d8198f10",
+    "public/menu/assets/products/talbinah-ice-cream-biscuit-2026-10.webp": "8274715572e85200a994a504aeced454683fefa8c968f15dabc464b272ea05b4",
+    "public/menu/assets/products/talbinah-lotus-cheesecake-2026-09.webp": "0159ee0e421dd9d52b1b7f7a7031320fc9163a4c6ce2270c79c845e3215cb359",
+    "public/menu/assets/products/talbinah-matcha-2026-10.webp": "03e7612261e8258a3f2f9427f27421ba6971d97b2aa1c21ce37dce69749883ed",
+    "public/menu/assets/products/talbinah-matcha.webp": "a337148986ed6c18af32079d441e77319e283452a8190be24831a96b514fca4e",
+    "public/menu/assets/products/talbinah-powder.webp": "54baf8e626d01783cf4f6ff365e5c2ca07b30d410ffc1c4ff4dae84ee9f1771f",
+    "public/menu/assets/products/talbinah-sachet-box-12-2026-09.webp": "9abc12ed7e1ec425f05a1bbbd91f9336c575f2804b96042fe8dd8b32dd88dc13",
+    "public/menu/assets/products/talbinah-sachet-box-2026-10.webp": "75a72b17f31e991eb630136bb33c7d5dfa1a4c2af49e0509290b0d04dcea8d04",
+    "public/menu/assets/products/talbinah-sachets.webp": "eca412800b7cb8ebc29bd6111481c3d20fb182a5912836e437396462cf24ab2d"
+  },
+  "protectedFiles": {
+    "src/menu/haram/locales.ts": "c1c63609e432adfb6ae468246f20738c41aa4105b92fd97cb3f2df91caa29648",
+    "src/menu/data/categories.ts": "884ab7a9958e15ed8efd249da5d8a8d8c5174a431b92d2b9a15fb30a4caa4158",
+    "src/menu/i18n/ar.ts": "82697e9f68a1ffd10c3db5ac08fdd97d255d6bc27f12c7c945802bc97a210fb5",
+    "src/menu/i18n/en.ts": "a3aa1a895a11967d0b07aef36dfffdbc96d8d26c2798a4340bad102a3e9d717d",
+    "src/menu/data/branches.ts": "66f8781f58223dfa85ff616be161de387cd8e737a8ae8c46fb2503908991cb1d"
+  },
+  "processingJobs": [
+    {
+      "sourceName": "talbinah-nabawi-powder.png",
+      "outputName": "talbinah-powder.webp",
+      "width": 1400,
+      "height": 1050,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    },
+    {
+      "sourceName": "talbinah-matcha.png",
+      "outputName": "talbinah-matcha.webp",
+      "width": 1400,
+      "height": 1050,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    },
+    {
+      "sourceName": "hot-talbinah-one-liter.png",
+      "outputName": "hot-talbinah-one-liter.webp",
+      "width": 1400,
+      "height": 1050,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    },
+    {
+      "sourceName": "mixed-caramelized-nuts-pack.png",
+      "outputName": "mixed-caramelized-nuts-pack.webp",
+      "width": 1400,
+      "height": 1050,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    },
+    {
+      "sourceName": "damkah-2026-09.png",
+      "outputName": "damkah-2026-09.webp",
+      "width": 1400,
+      "height": 1050,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    },
+    {
+      "sourceName": "talbinah-ice-cream-2026-09.png",
+      "outputName": "talbinah-ice-cream-2026-09.webp",
+      "width": 1400,
+      "height": 1050,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    },
+    {
+      "sourceName": "talbinah-ice-cream-biscuit-2026-10.png",
+      "outputName": "talbinah-ice-cream-biscuit-2026-10.webp",
+      "width": 1400,
+      "height": 1050,
+      "extract": {
+        "left": 240,
+        "top": 80,
+        "width": 600,
+        "height": 950
+      },
+      "fit": "contain",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    },
+    {
+      "sourceName": "talbinah-matcha-2026-10.png",
+      "outputName": "talbinah-matcha-2026-10.webp",
+      "width": 1400,
+      "height": 1050,
+      "extract": {
+        "left": 200,
+        "top": 200,
+        "width": 680,
+        "height": 820
+      },
+      "fit": "contain",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    },
+    {
+      "sourceName": "talbinah-sachet-box-2026-10.png",
+      "outputName": "talbinah-sachet-box-2026-10.webp",
+      "width": 1400,
+      "height": 1050,
+      "extract": {
+        "left": 40,
+        "top": 200,
+        "width": 1000,
+        "height": 750
+      },
+      "fit": "cover",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    },
+    {
+      "sourceName": "chocolate-ice-cream-cup-2026-10-refresh.png",
+      "outputName": "chocolate-ice-cream-cup-2026-10-refresh.webp",
+      "width": 1080,
+      "height": 1080,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "alpha": 0
+      }
+    },
+    {
+      "sourceName": "chocolate-ice-cream-biscuit-2026-10-refresh.png",
+      "outputName": "chocolate-ice-cream-biscuit-2026-10-refresh.webp",
+      "width": 1080,
+      "height": 1080,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "alpha": 0
+      }
+    },
+    {
+      "sourceName": "mixed-ice-cream-cup-2026-10-refresh.png",
+      "outputName": "mixed-ice-cream-cup-2026-10-refresh.webp",
+      "width": 1080,
+      "height": 1080,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "alpha": 0
+      }
+    },
+    {
+      "sourceName": "mixed-ice-cream-biscuit-2026-10-refresh.png",
+      "outputName": "mixed-ice-cream-biscuit-2026-10-refresh.webp",
+      "width": 1080,
+      "height": 1080,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "alpha": 0
+      }
+    },
+    {
+      "sourceName": "saweeg-powder.png",
+      "outputName": "sawiq-powder.webp",
+      "width": 1400,
+      "height": 1050,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    },
+    {
+      "sourceName": "gift-box-2026-09.png",
+      "outputName": "gift-box-2026-09.webp",
+      "width": 1400,
+      "height": 1050,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    },
+    {
+      "sourceName": "al-jabirah-box.png",
+      "outputName": "al-jabirah-box.webp",
+      "width": 1400,
+      "height": 1050,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    },
+    {
+      "sourceName": "date-pecan-tart-box.png",
+      "outputName": "date-pecan-tart-box.webp",
+      "width": 1400,
+      "height": 1050,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    },
+    {
+      "sourceName": "maamoul-box-2026-09.png",
+      "outputName": "maamoul-box-2026-09.webp",
+      "width": 1400,
+      "height": 1050,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    },
+    {
+      "sourceName": "cold-talbinah-2026-09.png",
+      "outputName": "cold-talbinah-2026-09.webp",
+      "width": 1400,
+      "height": 1050,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    },
+    {
+      "sourceName": "hot-talbinah-2026-09.png",
+      "outputName": "hot-talbinah-2026-09.webp",
+      "width": 1400,
+      "height": 1050,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    },
+    {
+      "sourceName": "talbinah-lotus-cheesecake-2026-09.png",
+      "outputName": "talbinah-lotus-cheesecake-2026-09.webp",
+      "width": 1400,
+      "height": 1050,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    },
+    {
+      "sourceName": "dates-with-saweeg-2026-09.png",
+      "outputName": "dates-with-saweeg-2026-09.webp",
+      "width": 1400,
+      "height": 1050,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    },
+    {
+      "sourceName": "الجابرة تلبينة.jpg",
+      "outputName": "haram-al-jabirah-sachet.webp",
+      "width": 1400,
+      "height": 1050,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    },
+    {
+      "sourceName": "بوكس بسبوسه.jpg",
+      "outputName": "haram-pecan-basbousa-box.webp",
+      "width": 1400,
+      "height": 1050,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    },
+    {
+      "sourceName": "كريب مديني أجبان.jpg",
+      "outputName": "madini-crepe-cheese.webp",
+      "width": 1400,
+      "height": 1050,
+      "extract": {
+        "left": 100,
+        "top": 650,
+        "width": 1960,
+        "height": 1470
+      },
+      "fit": "cover"
+    },
+    {
+      "sourceName": "كريب مديني سجنتشر.jpg",
+      "outputName": "madini-crepe-signature.webp",
+      "width": 1400,
+      "height": 1050,
+      "extract": {
+        "left": 120,
+        "top": 530,
+        "width": 1920,
+        "height": 1440
+      },
+      "fit": "cover"
+    },
+    {
+      "sourceName": "safawi-dates-gift-box-2026-09.png",
+      "outputName": "safawi-dates-gift-box-2026-09.webp",
+      "width": 1400,
+      "height": 1050,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    },
+    {
+      "sourceName": "talbinah-sachet-box-12-2026-09.png",
+      "outputName": "talbinah-sachet-box-12-2026-09.webp",
+      "width": 1400,
+      "height": 1050,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    },
+    {
+      "sourceName": "talbinah-sachets.png",
+      "outputName": "talbinah-sachets.webp",
+      "width": 1400,
+      "height": 1050,
+      "fullFrame": true,
+      "fit": "contain",
+      "background": {
+        "r": 251,
+        "g": 245,
+        "b": 238,
+        "alpha": 1
+      }
+    }
+  ]
+}
