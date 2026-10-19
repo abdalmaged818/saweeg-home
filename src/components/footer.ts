@@ -1,5 +1,7 @@
 import { siteConfig } from "../config/site.ts";
 import { pageAvailability } from "../config/features.ts";
+import { getMessages } from "../menu/i18n/index.ts";
+import { renderIcon } from "./icons.ts";
 import type { Locale, PageId, SiteCopy } from "../types/site.ts";
 
 interface FooterOptions {
@@ -26,6 +28,7 @@ export const renderFooter = ({ locale, page, copy, prefix, pathFor, localeSwitch
           <p>${copy.footer.tagline}</p>
         </div>
         <nav class="footer-nav" aria-label="${copy.navigationLabel}">
+          <h2 class="footer-nav-title">${getMessages(locale).saweegLinks}</h2>
           <a href="${pathFor(locale, "home")}">${copy.nav.home}</a>
           <a href="${siteConfig.links.store}" target="_blank" rel="noopener noreferrer" data-analytics-event="store_click">${copy.destinations.cards.store.title}</a>
           <a href="${siteConfig.links.menu}" target="_blank" rel="noopener noreferrer" data-analytics-event="menu_click">${copy.destinations.cards.menu.title}</a>
@@ -36,8 +39,8 @@ export const renderFooter = ({ locale, page, copy, prefix, pathFor, localeSwitch
         <section class="footer-downloads" aria-labelledby="footer-profiles-heading">
           <h2 id="footer-profiles-heading">${copy.footer.profilesHeading}</h2>
           <div class="footer-downloads__links">
-            <a href="/assets/documents/saweeg-official-profile-2026.pdf" download="saweeg-official-profile-2026.pdf">${copy.footer.officialProfile}</a>
-            <a href="/assets/documents/saweeg-hotels-hospitality-profile-2026.pdf" download="saweeg-hotels-hospitality-profile-2026.pdf">${copy.footer.hospitalityProfile}</a>
+            <a href="/assets/documents/saweeg-official-profile-2026.pdf" download="saweeg-official-profile-2026.pdf">${renderIcon("menu", "footer-download-icon")}<span class="footer-download-label">${copy.footer.officialProfile}</span><small class="footer-download-badge" aria-hidden="true">PDF</small></a>
+            <a href="/assets/documents/saweeg-hotels-hospitality-profile-2026.pdf" download="saweeg-hotels-hospitality-profile-2026.pdf">${renderIcon("menu", "footer-download-icon")}<span class="footer-download-label">${copy.footer.hospitalityProfile}</span><small class="footer-download-badge" aria-hidden="true">PDF</small></a>
           </div>
         </section>
         <div class="footer-bottom">
