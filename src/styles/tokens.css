@@ -20,6 +20,20 @@
   --color-haram-secondary: #727872;
   --color-haram-light: #e8e5dc;
 
+  /* Approved storefront palette: preserve existing component colors exactly. */
+  --color-storefront-ink: #1d211a;
+  --color-storefront-gold-tint: #f3ecdd;
+  --color-storefront-button-hover: #4b5242;
+  --color-product-media: #faf5ee;
+
+  /* Approved Sabtiya campaign colors intentionally differ from the global palette. */
+  --color-sabtiya-green: #46594f;
+  --color-sabtiya-gold: #ba9861;
+  --color-sabtiya-ivory: #e9e5db;
+  --color-sabtiya-ink: #28352f;
+  --color-sabtiya-neutral: #dedacd;
+  --color-sabtiya-gold-text: #d3c19f;
+
   --color-olive-soft: color-mix(in srgb, var(--color-olive) 10%, transparent);
   --color-olive-faint: color-mix(in srgb, var(--color-olive) 6%, transparent);
   --color-gold-soft: color-mix(in srgb, var(--color-gold) 16%, transparent);

@@ -32,7 +32,17 @@ test("the canonical Saweeg tokens contain the approved palette", () => {
     "--color-input-border": "#858b7c",
     "--color-on-olive-secondary": "#dce0d5",
     "--color-error": "#9b3a32",
-    "--color-error-surface": "#faece9"
+    "--color-error-surface": "#faece9",
+    "--color-storefront-ink": "#1d211a",
+    "--color-storefront-gold-tint": "#f3ecdd",
+    "--color-storefront-button-hover": "#4b5242",
+    "--color-product-media": "#faf5ee",
+    "--color-sabtiya-green": "#46594f",
+    "--color-sabtiya-gold": "#ba9861",
+    "--color-sabtiya-ivory": "#e9e5db",
+    "--color-sabtiya-ink": "#28352f",
+    "--color-sabtiya-neutral": "#dedacd",
+    "--color-sabtiya-gold-text": "#d3c19f"
   };
 
   for (const [token, color] of Object.entries(expected)) {
@@ -45,7 +55,8 @@ test("editable website and menu styles consume the canonical token source", () =
   const tokenPaths = new Set([tokenFile, menuTokenFile]);
   const editableStyles = [
     ...styleFiles(path.join(projectRoot, "src", "styles")),
-    ...styleFiles(path.join(projectRoot, "src", "menu", "styles"))
+    ...styleFiles(path.join(projectRoot, "src", "menu", "styles")),
+    ...styleFiles(path.join(projectRoot, "src", "menu", "haram"))
   ].filter((file) => !tokenPaths.has(file));
 
   for (const file of editableStyles) {

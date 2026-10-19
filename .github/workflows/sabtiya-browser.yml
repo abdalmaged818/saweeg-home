@@ -3,11 +3,18 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - src/components/sabtiya.ts
-      - src/styles/sabtiya.css
-      - src/main.ts
-      - src/pages/home.ts
-      - tests/sabtiya*
+      - 'src/**'
+      - 'public/**'
+      - 'assets-source/**'
+      - 'menu/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - package.json
+      - pnpm-lock.yaml
+      - pnpm-workspace.yaml
+      - .node-version
+      - tsconfig.json
+      - vite.config.ts
       - .github/workflows/sabtiya-browser.yml
 permissions:
   contents: read
