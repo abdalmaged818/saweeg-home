@@ -2,13 +2,14 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
+import { canonicalProductImages } from "../src/menu/data/catalog-images.ts";
 import { execFileSync } from "node:child_process";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const distRoot = path.join(projectRoot, "dist");
 execFileSync(process.execPath, ["--experimental-strip-types", "--test",
   "tests/sabtiya.test.ts", "tests/menu-official-data.test.ts", "tests/haram-store-card.test.ts",
-  "tests/brand-color-tokens.test.mjs"], { cwd: projectRoot, stdio: "inherit" });
+  "tests/brand-color-tokens.test.mjs", "tests/product-image-catalog.test.ts"], { cwd: projectRoot, stdio: "inherit" });
 const sabtiyaHome = fs.readFileSync(path.join(distRoot, "index.html"), "utf8");
 const sabtiyaEnglishHome = fs.readFileSync(path.join(distRoot, "en/index.html"), "utf8");
 if ((sabtiyaHome.match(/class="swg-haram container"/g) ?? []).length !== 1 ||
@@ -270,6 +271,11 @@ const productDirectory = path.join(distRoot, "menu", "assets", "products");
 const productImages = fs.existsSync(productDirectory)
   ? fs.readdirSync(productDirectory).filter((name) => name.endsWith(".webp"))
   : [];
+for (const [key, image] of Object.entries(canonicalProductImages)) {
+  if (image && !fs.existsSync(path.join(productDirectory, image.file))) {
+    failures.push("Missing generated canonical image for " + key + ": " + image.file);
+  }
+}
 const requiredProductImages = new Map([
   ["chocolate-ice-cream-cup-2026-10-refresh.webp", [1080, 1080]],
   ["chocolate-ice-cream-biscuit-2026-10-refresh.webp", [1080, 1080]],

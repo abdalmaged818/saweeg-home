@@ -526,7 +526,7 @@ const createProductCard = (
 ): HTMLElement => {
   const messages = getMessages(language);
   const canonicalImage = canonicalImageFor(product.catalogId ?? product.id);
-  const imageFile = canonicalImage?.file ?? product.image;
+  const imageFile = canonicalImage?.file;
   const article = createElement(
     "article",
     imageFile ? "product-card" : "product-card product-card--without-image"
@@ -546,10 +546,10 @@ const createProductCard = (
     image.loading = "lazy";
     image.decoding = "async";
     image.dataset.fallbackKind = "product";
-    image.style.objectFit = canonicalImage?.fit ?? product.imageFit ?? "cover";
-    image.style.objectPosition = canonicalImage?.position ?? product.imagePosition ?? "center";
-    image.style.transformOrigin = canonicalImage?.position ?? product.imagePosition ?? "center";
-    image.style.setProperty("--image-scale", String(product.imageScale ?? 1));
+    image.style.objectFit = canonicalImage!.fit;
+    image.style.objectPosition = canonicalImage!.position;
+    image.style.transformOrigin = canonicalImage!.position;
+    image.style.setProperty("--image-scale", String(1));
     media.append(decorative, image);
     article.append(media);
   }

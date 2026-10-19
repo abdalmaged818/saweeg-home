@@ -106,7 +106,7 @@ const createImageMedia = (
   image.width = 1400;
   image.height = 1050;
   image.style.objectFit = item.image.fit;
-  image.style.objectPosition = item.image.position ?? "center";
+  image.style.objectPosition = item.image.position;
   const removeMedia = (): void => {
     article.classList.add("haram-product--text-only");
     media.remove();

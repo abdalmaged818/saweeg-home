@@ -38,10 +38,6 @@ interface ProductBase {
 
 export interface ImageProduct extends ProductBase {
   displayMode: "image";
-  image?: string;
-  imageFit?: "cover" | "contain";
-  imagePosition?: string;
-  imageScale?: number;
 }
 
 export interface CompactProduct extends ProductBase {
