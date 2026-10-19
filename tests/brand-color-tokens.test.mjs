@@ -84,7 +84,7 @@ test("homepage cards and interactive states consume the approved semantic tokens
   for (const expected of [
     ".button--primary:active {\n  background: var(--button-primary-active);",
     ".branch-option.is-active {\n  border-color: var(--button-primary);\n  background: var(--button-primary);",
-    ".store-card .button--light {\n  background: var(--button-gold);\n  color: var(--button-gold-text);"
+    ".store-card .button--light {\n  background: var(--button-primary);\n  color: var(--button-primary-text);"
   ]) {
     assert.ok(menuComponents.includes(expected), `Missing menu color contract: ${expected}`);
   }

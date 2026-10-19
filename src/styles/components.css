@@ -1,20 +1,22 @@
 .eyebrow {
-  display: inline-flex;
+  display: block;
   align-items: center;
-  min-height: 34px;
-  margin-block-end: 14px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: var(--saweeg-green-soft);
-  color: var(--saweeg-green-dark);
-  font-size: 0.78rem;
-  font-weight: 700;
+  min-height: 0;
+  margin-block-end: 10px;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-gold-text);
+  font-size: 0.8125rem;
+  font-weight: 600;
   letter-spacing: 0.025em;
 }
 
 .eyebrow--dark {
-  background: var(--color-on-olive-faint);
+  background: transparent;
   color: var(--color-ivory);
+  padding: 0;
+  border: 0;
 }
 
 .button-row {
@@ -37,14 +39,14 @@
   padding: 11px 22px;
   border: 1px solid transparent;
   border-radius: 999px;
-  font-size: 0.92rem;
-  font-weight: 700;
+  font-size: 0.9375rem;
+  font-weight: 600;
   line-height: 1.3;
   transition: transform var(--transition), background-color var(--transition), border-color var(--transition), color var(--transition), box-shadow var(--transition);
 }
 
 .button:hover {
-  transform: translateY(-2px);
+  transform: none;
 }
 
 .button:active {
@@ -66,9 +68,9 @@
 }
 
 .button-outline {
-  border-color: var(--saweeg-green);
+  border-color: var(--border-strong);
   background: var(--surface);
-  color: var(--saweeg-green-dark);
+  color: var(--text);
 }
 
 .button-outline:hover {
@@ -116,109 +118,13 @@ html[dir="rtl"] .button-icon {
   transform: scaleX(-1);
 }
 
-.language-link,
-.footer-language {
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding-inline: 15px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--surface);
-  color: var(--saweeg-green-dark);
-  font-size: 0.78rem;
-  font-weight: 700;
-}
-
-.menu-button {
-  width: 44px;
-  height: 44px;
-  display: grid;
-  align-content: center;
-  gap: 5px;
-  padding: 11px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: var(--surface);
-  cursor: pointer;
-}
-
-.menu-button span {
-  display: block;
-  width: 100%;
-  height: 2px;
-  border-radius: 999px;
-  background: var(--saweeg-green-dark);
-  transition: transform 180ms ease, opacity 180ms ease;
-}
-
-.menu-button[aria-expanded="true"] span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-
-.menu-button[aria-expanded="true"] span:nth-child(2) {
-  opacity: 0;
-}
-
-.menu-button[aria-expanded="true"] span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-}
-
-.desktop-nav a,
-.mobile-navigation a {
-  position: relative;
-  color: var(--text);
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-.desktop-nav a {
-  min-width: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 8px 14px;
-  border-radius: 999px;
-}
-
-.desktop-nav a:hover {
-  background: var(--surface-soft);
-  color: var(--saweeg-green-dark);
-}
-
-.desktop-nav a[aria-current="page"] {
-  background: var(--saweeg-green-soft);
-  color: var(--saweeg-green-dark);
-  font-weight: 700;
-}
-
-.mobile-navigation a {
-  min-height: 48px;
-  display: flex;
-  align-items: center;
-  padding-inline: 12px;
-  border-radius: 12px;
-}
-
-.mobile-navigation a:last-child {
-  border-block-end: 0;
-}
-
-.mobile-navigation a[aria-current="page"] {
-  background: var(--saweeg-green-soft);
-  color: var(--saweeg-green-dark);
-  font-weight: 700;
-}
-
 .destination-card {
-  min-height: 190px;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 12px;
-  padding: 24px 22px;
+  padding: clamp(22px, 2.5vw, 32px);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
@@ -226,22 +132,26 @@ html[dir="rtl"] .button-icon {
 }
 
 .destination-card:hover {
-  transform: translateY(-4px);
+  transform: none;
   box-shadow: var(--shadow-hover);
 }
 
 .destination-card h3 {
-  font-size: clamp(1.35rem, 5vw, 1.7rem);
+  font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  color: var(--text);
 }
 
 .destination-card p {
   color: var(--text-soft);
-  font-size: 0.94rem;
+  font-size: 1.0625rem;
+  flex: 1;
 }
 
 .destination-card .button {
   min-width: 132px;
   margin-block-start: 8px;
+  align-self: flex-start;
+  font-size: 0.9375rem;
 }
 
 .destination-card--store {
@@ -268,7 +178,7 @@ html[dir="rtl"] .button-icon {
 }
 
 .destination-card--menu p {
-  color: var(--color-olive);
+  color: var(--color-olive-hover);
 }
 
 .destination-card--delivery {
@@ -281,7 +191,7 @@ html[dir="rtl"] .button-icon {
 }
 
 .destination-card--delivery p {
-  color: var(--color-olive);
+  color: var(--color-olive-hover);
 }
 
 .destination-card--store .button-light {
@@ -301,14 +211,17 @@ html[dir="rtl"] .button-icon {
 
 .delivery-actions {
   width: 100%;
-  display: grid;
-  gap: 8px;
+  display: flex;
+  gap: 10px;
   margin-block-start: 8px;
+  flex-wrap: wrap;
 }
 
 .delivery-actions .button {
-  width: 100%;
+  width: auto;
   margin: 0;
+  min-width: 0;
+  flex: 1;
 }
 
 .surface-card {
@@ -398,9 +311,9 @@ html[dir="rtl"] .button-icon {
 }
 
 .branch-card__location {
-  margin-block-start: 8px;
+  margin-block-start: -6px;
   color: var(--text-soft);
-  font-size: 0.92rem;
+  font-size: 0.875rem;
 }
 
 .value-card p,
@@ -445,34 +358,40 @@ html[dir="rtl"] .button-icon {
 }
 
 .branch-card {
-  min-height: 160px;
-  padding: 24px 22px;
+  min-height: 0;
+  padding: 24px;
   background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .branch-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 9px;
-  margin-block-start: 20px;
+  gap: 10px;
+  margin-block-start: auto;
+  padding-block-start: 6px;
 }
 
 .contact-card {
-  padding: 34px 22px;
-  border-radius: var(--radius-lg);
+  padding: clamp(28px, 5vw, 56px);
+  border-radius: 20px;
   background: var(--saweeg-green-dark);
   color: var(--surface);
-  text-align: center;
+  text-align: start;
+  display: grid;
+  gap: 0;
 }
 
 .contact-card h2 {
   color: var(--color-ivory);
-  font-size: clamp(1.75rem, 7vw, 2.75rem);
+  font-size: var(--heading-size);
 }
 
 .contact-card p {
-  max-width: 600px;
-  margin: 12px auto 0;
+  max-width: 52ch;
+  margin: 10px 0 0;
   color: var(--color-on-olive-secondary);
 }
 
@@ -498,81 +417,6 @@ html[dir="rtl"] .button-icon {
   color: var(--text-soft);
 }
 
-.footer-brand img {
-  width: 74px;
-  height: 74px;
-  padding: 8px;
-  border-radius: var(--radius-md);
-  background: var(--saweeg-ivory);
-  object-fit: contain;
-}
-
-.footer-brand p {
-  margin-block-start: 12px;
-  color: var(--color-on-olive-secondary);
-}
-
-.footer-nav a {
-  min-width: 44px;
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-on-olive-secondary);
-  font-size: 0.88rem;
-}
-
-.footer-nav a:hover {
-  color: var(--surface);
-}
-
-.footer-downloads h2 {
-  color: var(--saweeg-ivory);
-  font-size: 0.98rem;
-}
-
-.footer-downloads__links {
-  display: grid;
-  gap: 8px;
-  margin-block-start: 10px;
-}
-
-.footer-downloads__links a {
-  width: fit-content;
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  color: var(--color-on-olive-secondary);
-  font-size: 0.88rem;
-  text-decoration: underline;
-  text-decoration-color: var(--color-gold-decoration);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
-  transition: color var(--transition), text-decoration-color var(--transition);
-}
-
-.footer-downloads__links a:hover {
-  color: var(--surface);
-  text-decoration-color: var(--saweeg-gold);
-}
-
-.footer-downloads__links a:focus-visible {
-  outline-color: var(--color-ivory);
-  box-shadow: var(--focus-ring-on-dark);
-}
-
-.footer-bottom {
-  color: var(--color-on-olive-secondary);
-  font-size: 0.8rem;
-}
-
-.footer-language {
-  width: fit-content;
-  border-color: var(--color-on-olive-border);
-  background: transparent;
-  color: var(--saweeg-ivory);
-}
-
 .contact-card :focus-visible,
 .site-footer :focus-visible,
 .destination-card--store :focus-visible {
@@ -595,3 +439,25 @@ html[dir="rtl"] .button-icon {
   object-fit: cover;
   object-position: 50% 58%;
 }
+
+.icon-chip { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: var(--surface-soft); color: var(--color-olive); }
+
+.icon-chip .icon { width: 22px; height: 22px; }
+
+.destination-card--store .icon-chip { background: var(--color-on-olive-faint); color: var(--color-ivory); }
+
+.destination-card--store h3 { color: var(--color-ivory); }
+
+.destination-card--menu .icon-chip, .destination-card--delivery .icon-chip { background: var(--surface); }
+
+.branch-card__heading { display: flex; align-items: center; gap: 12px; }
+
+.branch-actions .button { flex: 1 1 150px; }
+
+.about-copy p { max-width: 58ch; }
+
+.contact-card .eyebrow { color: var(--color-on-olive-secondary); background: transparent; padding: 0; border: 0; min-height: 0; }
+
+.contact-card .button-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-block-start: 24px; }
+
+.contact-card .button { min-width: 0; width: auto; padding-inline: 10px; font-size: 0.9375rem; }

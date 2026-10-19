@@ -11,18 +11,19 @@ import { pageAvailability } from "../config/features.ts";
 import { renderHomeParticipations } from "../components/participations.ts";
 
 export const renderHomePage = (locale: Locale, copy: SiteCopy, prefix: string, aboutPath: string, opportunitiesPath: string): string => `
-  ${renderHero(copy)}
+  ${renderHero(copy, prefix, aboutPath)}
   ${locale === "ar" ? renderHaramStoreCard() : ""}
   ${locale === "ar" ? '<template id="sabtiya-slot"></template>' : ""}
   <section class="destinations-section" id="destinations" aria-label="${copy.destinations.title}">
     <div class="container">
+      <h2 class="visually-hidden">${copy.destinations.title}</h2>
       <div class="destinations-grid">
         ${destinations.map((destination) => renderDestinationCard(destination, copy)).join("")}
       </div>
     </div>
   </section>
   ${renderBranches(copy)}
-  ${renderAboutPreview(copy, prefix, aboutPath)}
+  ${renderAboutPreview(copy, prefix, aboutPath, locale)}
   ${pageAvailability.news ? renderHomeParticipations(locale, prefix) : ""}
   ${pageAvailability.opportunities ? renderOpportunityPreview(copy, opportunitiesPath) : ""}
   ${renderContact(copy)}

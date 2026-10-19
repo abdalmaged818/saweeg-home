@@ -1,4 +1,5 @@
 import { siteConfig } from "../config/site.ts";
+import { renderIcon } from "./icons.ts";
 import type { Destination, SiteCopy } from "../types/site.ts";
 
 export const renderDestinationCard = (destination: Destination, copy: SiteCopy): string => {
@@ -7,6 +8,7 @@ export const renderDestinationCard = (destination: Destination, copy: SiteCopy):
   if (destination.id === "delivery") {
     return `
       <article class="destination-card destination-card--delivery">
+        <span class="icon-chip">${renderIcon("delivery")}</span>
         <h3>${content.title}</h3>
         <p>${content.description}</p>
         <div class="delivery-actions">
@@ -20,6 +22,7 @@ export const renderDestinationCard = (destination: Destination, copy: SiteCopy):
   const analyticsEvent = destination.id === "store" ? "store_click" : "menu_click";
   return `
     <article class="destination-card destination-card--${destination.tone}">
+      <span class="icon-chip">${renderIcon(destination.id === "store" ? "bag" : "menu")}</span>
       <h3>${content.title}</h3>
       <p>${content.description}</p>
       <a class="button ${destination.id === "store" ? "button-light" : "button-primary"}" href="${href}" target="_blank" rel="noopener noreferrer" data-analytics-event="${analyticsEvent}">

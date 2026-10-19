@@ -1,4 +1,5 @@
 import { siteConfig } from "../config/site.ts";
+import { renderIcon } from "./icons.ts";
 import { branches } from "../data/branches.ts";
 import type { BranchId, SiteCopy } from "../types/site.ts";
 
@@ -27,7 +28,7 @@ export const renderBranches = (copy: SiteCopy): string => `
           const menu = menus[branch.id];
           return `
             <article class="branch-card">
-              <h3>${copy.branches.names[branch.id]}</h3>
+              <div class="branch-card__heading"><span class="icon-chip">${renderIcon("pin")}</span><h3>${copy.branches.names[branch.id]}</h3></div>
               ${location ? `<p class="branch-card__location">${location}</p>` : ""}
               <div class="branch-actions">
                 <a class="button button-primary" href="${locations[branch.id]}" target="_blank" rel="noopener noreferrer" data-analytics-event="branch_map_click" data-analytics-label="${branch.id}">${copy.branches.locationCtas[branch.id] ?? copy.branches.locationCta}</a>

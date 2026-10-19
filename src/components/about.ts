@@ -1,9 +1,21 @@
+import { aboutPageCopy } from "../content/about.ts";
+import { renderResponsiveImage } from "./responsive-image.ts";
 import type { SiteCopy } from "../types/site.ts";
 
-export const renderAboutPreview = (copy: SiteCopy, _prefix: string, aboutPath: string): string => `
-  <section class="section" id="about" aria-labelledby="about-title">
+export const renderAboutPreview = (copy: SiteCopy, prefix: string, aboutPath: string, locale: "ar" | "en"): string => `
+  <section class="section about-preview" id="about" aria-labelledby="about-title">
     <div class="container about-preview-grid">
-      <article class="surface-card about-copy">
+      ${renderResponsiveImage({
+        prefix,
+        base: "assets/participations/about-saweeg/about-saweeg-talbinah",
+        alt: aboutPageCopy[locale].talbinahAlt,
+        width: 1440,
+        height: 1800,
+        sizes: "(max-width: 899px) 100vw, 40vw",
+        className: "about-preview-media",
+        position: "50% 60%"
+      })}
+      <article class="about-copy">
         <span class="eyebrow">${copy.about.eyebrow}</span>
         <h2 id="about-title">${copy.about.title}</h2>
         <p>${copy.about.short}</p>

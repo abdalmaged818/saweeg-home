@@ -7,7 +7,6 @@
 }
 
 html {
-  overflow-x: clip;
   scroll-behavior: smooth;
   scroll-padding-top: var(--header-offset);
 }
@@ -18,7 +17,6 @@ section[id] {
 
 body {
   margin: 0;
-  overflow-x: clip;
   background: var(--page-bg);
   color: var(--text);
   font-family: "IBM Plex Sans Arabic", sans-serif;
