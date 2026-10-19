@@ -80,20 +80,25 @@
   --error: var(--color-error);
   --error-surface: var(--color-error-surface);
 
-  --radius-xl: 18px;
-  --radius-lg: 18px;
+  --radius-xl: 20px;
+  --radius-lg: 16px;
   --radius-md: 16px;
-  --radius-sm: 14px;
-  --shadow-card: 0 4px 16px color-mix(in srgb, var(--color-olive) 4%, transparent);
+  --radius-sm: 12px;
+  --shadow-card: 0 1px 2px color-mix(in srgb, var(--color-text) 4%, transparent), 0 6px 18px color-mix(in srgb, var(--color-olive) 6%, transparent);
   --shadow-soft: 0 8px 24px color-mix(in srgb, var(--color-olive) 6%, transparent);
   --shadow-header: 0 8px 22px var(--color-olive-shadow);
   --shadow-hover: 0 12px 28px var(--color-olive-shadow);
   --shadow-button: 0 6px 18px var(--color-olive-shadow-strong);
-  --focus-ring: 0 0 0 4px color-mix(in srgb, var(--color-olive) 22%, transparent);
-  --focus-ring-on-dark: 0 0 0 4px color-mix(in srgb, var(--color-ivory) 32%, transparent);
+  --focus-ring: 0 0 0 3px var(--color-ivory), 0 0 0 6px var(--color-olive);
+  --focus-ring-on-dark: 0 0 0 3px var(--color-olive), 0 0 0 6px var(--color-ivory);
   --transition: 180ms ease;
   --font-ar: "IBM Plex Sans Arabic", system-ui, sans-serif;
   --font-en: "Inter", system-ui, sans-serif;
-  --header-height: 78px;
-  --content-width: 1180px;
+  --header-height: 94px;
+  --content-width: 1200px;
+  --gutter: clamp(16px, 3.5vw, 40px);
+  --section-space: clamp(56px, 4.5vw + 32px, 104px);
+  --heading-size: clamp(1.625rem, 1.15rem + 1.9vw, 2.375rem);
+  --hero-size: clamp(1.875rem, 1.2rem + 2.9vw, 3.25rem);
 }
+
