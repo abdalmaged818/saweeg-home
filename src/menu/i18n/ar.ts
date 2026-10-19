@@ -1,4 +1,10 @@
+import { sharedNameFor } from "./catalog.ts";
 export const ar = {
+  backToMenu: "العودة إلى منيو سويق",
+  logoAlt: "شعار سويق",
+  desktopLanguage: "EN",
+  footerNavLabel: "روابط التذييل",
+  activeSeparator: "، ",
   skipToContent: "انتقل إلى المحتوى",
   navLabel: "روابط سويق",
   store: "المتجر الإلكتروني",
@@ -18,7 +24,7 @@ export const ar = {
   openBranchLocation: "موقع الفرع",
   branchLocationsTitle: "فروع سويق",
   menuSectionTitle: "أقسام منيو سويق",
-  extrasTitle: "مشروبات وإضافات",
+  extrasTitle: sharedNameFor("drinks", "ar"),
   storeEyebrow: "متجر سويق",
   storeTitle: "منتجات سويق إلى باب بيتك",
   storeBody: "استكشف منتجات سويق عبر متجرنا الإلكتروني.",

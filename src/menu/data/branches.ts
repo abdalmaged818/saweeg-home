@@ -1,14 +1,10 @@
-import type { Branch } from "../types/menu";
-
+import type { Branch } from "../types/menu.ts";
+import { sharedNameFor } from "../i18n/catalog.ts";
 export const branches: Branch[] = [
   {
-    id: "maqsed",
-    nameAr: "فرع المقصد",
-    nameEn: "Al-Maqsad Branch"
+    "id": "maqsed"
   },
   {
-    id: "bustan",
-    nameAr: "فرع بستان المستظل",
-    nameEn: "Bustan Al-Mustazal Branch"
+    "id": "bustan"
   }
-];
+].map(record => ({ id: record.id as Branch["id"], nameAr: sharedNameFor(record.id, "ar"), nameEn: sharedNameFor(record.id, "en") }));

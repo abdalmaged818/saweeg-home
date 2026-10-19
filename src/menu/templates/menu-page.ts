@@ -1,3 +1,4 @@
+import { sharedNameFor, sharedItemText } from "../i18n/catalog.ts";
 import { assetUrl, branchMapUrl, menuBasePath, siteConfig } from "../config/site";
 import { branches } from "../data/branches";
 import { categories } from "../data/categories";
@@ -51,39 +52,10 @@ const createElement = <K extends keyof HTMLElementTagNameMap>(
   return element;
 };
 
-const localName = (
-  item: { nameAr: string; nameEn: string },
-  language: Language
-): string => (language === "ar" ? item.nameAr : item.nameEn);
-
-const localQuantity = (
-  item: { quantityAr?: string; quantityEn?: string },
-  language: Language
-): string | undefined =>
-  language === "ar" ? item.quantityAr : item.quantityEn;
-
-const localNote = (
-  item: { noteAr?: string; noteEn?: string },
-  language: Language
-): string | undefined => language === "ar" ? item.noteAr : item.noteEn;
-
-const normalizedLabel = (value: string): string =>
-  value.toLocaleLowerCase().replace(/[\s\p{P}\p{S}]+/gu, "");
-
-const isQuantityAlreadyInName = (
-  item: { nameAr: string; nameEn: string; quantityAr?: string; quantityEn?: string },
-  language: Language
-): boolean => {
-  const quantity = localQuantity(item, language);
-  if (!quantity) return false;
-  const name = normalizedLabel(localName(item, language));
-  const normalizedQuantity = normalizedLabel(quantity);
-  const quantityTokens = quantity
-    .split(/[\s\p{P}\p{S}]+/u)
-    .map(normalizedLabel)
-    .filter(Boolean);
-  return name.includes(normalizedQuantity) || quantityTokens.every((token) => name.includes(token));
-};
+const localName = (item: { id: string }, language: Language): string => sharedNameFor(item.id, language);
+const localQuantity = (item: { id: string }, language: Language): string | undefined => sharedItemText(item.id, language).quantity ?? undefined;
+const localNote = (item: { id: string }, language: Language): string | undefined => sharedItemText(item.id, language).note ?? undefined;
+const hasSeparateQuantity = (item: { id: string }, language: Language): boolean => sharedItemText(item.id, language).showQuantity;
 
 const appendProductDetails = (
   container: HTMLElement,
@@ -93,7 +65,7 @@ const appendProductDetails = (
 ): void => {
   const quantity = localQuantity(product, language);
   const note = localNote(product, language);
-  if (quantity && !isQuantityAlreadyInName(product, language)) {
+  if (quantity && hasSeparateQuantity(product, language)) {
     container.append(createElement("p", `${classPrefix}__quantity`, quantity));
   }
   if (note) {
@@ -130,7 +102,7 @@ const createBrand = (
   brand.href = brandHref(language, branch);
   brand.setAttribute(
     "aria-label",
-    language === "ar" ? "العودة إلى منيو سويق" : "Back to Saweeg menu"
+    getMessages(language).backToMenu
   );
   brand.dataset.brandLink = "";
 
@@ -142,7 +114,7 @@ const createBrand = (
   );
   const image = createElement("img", "brand__image");
   image.src = assetUrl(siteConfig.logoPath);
-  image.alt = language === "ar" ? "شعار سويق" : "Saweeg logo";
+  image.alt = getMessages(language).logoAlt;
   image.width = 80;
   image.height = 40;
   image.decoding = "async";
@@ -162,7 +134,7 @@ const createHeader = (state: AppState): HTMLElement => {
   const languageLink = createElement(
     "a",
     "language-link",
-    state.language === "ar" ? "EN" : "العربية"
+    messages.desktopLanguage
   );
   languageLink.href = appHref(
     state.language === "ar" ? "en" : "ar",
@@ -315,7 +287,7 @@ const createBranchButton = (
     button.classList.add("is-active");
     button.setAttribute(
       "aria-label",
-      `${name}${state.language === "ar" ? "، " : ", "}${messages.branchActive}`
+      `${name}${messages.activeSeparator}${messages.branchActive}`
     );
   }
   return button;
@@ -477,7 +449,7 @@ const createFooter = (state: AppState): HTMLElement => {
   const logoWrap = createElement("div", "footer-logo-wrap");
   const logo = createElement("img", "footer-logo");
   logo.src = assetUrl(siteConfig.logoPath);
-  logo.alt = state.language === "ar" ? "شعار سويق" : "Saweeg logo";
+  logo.alt = messages.logoAlt;
   logo.width = 68;
   logo.height = 68;
   logo.loading = "lazy";
@@ -488,7 +460,7 @@ const createFooter = (state: AppState): HTMLElement => {
   const nav = createElement("nav", "footer-nav");
   nav.setAttribute(
     "aria-label",
-    state.language === "ar" ? "روابط التذييل" : "Footer links"
+    messages.footerNavLabel
   );
   const footerLinks = [
     { label: messages.store, href: siteConfig.links.onlineStore },
@@ -599,8 +571,8 @@ const createExtraRow = (extra: Extra, language: Language): HTMLElement => {
   const row = createElement("div", "extra-row");
   const copy = createElement("div", "extra-row__copy");
   copy.append(createElement("h3", "extra-row__name", localName(extra, language)));
-  const quantity = language === "ar" ? extra.quantityAr : extra.quantityEn;
-  if (quantity && !isQuantityAlreadyInName(extra, language)) {
+  const quantity = localQuantity(extra, language);
+  if (quantity && hasSeparateQuantity(extra, language)) {
     copy.append(createElement("p", "extra-row__quantity", quantity));
   }
   row.append(
