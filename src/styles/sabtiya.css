@@ -35,4 +35,4 @@
 .sabtiya-section .sab-card:has(.sab-common) .sab-actions { margin: 8px 0 0; padding: 0; justify-content: start; }
 .sabtiya-section .sab-card:has(.sab-common) .sab-btn { flex: 0 1 auto; font-size: 0.9375rem; }
 @media (min-width: 900px) { .sabtiya-section .sab-card:has(.sab-common) { grid-template-columns: minmax(0, 1fr) auto; column-gap: 24px; } .sabtiya-section .sab-card:has(.sab-common) > :not(.sab-actions) { grid-column: 1; } .sabtiya-section .sab-card:has(.sab-common) .sab-actions { grid-column: 2; grid-row: 1 / 4; align-self: center; } }
-
+.sabtiya-section .sab-card:has(.sab-common) h2 span { font-size: 0.8em; font-weight: 600; margin-block-start: 2px; }

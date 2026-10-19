@@ -105,11 +105,11 @@
 }
 
 .mobile-menu__card {
-  width: min(100%, 360px);
+  width: 100%;
   display: grid;
   gap: 0.2rem;
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: 16px;
   background: var(--surface);
   box-shadow: var(--shadow-soft);
   padding: 0.55rem;
@@ -231,12 +231,12 @@ html[lang="ar"] .eyebrow {
 }
 
 .store-card .button--light {
-  background: var(--button-gold);
-  color: var(--button-gold-text);
+  background: var(--button-primary);
+  color: var(--button-primary-text);
 }
 
 .store-card .button--light:hover {
-  background: var(--button-gold-hover);
+  background: var(--button-primary-hover);
 }
 
 .section-heading {
@@ -712,3 +712,12 @@ html[lang="ar"] .eyebrow {
   min-width: 0;
 }
 
+.store-card :focus-visible {
+  outline-color: var(--color-olive);
+  box-shadow: var(--focus-ring);
+}
+
+.mobile-menu {
+  position: absolute;
+  inset-block-start: 100%;
+}

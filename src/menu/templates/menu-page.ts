@@ -148,6 +148,7 @@ const createHeader = (state: AppState): HTMLElement => {
   button.setAttribute("aria-label", getMessages(state.language).mobileMenuOpen);
   const language = header.querySelector<HTMLAnchorElement>(".language-link")!;
   language.dataset.languageLink = "";
+  language.textContent = getMessages(state.language).desktopLanguage;
   return header;
 };
 
@@ -436,6 +437,8 @@ const createFooter = (state: AppState): HTMLElement => {
     localeSwitchPath: appHref(state.language === "ar" ? "en" : "ar", state.branch)
   });
   const footer = holder.firstElementChild as HTMLElement;
+  footer.querySelector<HTMLImageElement>(".footer-brand img")!.alt = messages.logoAlt;
+  footer.querySelector(".footer-brand p")!.textContent = messages.footerTagline;
   const legacy = createElement("nav", "menu-footer-context-links");
   legacy.setAttribute("aria-label", messages.footerNavLabel);
   for (const [label, href] of [
@@ -633,6 +636,12 @@ export const renderMenuPage = (
   skipLink.href = "#main-content";
   const header = createHeader(state);
   const mobileMenu = createMobileMenu(state);
+  header.append(mobileMenu);
+  const welcome = createElement("div", "welcome-strip");
+  welcome.lang = "ar";
+  welcome.dir = "rtl";
+  // Existing fixed Arabic site welcome, also used by the production Haram chrome.
+  welcome.append(createElement("p", "welcome-strip__text", "سلام من لدن أرض السلام"));
   const main = createElement("main");
   main.id = "main-content";
   const menuSection = createMenuSection(state);
@@ -648,7 +657,7 @@ export const renderMenuPage = (
     createContactSection(state)
   );
   const page = createElement("div", "site");
-  page.append(skipLink, header, mobileMenu, main, createFooter(state));
+  page.append(skipLink, welcome, header, main, createFooter(state));
   root.replaceChildren(page);
 
   const menuSections =

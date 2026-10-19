@@ -43,8 +43,8 @@
 }
 
 .mobile-menu {
-  position: fixed;
-  inset-block-start: calc(76px + env(safe-area-inset-top, 0px));
+  position: absolute;
+  inset-block-start: 100%;
   inset-inline: 0;
   z-index: 79;
   pointer-events: none;
@@ -207,4 +207,3 @@
 @media (min-width: 900px) { .product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; } }
 
 @media (min-width: 1200px) { .product-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-

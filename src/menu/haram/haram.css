@@ -55,10 +55,10 @@ body:has(.haram) {
 }
 
 .haram-language-grid {
-  --haram-language-card-block-size: 80px;
+  --haram-language-card-block-size: 76px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr));
-  grid-auto-rows: 76px;
+  grid-auto-rows: var(--haram-language-card-block-size);
   gap: 12px;
   margin-block-start: clamp(1.75rem, 5vw, 2.75rem);
   text-align: initial;
@@ -333,3 +333,6 @@ html[lang="ms"] .haram { font-family: "Noto Sans", "IBM Plex Sans Arabic", sans-
 
 @media (min-width: 1200px) { .haram-product-grid--media { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 
+.haram-language-card[lang="bn"] .haram-language-card__label{ font-family: "Noto Sans Bengali", "Noto Sans", sans-serif; }
+
+.haram-shared-header{ display: contents; }

@@ -19,7 +19,8 @@ test("Haram introduction contains only exact approved customer content and safe 
 test("Haram introduction is Arabic-only, between hero and unchanged Sabtiya mount", () => {
   const home = fs.readFileSync(new URL("../src/pages/home.ts", import.meta.url), "utf8");
   assert.match(home, /locale === "ar" \? renderHaramStoreCard\(\) : ""/);
-  assert(home.indexOf("renderHero(copy)") < home.indexOf("renderHaramStoreCard()"));
+  assert(home.indexOf("renderHero(copy, prefix, aboutPath)") >= 0);
+  assert(home.indexOf("renderHero(copy, prefix, aboutPath)") < home.indexOf("renderHaramStoreCard()"));
   assert(home.indexOf("renderHaramStoreCard()") < home.indexOf('id="sabtiya-slot"'));
   assert(home.indexOf('id="sabtiya-slot"') < home.indexOf('class="destinations-section"'));
 });
@@ -33,7 +34,7 @@ test("Haram photo preserves full original proportions, and CSS stays isolated", 
   const styles = fs.readFileSync(new URL("../src/styles/haram-store-card.css", import.meta.url), "utf8");
   assert.match(styles, /aspect-ratio: 4 \/ 3/);
   assert.match(styles, /object-fit: cover; object-position: 50% 58%/);
-  assert.match(styles, /min-height: 52px/);
+  assert.match(styles, /min-height: 48px/);
   assert.match(styles, /:focus-visible/);
   assert.doesNotMatch(styles, /@import|font-face|gradient|media-mark|font-family:(?! inherit)/);
   for (const selector of styles.matchAll(/(?:^|\})\s*([^@{}]+)\{/g)) assert(selector[1].trim().startsWith(".swg-haram"));

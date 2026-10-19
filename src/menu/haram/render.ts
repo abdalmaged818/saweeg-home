@@ -61,6 +61,7 @@ const createSharedHeader = (copy: HaramLocaleContent, isSelector = false): HTMLE
   const menuButton = create("button", "menu-button") as HTMLButtonElement;
   menuButton.type = "button";
   menuButton.dataset.menuButton = "";
+  menuButton.setAttribute("aria-controls", "haram-mobile-navigation");
   menuButton.dataset.openLabel = copy.chooseLanguage;
   menuButton.dataset.closeLabel = copy.changeLanguage;
   menuButton.setAttribute("aria-expanded", "false");
@@ -70,6 +71,7 @@ const createSharedHeader = (copy: HaramLocaleContent, isSelector = false): HTMLE
 
   const mobileNavigation = create("div", "mobile-navigation") as HTMLDivElement;
   mobileNavigation.dataset.mobileNavigation = "";
+  mobileNavigation.id = "haram-mobile-navigation";
   mobileNavigation.hidden = true;
   const mobileInner = create("div", "container mobile-navigation-inner");
   const mobileNav = create("nav");

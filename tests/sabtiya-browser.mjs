@@ -74,7 +74,7 @@ try {
       assert.equal(intro.count, 1);
       assert(intro.positioned && intro.font && !intro.clipped.length);
       assert(Math.abs(intro.ratio - 4 / 3) < 0.01);
-      assert(width < 1100 ? intro.stacked : intro.leftPhoto);
+      assert(width < 760 ? intro.stacked : intro.leftPhoto);
       assert.equal(intro.fit, "cover");
       assert.equal(intro.position, "50% 58%");
       assert.equal(intro.placeholder, 0);

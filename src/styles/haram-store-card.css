@@ -27,4 +27,5 @@
   .swg-haram .swg-haram__btn { width: auto; }
 }
 @media (prefers-reduced-motion: reduce) { .swg-haram .swg-haram__btn { transition: none; } }
-
+@media (min-width: 760px) and (max-width: 1099px) { .swg-haram .swg-haram__body { padding: 16px 24px; gap: 8px; } .swg-haram .swg-haram__label { min-height: 24px; } .swg-haram .swg-haram__line { font-size: 16px; line-height: 1.5; } .swg-haram .swg-haram__info { gap: 8px; } .swg-haram .swg-haram__info li { font-size: 16px; } .swg-haram .swg-haram__btn { margin-top: 0; } }
+@media (min-width:760px) and (max-width:1099px){.swg-haram .swg-haram__body{padding:12px 24px;gap:8px}.swg-haram .swg-haram__label{min-height:24px}.swg-haram .swg-haram__line{font-size:16px;line-height:1.5}.swg-haram .swg-haram__info{gap:8px}.swg-haram .swg-haram__info li{font-size:16px}.swg-haram .swg-haram__btn{margin-top:0}}

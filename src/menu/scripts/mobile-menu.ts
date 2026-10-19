@@ -52,6 +52,10 @@ export const bindMobileMenu = (
     }
   });
 
+  window.matchMedia("(min-width: 900px)").addEventListener("change", (event) => {
+    if (event.matches) setOpen(false);
+  });
+
   return {
     close: () => setOpen(false)
   };

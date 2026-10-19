@@ -43,6 +43,16 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/sabtiya-browser/node_modules/playwright/index.mjs
         run: node tests/sabtiya-browser.mjs
+      - name: Approved visual redesign semantic and responsive verification
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/sabtiya-browser/node_modules/playwright/index.mjs
+        run: node tests/visual-redesign-browser.mjs
+      - name: Save visual redesign screenshots and semantic report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-redesign-results
+          path: test-results/visual-redesign
       - name: Save screenshots and browser report
         if: always()
         uses: actions/upload-artifact@v4

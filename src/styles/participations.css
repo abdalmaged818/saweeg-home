@@ -50,6 +50,7 @@
   min-height: 0;
   height: auto;
   aspect-ratio: 4 / 3;
+  position: relative;
 }
 
 .participation-card-media img {
@@ -90,6 +91,9 @@
 
 .participation-card h3 a {
   position: relative;
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
 }
 
 .participation-card p,
@@ -550,3 +554,12 @@ html[lang="en"] .about-story-copy > p {
 
 @media (min-width: 1024px) { .participations-grid--home { grid-template-columns: repeat(3, minmax(0, 1fr)); } .participation-card--home:last-child { grid-column: auto; flex-direction: column; } .participation-card--home:last-child .participation-card-image-link { flex: none; aspect-ratio: 4 / 3; } }
 
+.participation-card--home .participation-card-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+.participation-card-image-link:focus-visible::after { content: ""; position: absolute; inset: 6px; border: 3px solid var(--color-olive); outline: 3px solid var(--color-ivory); border-radius: 8px; z-index: 2; pointer-events: none; }

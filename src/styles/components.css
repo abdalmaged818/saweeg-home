@@ -13,8 +13,10 @@
 }
 
 .eyebrow--dark {
-  background: var(--color-on-olive-faint);
+  background: transparent;
   color: var(--color-ivory);
+  padding: 0;
+  border: 0;
 }
 
 .button-row {
@@ -454,11 +456,8 @@ html[dir="rtl"] .button-icon {
 
 .about-copy p { max-width: 58ch; }
 
-.contact-card .eyebrow { color: var(--color-on-olive-secondary); }
+.contact-card .eyebrow { color: var(--color-on-olive-secondary); background: transparent; padding: 0; border: 0; min-height: 0; }
 
 .contact-card .button-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-block-start: 24px; }
 
 .contact-card .button { min-width: 0; width: auto; padding-inline: 10px; font-size: 0.9375rem; }
-
-
-
