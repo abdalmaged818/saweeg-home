@@ -16,8 +16,9 @@ async function compareProduction(){
   if(!baseline){
     const revision='2afc684df303c0bc5aadf97631f338ec10bd9189';
     const scratch=fs.mkdtempSync(path.join(os.tmpdir(),'saweeg-global-output-baseline-'));
-    const archive=execFileSync('git',['archive',revision],{maxBuffer:64*1024*1024});
-    execFileSync('tar',['-x','-C',scratch],{input:archive});
+    const archive=path.join(scratch,'baseline.tar');
+    execFileSync('git',['archive','--output',archive,revision]);
+    execFileSync('tar',['-xf',archive,'-C',scratch]);
     fs.symlinkSync(path.resolve('node_modules'),path.join(scratch,'node_modules'),'dir');
     execFileSync('corepack',['pnpm','build'],{cwd:scratch,stdio:'pipe',maxBuffer:64*1024*1024});
     baseline=path.join(scratch,'dist');
