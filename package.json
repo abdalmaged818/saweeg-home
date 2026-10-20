@@ -17,12 +17,13 @@
     "test:menu": "node --experimental-strip-types --test tests/menu-official-data.test.ts",
     "test:brand": "node --test tests/brand-color-tokens.test.mjs",
     "typecheck": "tsc --noEmit",
-    "build": "node scripts/generate-favicons.mjs && node scripts/generate-social-preview.mjs && node --experimental-strip-types scripts/generate-pages.ts && tsc --noEmit && vite build && node scripts/verify-unified-build.mjs",
+    "build": "node scripts/generate-favicons.mjs && node scripts/generate-social-preview.mjs && node --experimental-strip-types scripts/generate-pages.ts && tsc --noEmit && vite build && node --experimental-strip-types scripts/build-global-v1.mjs && node scripts/verify-unified-build.mjs",
     "verify:build": "node scripts/verify-unified-build.mjs",
     "preview": "vite preview"
   },
   "devDependencies": {
     "@types/node": "22.15.3",
+    "linkedom": "0.18.13",
     "sharp": "0.35.4",
     "typescript": "5.8.3",
     "vite": "7.3.5",

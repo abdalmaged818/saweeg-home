@@ -1,5 +1,6 @@
 import { arabicMaster, requiredContentKeys, type WorldContent } from "./content/ar.ts";
-import { localeRegistry, type LocaleReview, type WorldLocale } from "./locales.ts";
+import { localeRegistry, v1LocaleCodes, isV1Locale, type LocaleReview, type WorldLocale } from "./locales.ts";
+import type {WorldDisplayContent} from "./content/types.ts";
 import { wave1Content, wave1Metadata } from "./content/wave1.generated.ts";
 
 export interface TranslationPackage {
@@ -43,10 +44,22 @@ export function approvedContent(locale: WorldLocale): WorldContent {
   return pack.content as WorldContent;
 }
 export function publicationIssues(locale: WorldLocale): string[] {
-  return [...packageIssues(locale, translationPackages[locale]), ...(
-    localeRegistry[locale].activation === "inactive" ? ["phase-1-inactive"] : [])];
+  const pack=translationPackages[locale];
+  const issues=packageIssues(locale,pack).filter(issue=>!issue.startsWith("review:"));
+  if(!isV1Locale(locale)||localeRegistry[locale].activation!=="active"||localeRegistry[locale].publicationScope!=="v1-original-hadith-only")issues.push("v1-inactive");
+  if(pack&&JSON.stringify(Object.keys(pack.content))!==JSON.stringify(requiredContentKeys))issues.push("content-order");
+  if(locale!=="ar"&&pack?.review.content!=="ready-for-owner-review")issues.push("not-owner-authorized-wave1");
+  return issues;
 }
-export const publishableLocales = (): WorldLocale[] => [];
-export function assertPublicActivation(locale: WorldLocale): never {
-  throw new Error(`Saweeg Global is not activated: ${locale} (${publicationIssues(locale).join(",")})`);
+export const publishableLocales = (): WorldLocale[] => [...v1LocaleCodes];
+export function assertPublicActivation(locale: WorldLocale): void {
+  const issues=publicationIssues(locale);
+  if(issues.length)throw new Error(`Saweeg Global is not activated: ${locale} (${issues.join(",")})`);
+}
+// Build-time projection, not a public translation bundle. Full approval above remains strict.
+export function publicV1Content(locale:WorldLocale):WorldDisplayContent {
+  assertPublicActivation(locale);
+  const {"world.talbinah.hadithTranslation":unapprovedMeaning,...content}=translationPackages[locale]!.content;
+  void unapprovedMeaning;
+  return content as WorldDisplayContent;
 }

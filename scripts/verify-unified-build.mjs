@@ -10,7 +10,7 @@ const distRoot = path.join(projectRoot, "dist");
 execFileSync(process.execPath,["--experimental-strip-types","scripts/global-wave1.mjs"],{cwd:projectRoot,stdio:"inherit"});
 execFileSync(process.execPath, ["--experimental-strip-types", "--test",
   "tests/sabtiya.test.ts", "tests/menu-official-data.test.ts", "tests/haram-store-card.test.ts",
-  "tests/brand-color-tokens.test.mjs", "tests/product-image-catalog.test.ts", "tests/menu-localization.test.ts", "tests/visual-redesign.test.ts", "tests/saweeg-global-foundation.test.ts", "tests/saweeg-global-wave1.test.ts"], { cwd: projectRoot, stdio: "inherit" });
+  "tests/brand-color-tokens.test.mjs", "tests/product-image-catalog.test.ts", "tests/menu-localization.test.ts", "tests/visual-redesign.test.ts", "tests/saweeg-global-foundation.test.ts", "tests/saweeg-global-wave1.test.ts", "tests/saweeg-global-v1.test.ts"], { cwd: projectRoot, stdio: "inherit" });
 const sabtiyaHome = fs.readFileSync(path.join(distRoot, "index.html"), "utf8");
 const sabtiyaEnglishHome = fs.readFileSync(path.join(distRoot, "en/index.html"), "utf8");
 if ((sabtiyaHome.match(/class="swg-haram container"/g) ?? []).length !== 1 ||

@@ -1,0 +1,5 @@
+@media (min-width: 768px) {
+  .swg-world[data-release="v1"] .world-language-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

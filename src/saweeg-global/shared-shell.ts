@@ -1,11 +1,11 @@
 import { renderHeader } from "../components/header.ts";
 import { renderFooter } from "../components/footer.ts";
 import { getCopy } from "../i18n/index.ts";
-import type { WorldContent } from "./content/ar.ts";
+import type { WorldShellContent } from "./content/types.ts";
 
 export interface ShellLink { label: string; href: string; external?: boolean }
 export interface WorldShellProps {
-  content: WorldContent;
+  content: WorldShellContent;
   selectorHref: string;
   navigation: readonly ShellLink[];
   footerLinks: readonly ShellLink[];
