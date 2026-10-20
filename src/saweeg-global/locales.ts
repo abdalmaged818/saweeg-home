@@ -1,6 +1,6 @@
 export const localeCodes = ["ar", "en", "ur", "id", "bn", "tr", "fa", "fr", "ms", "ru"] as const;
 export type WorldLocale = typeof localeCodes[number];
-export type ReviewStatus = "pending" | "approved";
+export type ReviewStatus = "pending" | "ready-for-owner-review" | "approved";
 export type Direction = "rtl" | "ltr";
 export type LanguageLabelKey = `world.languages.${WorldLocale}.label`;
 
@@ -33,7 +33,7 @@ export interface WorldLocaleManifest extends LocaleReview {
 export const localeRegistry = Object.freeze(Object.fromEntries(localeCodes.map(code => [code, Object.freeze({
   code, labelKey: `world.languages.${code}.label`,
   directionality: ["ar", "ur", "fa"].includes(code) ? "rtl" : "ltr",
-  futureRoute: `/${code}/`, content: code === "ar" ? "approved" : "pending",
+  futureRoute: `/${code}/`, content: code === "ar" ? "approved" : ["en","tr","ur","fa","id"].includes(code) ? "ready-for-owner-review" : "pending",
   terminology: code === "ar" ? "approved" : "pending", editorial: code === "ar" ? "approved" : "pending",
   religious: code === "ar" ? "approved" : "pending", direction: code === "ar" ? "approved" : "pending",
   typography: code === "ar" ? "approved" : "pending", activation: "inactive", publishable: false, welcomePhrase: null

@@ -1,5 +1,6 @@
 import { arabicMaster, requiredContentKeys, type WorldContent } from "./content/ar.ts";
 import { localeRegistry, type LocaleReview, type WorldLocale } from "./locales.ts";
+import { wave1Content, wave1Metadata } from "./content/wave1.generated.ts";
 
 export interface TranslationPackage {
   locale: WorldLocale;
@@ -7,10 +8,14 @@ export interface TranslationPackage {
   review: LocaleReview;
   provenance: { reviewer: string; revision: string };
 }
-// No English draft, inherited dictionary, get-or-default lookup or translation inference.
+// Exact generated review packages; no inherited dictionary or fallback lookup.
 export const translationPackages: Readonly<Partial<Record<WorldLocale, TranslationPackage>>> = Object.freeze({
   ar: Object.freeze({locale: "ar", content: arabicMaster, review: localeRegistry.ar,
-    provenance: {reviewer: "Management-approved Arabic master", revision: "2026-10-20"}})
+    provenance: {reviewer: "Management-approved Arabic master", revision: "2026-10-20"}}),
+  ...Object.fromEntries(Object.entries(wave1Content).map(([locale,content])=>[locale,Object.freeze({
+    locale,content,review:localeRegistry[locale as WorldLocale],
+    provenance:{reviewer:wave1Metadata[locale as keyof typeof wave1Metadata].specialist_role,revision:"wave1-owner-review"}
+  })]))
 });
 export function packageIssues(locale: WorldLocale, pack?: TranslationPackage): string[] {
   if (!pack) return ["missing-package"];

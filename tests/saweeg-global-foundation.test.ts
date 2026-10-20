@@ -54,9 +54,9 @@ test("Arabic master completeness and exact approved snapshot",()=>{
   assert.equal(arabicMaster["world.hero.cta"],arabicMaster["world.about.heading"]);
   assert.deepEqual(packageIssues("ar",translationPackages.ar),[]);
 });
-test("nine locales pending, no silent fallback and every public activation closed",()=>{
-  assert.deepEqual(Object.keys(translationPackages),["ar"]);assert.deepEqual(publishableLocales(),[]);
-  for(const code of localeCodes){assert(publicationIssues(code).includes("phase-1-inactive"));assert.throws(()=>assertPublicActivation(code));if(code!=="ar"){for(const key of ["content","terminology","editorial","religious","direction","typography"] as const)assert.equal(localeRegistry[code][key],"pending");assert.throws(()=>approvedContent(code),/Locale unavailable/);}}
+test("five review-ready and four pending locales have no silent fallback and every public activation remains closed",()=>{
+  assert.deepEqual(Object.keys(translationPackages),["ar","en","tr","ur","fa","id"]);assert.deepEqual(publishableLocales(),[]);
+  for(const code of localeCodes){assert(publicationIssues(code).includes("phase-1-inactive"));assert.throws(()=>assertPublicActivation(code));if(code!=="ar"){assert.equal(localeRegistry[code].content,["en","tr","ur","fa","id"].includes(code)?"ready-for-owner-review":"pending");for(const key of ["terminology","editorial","religious","direction","typography"] as const)assert.equal(localeRegistry[code][key],"pending");assert.throws(()=>approvedContent(code),/Locale unavailable/);}}
 });
 test("missing keys, raw keys, unknown keys and each pending review fail closed",()=>{
   const approved=translationPackages.ar!;

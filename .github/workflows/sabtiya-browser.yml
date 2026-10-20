@@ -6,6 +6,7 @@ on:
       - 'src/**'
       - 'public/**'
       - 'assets-source/**'
+      - 'content-source/saweeg-global/**'
       - 'menu/**'
       - 'scripts/**'
       - 'tests/**'
@@ -57,7 +58,7 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/sabtiya-browser/node_modules/playwright/index.mjs
         run: |
-          git fetch origin 2afc684df303c0bc5aadf97631f338ec10bd9189 --depth=1
+          git fetch origin 4ad8147df978625388f078ce9edeab36e5d2e021 --depth=1
           node tests/saweeg-global-browser.mjs
       - name: Save non-public Global test evidence
         if: always()
