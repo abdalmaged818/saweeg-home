@@ -1,0 +1,49 @@
+name: Saweeg Global V1 browser verification
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'assets-source/**'
+      - 'content-source/saweeg-global/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - package.json
+      - pnpm-lock.yaml
+      - .node-version
+      - tsconfig.json
+      - vite.config.ts
+      - .github/workflows/global-v1-browser.yml
+permissions:
+  contents: read
+jobs:
+  global-v1-browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11.19.0
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build
+      - name: Install isolated Chromium
+        run: |
+          npm install --prefix "$RUNNER_TEMP/global-v1-browser" --no-package-lock playwright@1.56.1
+          node "$RUNNER_TEMP/global-v1-browser/node_modules/playwright/cli.js" install --with-deps chromium
+      - name: Public V1 routes, six locales, responsive accessibility and navigation
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/global-v1-browser/node_modules/playwright/index.mjs
+        run: node --experimental-strip-types tests/saweeg-global-v1-browser.mjs
+      - name: Save Global V1 browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: saweeg-global-v1-browser-results
+          path: test-results/saweeg-global-v1

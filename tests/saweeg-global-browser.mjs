@@ -28,9 +28,9 @@ async function compareProduction(){
     execFileSync('corepack',['pnpm','build'],{cwd:scratch,stdio:'pipe',maxBuffer:64*1024*1024});
     baseline=path.join(scratch,'dist');
   }
-  const before=walk(baseline),after=walk('dist');assert.deepEqual(after,before,'Production emitted-file set changed');
+  const before=walk(baseline),allAfter=walk('dist'),after=allAfter.filter(file=>!file.startsWith('global/'));assert.deepEqual(after,before,'Existing production emitted-file set changed');
   for(const file of before)assert.equal(digest(path.join('dist',file)),digest(path.join(baseline,file)),`Production bytes changed: ${file}`);
-  report.productionComparison={baseline:'4ad8147df978625388f078ce9edeab36e5d2e021',files:before.length,byteIdentical:true};
+  report.productionComparison={baseline:'4ad8147df978625388f078ce9edeab36e5d2e021',files:before.length,byteIdentical:true,approvedGlobalFiles:allAfter.length-after.length};
 }
 const server=await createServer({configFile:false,root:process.cwd(),server:{host:'127.0.0.1',port:0,hmr:false},plugins:[{
   name:'isolated-global-test-only',configureServer(server){server.middlewares.use(async(req,res,next)=>{

@@ -1,5 +1,8 @@
 export const localeCodes = ["ar", "en", "ur", "id", "bn", "tr", "fa", "fr", "ms", "ru"] as const;
 export type WorldLocale = typeof localeCodes[number];
+// Owner-authorized V1 release, 20 October 2026; not religious-meaning approval.
+export const v1LocaleCodes = ["ar","en","tr","ur","fa","id"] as const;
+export const isV1Locale = (code:WorldLocale):boolean => v1LocaleCodes.some(active=>active===code);
 export type ReviewStatus = "pending" | "ready-for-owner-review" | "approved";
 export type Direction = "rtl" | "ltr";
 export type LanguageLabelKey = `world.languages.${WorldLocale}.label`;
@@ -26,8 +29,9 @@ export interface WorldLocaleManifest extends LocaleReview {
   directionality: Direction;
   // Relative route intent only; no domain, hosting decision or generated route.
   futureRoute: `/${WorldLocale}/`;
-  activation: "inactive";
-  publishable: false;
+  activation: "inactive" | "active";
+  publishable: boolean;
+  publicationScope: "inactive" | "v1-original-hadith-only";
   welcomePhrase: null;
 }
 export const localeRegistry = Object.freeze(Object.fromEntries(localeCodes.map(code => [code, Object.freeze({
@@ -36,6 +40,7 @@ export const localeRegistry = Object.freeze(Object.fromEntries(localeCodes.map(c
   futureRoute: `/${code}/`, content: code === "ar" ? "approved" : ["en","tr","ur","fa","id"].includes(code) ? "ready-for-owner-review" : "pending",
   terminology: code === "ar" ? "approved" : "pending", editorial: code === "ar" ? "approved" : "pending",
   religious: code === "ar" ? "approved" : "pending", direction: code === "ar" ? "approved" : "pending",
-  typography: code === "ar" ? "approved" : "pending", activation: "inactive", publishable: false, welcomePhrase: null
+  typography: code === "ar" ? "approved" : "pending", activation: isV1Locale(code)?"active":"inactive",
+  publishable:isV1Locale(code),publicationScope:isV1Locale(code)?"v1-original-hadith-only":"inactive",welcomePhrase: null
 })])) as Record<WorldLocale, WorldLocaleManifest>);
 export const isWorldLocale = (value: string): value is WorldLocale => localeCodes.some(code => code === value);

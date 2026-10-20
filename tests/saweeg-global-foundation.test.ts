@@ -5,7 +5,7 @@ import {createHash} from "node:crypto";
 import {execFileSync} from "node:child_process";
 import {parse} from "yaml";
 import {arabicMaster,requiredContentKeys} from "../src/saweeg-global/content/ar.ts";
-import {localeCodes,localeRegistry,languageLabels} from "../src/saweeg-global/locales.ts";
+import {localeCodes,localeRegistry,languageLabels,v1LocaleCodes,isV1Locale} from "../src/saweeg-global/locales.ts";
 import {translationPackages,approvedContent,packageIssues,publicationIssues,publishableLocales,assertPublicActivation} from "../src/saweeg-global/validation.ts";
 import {featuredProducts,featuredImage} from "../src/saweeg-global/products.ts";
 import {canonicalImageFor} from "../src/menu/data/catalog-images.ts";
@@ -37,16 +37,16 @@ test("Hadith bytes match the final handoff and the Arabic page renders no duplic
   // Synthetic component-only sentinel: no translation package or pending locale is activated.
   for(const locale of ["en","ur"] as const){
     const meaning="review-only meaning sentinel";
-    const rendered=renderTalbinah({...arabicMaster,"world.talbinah.hadithTranslation":meaning},m=>m.source,locale);
+    const rendered=renderTalbinah(arabicMaster,m=>m.source,locale,meaning);
     assert.equal(rendered.split(original).length-1,1);assert.equal(rendered.split(meaning).length-1,1);
     assert(rendered.includes(`<p class="world-hadith-meaning" lang="${locale}" dir="${localeRegistry[locale].directionality}">${meaning}</p>`));
     assert(!/<(?:a|button)\b/.test(rendered));
   }
 });
-test("exact ten endonyms, keys, directions and inactive locale manifest",()=>{
+test("exact ten endonyms and the six-locale, original-Hadith-only V1 activation manifest",()=>{
   assert.deepEqual(localeCodes,["ar","en","ur","id","bn","tr","fa","fr","ms","ru"]);
   assert.deepEqual(Object.values(languageLabels),["العربية","English","اردو","Bahasa Indonesia","বাংলা","Türkçe","فارسی","Français","Bahasa Melayu","Русский"]);
-  for(const code of localeCodes){const m=localeRegistry[code];assert.equal(m.code,code);assert.equal(m.labelKey,`world.languages.${code}.label`);assert.equal(m.directionality,["ar","ur","fa"].includes(code)?"rtl":"ltr");assert.equal(m.futureRoute,`/${code}/`);assert.equal(m.activation,"inactive");assert.equal(m.publishable,false);assert.equal(m.welcomePhrase,null);}
+  for(const code of localeCodes){const m=localeRegistry[code];assert.equal(m.code,code);assert.equal(m.labelKey,`world.languages.${code}.label`);assert.equal(m.directionality,["ar","ur","fa"].includes(code)?"rtl":"ltr");assert.equal(m.futureRoute,`/${code}/`);assert.equal(m.activation,isV1Locale(code)?"active":"inactive");assert.equal(m.publishable,isV1Locale(code));assert.equal(m.publicationScope,isV1Locale(code)?"v1-original-hadith-only":"inactive");assert.equal(m.welcomePhrase,null);}
 });
 test("Arabic master completeness and exact approved snapshot",()=>{
   const snapshot=JSON.parse(fs.readFileSync("tests/fixtures/saweeg-global/approved-ar.json","utf8"));
@@ -56,9 +56,9 @@ test("Arabic master completeness and exact approved snapshot",()=>{
   assert.equal(arabicMaster["world.hero.cta"],arabicMaster["world.about.heading"]);
   assert.deepEqual(packageIssues("ar",translationPackages.ar),[]);
 });
-test("five review-ready and four pending locales have no silent fallback and every public activation remains closed",()=>{
-  assert.deepEqual(Object.keys(translationPackages),["ar","en","tr","ur","fa","id"]);assert.deepEqual(publishableLocales(),[]);
-  for(const code of localeCodes){assert(publicationIssues(code).includes("phase-1-inactive"));assert.throws(()=>assertPublicActivation(code));if(code!=="ar"){assert.equal(localeRegistry[code].content,["en","tr","ur","fa","id"].includes(code)?"ready-for-owner-review":"pending");for(const key of ["terminology","editorial","religious","direction","typography"] as const)assert.equal(localeRegistry[code][key],"pending");assert.throws(()=>approvedContent(code),/Locale unavailable/);}}
+test("V1 activation never grants full religious approval or fallback to pending locales",()=>{
+  assert.deepEqual(Object.keys(translationPackages),["ar","en","tr","ur","fa","id"]);assert.deepEqual(v1LocaleCodes,["ar","en","tr","ur","fa","id"]);assert.deepEqual(publishableLocales(),v1LocaleCodes);
+  for(const code of localeCodes){if(isV1Locale(code)){assert.deepEqual(publicationIssues(code),[]);assert.doesNotThrow(()=>assertPublicActivation(code));}else{assert(publicationIssues(code).includes("v1-inactive"));assert.throws(()=>assertPublicActivation(code));}if(code!=="ar"){assert.equal(localeRegistry[code].content,["en","tr","ur","fa","id"].includes(code)?"ready-for-owner-review":"pending");for(const key of ["terminology","editorial","religious","direction","typography"] as const)assert.equal(localeRegistry[code][key],"pending");assert.throws(()=>approvedContent(code),/Locale unavailable/);}}
 });
 test("missing keys, raw keys, unknown keys and each pending review fail closed",()=>{
   const approved=translationPackages.ar!;
@@ -82,7 +82,7 @@ test("branch destinations, exact hours, and menu availability come from branch a
   assert.deepEqual(worldBranches.map(b=>arabicMaster[`world.branches.${b.id}.hours`]),["٤:٣٠ مساءً–١٢ ليلًا. الخميس والجمعة حتى ٢ صباحًا.","٦ صباحًا–١٢ ظهرًا، ثم ٤:٣٠ مساءً–١١:٣٠ مساءً.","نستقبلكم على مدار الساعة."]);
   for(const b of worldBranches)for(const code of localeCodes){const url=branchMenu(b,code);assert.equal(Boolean(url),b.id==="haram"||code==="ar"||code==="en");if(b.id==="haram")assert.equal(url,`https://go.saweegsa.com/menu/haram/${code}/`);}
 });
-test("editorial originals are preserved and do not enter public",()=>{
+test("editorial originals remain preserved and approved V1 copies keep identical image bytes",()=>{
   for(const m of Object.values(editorialMedia))assert(fs.existsSync("privateSource" in m?m.source:`public${m.source}`));
   const originals=JSON.parse(fs.readFileSync("tests/fixtures/saweeg-global/source-hashes.json","utf8"));
   for(const [file,digest] of Object.entries(originals))assert.equal(hash(fs.readFileSync(file)),digest,file);
@@ -125,7 +125,14 @@ test("all baseline production source, assets, menus, prices and routes stay byte
   previousGlobal.run="node tests/saweeg-global-browser.mjs";
   assert.deepEqual(currentBrowser,previousBrowser);
 });
-test("no public Global route, content, asset or entry emitted",()=>{
+test("Global V1 emits no private preview, raw keys, review metadata or unapproved religious meaning",()=>{
   const walk=(dir:string):string[]=>fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(`${dir}/${e.name}`):[`${dir}/${e.name}`]);
-  for(const file of walk("dist")){assert(!/saweeg-global|world-preview|_global-source/.test(file));if(/\.(html|js|css|xml|json)$/.test(file))assert(!/سويق للعالم|world\.hero|saweeglobal|_global-preview/.test(fs.readFileSync(file,"utf8")),file);}
+  for(const file of walk("dist")){
+    assert(!/world-preview|_global-source|content-source|wave1.generated/.test(file));
+    if(/\.(html|js|css|xml|json)$/.test(file)){
+      const text=fs.readFileSync(file,"utf8");assert(!/world\.hero|_global-preview|ready-for-owner-review|religious_review_status/.test(text),file);
+      if(!file.startsWith("dist/global/"))assert(!/سويق للعالم|saweeglobal/.test(text),file);
+      else for(const [locale,pack]of Object.entries(translationPackages))if(locale!=="ar")assert(!text.includes(pack!.content["world.talbinah.hadithTranslation"]),file);
+    }
+  }
 });
