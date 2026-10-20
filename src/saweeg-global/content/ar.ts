@@ -1,4 +1,4 @@
-// Approved Arabic master. Source: management brief and final handoff, 20 October 2026.
+// Approved Arabic master. Exact content from the final Arabic handoff, 20 October 2026.
 // Headings and actions intentionally have separate stable keys.
 export const arabicMaster = {
   "world.welcome.title": "حيّاكم في سويق",
@@ -13,7 +13,8 @@ export const arabicMaster = {
   "world.talbinah.heading": "ما التلبينة النبوية؟",
   "world.talbinah.description": "التلبينة غذاء تقليدي يُحضّر من الشعير المطحون، ويُطهى حتى يصبح بقوام ناعم. ورد ذكرها في السنة النبوية، وهي من المنتجات الأساسية التي تقدّمها سويق بصور معاصرة.",
   "world.talbinah.hadithIntro": "عن عائشة رضي الله عنها، أن رسول الله ﷺ قال:",
-  "world.talbinah.hadithText": "«التَّلْبِينَةُ مَجَمَّةٌ لِفُؤَادِ الْمَرِيضِ، تَذْهَبُ بِبَعْضِ الْحُزْنِ».",
+  "world.talbinah.hadithText": "«التَّلْبِينَةُ مَجَمَّةٌ لِفُؤَادِ الْمَرِيضِ، تَذْهَبُ بِبَعْضِ الْحُزْنِ».",
+  "world.talbinah.hadithTranslation": "«التَّلْبِينَةُ مَجَمَّةٌ لِفُؤَادِ الْمَرِيضِ، تَذْهَبُ بِبَعْضِ الْحُزْنِ».",
   "world.talbinah.hadithSource": "رواه البخاري، حديث ٥٤١٧.",
   "world.products.heading": "تعرّف على منتجاتنا",
   "world.products.description": "من التلبينة والسويق إلى تجارب معاصرة للضيافة والتحضير في المنزل.",
@@ -27,7 +28,6 @@ export const arabicMaster = {
   "world.products.saweegMaamoul.name": "معمول السويق",
   "world.branches.heading": "حيّاكم في فروعنا",
   "world.branches.description": "زورونا في المدينة المنورة. اختاروا الفرع المناسب، وشوفوا موقعه ومنيوه.",
-  "world.branches.mapCta": "الموقع على الخريطة",
   "world.branches.maqsed.name": "فرع المقصد",
   "world.branches.maqsed.location": "داخل مقصد قباء، بجوار مسجد قباء، المدينة المنورة.",
   "world.branches.maqsed.hours": "٤:٣٠ مساءً–١٢ ليلًا. الخميس والجمعة حتى ٢ صباحًا.",
@@ -37,6 +37,7 @@ export const arabicMaster = {
   "world.branches.haram.name": "فرع الحرم",
   "world.branches.haram.location": "باب السلام ٣١٤، المدينة المنورة.",
   "world.branches.haram.hours": "نستقبلكم على مدار الساعة.",
+  "world.branches.mapCta": "الموقع على الخريطة",
   "world.menu.cta": "شوف المنيو",
   "world.menu.languageUnavailable": "منيو هذا الفرع غير متاح بلغتك حاليًا. يمكنك اختيار إحدى اللغات المتوفرة.",
   "world.menu.chooseLanguageCta": "اختر لغة المنيو",
@@ -49,8 +50,8 @@ export const arabicMaster = {
   "world.contact.whatsappCta": "تواصل معنا عبر واتساب",
   "world.social.heading": "تابع سويق للعالم",
   "world.social.description": "حكايات ومنتجات ومحتوى يقرّب موروث المدينة إليكم، بلغات متعددة.",
-  "world.social.instagram": "إنستجرام",
-  "world.social.tiktok": "تيك توك",
+  "world.social.instagramCta": "إنستجرام",
+  "world.social.tiktokCta": "تيك توك",
   "world.language.changeCta": "تغيير اللغة",
   "world.navigation.backToTop": "العودة للأعلى",
   "world.nav.about": "عن سويق",
@@ -66,13 +67,12 @@ export const arabicMaster = {
   "world.footer.linksTitle": "روابط سويق",
   "world.footer.tagline": "امتداد عصري للأصالة",
   "world.footer.rights": "© سويق. جميع الحقوق محفوظة.",
-  "world.media.logo.alt": "شعار سويق الرسمي",
-  "world.media.hero.alt": "معلم من المدينة المنورة ضمن هوية سويق",
-  "world.media.about.alt": "عبوة التلبينة الباردة من سويق",
-  "world.media.talbinah.alt": "بودرة التلبينة في وعاء فخاري",
-  "world.media.maqsed.alt": "واجهة فرع سويق في المقصد",
-  "world.media.bustan.alt": "واجهة فرع سويق في بستان المستظل",
-  "world.media.haram.alt": "واجهة فرع سويق في الحرم"
+  "world.images.heroAlt": "مشهد من المدينة المنورة",
+  "world.images.aboutAlt": "تلبينة باردة من سويق",
+  "world.images.talbinahAlt": "بودرة التلبينة في وعاء",
+  "world.branches.maqsed.imageAlt": "واجهة فرع سويق في مقصد قباء",
+  "world.branches.bustan.imageAlt": "واجهة فرع سويق في بستان المستظل",
+  "world.branches.haram.imageAlt": "واجهة فرع سويق في منطقة الحرم"
 } as const;
 
 export type WorldContentKey = keyof typeof arabicMaster;

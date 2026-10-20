@@ -30,8 +30,8 @@ function frame(c:WorldContent,options:WorldRenderOptions,minimal:boolean,body:st
   const links:ShellLink[]=sections.map(id=>({label:c[`world.nav.${id}`],href:`#world-${id}`}));
   const footerLinks:ShellLink[]=minimal ? [
     {label:c["world.store.cta"],href:worldLinks.store,external:true},
-    {label:c["world.social.instagram"],href:worldLinks.instagram,external:true},
-    {label:c["world.social.tiktok"],href:worldLinks.tiktok,external:true},
+    {label:c["world.social.instagramCta"],href:worldLinks.instagram,external:true},
+    {label:c["world.social.tiktokCta"],href:worldLinks.tiktok,external:true},
     {label:c["world.contact.whatsappCta"],href:worldLinks.whatsapp,external:true}
   ] : [...links,{label:c["world.store.cta"],href:worldLinks.store,external:true}];
   const props={content:c,selectorHref:options.selectorHref,navigation:links,footerLinks,minimal};
@@ -52,7 +52,7 @@ export function renderAbout(c:WorldContent,resolve:MediaResolver):string {
 }
 export function renderTalbinah(c:WorldContent,resolve:MediaResolver,locale:WorldLocale):string {
   const original=approvedContent("ar")["world.talbinah.hadithText"];
-  return `<section class="world-section" id="world-talbinah" aria-labelledby="world-talbinah-title"><div class="container world-split world-talbinah"><div><h2 id="world-talbinah-title" tabindex="-1">${text(c,"world.talbinah.heading")}</h2><p class="world-muted">${text(c,"world.talbinah.description")}</p><figure class="world-hadith"><p>${text(c,"world.talbinah.hadithIntro")}</p><blockquote lang="ar" dir="rtl">${esc(original)}</blockquote>${locale==="ar"?"":`<p lang="${locale}">${text(c,"world.talbinah.hadithText")}</p>`}<figcaption>${text(c,"world.talbinah.hadithSource")}</figcaption></figure></div><figure class="world-media">${image(editorialMedia.talbinah,c,resolve)}</figure></div></section>`;
+  return `<section class="world-section" id="world-talbinah" aria-labelledby="world-talbinah-title"><div class="container world-split world-talbinah"><div><h2 id="world-talbinah-title" tabindex="-1">${text(c,"world.talbinah.heading")}</h2><p class="world-muted">${text(c,"world.talbinah.description")}</p><figure class="world-hadith"><p>${text(c,"world.talbinah.hadithIntro")}</p><blockquote lang="ar" dir="rtl">${esc(original)}</blockquote>${locale==="ar"?"":`<p class="world-hadith-meaning" lang="${locale}" dir="${localeRegistry[locale].directionality}">${text(c,"world.talbinah.hadithTranslation")}</p>`}<figcaption>${text(c,"world.talbinah.hadithSource")}</figcaption></figure></div><figure class="world-media">${image(editorialMedia.talbinah,c,resolve)}</figure></div></section>`;
 }
 export function renderProducts(c:WorldContent):string {
   return `<section class="world-section world-band" id="world-products" aria-labelledby="world-products-title"><div class="container"><div class="world-section-head"><h2 id="world-products-title" tabindex="-1">${text(c,"world.products.heading")}</h2><p>${text(c,"world.products.description")}</p></div><ul class="world-product-grid">${featuredProducts.map(p=>{const m=featuredImage(p.id);return `<li><article class="world-product" data-world-product="${p.id}"><div class="world-product-media"><img src="/menu/assets/products/${m.file}" width="1400" height="1050" alt="${text(c,p.nameKey)}" loading="lazy" decoding="async" style="object-fit:${m.fit};object-position:${m.position}"></div><h3>${text(c,p.nameKey)}</h3></article></li>`;}).join("")}</ul></div></section>`;
@@ -70,7 +70,7 @@ export function renderStore(c:WorldContent):string {
   return `<section class="container" id="world-store" aria-labelledby="world-store-title"><div class="world-store"><div><h2 id="world-store-title">${text(c,"world.store.heading")}</h2><p>${text(c,"world.store.description")}</p></div>${action(c["world.store.cta"],worldLinks.store,"gold",true)}</div></section>`;
 }
 export function renderContact(c:WorldContent):string {
-  return `<section class="world-section" id="world-contact" aria-labelledby="world-contact-title"><div class="container world-connect"><article class="world-contact"><h2 id="world-contact-title" tabindex="-1">${text(c,"world.contact.heading")}</h2><p>${text(c,"world.contact.description")}</p><a class="world-phone" href="${worldLinks.phone}" dir="ltr">${text(c,"world.contact.phone")}</a>${action(c["world.contact.whatsappCta"],worldLinks.whatsapp,"primary",true)}</article><article class="world-social"><h2>${text(c,"world.social.heading")}</h2><p>${text(c,"world.social.description")}</p><div class="world-actions">${action(c["world.social.instagram"],worldLinks.instagram,"secondary",true)}${action(c["world.social.tiktok"],worldLinks.tiktok,"secondary",true)}</div></article></div></section>`;
+  return `<section class="world-section" id="world-contact" aria-labelledby="world-contact-title"><div class="container world-connect"><article class="world-contact"><h2 id="world-contact-title" tabindex="-1">${text(c,"world.contact.heading")}</h2><p>${text(c,"world.contact.description")}</p><a class="world-phone" href="${worldLinks.phone}" dir="ltr">${text(c,"world.contact.phone")}</a>${action(c["world.contact.whatsappCta"],worldLinks.whatsapp,"primary",true)}</article><article class="world-social"><h2>${text(c,"world.social.heading")}</h2><p>${text(c,"world.social.description")}</p><div class="world-actions">${action(c["world.social.instagramCta"],worldLinks.instagram,"secondary",true)}${action(c["world.social.tiktokCta"],worldLinks.tiktok,"secondary",true)}</div></article></div></section>`;
 }
 export function renderGlobalPage(options:WorldRenderOptions):HTMLElement {
   const c=contentFor(options);

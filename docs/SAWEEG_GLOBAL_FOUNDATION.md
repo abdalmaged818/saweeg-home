@@ -64,6 +64,16 @@ focus patterns and icon renderer are reused. No existing stylesheet or token is 
 
 ## Translation and religious review workflow
 
+The final Arabic schema is the 20 October 2026 v1 handoff, retained verbatim as a test reference
+in `tests/fixtures/saweeg-global/arabic-handoff-v1.md`. Its 82 stable keys comprise exactly 72
+Arabic content keys and ten fixed native-language label keys. Tests compare the combined manifest
+and every value with that reference, reject unknown source keys, and pin the Hadith UTF-8 digest.
+Both Hadith keys store the exact approved Arabic source. Arabic renders it once; the separate
+meaning slot is used only by future non-Arabic content after its independent review gates pass.
+The linked header logo uses `world.brand.homeLabel` and a decorative empty image alt. The unlinked
+footer logo uses the invariant brand name `Saweeg`, without adding a localization key. No shell
+geometry, image presentation, production entry or publication gate changes in this correction.
+
 Later human-reviewed packages must supply exactly every required content key, their own locale,
 reviewer and revision provenance, and all explicit review approvals. Unknown/missing/empty/raw-key
 values fail validation. A copied Arabic master cannot masquerade as another language. There is no

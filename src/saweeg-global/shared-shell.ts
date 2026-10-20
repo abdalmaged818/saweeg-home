@@ -37,7 +37,7 @@ export function worldHeader(props: WorldShellProps): HTMLElement {
   const root=parsed(renderHeader({locale:"ar",page:"home",copy,prefix:"/",pathFor:()=>props.selectorHref}));
   const brand=required<HTMLAnchorElement>(root,".brand");
   brand.href=props.selectorHref;brand.setAttribute("aria-label",c["world.brand.homeLabel"]);
-  required<HTMLImageElement>(brand,"img").alt=c["world.media.logo.alt"];
+  required<HTMLImageElement>(brand,"img").alt="";
   const menu=required<HTMLButtonElement>(root,".menu-button");
   menu.setAttribute("aria-label",c["world.navigation.openMenu"]);
   menu.dataset.openLabel=c["world.navigation.openMenu"];menu.dataset.closeLabel=c["world.navigation.closeMenu"];
@@ -62,7 +62,8 @@ export function worldFooter(props: WorldShellProps): HTMLElement {
   const root=parsed(renderFooter({locale:"ar",page:"home",copy,prefix:"/",pathFor:()=>props.selectorHref}));
   const nav=required<HTMLElement>(root,".footer-nav");
   nav.setAttribute("aria-label",c["world.navigation.label"]);
-  required<HTMLImageElement>(root,".footer-brand img").alt=c["world.media.logo.alt"];
+  // The unlinked footer logo uses the invariant brand name, not another content key.
+  required<HTMLImageElement>(root,".footer-brand img").alt="Saweeg";
   required<HTMLElement>(root,".footer-brand p").textContent=c["world.footer.tagline"];
   required<HTMLElement>(root,".footer-bottom>span").textContent=c["world.footer.rights"];
   const heading=document.createElement("h2");heading.className="footer-nav-title";heading.textContent=c["world.footer.linksTitle"];

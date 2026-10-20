@@ -9,6 +9,8 @@ import {createServer} from 'vite';
 const {chromium}=await import(pathToFileURL(process.env.PLAYWRIGHT_MODULE).href);
 const results='test-results/saweeg-global';fs.mkdirSync(results,{recursive:true});
 const report={cases:[],productionComparison:null,failures:[]};
+const approvedRows=[...fs.readFileSync('tests/fixtures/saweeg-global/arabic-handoff-v1.md','utf8').matchAll(/^\| `(world\.[^`]+)` \| ([^|]+) \|/gm)].map(m=>[m[1],m[2].trim()]);
+const approvedArabic=Object.fromEntries(approvedRows);
 const digest=file=>createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 const walk=(dir,relative='')=>fs.readdirSync(path.join(dir,relative),{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(dir,path.join(relative,e.name)):[path.join(relative,e.name)]).sort();
 async function compareProduction(){
@@ -68,6 +70,9 @@ try{
       clipped:[...document.querySelectorAll('.swg-world main *')].filter(el=>{const r=el.getBoundingClientRect();return r.width>0&&(r.left<-.5||r.right>innerWidth+.5)}).map(el=>el.className),
       images:[...document.images].filter(i=>!i.complete||!i.naturalWidth||i.getBoundingClientRect().width===0).map(i=>i.src),
       h1:document.querySelectorAll('h1').length,
+      brand:{label:document.querySelector('.brand').getAttribute('aria-label'),alt:document.querySelector('.brand img').getAttribute('alt'),footerAlt:document.querySelector('.footer-brand img').getAttribute('alt')},
+      hadithText:document.querySelector('.world-hadith blockquote')?.textContent??null,
+      hadithMeanings:document.querySelectorAll('.world-hadith-meaning').length,
       landmarks:['header','main','footer'].map(s=>document.querySelectorAll(s).length),
       keys:/world\.[a-z]|Prototype only|Translation pending/.test(document.body.textContent),
       products:[...document.querySelectorAll('[data-world-product]')].map(el=>({id:el.dataset.worldProduct,file:new URL(el.querySelector('img').src).pathname.split('/').at(-1),fit:getComputedStyle(el.querySelector('img')).objectFit,position:getComputedStyle(el.querySelector('img')).objectPosition,ratio:el.querySelector('.world-product-media').getBoundingClientRect().width/el.querySelector('.world-product-media').getBoundingClientRect().height})),
@@ -77,6 +82,14 @@ try{
       reduced:[...document.querySelectorAll('.swg-world *')].every(el=>getComputedStyle(el).transitionDuration==='0s')
     }));
     assert.equal(state.overflow,false);assert.deepEqual(state.clipped,[]);assert.deepEqual(state.images,[]);assert.deepEqual(state.small,[]);assert.equal(state.h1,1);assert.deepEqual(state.landmarks,[1,1,1]);assert.equal(state.keys,false);assert.equal(state.reduced,true);assert.deepEqual(errors,[]);
+    assert.deepEqual(state.brand,{label:approvedArabic['world.brand.homeLabel'],alt:'',footerAlt:'Saweeg'});
+    assert.equal(await page.getByRole('link',{name:approvedArabic['world.brand.homeLabel'],exact:true}).count(),1);
+    assert.equal(await page.locator('.brand').getAttribute('href'),'/_global-preview/');
+    assert.equal(state.hadithMeanings,0);
+    if(view!=='selector'){
+      assert(Buffer.from(state.hadithText,'utf8').equals(Buffer.from(approvedArabic['world.talbinah.hadithText'],'utf8')));
+      assert.equal(await page.locator('.world-hadith blockquote').count(),1);
+    }
     if(view==='selector'){
       assert.equal(state.languages.length,10);assert.equal(new Set(state.languages.map(x=>x.height)).size,1);assert(Math.max(...state.languages.map(x=>x.width))-Math.min(...state.languages.map(x=>x.width))<.05);
       for(const l of state.languages){assert.equal(l.dir,['ar','ur','fa'].includes(l.lang)?'rtl':'ltr');assert.equal(l.arrow!=='none',l.dir==='rtl');}

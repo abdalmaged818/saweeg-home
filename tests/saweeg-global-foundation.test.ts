@@ -9,7 +9,38 @@ import {featuredProducts,featuredImage} from "../src/saweeg-global/products.ts";
 import {canonicalImageFor} from "../src/menu/data/catalog-images.ts";
 import {worldBranches,worldLinks,branchMenu} from "../src/saweeg-global/branches.ts";
 import {editorialMedia} from "../src/saweeg-global/media.ts";
+import {renderTalbinah} from "../src/saweeg-global/render.ts";
 const hash=(data:string|Buffer)=>createHash("sha256").update(data).digest("hex");
+const handoff=fs.readFileSync("tests/fixtures/saweeg-global/arabic-handoff-v1.md","utf8");
+const handoffRows=[...handoff.matchAll(/^\| `(world\.[^`]+)` \| ([^|]+) \|/gm)].map(m=>[m[1],m[2].trim()]);
+const handoffValues=Object.fromEntries(handoffRows);
+test("final Arabic handoff has exactly 72 content plus 10 fixed labels and no other keys",()=>{
+  const manifest={...arabicMaster,...languageLabels};
+  assert.equal(requiredContentKeys.length,72);assert.equal(Object.keys(languageLabels).length,10);
+  assert.equal(handoffRows.length,82);assert.equal(new Set(handoffRows.map(([key])=>key)).size,82);
+  assert.equal(Object.keys(manifest).length,82);
+  assert.deepEqual(Object.keys(manifest),Object.keys(handoffValues));
+  assert.deepEqual(manifest,handoffValues);
+  const scan=(directory:string):string[]=>fs.readdirSync(directory,{withFileTypes:true}).flatMap(e=>e.isDirectory()?scan(`${directory}/${e.name}`):e.name.endsWith(".ts")?[`${directory}/${e.name}`]:[]);
+  for(const file of scan("src/saweeg-global"))for(const match of fs.readFileSync(file,"utf8").matchAll(/["'`](world\.[a-zA-Z][\w.]+)["'`]/g))assert(Object.hasOwn(manifest,match[1]),`Unknown or obsolete localization key ${match[1]} in ${file}`);
+});
+test("Hadith bytes match the final handoff and the Arabic page renders no duplicate meaning",()=>{
+  const original=handoffValues["world.talbinah.hadithText"];
+  assert.equal(hash(original),"6ea95945342ce2ad6acb32dfd255b05060b417e19e0246f0b244b5416dda3ad4");
+  assert.equal(Buffer.byteLength(original,"utf8"),147);
+  for(const key of ["world.talbinah.hadithText","world.talbinah.hadithTranslation"] as const)assert(Buffer.from(arabicMaster[key],"utf8").equals(Buffer.from(original,"utf8")));
+  const arabic=renderTalbinah(arabicMaster,m=>m.source,"ar");
+  assert.equal(arabic.split(original).length-1,1);assert(!arabic.includes("world-hadith-meaning"));
+  assert(arabic.includes(`<blockquote lang="ar" dir="rtl">${original}</blockquote>`));
+  // Synthetic component-only sentinel: no translation package or pending locale is activated.
+  for(const locale of ["en","ur"] as const){
+    const meaning="review-only meaning sentinel";
+    const rendered=renderTalbinah({...arabicMaster,"world.talbinah.hadithTranslation":meaning},m=>m.source,locale);
+    assert.equal(rendered.split(original).length-1,1);assert.equal(rendered.split(meaning).length-1,1);
+    assert(rendered.includes(`<p class="world-hadith-meaning" lang="${locale}" dir="${localeRegistry[locale].directionality}">${meaning}</p>`));
+    assert(!/<(?:a|button)\b/.test(rendered));
+  }
+});
 test("exact ten endonyms, keys, directions and inactive locale manifest",()=>{
   assert.deepEqual(localeCodes,["ar","en","ur","id","bn","tr","fa","fr","ms","ru"]);
   assert.deepEqual(Object.values(languageLabels),["العربية","English","اردو","Bahasa Indonesia","বাংলা","Türkçe","فارسی","Français","Bahasa Melayu","Русский"]);
