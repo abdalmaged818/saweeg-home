@@ -53,6 +53,18 @@ jobs:
         with:
           name: visual-redesign-results
           path: test-results/visual-redesign
+      - name: Isolated Saweeg Global foundation and byte-identical production output
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/sabtiya-browser/node_modules/playwright/index.mjs
+        run: |
+          git fetch origin 2afc684df303c0bc5aadf97631f338ec10bd9189 --depth=1
+          node tests/saweeg-global-browser.mjs
+      - name: Save non-public Global test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: saweeg-global-foundation-results
+          path: test-results/saweeg-global
       - name: Save screenshots and browser report
         if: always()
         uses: actions/upload-artifact@v4
