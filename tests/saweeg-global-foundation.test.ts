@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import fs from "node:fs";
 import {createHash} from "node:crypto";
+import {execFileSync} from "node:child_process";
+import {parse} from "yaml";
 import {arabicMaster,requiredContentKeys} from "../src/saweeg-global/content/ar.ts";
 import {localeCodes,localeRegistry,languageLabels} from "../src/saweeg-global/locales.ts";
 import {translationPackages,approvedContent,packageIssues,publicationIssues,publishableLocales,assertPublicActivation} from "../src/saweeg-global/validation.ts";
@@ -54,9 +56,9 @@ test("Arabic master completeness and exact approved snapshot",()=>{
   assert.equal(arabicMaster["world.hero.cta"],arabicMaster["world.about.heading"]);
   assert.deepEqual(packageIssues("ar",translationPackages.ar),[]);
 });
-test("nine locales pending, no silent fallback and every public activation closed",()=>{
-  assert.deepEqual(Object.keys(translationPackages),["ar"]);assert.deepEqual(publishableLocales(),[]);
-  for(const code of localeCodes){assert(publicationIssues(code).includes("phase-1-inactive"));assert.throws(()=>assertPublicActivation(code));if(code!=="ar"){for(const key of ["content","terminology","editorial","religious","direction","typography"] as const)assert.equal(localeRegistry[code][key],"pending");assert.throws(()=>approvedContent(code),/Locale unavailable/);}}
+test("five review-ready and four pending locales have no silent fallback and every public activation remains closed",()=>{
+  assert.deepEqual(Object.keys(translationPackages),["ar","en","tr","ur","fa","id"]);assert.deepEqual(publishableLocales(),[]);
+  for(const code of localeCodes){assert(publicationIssues(code).includes("phase-1-inactive"));assert.throws(()=>assertPublicActivation(code));if(code!=="ar"){assert.equal(localeRegistry[code].content,["en","tr","ur","fa","id"].includes(code)?"ready-for-owner-review":"pending");for(const key of ["terminology","editorial","religious","direction","typography"] as const)assert.equal(localeRegistry[code][key],"pending");assert.throws(()=>approvedContent(code),/Locale unavailable/);}}
 });
 test("missing keys, raw keys, unknown keys and each pending review fail closed",()=>{
   const approved=translationPackages.ar!;
@@ -89,7 +91,39 @@ test("all baseline production source, assets, menus, prices and routes stay byte
   const baseline=JSON.parse(fs.readFileSync("tests/fixtures/saweeg-global/production-source-hashes.json","utf8"));
   assert.equal(baseline.commit,"2afc684df303c0bc5aadf97631f338ec10bd9189");
   assert(Object.keys(baseline.files).length>200);
-  for(const [file,digest] of Object.entries(baseline.files)){assert(fs.existsSync(file),file);assert.equal(hash(fs.readFileSync(file)),digest,file);}
+  // Owner-approved exact CI transition; the original protected fixture is never rewritten.
+  const approvedOverrides=[{
+    path:".github/workflows/deploy.yml",
+    originalHash:"6b3e185ac285a2a30d63e33261fb62c2cf982d75c41e5d63a8814ceb964cc0e3",
+    approvedHash:"4f1f4904e8958ab8b088810c775c24cee66297b4825d2c7a676b77e24b5800cf",
+    reason:"The three CI jobs must fetch sufficient Git history so the approved Phase 1 comparison can run in GitHub Actions."
+  }] as const;
+  assert.deepEqual(approvedOverrides.map(entry=>entry.path),[".github/workflows/deploy.yml"]);
+  assert.equal(new Set(approvedOverrides.map(entry=>entry.path)).size,1);
+  for(const entry of approvedOverrides){assert(!/[?*\[\]{}]/.test(entry.path));assert.equal(baseline.files[entry.path],entry.originalHash);assert.equal(hash(fs.readFileSync(entry.path)),entry.approvedHash);assert(entry.reason.trim());}
+  for(const [file,digest] of Object.entries(baseline.files)){
+    assert(fs.existsSync(file),file);
+    const approved=approvedOverrides.find(entry=>entry.path===file);
+    assert.equal(hash(fs.readFileSync(file)),approved?approved.approvedHash:digest,file);
+  }
+  const readAt=(revision:string,file:string)=>parse(execFileSync("git",["show",`${revision}:${file}`],{encoding:"utf8"}));
+  const currentDeploy=parse(fs.readFileSync(".github/workflows/deploy.yml","utf8"));
+  const currentBrowser=parse(fs.readFileSync(".github/workflows/sabtiya-browser.yml","utf8"));
+  let checkoutCount=0;
+  for(const workflow of [currentDeploy,currentBrowser])for(const job of Object.values(workflow.jobs) as {steps:{uses?:string;with?:Record<string,unknown>;run?:string}[]}[]){
+    const buildIndex=job.steps.findIndex(step=>step.run==="pnpm run build");assert(buildIndex>=0);
+    const checkoutIndex=job.steps.findIndex(step=>step.uses==="actions/checkout@v7");assert(checkoutIndex>=0&&checkoutIndex<buildIndex);
+    const checkout=job.steps[checkoutIndex];assert.deepEqual(checkout.with,{"fetch-depth":0});delete checkout.with;checkoutCount++;
+  }
+  assert.equal(checkoutCount,3);
+  // Comparing complete parsed workflows protects triggers, permissions, build, upload,
+  // deploy, tests, failure propagation and artifacts. Only checkout depth may differ.
+  assert.deepEqual(currentDeploy,readAt("4ad8147df978625388f078ce9edeab36e5d2e021",".github/workflows/deploy.yml"));
+  const previousBrowser=readAt("8a34ce635d413003f99219a526fa04296809c22f",".github/workflows/sabtiya-browser.yml");
+  const previousGlobal=previousBrowser.jobs.browser.steps.find((step:{name?:string})=>step.name==="Isolated Saweeg Global foundation and byte-identical production output");
+  assert.equal(previousGlobal.run,"git fetch origin 4ad8147df978625388f078ce9edeab36e5d2e021 --depth=1\nnode tests/saweeg-global-browser.mjs\n");
+  previousGlobal.run="node tests/saweeg-global-browser.mjs";
+  assert.deepEqual(currentBrowser,previousBrowser);
 });
 test("no public Global route, content, asset or entry emitted",()=>{
   const walk=(dir:string):string[]=>fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(`${dir}/${e.name}`):[`${dir}/${e.name}`]);

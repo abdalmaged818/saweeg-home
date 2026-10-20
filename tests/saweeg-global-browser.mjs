@@ -6,6 +6,8 @@ import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {pathToFileURL} from 'node:url';
 import {createServer} from 'vite';
+import {verifyGenerated} from '../scripts/global-wave1.mjs';
+const wave1=verifyGenerated();
 const {chromium}=await import(pathToFileURL(process.env.PLAYWRIGHT_MODULE).href);
 const results='test-results/saweeg-global';fs.mkdirSync(results,{recursive:true});
 const report={cases:[],productionComparison:null,failures:[]};
@@ -16,25 +18,26 @@ const walk=(dir,relative='')=>fs.readdirSync(path.join(dir,relative),{withFileTy
 async function compareProduction(){
   let baseline=process.env.GLOBAL_BASELINE_DIST;
   if(!baseline){
-    const revision='2afc684df303c0bc5aadf97631f338ec10bd9189';
+    const revision='4ad8147df978625388f078ce9edeab36e5d2e021';
     const scratch=fs.mkdtempSync(path.join(os.tmpdir(),'saweeg-global-output-baseline-'));
     const archive=path.join(scratch,'baseline.tar');
     execFileSync('git',['archive','--output',archive,revision]);
     execFileSync('tar',['-xf',archive,'-C',scratch]);
-    fs.symlinkSync(path.resolve('node_modules'),path.join(scratch,'node_modules'),'dir');
+    // A baseline install may change peer-resolution paths. Never share its mutable node_modules.
+    fs.cpSync(path.resolve('node_modules'),path.join(scratch,'node_modules'),{recursive:true,verbatimSymlinks:true});
     execFileSync('corepack',['pnpm','build'],{cwd:scratch,stdio:'pipe',maxBuffer:64*1024*1024});
     baseline=path.join(scratch,'dist');
   }
   const before=walk(baseline),after=walk('dist');assert.deepEqual(after,before,'Production emitted-file set changed');
   for(const file of before)assert.equal(digest(path.join('dist',file)),digest(path.join(baseline,file)),`Production bytes changed: ${file}`);
-  report.productionComparison={baseline:'2afc684df303c0bc5aadf97631f338ec10bd9189',files:before.length,byteIdentical:true};
+  report.productionComparison={baseline:'4ad8147df978625388f078ce9edeab36e5d2e021',files:before.length,byteIdentical:true};
 }
 const server=await createServer({configFile:false,root:process.cwd(),server:{host:'127.0.0.1',port:0,hmr:false},plugins:[{
   name:'isolated-global-test-only',configureServer(server){server.middlewares.use(async(req,res,next)=>{
     const url=new URL(req.url,'http://127.0.0.1');
     if(url.pathname==='/_global-preview/'){
       const locale=url.searchParams.get('locale');
-      if(locale&&locale!=='ar'){res.statusCode=403;res.end();return;}
+      if(locale&&!['ar','en','tr','ur','fa','id'].includes(locale)){res.statusCode=403;res.end();return;}
       res.setHeader('Content-Type','text/html');res.setHeader('Cache-Control','no-store');
       res.end(await server.transformIndexHtml(req.url,fs.readFileSync('tests/fixtures/saweeg-global/preview.html','utf8')));return;
     }
@@ -56,15 +59,18 @@ async function settle(page){await page.waitForLoadState('networkidle');await pag
 });}
 try{
   await compareProduction();
-  for(const width of [320,390,768,1280])for(const view of ['selector','page','ltr-geometry','unavailable']){
+  for(const width of [320,390,768,1280])for(const view of ['selector','page','unavailable','en','tr','ur','fa','id']){
+    const locale=['en','tr','ur','fa','id'].includes(view)?view:'ar';
+    const content=locale==='ar'?approvedArabic:wave1.locales[locale].strings;
     const context=await browser.newContext({viewport:{width,height:900},deviceScaleFactor:1,locale:'en-US',timezoneId:'Asia/Riyadh',reducedMotion:'reduce'});
     const page=await context.newPage(),errors=[];
     page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});page.on('response',r=>{if(r.status()>=400)errors.push(`${r.status()} ${r.url()}`)});
-    const url=origin+'/_global-preview/'+(view==='selector'?'':'?view=page'+(view==='unavailable'?'&flow=unavailable':''));
+    const url=origin+'/_global-preview/'+(view==='selector'?'':`?view=page&locale=${locale}`+(view==='unavailable'?'&flow=unavailable':''));
     await page.goto(url);await settle(page);
     // Geometry-only mirror of the approved Arabic preview. This does not construct
     // an English or other pending translation package, route, language or fallback.
-    if(view==='ltr-geometry')await page.locator('.swg-world').evaluate(root=>root.dir='ltr');
+    assert.equal(await page.locator('.swg-world').getAttribute('lang'),locale);
+    assert.equal(await page.locator('.swg-world').getAttribute('dir'),['ar','ur','fa'].includes(locale)?'rtl':'ltr');
     const state=await page.evaluate(()=>({
       overflow:document.documentElement.scrollWidth>innerWidth,
       clipped:[...document.querySelectorAll('.swg-world main *')].filter(el=>{const r=el.getBoundingClientRect();return r.width>0&&(r.left<-.5||r.right>innerWidth+.5)}).map(el=>el.className),
@@ -82,10 +88,18 @@ try{
       reduced:[...document.querySelectorAll('.swg-world *')].every(el=>getComputedStyle(el).transitionDuration==='0s')
     }));
     assert.equal(state.overflow,false);assert.deepEqual(state.clipped,[]);assert.deepEqual(state.images,[]);assert.deepEqual(state.small,[]);assert.equal(state.h1,1);assert.deepEqual(state.landmarks,[1,1,1]);assert.equal(state.keys,false);assert.equal(state.reduced,true);assert.deepEqual(errors,[]);
-    assert.deepEqual(state.brand,{label:approvedArabic['world.brand.homeLabel'],alt:'',footerAlt:'Saweeg'});
-    assert.equal(await page.getByRole('link',{name:approvedArabic['world.brand.homeLabel'],exact:true}).count(),1);
+    assert.deepEqual(state.brand,{label:content['world.brand.homeLabel'],alt:'',footerAlt:'Saweeg'});
+    assert.equal(await page.getByRole('link',{name:content['world.brand.homeLabel'],exact:true}).count(),1);
     assert.equal(await page.locator('.brand').getAttribute('href'),'/_global-preview/');
-    assert.equal(state.hadithMeanings,0);
+    assert.equal(state.hadithMeanings,locale==='ar'?0:1);
+    if(locale!=='ar'){
+      assert.equal(await page.locator('.world-hadith-meaning').textContent(),content['world.talbinah.hadithTranslation']);
+      assert.equal(await page.locator('.world-hadith-meaning').getAttribute('lang'),locale);
+      assert.equal(await page.locator('.world-hadith-meaning').getAttribute('dir'),['ur','fa'].includes(locale)?'rtl':'ltr');
+      assert.equal(await page.locator('.world-phone').textContent(),content['world.contact.phone']);
+      if(['ur','fa'].includes(locale))assert(await page.locator('bdi[dir=ltr]').count()>0);
+      for(const [key,selector]of Object.entries({'world.hero.heading':'#world-hero-title','world.about.heading':'#world-about-title','world.store.cta':'.world-store a','world.footer.rights':'.footer-bottom>span'}))assert.equal(await page.locator(selector).textContent(),content[key]);
+    }
     if(view!=='selector'){
       assert(Buffer.from(state.hadithText,'utf8').equals(Buffer.from(approvedArabic['world.talbinah.hadithText'],'utf8')));
       assert.equal(await page.locator('.world-hadith blockquote').count(),1);
@@ -106,7 +120,7 @@ try{
     await page.reload();await settle(page);assert.equal(await page.locator('h1').count(),1);assert.deepEqual(errors,[]);
     report.cases.push({width,view,status:'pass',state});await context.close();console.log('PASS',width,view);
   }
-  for(const code of ['en','ur','id','bn','tr','fa','fr','ms','ru']){const response=await fetch(`${origin}/_global-preview/?locale=${code}&view=page`);assert.equal(response.status,403);assert.equal(await response.text(),'');}
+  for(const code of ['bn','fr','ms','ru']){const response=await fetch(`${origin}/_global-preview/?locale=${code}&view=page`);assert.equal(response.status,403);assert.equal(await response.text(),'');}
 }catch(error){report.failures.push(error.stack);console.error(error.stack);process.exitCode=1;}
 finally{fs.writeFileSync(`${results}/report.json`,JSON.stringify(report,null,2)+'\n');await browser.close();await server.close();}
 console.log(JSON.stringify({cases:report.cases.length,production:report.productionComparison,failures:report.failures.length}));

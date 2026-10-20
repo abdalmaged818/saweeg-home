@@ -19,7 +19,10 @@ importers:
         version: 5.8.3
       vite:
         specifier: 7.3.5
-        version: 7.3.5(@types/node@22.15.3)
+        version: 7.3.5(@types/node@22.15.3)(yaml@2.8.1)
+      yaml:
+        specifier: 2.8.1
+        version: 2.8.1
 
 packages:
 
@@ -612,6 +615,11 @@ packages:
       yaml:
         optional: true
 
+  yaml@2.8.1:
+    resolution: {integrity: sha512-lcYcMxX2PO9XMGvAJkJ3OsNMw+/7FKes7/hgerGUYWIoWu5j/+YQqcZr5JnPZWzOsEBgMbSbiSTn/dv/69Mkpw==}
+    engines: {node: '>= 14.6'}
+    hasBin: true
+
 snapshots:
 
   '@emnapi/runtime@1.11.3':
@@ -1018,7 +1026,7 @@ snapshots:
 
   undici-types@6.21.0: {}
 
-  vite@7.3.5(@types/node@22.15.3):
+  vite@7.3.5(@types/node@22.15.3)(yaml@2.8.1):
     dependencies:
       esbuild: 0.27.7
       fdir: 6.5.0(picomatch@4.0.7)
@@ -1029,3 +1037,6 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.15.3
       fsevents: 2.3.3
+      yaml: 2.8.1
+
+  yaml@2.8.1: {}

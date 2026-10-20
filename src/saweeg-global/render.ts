@@ -26,7 +26,7 @@ function contentFor(options:WorldRenderOptions):WorldContent {
   if(options.mode==="public") assertPublicActivation(options.locale);
   return approvedContent(options.locale);
 }
-function frame(c:WorldContent,options:WorldRenderOptions,minimal:boolean,body:string):HTMLElement {
+export function frame(c:WorldContent,options:WorldRenderOptions,minimal:boolean,body:string):HTMLElement {
   const links:ShellLink[]=sections.map(id=>({label:c[`world.nav.${id}`],href:`#world-${id}`}));
   const footerLinks:ShellLink[]=minimal ? [
     {label:c["world.store.cta"],href:worldLinks.store,external:true},
@@ -42,6 +42,10 @@ function frame(c:WorldContent,options:WorldRenderOptions,minimal:boolean,body:st
 }
 export function renderLanguageSelector(options:WorldRenderOptions):HTMLElement {
   const c=contentFor(options);
+  return composeLanguageSelector(c,options);
+}
+// Pure composition also used by the isolated test adapter. Public entry points above/below retain their gate.
+export function composeLanguageSelector(c:WorldContent,options:WorldRenderOptions):HTMLElement {
   return frame(c,options,true,`<section class="container world-welcome" aria-labelledby="world-welcome-title"><div class="world-split"><div>${projectName()}<h1 id="world-welcome-title">${text(c,"world.welcome.title")}</h1><p class="world-lead">${text(c,"world.welcome.description")}</p></div><figure class="world-media world-hero-media">${image(editorialMedia.hero,c,options.media,true)}</figure></div><div class="world-language-area"><h2>${text(c,"world.welcome.languageLabel")}</h2><ul class="world-language-grid">${localeCodes.map(code=>`<li><a class="world-language-card" href="${esc(options.localeHref(code))}" lang="${code}" dir="${localeRegistry[code].directionality}" hreflang="${code}"><span>${esc(languageLabels[localeRegistry[code].labelKey])}</span>${renderIcon("arrow")}</a></li>`).join("")}</ul></div></section>`);
 }
 export function renderHero(c:WorldContent,resolve:MediaResolver):string {
@@ -74,5 +78,8 @@ export function renderContact(c:WorldContent):string {
 }
 export function renderGlobalPage(options:WorldRenderOptions):HTMLElement {
   const c=contentFor(options);
+  return composeGlobalPage(c,options);
+}
+export function composeGlobalPage(c:WorldContent,options:WorldRenderOptions):HTMLElement {
   return frame(c,options,false,renderHero(c,options.media)+renderAbout(c,options.media)+renderTalbinah(c,options.media,options.locale)+renderProducts(c)+renderBranches(c,options.media,options.locale)+renderStore(c)+renderContact(c));
 }

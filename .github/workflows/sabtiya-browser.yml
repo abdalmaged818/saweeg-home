@@ -6,6 +6,7 @@ on:
       - 'src/**'
       - 'public/**'
       - 'assets-source/**'
+      - 'content-source/saweeg-global/**'
       - 'menu/**'
       - 'scripts/**'
       - 'tests/**'
@@ -23,6 +24,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
       - uses: pnpm/action-setup@v6
         with:
           version: 11.19.0
@@ -56,9 +59,7 @@ jobs:
       - name: Isolated Saweeg Global foundation and byte-identical production output
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/sabtiya-browser/node_modules/playwright/index.mjs
-        run: |
-          git fetch origin 2afc684df303c0bc5aadf97631f338ec10bd9189 --depth=1
-          node tests/saweeg-global-browser.mjs
+        run: node tests/saweeg-global-browser.mjs
       - name: Save non-public Global test evidence
         if: always()
         uses: actions/upload-artifact@v4
