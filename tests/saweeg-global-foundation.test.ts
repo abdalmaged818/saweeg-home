@@ -5,7 +5,7 @@ import {createHash} from "node:crypto";
 import {execFileSync} from "node:child_process";
 import {parse} from "yaml";
 import {arabicMaster,requiredContentKeys} from "../src/saweeg-global/content/ar.ts";
-import {localeCodes,localeRegistry,languageLabels,v1LocaleCodes,isV1Locale} from "../src/saweeg-global/locales.ts";
+import {localeCodes,localeRegistry,languageLabels,v1LocaleCodes,isV1Locale,activeLocaleCodes,isActiveLocale} from "../src/saweeg-global/locales.ts";
 import {translationPackages,approvedContent,packageIssues,publicationIssues,publishableLocales,assertPublicActivation} from "../src/saweeg-global/validation.ts";
 import {featuredProducts,featuredImage} from "../src/saweeg-global/products.ts";
 import {canonicalImageFor} from "../src/menu/data/catalog-images.ts";
@@ -43,10 +43,10 @@ test("Hadith bytes match the final handoff and the Arabic page renders no duplic
     assert(!/<(?:a|button)\b/.test(rendered));
   }
 });
-test("exact ten endonyms and the six-locale, original-Hadith-only V1 activation manifest",()=>{
+test("exact ten endonyms and the ten-locale, original-Hadith-only activation manifest",()=>{
   assert.deepEqual(localeCodes,["ar","en","ur","id","bn","tr","fa","fr","ms","ru"]);
   assert.deepEqual(Object.values(languageLabels),["العربية","English","اردو","Bahasa Indonesia","বাংলা","Türkçe","فارسی","Français","Bahasa Melayu","Русский"]);
-  for(const code of localeCodes){const m=localeRegistry[code];assert.equal(m.code,code);assert.equal(m.labelKey,`world.languages.${code}.label`);assert.equal(m.directionality,["ar","ur","fa"].includes(code)?"rtl":"ltr");assert.equal(m.futureRoute,`/${code}/`);assert.equal(m.activation,isV1Locale(code)?"active":"inactive");assert.equal(m.publishable,isV1Locale(code));assert.equal(m.publicationScope,isV1Locale(code)?"v1-original-hadith-only":"inactive");assert.equal(m.welcomePhrase,null);}
+  for(const code of localeCodes){const m=localeRegistry[code];assert.equal(m.code,code);assert.equal(m.labelKey,`world.languages.${code}.label`);assert.equal(m.directionality,["ar","ur","fa"].includes(code)?"rtl":"ltr");assert.equal(m.futureRoute,`/${code}/`);assert.equal(m.activation,isActiveLocale(code)?"active":"inactive");assert.equal(m.publishable,isActiveLocale(code));assert.equal(m.publicationScope,isV1Locale(code)?"v1-original-hadith-only":isActiveLocale(code)?"wave2-original-hadith-only":"inactive");assert.equal(m.welcomePhrase,null);}
 });
 test("Arabic master completeness and exact approved snapshot",()=>{
   const snapshot=JSON.parse(fs.readFileSync("tests/fixtures/saweeg-global/approved-ar.json","utf8"));
@@ -57,8 +57,8 @@ test("Arabic master completeness and exact approved snapshot",()=>{
   assert.deepEqual(packageIssues("ar",translationPackages.ar),[]);
 });
 test("V1 activation never grants full religious approval or fallback to pending locales",()=>{
-  assert.deepEqual(Object.keys(translationPackages),["ar","en","tr","ur","fa","id"]);assert.deepEqual(v1LocaleCodes,["ar","en","tr","ur","fa","id"]);assert.deepEqual(publishableLocales(),v1LocaleCodes);
-  for(const code of localeCodes){if(isV1Locale(code)){assert.deepEqual(publicationIssues(code),[]);assert.doesNotThrow(()=>assertPublicActivation(code));}else{assert(publicationIssues(code).includes("v1-inactive"));assert.throws(()=>assertPublicActivation(code));}if(code!=="ar"){assert.equal(localeRegistry[code].content,["en","tr","ur","fa","id"].includes(code)?"ready-for-owner-review":"pending");for(const key of ["terminology","editorial","religious","direction","typography"] as const)assert.equal(localeRegistry[code][key],"pending");assert.throws(()=>approvedContent(code),/Locale unavailable/);}}
+  assert.deepEqual(Object.keys(translationPackages),["ar","en","tr","ur","fa","id","bn","fr","ms","ru"]);assert.deepEqual(v1LocaleCodes,["ar","en","tr","ur","fa","id"]);assert.deepEqual(publishableLocales(),activeLocaleCodes);
+  for(const code of localeCodes){if(isActiveLocale(code)){assert.deepEqual(publicationIssues(code),[]);assert.doesNotThrow(()=>assertPublicActivation(code));}else{assert(publicationIssues(code).includes("inactive"));assert.throws(()=>assertPublicActivation(code));}if(code!=="ar"){assert.equal(localeRegistry[code].content,isActiveLocale(code)?"ready-for-owner-review":"pending");for(const key of ["terminology","editorial","religious","direction","typography"] as const)assert.equal(localeRegistry[code][key],"pending");assert.throws(()=>approvedContent(code),/Locale unavailable/);}}
 });
 test("missing keys, raw keys, unknown keys and each pending review fail closed",()=>{
   const approved=translationPackages.ar!;

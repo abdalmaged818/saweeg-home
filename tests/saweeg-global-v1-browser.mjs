@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import http from 'node:http';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {v1LocaleCodes,localeRegistry,languageLabels} from '../src/saweeg-global/locales.ts';
+import {activeLocaleCodes,localeRegistry,languageLabels} from '../src/saweeg-global/locales.ts';
 import {localeDestination,globalContentLocales} from '../src/saweeg-global/destinations.ts';
 import {editorialMedia} from '../src/saweeg-global/media.ts';
 import {publicV1Content,translationPackages} from '../src/saweeg-global/validation.ts';
@@ -62,6 +62,12 @@ try{
     }));
     assert.equal(state.lang,code);assert.equal(state.dir,localeRegistry[code].directionality);assert.equal(state.scrollX,0);assert.equal(state.scrollY,0);assert.equal(state.overflow,false);assert.deepEqual(state.clipped,[]);assert.deepEqual(state.broken,[]);assert.deepEqual(state.small,[]);assert.deepEqual(state.landmarks,[1,1,1]);assert.equal(state.h1,1);assert.equal(state.raw,false);if(!official)assert.equal(state.reduced,true);assert.deepEqual(errors,[]);
     if(!official){
+    if(code==='bn'){
+      const session=await context.newCDPSession(page);await session.send('DOM.enable');await session.send('CSS.enable');
+      const {root}=await session.send('DOM.getDocument');const {nodeId}=await session.send('DOM.querySelector',{nodeId:root.nodeId,selector:'#world-hero-title'});
+      const {fonts}=await session.send('CSS.getPlatformFontsForNode',{nodeId});
+      assert(fonts.some(font=>/Noto Sans Bengali/.test(font.familyName)&&font.glyphCount>0),'Bengali text must actually use the Bengali script font');state.bengaliFonts=fonts;await session.detach();
+    }
     assert.equal(await page.locator('meta[name=robots]').getAttribute('content'),'noindex,follow');assert.equal(await page.locator('link[rel=canonical]').getAttribute('href'),`https://go.saweegsa.com${route}`);
     assert.equal(await page.locator('.world-hadith-meaning').count(),0);
     const body=await page.locator('body').textContent();for(const [language,pack]of Object.entries(translationPackages))if(language!=='ar')assert(!body.includes(pack.content['world.talbinah.hadithTranslation']));
@@ -79,7 +85,7 @@ try{
       if(code==='ur'||code==='fa')assert(await page.locator('bdi[dir=ltr]').count()>0);
       if(width<900){const button=page.locator('[data-menu-button]');await button.click();assert.equal(await button.getAttribute('aria-expanded'),'true');assert(await page.locator('body').evaluate(element=>element.classList.contains('menu-open')));assert(await page.locator('[data-mobile-navigation] a').first().evaluate(element=>document.activeElement===element));await page.keyboard.press('Escape');assert.equal(await button.getAttribute('aria-expanded'),'false');assert.equal(await page.locator('body').evaluate(element=>element.classList.contains('menu-open')),false);assert(await button.evaluate(element=>document.activeElement===element));await button.tap();assert.equal(await button.getAttribute('aria-expanded'),'true');await page.keyboard.press('Escape');await button.press('Enter');assert.equal(await button.getAttribute('aria-expanded'),'true');await page.keyboard.press('Escape');assert.equal(await button.getAttribute('aria-expanded'),'false');assert(await button.evaluate(element=>document.activeElement===element));}
     }else{
-      assert.equal(state.languages.length,6);assert.equal(new Set(state.languages.map(card=>card.height)).size,1);assert(Math.max(...state.languages.map(card=>card.width))-Math.min(...state.languages.map(card=>card.width))<.1);
+      assert.equal(state.languages.length,10);assert.equal(new Set(state.languages.map(card=>card.height)).size,1);assert(Math.max(...state.languages.map(card=>card.width))-Math.min(...state.languages.map(card=>card.width))<.1);
       for(const card of state.languages){assert.equal(card.label,languageLabels[localeRegistry[card.code].labelKey]);assert.equal(card.dir,localeRegistry[card.code].directionality);assert.equal(card.href,localeDestination(card.code));assert.equal(card.arrow!=='none',card.dir==='rtl');}
     }
     const hero=page.locator('.world-hero-media');
@@ -94,8 +100,13 @@ try{
       const robots=page.locator('meta[name=robots]');assert.notEqual(await robots.count()?await robots.getAttribute('content'):null,'noindex,follow');
     }
     if(view==='home-ar'||view==='home-en')chromeBaseline.set(width+'-'+state.dir,initialChrome);
-    if(!official&&locale){const chrome=initialChrome,expected=chromeBaseline.get(width+'-'+state.dir);assert(expected);for(const selector of Object.keys(chrome))assert.deepEqual(chrome[selector],expected[selector],`Official shared chrome: ${selector}`);state.chrome=chrome;}
-    if(baselineServer&&width===1280&&!official&&locale){
+    if(!official&&locale){const chrome=initialChrome,expected=chromeBaseline.get(width+'-'+state.dir);assert(expected);for(const selector of Object.keys(chrome)){
+      const actual={...chrome[selector]},reference={...expected[selector]};
+      // Bengali needs its approved script font; every other shared-shell property stays exact.
+      if(code==='bn'){assert(actual.fontFamily.includes('Noto Sans Bengali'));delete actual.fontFamily;delete reference.fontFamily;}
+      assert.deepEqual(actual,reference,`Official shared chrome: ${selector}`);
+    }state.chrome=chrome;}
+    if(baselineServer&&width===1280&&!official&&locale&&['tr','ur','fa','id'].includes(locale)){
       const before=await context.newPage();await before.goto(`http://127.0.0.1:${baselineServer.address().port}${route}`);await settle(before);
       assert.deepEqual(await mainGeometry(page),await mainGeometry(before),'Desktop main content must remain geometrically identical');
       report.desktopComparisons.push({locale,width,status:'pass'});await before.close();
@@ -105,7 +116,7 @@ try{
     await page.reload();await settle(page);assert.equal(await page.locator('html').getAttribute('lang'),code);if(!official)assert.equal(await page.locator('.swg-world').getAttribute('lang'),code);assert.equal(await page.locator('.world-hadith-meaning').count(),0);assert.deepEqual(errors,[]);
     if(!official&&locale){
       assert.equal(await page.locator('.language-link').getAttribute('href'),'/global/');assert.equal(await page.locator('.world-footer-utility a[href="/global/"]').getAttribute('href'),'/global/');await page.locator('.world-footer-utility a[href="/global/"]').press('Enter');await page.waitForURL('**/global/');await settle(page);await page.goBack();await page.waitForURL('**'+route);await settle(page);await page.goForward();await page.waitForURL('**/global/');await settle(page);
-    }else if(!official)for(const language of v1LocaleCodes){
+    }else if(!official)for(const language of activeLocaleCodes){
       const destination=localeDestination(language);
       await page.locator(`.world-language-card[lang="${language}"]`).press('Enter');await page.waitForURL(origin+destination);await settle(page);
       assert.equal(await page.locator('html').getAttribute('lang'),language);
@@ -116,7 +127,7 @@ try{
     }
     assert.deepEqual(errors,[]);report.cases.push({width,locale:view??'selector',status:'pass',state});await context.close();console.log('PASS',width,view??'selector');
   }
-  for(const locale of ['bn','fr','ms','ru']){const response=await fetch(`${origin}/global/${locale}/`);assert.equal(response.status,404);assert(!(await response.text()).includes('data-release="v1"'));report.inactive.push(locale);}
+  for(const locale of ['xx','de','constructor','not-a-locale']){const response=await fetch(`${origin}/global/${locale}/`);assert.equal(response.status,404);assert(!(await response.text()).includes('data-release="v1"'));report.inactive.push(locale);}
 }catch(error){report.failures.push(error.stack);console.error(error.stack);process.exitCode=1;}
 finally{fs.writeFileSync(`${results}/report.json`,JSON.stringify(report,null,2)+'\n');await browser.close();server.close();baselineServer?.close();}
 console.log(JSON.stringify({desktopComparisons:report.desktopComparisons.length,cases:report.cases.length,switching:report.switching.length,inactive:report.inactive.length,failures:report.failures.length}));

@@ -5,15 +5,17 @@ import {createHash} from 'node:crypto';
 import {build} from 'vite';
 import {parseHTML} from 'linkedom';
 import {verifyGenerated} from './global-wave1.mjs';
+import {verifyGenerated as verifyWave2} from './global-wave2.mjs';
 import {siteConfig} from '../src/config/site.ts';
 import {localeDestination,globalContentLocales,compatibilityLocales} from '../src/saweeg-global/destinations.ts';
-import {v1LocaleCodes,localeRegistry} from '../src/saweeg-global/locales.ts';
+import {activeLocaleCodes,localeRegistry} from '../src/saweeg-global/locales.ts';
 import {publicV1Content} from '../src/saweeg-global/validation.ts';
 import {editorialMedia} from '../src/saweeg-global/media.ts';
 import {renderGlobalPage,renderLanguageSelector} from '../src/saweeg-global/render.ts';
 import {isolateWorldRuns} from '../src/saweeg-global/bidi.ts';
 
 verifyGenerated();
+verifyWave2();
 const walk=(dir,relative='')=>fs.readdirSync(path.join(dir,relative),{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(dir,path.join(relative,e.name)):[path.join(relative,e.name)]).sort();
 const hash=file=>createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 const previous=walk('dist');assert.equal(previous.length,183,'Existing production file set changed');
@@ -35,7 +37,7 @@ const href=locale=>`${origin}${locale?localeDestination(locale):'/global/'}`;
 const escape=value=>value.replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const fonts='https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&display=swap';
 const social=`${origin}/assets/social/saweeg-gateway-preview-20260910.png`;
-const ogLocales={ar:'ar_SA',en:'en_US',tr:'tr_TR',ur:'ur_PK',fa:'fa_IR',id:'id_ID'};
+const ogLocales={ar:'ar_SA',en:'en_US',tr:'tr_TR',ur:'ur_PK',fa:'fa_IR',id:'id_ID',bn:'bn_BD',fr:'fr_FR',ms:'ms_MY',ru:'ru_RU'};
 for(const routeLocale of [null,...globalContentLocales]){
   const locale=routeLocale??'ar',content=publicV1Content(locale),direction=localeRegistry[locale].directionality;
   const {document,HTMLElement}=parseHTML('<!doctype html><html><body></body></html>');
@@ -53,7 +55,7 @@ for(const routeLocale of [null,...globalContentLocales]){
   <meta name="robots" content="noindex,follow">
   <title>${escape(title)}</title><meta name="description" content="${escape(description)}">
   <link rel="canonical" href="${canonical}">
-  ${v1LocaleCodes.map(code=>`<link rel="alternate" hreflang="${code}" href="${href(code)}">`).join('\n  ')}
+  ${activeLocaleCodes.map(code=>`<link rel="alternate" hreflang="${code}" href="${href(code)}">`).join('\n  ')}
   <link rel="alternate" hreflang="x-default" href="${href(null)}">
   <meta property="og:type" content="website"><meta property="og:site_name" content="Saweeg Global">
   <meta property="og:locale" content="${ogLocales[locale]}"><meta property="og:url" content="${canonical}">
@@ -63,7 +65,7 @@ for(const routeLocale of [null,...globalContentLocales]){
   <meta name="twitter:description" content="${escape(description)}"><meta name="twitter:image" content="${social}"><meta name="twitter:image:alt" content="Saweeg">
   <link rel="icon" href="/favicon-saweeg-202609.ico" sizes="any">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="${escape(fonts)}">${styles.map(file=>`<link rel="stylesheet" href="/${file}">`).join('')}
+  <link rel="stylesheet" href="${escape(fonts)}">${locale==='bn'?'<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap"><style>.swg-world[lang="bn"]{--font-en:"Noto Sans Bengali",sans-serif;font-family:var(--font-en)}.swg-world[lang="bn"] :is(h1,h2,h3){font-family:var(--font-en)}</style>':''}${styles.map(file=>`<link rel="stylesheet" href="/${file}">`).join('')}
   <script type="application/ld+json">${JSON.stringify({'@context':'https://schema.org','@type':'WebPage',name:title,url:canonical,inLanguage:locale,provider:{'@id':`${origin}/#organization`}}).replace(/</g,'\\u003c')}</script>
 </head>
 <body>${body}<script type="module" src="/${entry}"></script></body>
@@ -85,4 +87,4 @@ for(const locale of compatibilityLocales){
 }
 for(const [file,digest]of Object.entries(protectedFiles))assert.equal(hash(path.join('dist',file)),digest,`Existing public output changed: ${file}`);
 assert(walk('dist').filter(file=>!previous.includes(file)).every(file=>file.startsWith('global/')));
-console.log('Global V1: 5 content/selector routes and 2 compatibility redirects; 6 authoritative language destinations; original Hadith only; all 183 existing public files unchanged.');
+console.log('Global Wave 2: 9 content/selector routes and 2 compatibility redirects; 10 authoritative language destinations; original Hadith only; all 183 existing public files unchanged.');

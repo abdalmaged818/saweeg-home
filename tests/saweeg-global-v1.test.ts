@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {parseHTML} from 'linkedom';
 import {arabicMaster,requiredContentKeys} from '../src/saweeg-global/content/ar.ts';
-import {localeCodes,v1LocaleCodes,localeRegistry,languageLabels} from '../src/saweeg-global/locales.ts';
+import {localeCodes,v1LocaleCodes,activeLocaleCodes,localeRegistry,languageLabels} from '../src/saweeg-global/locales.ts';
 import {globalContentLocales,compatibilityLocales,localeDestination} from '../src/saweeg-global/destinations.ts';
 import {publicV1Content,approvedContent,translationPackages,assertPublicActivation} from '../src/saweeg-global/validation.ts';
 import {featuredProducts,featuredImage} from '../src/saweeg-global/products.ts';
@@ -14,16 +14,16 @@ import {renderGlobalPage,composeGlobalPage} from '../src/saweeg-global/render.ts
 import {isolateWorldRuns} from '../src/saweeg-global/bidi.ts';
 const origin='https://go.saweegsa.com';
 const read=(locale?:string)=>parseHTML(fs.readFileSync(`dist/global/${locale?locale+'/':''}index.html`,'utf8')).document;
-test('V1 activates exactly six complete locales with no religious meaning or pending-locale fallback',()=>{
+test('Wave 1 plus Wave 2 activate ten complete locales without granting religious meaning approval',()=>{
   assert.deepEqual(v1LocaleCodes,['ar','en','tr','ur','fa','id']);assert.equal(localeCodes.length,10);
-  for(const locale of v1LocaleCodes){
+  for(const locale of activeLocaleCodes){
     const content=publicV1Content(locale),source=translationPackages[locale]!.content;
     assert.deepEqual(Object.keys(content),requiredContentKeys.filter(key=>key!=='world.talbinah.hadithTranslation'));
     for(const key of Object.keys(content))assert.equal(content[key as keyof typeof content],source[key]);
     if(locale!=='ar'){assert.equal(localeRegistry[locale].religious,'pending');assert.throws(()=>approvedContent(locale));}
-    assert.equal(localeRegistry[locale].publicationScope,'v1-original-hadith-only');
+    assert.equal(localeRegistry[locale].publicationScope,v1LocaleCodes.some(code=>code===locale)?'v1-original-hadith-only':'wave2-original-hadith-only');
   }
-  for(const locale of ['bn','fr','ms','ru'] as const){assert.equal(translationPackages[locale],undefined);assert.throws(()=>assertPublicActivation(locale));assert(!fs.existsSync(`dist/global/${locale}`));}
+  for(const locale of ['xx','de','constructor'] as const){assert.throws(()=>assertPublicActivation(locale as never));assert(!fs.existsSync(`dist/global/${locale}`));}
 });
 test('Content/selector routes use exact locale metadata, noindex and active-only hreflang without changing the sitemap',()=>{
   for(const locale of [undefined,...globalContentLocales]){
@@ -34,8 +34,8 @@ test('Content/selector routes use exact locale metadata, noindex and active-only
     assert.equal(document.querySelector('meta[property="og:url"]')!.getAttribute('content'),url);
     assert.equal(document.title,`${content[locale?'world.hero.heading':'world.welcome.title']} | Saweeg Global`);
     assert.equal(document.querySelector('meta[name=description]')!.getAttribute('content'),content[locale?'world.hero.description':'world.welcome.description']);
-    const alternates=[...document.querySelectorAll('link[hreflang]')];assert.deepEqual(alternates.map(link=>link.getAttribute('hreflang')),[...v1LocaleCodes,'x-default']);
-    for(const link of alternates)assert.equal(link.getAttribute('href'),origin+(link.getAttribute('hreflang')==='x-default'?'/global/':localeDestination(link.getAttribute('hreflang') as typeof v1LocaleCodes[number])));
+    const alternates=[...document.querySelectorAll('link[hreflang]')];assert.deepEqual(alternates.map(link=>link.getAttribute('hreflang')),[...activeLocaleCodes,'x-default']);
+    for(const link of alternates)assert.equal(link.getAttribute('href'),origin+(link.getAttribute('hreflang')==='x-default'?'/global/':localeDestination(link.getAttribute('hreflang') as typeof activeLocaleCodes[number])));
     for(const selector of ['meta[property="og:title"]','meta[property="og:description"]','meta[property="og:image"]','meta[name="twitter:card"]','meta[name="twitter:image"]'])assert(document.querySelector(selector)?.getAttribute('content'));
     assert.equal(document.querySelectorAll('header').length,1);assert.equal(document.querySelectorAll('footer').length,1);assert.equal(document.querySelectorAll('h1').length,1);
     assert.equal(document.querySelector('.brand')!.getAttribute('href'),'/global/');
@@ -85,12 +85,12 @@ test('Eight featured IDs, canonical image presentation, branches, menus and ever
     for(const href of Object.values(worldLinks))assert([...document.querySelectorAll('a')].some(link=>link.getAttribute('href')===href),href);
     assert.deepEqual([...document.querySelectorAll('main>section')].map(section=>section.getAttribute('id')), [null,'world-about','world-talbinah','world-products','world-branches','world-store','world-contact']);
   }
-  const cards=[...read().querySelectorAll('.world-language-card')];assert.deepEqual(cards.map(card=>card.getAttribute('lang')),v1LocaleCodes);
-  for(const card of cards){const locale=card.getAttribute('lang') as typeof v1LocaleCodes[number];assert.equal(card.querySelector('span')!.textContent,languageLabels[localeRegistry[locale].labelKey]);assert.equal(card.getAttribute('href'),localeDestination(locale));assert.equal(card.querySelectorAll('svg').length,1);}
+  const cards=[...read().querySelectorAll('.world-language-card')];assert.deepEqual(cards.map(card=>card.getAttribute('lang')),activeLocaleCodes);
+  for(const card of cards){const locale=card.getAttribute('lang') as typeof activeLocaleCodes[number];assert.equal(card.querySelector('span')!.textContent,languageLabels[localeRegistry[locale].labelKey]);assert.equal(card.getAttribute('href'),localeDestination(locale));assert.equal(card.querySelectorAll('svg').length,1);}
 });
 test('Only approved Global routes/assets are emitted; all original image bytes and private review boundaries remain intact',()=>{
   const walk=(directory:string,relative=''):string[]=>fs.readdirSync(path.join(directory,relative),{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?walk(directory,path.join(relative,entry.name)):[path.join(relative,entry.name)]).sort();
-  const files=walk('dist/global');assert.deepEqual(files.filter(file=>file.endsWith('.html')),['index.html',...v1LocaleCodes.map(locale=>`${locale}/index.html`)].sort());
+  const files=walk('dist/global');assert.deepEqual(files.filter(file=>file.endsWith('.html')),['index.html',...activeLocaleCodes.map(locale=>`${locale}/index.html`)].sort());
   assert(files.every(file=>file.endsWith('.html')||file.startsWith('assets/')));assert(!files.some(file=>/yaml|\.map$|review|generated/.test(file)));
   for(const media of Object.values(editorialMedia))if('privateSource'in media)assert(fs.readFileSync(media.source).equals(fs.readFileSync(`dist/global/assets/editorial/${path.basename(media.source)}`)));
   for(const file of files.filter(file=>/\.(html|js|css)$/.test(file))){
@@ -102,10 +102,10 @@ test('Only approved Global routes/assets are emitted; all original image bytes a
 });
 
 test('One destination authority replaces duplicate Arabic/English pages with safe immediate compatibility redirects',()=>{
-  assert.deepEqual(globalContentLocales,['tr','ur','fa','id']);assert.deepEqual(compatibilityLocales,['ar','en']);
+  assert.deepEqual(globalContentLocales,['ur','id','bn','tr','fa','fr','ms','ru']);assert.deepEqual(compatibilityLocales,['ar','en']);
   assert.equal(localeDestination('ar'),'/');assert.equal(localeDestination('en'),'/en/');
   for(const locale of globalContentLocales)assert.equal(localeDestination(locale),`/global/${locale}/`);
-  for(const locale of ['bn','fr','ms','ru'] as const)assert.throws(()=>localeDestination(locale));
+  for(const locale of ['xx','de','constructor'] as const)assert.throws(()=>localeDestination(locale as never));
   for(const locale of compatibilityLocales){
     const document=read(locale),target=localeDestination(locale);
     assert.equal(document.querySelector('link[rel=canonical]')!.getAttribute('href'),origin+target);
