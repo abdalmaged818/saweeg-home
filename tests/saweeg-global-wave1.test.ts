@@ -5,7 +5,7 @@ import {execFileSync} from 'node:child_process';
 import {verifyGenerated,parseWave1,sourcePath,wave1Locales} from '../scripts/global-wave1.mjs';
 import {wave1Content,wave1Metadata} from '../src/saweeg-global/content/wave1.generated.ts';
 import {requiredContentKeys,arabicMaster} from '../src/saweeg-global/content/ar.ts';
-import {languageLabels,localeRegistry,localeCodes,isV1Locale} from '../src/saweeg-global/locales.ts';
+import {languageLabels,localeRegistry,localeCodes,isV1Locale,isActiveLocale} from '../src/saweeg-global/locales.ts';
 import {approvedContent,assertPublicActivation,translationPackages,publicV1Content} from '../src/saweeg-global/validation.ts';
 import {reviewContent} from './fixtures/saweeg-global/review.ts';
 import {renderReview} from './fixtures/saweeg-global/review.ts';
@@ -35,11 +35,11 @@ test('Strict YAML rejects duplicate, extra, missing, reordered, empty, raw keys 
   ])assert.throws(()=>parseWave1(change));
 });
 test('V1 release is limited to complete packages; full religious approval and pending-locale restrictions remain strict',()=>{
-  for(const code of localeCodes){assert.equal(localeRegistry[code].activation,isV1Locale(code)?'active':'inactive');assert.equal(localeRegistry[code].publishable,isV1Locale(code));if(isV1Locale(code)){assert.doesNotThrow(()=>assertPublicActivation(code));const projected=publicV1Content(code);assert.equal(Object.keys(projected).length,71);assert(!Object.hasOwn(projected,'world.talbinah.hadithTranslation'));}else assert.throws(()=>assertPublicActivation(code));
+  for(const code of localeCodes){assert.equal(localeRegistry[code].activation,isActiveLocale(code)?'active':'inactive');assert.equal(localeRegistry[code].publishable,isActiveLocale(code));if(isActiveLocale(code)){assert.doesNotThrow(()=>assertPublicActivation(code));const projected=publicV1Content(code);assert.equal(Object.keys(projected).length,71);assert(!Object.hasOwn(projected,'world.talbinah.hadithTranslation'));}else assert.throws(()=>assertPublicActivation(code));
     if(code!=='ar')assert.throws(()=>approvedContent(code));
     if(wave1Locales.includes(code)){assert.equal(localeRegistry[code].content,'ready-for-owner-review');assert.equal(localeRegistry[code].religious,'pending');for(const key of ['terminology','editorial','direction','typography'] as const)assert.equal(localeRegistry[code][key],'pending');}
   }
-  for(const code of ['bn','fr','ms','ru'] as const){assert.equal(translationPackages[code],undefined);assert.throws(()=>reviewContent(code));}
+  for(const code of ['bn','fr','ms','ru'] as const){assert.equal(Object.keys(translationPackages[code]!.content).length,72);assert.equal(reviewContent(code),translationPackages[code]!.content);assert.throws(()=>approvedContent(code));}
 });
 test('Review-only access cannot be used as a public renderer; full and incomplete content still fail closed',()=>{
   for(const locale of ['en','tr','ur','fa','id'] as const){
@@ -49,7 +49,7 @@ test('Review-only access cannot be used as a public renderer; full and incomplet
     }
     assert.throws(()=>renderReview(options,true),/test-only/);
   }
-  for(const locale of ['bn','fr','ms','ru'] as const){const options={locale,selectorHref:'/global/',localeHref:()=>'/global/',media:()=>'/unused.png',mode:'public' as const};for(const render of [renderGlobalPage,renderLanguageSelector])assert.throws(()=>render(options),/not activated/);}
+  for(const locale of ['xx','de'] as unknown as import('../src/saweeg-global/locales.ts').WorldLocale[]){const options={locale,selectorHref:'/global/',localeHref:()=>'/global/',media:()=>'/unused.png',mode:'public' as const};for(const render of [renderGlobalPage,renderLanguageSelector])assert.throws(()=>render(options));}
 });
 test('Arabic master and protected production sources remain equal to approved Phase 1 merge',()=>{
   const baseline='4ad8147df978625388f078ce9edeab36e5d2e021';

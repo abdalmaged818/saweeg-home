@@ -1,7 +1,8 @@
 import { arabicMaster, requiredContentKeys, type WorldContent } from "./content/ar.ts";
-import { localeRegistry, v1LocaleCodes, isV1Locale, type LocaleReview, type WorldLocale } from "./locales.ts";
+import { localeRegistry, activeLocaleCodes, isActiveLocale, isV1Locale, type LocaleReview, type WorldLocale } from "./locales.ts";
 import type {WorldDisplayContent} from "./content/types.ts";
 import { wave1Content, wave1Metadata } from "./content/wave1.generated.ts";
+import { wave2Content, wave2Metadata } from "./content/wave2.generated.ts";
 
 export interface TranslationPackage {
   locale: WorldLocale;
@@ -16,6 +17,10 @@ export const translationPackages: Readonly<Partial<Record<WorldLocale, Translati
   ...Object.fromEntries(Object.entries(wave1Content).map(([locale,content])=>[locale,Object.freeze({
     locale,content,review:localeRegistry[locale as WorldLocale],
     provenance:{reviewer:wave1Metadata[locale as keyof typeof wave1Metadata].specialist_role,revision:"wave1-owner-review"}
+  })])),
+  ...Object.fromEntries(Object.entries(wave2Content).map(([locale,content])=>[locale,Object.freeze({
+    locale,content,review:localeRegistry[locale as WorldLocale],
+    provenance:{reviewer:wave2Metadata[locale as keyof typeof wave2Metadata].specialist_role,revision:"wave2-owner-review"}
   })]))
 });
 export function packageIssues(locale: WorldLocale, pack?: TranslationPackage): string[] {
@@ -46,12 +51,13 @@ export function approvedContent(locale: WorldLocale): WorldContent {
 export function publicationIssues(locale: WorldLocale): string[] {
   const pack=translationPackages[locale];
   const issues=packageIssues(locale,pack).filter(issue=>!issue.startsWith("review:"));
-  if(!isV1Locale(locale)||localeRegistry[locale].activation!=="active"||localeRegistry[locale].publicationScope!=="v1-original-hadith-only")issues.push("v1-inactive");
+  const scope=isV1Locale(locale)?"v1-original-hadith-only":"wave2-original-hadith-only";
+  if(!isActiveLocale(locale)||localeRegistry[locale].activation!=="active"||localeRegistry[locale].publicationScope!==scope)issues.push("inactive");
   if(pack&&JSON.stringify(Object.keys(pack.content))!==JSON.stringify(requiredContentKeys))issues.push("content-order");
-  if(locale!=="ar"&&pack?.review.content!=="ready-for-owner-review")issues.push("not-owner-authorized-wave1");
+  if(locale!=="ar"&&pack?.review.content!=="ready-for-owner-review")issues.push("not-owner-authorized");
   return issues;
 }
-export const publishableLocales = (): WorldLocale[] => [...v1LocaleCodes];
+export const publishableLocales = (): WorldLocale[] => [...activeLocaleCodes];
 export function assertPublicActivation(locale: WorldLocale): void {
   const issues=publicationIssues(locale);
   if(issues.length)throw new Error(`Saweeg Global is not activated: ${locale} (${issues.join(",")})`);

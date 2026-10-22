@@ -1,0 +1,1503 @@
+"project": "Saweeg Global"
+"package_version": "1.0"
+"wave": 2
+"prepared_on": "2026-10-22"
+"review_status": "ready-for-owner-review"
+"native_human_review_completed": false
+"religious_review_status": "religious-review-required"
+"publishable": false
+"source":
+  "localization_package": "saweeg-global-localization-wave1 (1).yaml"
+  "localization_package_sha256": "ee31f7543faa0e6c0a8244852b84c81231d1287792ba1b6a84c931fc1c8fd5c4"
+  "arabic_master": "saweeg-global-translation-handoff-ar-v1.md"
+  "arabic_master_version": "1.0"
+  "arabic_master_sha256": "8931a4d5f6fa831642d4e70159effeafe567ce50086796304ecd5b8ca8caa49a"
+  "arabic_master_provenance": "Approved Arabic master named by the attached Wave 1 package and already supplied in this project session; read in full."
+  "english_reference": "locales.en in the attached Wave 1 package; reviewed localized values used only as terminology and schema reference."
+  "meaning_authority": "approved Arabic master"
+  "english_reference_ordered_values_sha256": "6b405163924adf4ba9b3cdf888ed7d4aca554c4594040e43bde7ef16033d7511"
+  "english_reference_values_modified": false
+  "source_key_count": 82
+  "source_content_and_interface_key_count": 72
+  "source_fixed_language_label_count": 10
+"translated_locales":
+- "bn"
+- "fr"
+- "ms"
+- "ru"
+"expected_key_count": 82
+"review_method":
+  "specialist_passes": 4
+  "specialist_type": "independent AI language specialists"
+  "translation_source_language": "ar"
+  "english_used_as_translation_pivot": false
+  "other_specialist_drafts_seen_during_independent_pass": false
+  "coordinator_scope": "schema validation, semantic comparison against Arabic, exact-concept menu comparison, source checks, formatting and final assembly"
+  "coordinator_translation_value_rewrites": false
+  "coordinator_corrections": []
+  "formatting_changes":
+  - "Serialized all keys and strings with double quotes and direct Unicode."
+  - "Standardized ordered-value digest metadata using one length-prefixed UTF-8 algorithm."
+  - "Replaced redundant copies of the Hadith quotation in metadata with its stable-key reference; quoted values are unchanged."
+  - "Added measured per-locale validation and source-integrity metadata."
+  "sources_modified": false
+  "production_code_or_github_modified": false
+"values_digest":
+  "algorithm": "SHA-256"
+  "method_id": "length-prefixed-utf8-v1"
+  "encoding": "UTF-8 without BOM; no Unicode normalization"
+  "serialization": "For each of the 82 values in authoritative key order, concatenate its UTF-8 byte length as an unsigned 8-byte big-endian integer followed by the value bytes. Hash that complete byte stream. No separator or trailing newline is added."
+"locales":
+  "bn":
+    "native_label": "বাংলা"
+    "direction": "ltr"
+    "review_status": "ready-for-owner-review"
+    "native_human_review_completed": false
+    "religious_review_status": "religious-review-required"
+    "publishable": false
+    "specialist_role": "AI Bengali cultural, food, and religious-context localization specialist"
+    "hadith_translation_source": "https://www.hadithbd.com/hadith/bukhari/5417?erid=29990&errt=hadith"
+    "hadith_source_metadata":
+      "url": "https://www.hadithbd.com/hadith/bukhari/5417?erid=29990&errt=hadith"
+      "online_publisher": "HadithBD / হাদিসবিডি"
+      "edition_publisher": "তাওহীদ পাবলিকেশন (the consulted page labels its edition সহীহ বুখারী (তাওহীদ পাবঃ))"
+      "publication_title": "সহীহ বুখারী (তাওহীদ পাবঃ)"
+      "individual_translator": null
+      "individual_translator_status": "Not named on the consulted passage; no individual translator attribution inferred."
+      "reference": "Sahih al-Bukhari, Hadith 5417; chapter 70/24, Talbinah"
+      "consulted_on": "2026-10-22"
+      "published_wording_preserved": true
+      "quotation_scope": "Only the published Bengali clause corresponding to the approved Arabic matn; the surrounding narration and explanatory footnote are excluded."
+      "source_evidence": "The live page explicitly labels Hadith 5417 and the Tawheed edition, and its Bengali narration contains the exact excerpt. Its Arabic matn corresponds to the approved short quotation."
+      "review_status": "religious-review-required"
+      "independent_religious_review_completed": false
+      "notes": "The published excerpt uses তালবীনা and source punctuation ’তালবীনা’; these are preserved exactly. General product prose uses contemporary Bengali তালবিনা. No medical claims from the site’s editorial footnote were copied."
+      "quotation_key": "world.talbinah.hadithTranslation"
+    "glossary":
+      "brand":
+        "form": "Saweeg"
+        "usage_rule": "Official Latin brand spelling is fixed; never render the brand as the Bengali food name."
+      "project":
+        "form": "Saweeg Global"
+        "usage_rule": "Official project identity is fixed; use the complete Latin spelling."
+      "madinah":
+        "form": "মদিনা"
+        "usage_rule": "Natural standard Bengali name for Madinah; retain the geographical and cultural connection."
+      "talbinah":
+        "form": "তালবিনা"
+        "usage_rule": "Keep this cultural food name; explain only with the approved ground-barley preparation. The sourced Hadith excerpt retains its published spelling তালবীনা."
+      "prophetic_talbinah":
+        "form": "নববী তালবিনা"
+        "usage_rule": "Religious and cultural designation reflecting mention in the Sunnah; do not turn it into a health or therapeutic promise."
+      "prophetic_tradition":
+        "form": "নবীর সুন্নাহ"
+        "usage_rule": "Use for the approved religious context; do not imply commercial religious certification."
+      "talbinah_powder":
+        "form": "নববী তালবিনা পাউডার"
+        "usage_rule": "Preparation product, separate from ready-to-serve Talbinah and from saweeg powder. Do not add sachet or package size."
+      "traditional_saweeg":
+        "form": "সাওয়ীক"
+        "usage_rule": "Bengali transliteration of the traditional food; distinct from Latin Saweeg as the brand. Do not infer ingredients from the name."
+      "saweeg_powder":
+        "form": "সাওয়ীক পাউডার"
+        "usage_rule": "Separate powder product; do not substitute Talbinah powder or add sachet wording."
+      "al_jabirah":
+        "form": "Al Jabirah"
+        "usage_rule": "Commercial identity retained in its approved Latin spelling; do not translate as a descriptive product type."
+      "al_jabirah_box":
+        "form": "Al Jabirah বক্স"
+        "usage_rule": "Commercial product collection; box is localized as বক্স. Never add powder, single-use sachet, or sachet-box wording."
+      "saweeg_maamoul":
+        "form": "সাওয়ীক মামুল"
+        "usage_rule": "Saweeg here names the traditional food within the product name. মামুল transliterates Maamoul; do not add a box, filling, or ingredients."
+      "madinah_food_heritage":
+        "form": "মদিনার খাদ্য ঐতিহ্য"
+        "usage_rule": "Includes the city’s recipes, domestic food memories, and hospitality; do not restrict it to one product."
+      "saudi_food_heritage":
+        "form": "সৌদি খাদ্য ঐতিহ্য"
+        "usage_rule": "Wider cultural context; no claim that every product is exclusive to Saudi Arabia."
+      "branch":
+        "form": "শাখা"
+        "usage_rule": "A physical visitable location, distinct from the online store or menu."
+      "menu":
+        "form": "মেনু"
+        "usage_rule": "A branch-specific food and price list; navigation menu is also মেনু in interface context."
+      "online_store":
+        "form": "অনলাইন স্টোর"
+        "usage_rule": "Official ordering destination; do not imply worldwide shipping or add delivery availability."
+      "maqsed_branch":
+        "form": "Al-Maqsed শাখা"
+        "usage_rule": "Preserve the approved Latin branch identity; localize only the generic branch noun."
+      "maqsed_place":
+        "form": "Al-Maqsed Quba"
+        "usage_rule": "Approved place identity retained; use Al-Maqsed Quba-এর when Bengali grammar requires the possessive."
+      "quba_mosque":
+        "form": "কুবা মসজিদ"
+        "usage_rule": "Natural Bengali form for the approved nearby mosque; no extra location or gate facts."
+      "bustan_branch":
+        "form": "Bustan Al-Mustazal শাখা"
+        "usage_rule": "Preserve the approved Latin branch identity; localize only the generic branch noun."
+      "bustan_place":
+        "form": "Bustan Al-Mustazal"
+        "usage_rule": "Approved place identity retained; use the same spelling in address and image text."
+      "haram_branch":
+        "form": "Al Haram শাখা"
+        "usage_rule": "Preserve the approved Latin branch identity; do not substitute a different site name."
+      "haram_place":
+        "form": "Al Haram"
+        "usage_rule": "Approved place identity retained in descriptions of the surrounding area."
+      "bab_al_salam_314":
+        "form": "Bab Al Salam 314"
+        "usage_rule": "Preserve the complete approved location identity and 314. Do not call 314 a mosque gate number."
+      "hot_talbinah":
+        "form": "গরম তালবিনা"
+        "usage_rule": "Hot refers to serving temperature, not spiciness; ready-to-serve food, not powder."
+      "cold_talbinah":
+        "form": "ঠান্ডা তালবিনা"
+        "usage_rule": "Cold refers to serving temperature; ready-to-serve food, not powder."
+      "talbinah_ice_cream":
+        "form": "তালবিনা আইসক্রিম"
+        "usage_rule": "Keep the approved generic ice cream product; do not add cone, cup, or another variant."
+      "matcha_talbinah":
+        "form": "ম্যাচা তালবিনা"
+        "usage_rule": "Preserve both Matcha and Talbinah concepts; do not shorten to Matcha or add powder."
+      "hadith_reference":
+        "form": "সহিহ বুখারি, হাদিস ৫৪১৭।"
+        "usage_rule": "Bengali digits represent the unchanged reference 5417. Do not replace it with older edition numbering."
+    "strings":
+      "world.welcome.title": "Saweeg-এ স্বাগতম"
+      "world.welcome.description": "মদিনার এক গল্প, যা আমরা ভাগ করে নিই সারা বিশ্বের সঙ্গে। আপনার ভাষায় Saweeg-কে জানুন।"
+      "world.welcome.languageLabel": "আপনার ভাষা বেছে নিন"
+      "world.hero.heading": "মদিনা থেকে বিশ্বজুড়ে"
+      "world.hero.description": "মদিনার খাদ্য ঐতিহ্যকে তুলে ধরি আধুনিক পণ্য ও অভিজ্ঞতার মাধ্যমে।"
+      "world.hero.cta": "Saweeg-কে জানুন"
+      "world.about.heading": "Saweeg পরিচিতি"
+      "world.about.description": "Saweeg মদিনার একটি সৌদি ব্র্যান্ড, যা মদিনার খাদ্য ঐতিহ্যকে নতুন করে তুলে ধরে আধুনিক আঙ্গিকে। নববী তালবিনা ও সাওয়ীক থেকে শুরু করে অতিথি আপ্যায়ন, উপহার ও দৈনন্দিন উপভোগের জন্য রয়েছে নানা পণ্য।"
+      "world.about.heritage": "মদিনার রেসিপি, ঘরোয়া স্মৃতি ও অতিথি আপ্যায়ন থেকে আমরা অনুপ্রেরণা নিই। সেগুলো পরিবেশনের ধরনে নতুনত্ব আনি, যেন এই ঐতিহ্য মানুষের দৈনন্দিন জীবনের কাছাকাছি থাকে।"
+      "world.talbinah.heading": "নববী তালবিনা কী?"
+      "world.talbinah.description": "তালবিনা যবের গুঁড়া দিয়ে তৈরি এক ঐতিহ্যবাহী খাবার, যা মসৃণ হওয়া পর্যন্ত রান্না করা হয়। নবীর সুন্নাহয় এর উল্লেখ রয়েছে। Saweeg-এর প্রধান পণ্যগুলোর অন্যতম তালবিনা, যা আমরা আধুনিক নানা রূপে পরিবেশন করি।"
+      "world.talbinah.hadithIntro": "আয়িশা (রাদিয়াল্লাহু আনহা) থেকে বর্ণিত, আল্লাহর রাসুল ﷺ বলেছেন:"
+      "world.talbinah.hadithText": "«التَّلْبِينَةُ مَجَمَّةٌ لِفُؤَادِ الْمَرِيضِ، تَذْهَبُ بِبَعْضِ الْحُزْنِ»."
+      "world.talbinah.hadithTranslation": "’তালবীনা’ রুগ্ন ব্যক্তির হৃদয়ে প্রশান্তি আনে এবং শোক দুঃখ কিছুটা দূর করে।"
+      "world.talbinah.hadithSource": "সহিহ বুখারি, হাদিস ৫৪১৭।"
+      "world.products.heading": "আমাদের পণ্যগুলো জানুন"
+      "world.products.description": "তালবিনা ও সাওয়ীক থেকে শুরু করে অতিথি আপ্যায়ন ও বাড়িতে তৈরির জন্য আধুনিক নানা অভিজ্ঞতা।"
+      "world.products.hotTalbinah.name": "গরম তালবিনা"
+      "world.products.coldTalbinah.name": "ঠান্ডা তালবিনা"
+      "world.products.talbinahIceCream.name": "তালবিনা আইসক্রিম"
+      "world.products.matchaTalbinah.name": "ম্যাচা তালবিনা"
+      "world.products.talbinahPowder.name": "নববী তালবিনা পাউডার"
+      "world.products.saweegPowder.name": "সাওয়ীক পাউডার"
+      "world.products.alJabirahBox.name": "Al Jabirah বক্স"
+      "world.products.saweegMaamoul.name": "সাওয়ীক মামুল"
+      "world.branches.heading": "আমাদের শাখায় স্বাগতম"
+      "world.branches.description": "মদিনায় আমাদের শাখায় আসুন। সুবিধামতো শাখা বেছে নিয়ে তার অবস্থান ও মেনু দেখুন।"
+      "world.branches.maqsed.name": "Al-Maqsed শাখা"
+      "world.branches.maqsed.location": "Al-Maqsed Quba-এর ভেতরে, কুবা মসজিদের পাশে, মদিনা।"
+      "world.branches.maqsed.hours": "বিকেল ৪:৩০টা–রাত ১২টা। বৃহস্পতি ও শুক্রবার রাত ২টা পর্যন্ত।"
+      "world.branches.bustan.name": "Bustan Al-Mustazal শাখা"
+      "world.branches.bustan.location": "Bustan Al-Mustazal-এর ভেতরে, মদিনা।"
+      "world.branches.bustan.hours": "সকাল ৬টা–দুপুর ১২টা, এরপর বিকেল ৪:৩০টা–রাত ১১:৩০টা।"
+      "world.branches.haram.name": "Al Haram শাখা"
+      "world.branches.haram.location": "Bab Al Salam 314, মদিনা।"
+      "world.branches.haram.hours": "দিনরাত ২৪ ঘণ্টা খোলা।"
+      "world.branches.mapCta": "মানচিত্রে দেখুন"
+      "world.menu.cta": "মেনু দেখুন"
+      "world.menu.languageUnavailable": "এই শাখার মেনু বর্তমানে আপনার ভাষায় পাওয়া যাচ্ছে না। উপলব্ধ ভাষাগুলোর একটি বেছে নিতে পারেন।"
+      "world.menu.chooseLanguageCta": "মেনুর ভাষা বেছে নিন"
+      "world.store.heading": "আপনার ঘরে Saweeg"
+      "world.store.description": "Saweeg-এর অনলাইন স্টোরের পণ্যগুলো দেখুন এবং অর্ডার ও ডেলিভারির উপলব্ধ বিকল্পগুলো জানুন।"
+      "world.store.cta": "স্টোরে যান"
+      "world.contact.heading": "Saweeg-এর সঙ্গে যোগাযোগ"
+      "world.contact.description": "আমাদের পণ্য বা শাখা নিয়ে কোনো প্রশ্ন আছে? আমাদের গ্রাহকসেবা দল আনন্দের সঙ্গে আপনাকে সাহায্য করবে।"
+      "world.contact.phone": "+966 57 005 2424"
+      "world.contact.whatsappCta": "হোয়াটসঅ্যাপে যোগাযোগ করুন"
+      "world.social.heading": "Saweeg Global-কে অনুসরণ করুন"
+      "world.social.description": "নানা ভাষায় গল্প, পণ্য ও বিষয়বস্তু, যা মদিনার ঐতিহ্যকে আপনার কাছে নিয়ে আসে।"
+      "world.social.instagramCta": "ইনস্টাগ্রাম"
+      "world.social.tiktokCta": "টিকটক"
+      "world.language.changeCta": "ভাষা বদলান"
+      "world.navigation.backToTop": "ওপরে ফিরুন"
+      "world.nav.about": "Saweeg সম্পর্কে"
+      "world.nav.talbinah": "তালবিনা"
+      "world.nav.products": "পণ্য"
+      "world.nav.branches": "শাখা"
+      "world.nav.contact": "যোগাযোগ করুন"
+      "world.navigation.label": "প্রধান নেভিগেশন"
+      "world.navigation.skip": "মূল বিষয়বস্তুতে যান"
+      "world.navigation.openMenu": "মেনু খুলুন"
+      "world.navigation.closeMenu": "মেনু বন্ধ করুন"
+      "world.brand.homeLabel": "Saweeg Global – ভাষা বেছে নিন"
+      "world.footer.linksTitle": "Saweeg-এর লিংক"
+      "world.footer.tagline": "ঐতিহ্যের আধুনিক ধারাবাহিকতা"
+      "world.footer.rights": "© Saweeg। সর্বস্বত্ব সংরক্ষিত।"
+      "world.images.heroAlt": "মদিনার একটি দৃশ্য"
+      "world.images.aboutAlt": "Saweeg-এর ঠান্ডা তালবিনা"
+      "world.images.talbinahAlt": "একটি বাটিতে তালবিনা পাউডার"
+      "world.branches.maqsed.imageAlt": "Al-Maqsed Quba-এ Saweeg শাখার সামনের অংশ"
+      "world.branches.bustan.imageAlt": "Bustan Al-Mustazal-এ Saweeg শাখার সামনের অংশ"
+      "world.branches.haram.imageAlt": "Al Haram এলাকায় Saweeg শাখার সামনের অংশ"
+      "world.languages.ar.label": "العربية"
+      "world.languages.en.label": "English"
+      "world.languages.ur.label": "اردو"
+      "world.languages.id.label": "Bahasa Indonesia"
+      "world.languages.bn.label": "বাংলা"
+      "world.languages.tr.label": "Türkçe"
+      "world.languages.fa.label": "فارسی"
+      "world.languages.fr.label": "Français"
+      "world.languages.ms.label": "Bahasa Melayu"
+      "world.languages.ru.label": "Русский"
+    "menu_terminology_review":
+      "official_menu_url": "https://go.saweegsa.com/menu/haram/bn/"
+      "catalog_module_url": "https://go.saweegsa.com/assets/catalog-images-CIgsEenh.js"
+      "menu_module_url": "https://go.saweegsa.com/assets/haram-main-kOHBLKp_.js"
+      "consulted_on": "2026-10-22"
+      "access_method": "Web open failed; official HTML and its linked production JavaScript catalog were retrieved using Python urllib. Only Bengali menu values were used for linguistic decisions."
+      "independent_draft_completed_before_menu_consultation": true
+      "scope": "Exact same-concept terminology only; menu content does not override the approved Arabic master. Menu prices, variant details, or availability are not imported."
+      "same_concept_comparisons":
+      - "key": "world.products.hotTalbinah.name"
+        "product_ids":
+        - "hot-talbinah"
+        "menu_form": "গরম তালবিনা"
+        "final_form": "গরম তালবিনা"
+        "decision": "Exact same-concept match; retained the independent draft."
+      - "key": "world.products.coldTalbinah.name"
+        "product_ids":
+        - "cold-talbinah"
+        "menu_form": "ঠান্ডা তালবিনা"
+        "final_form": "ঠান্ডা তালবিনা"
+        "decision": "Exact same-concept match; retained the independent draft."
+      - "key": "world.products.talbinahIceCream.name"
+        "product_ids":
+        - "talbinah-ice-cream-biscuit"
+        - "talbinah-ice-cream-cup"
+        "menu_forms":
+        - "তালবিনা আইসক্রিম — কোন"
+        - "তালবিনা আইসক্রিম — কাপ"
+        "final_form": "তালবিনা আইসক্রিম"
+        "decision": "Same parent concept confirms তালবিনা আইসক্রিম. Variant-specific cone/cup qualifiers are excluded because the master names only generic Talbinah Ice Cream."
+      - "key": "world.products.matchaTalbinah.name"
+        "product_ids":
+        - "talbinah-matcha"
+        "menu_form": "তালবিনা ম্যাচা"
+        "independent_draft_form": "মাচা তালবিনা"
+        "final_form": "ম্যাচা তালবিনা"
+        "decision": "Adopted the official, natural Bengali loanword ম্যাচা for Matcha. Kept modifier order matching approved Arabic ماتشا تلبينة. This is the only product-word adjustment made after menu consultation."
+      - "key": "world.products.talbinahPowder.name"
+        "product_ids":
+        - "talbinah-powder-sachet"
+        "menu_form": "তালবিনা পাউডারের প্যাকেট"
+        "final_form": "নববী তালবিনা পাউডার"
+        "decision": "Related preparation product, but sachet/packet is narrower than the master. Preserved নববী and powder; did not copy packet wording."
+      - "key": "world.products.saweegPowder.name"
+        "product_ids":
+        - "saweeg-powder-sachet"
+        "menu_form": "Saweeg পাউডারের প্যাকেট"
+        "final_form": "সাওয়ীক পাউডার"
+        "decision": "Related powder, not an exact packaging match. Used Bengali সাওয়ীক for the food, distinct from Latin Saweeg as brand, and excluded packet wording."
+      - "key": "world.products.alJabirahBox.name"
+        "product_ids":
+        - "al-jabirah-box"
+        "menu_form": "আল জাবিরাহ স্যাশের বক্স"
+        "final_form": "Al Jabirah বক্স"
+        "decision": "Rejected conflicting sachet-box expansion. Approved master is only Al Jabirah Box. Retained approved Latin commercial identity Al Jabirah and localized box as বক্স."
+      - "key": "world.products.saweegMaamoul.name"
+        "product_ids":
+        - "saweeg-maamoul"
+        "menu_form": "Saweeg মামুল"
+        "final_form": "সাওয়ীক মামুল"
+        "decision": "Same non-box Maamoul product. Retained menu-consistent মামুল; used সাওয়ীক to make the food meaning distinct from the brand. Did not borrow saweeg-maamoul-box."
+      "distinct_products_not_conflated":
+      - "al-jabirah-sachet"
+      - "al-jabirah-box"
+      - "sachet-box"
+      - "saweeg-maamoul"
+      - "saweeg-maamoul-box"
+      - "hot-talbinah"
+      - "hot-talbinah-one-liter"
+      "other_consistency":
+      - "concept": "menu"
+        "menu_form": "মেনু"
+        "final_form": "মেনু"
+        "decision": "Same concise Bengali menu term retained."
+      - "concept": "online store"
+        "menu_form": "অনলাইন স্টোর"
+        "final_form": "অনলাইন স্টোর"
+        "decision": "Same natural Bengali term retained."
+      - "concept": "Al Haram branch"
+        "menu_form": "হারাম শাখা"
+        "final_form": "Al Haram শাখা"
+        "decision": "Used the approved Latin place identity from the authoritative package."
+      "fallback_rejected":
+      - "menu_field": "homeLabel"
+        "menu_value": "Saweeg home"
+        "reason": "English interface fallback; final Bengali home label is complete."
+      - "menu_field": "logoAlt"
+        "menu_value": "Saweeg logo"
+        "reason": "English interface fallback; not imported."
+      - "menu_field": "selectorTitle"
+        "menu_value": "فرع الحرم | سويق"
+        "reason": "Arabic fallback; not imported."
+      - "menu_field": "welcomeStrip"
+        "menu_value": "سلام من لدن أرض السلام"
+        "reason": "Arabic welcome strip is outside the approved Bengali content; not imported."
+      - "menu_field": "welcome"
+        "menu_value": "সুইকে স্বাগতম"
+        "reason": "Transliterates the brand instead of retaining mandatory Saweeg; final welcome preserves the official Latin brand."
+    "linguistic_qa":
+      "key_count": 82
+      "expected_key_count": 82
+      "content_and_interface_key_count": 72
+      "fixed_language_label_count": 10
+      "missing_keys": []
+      "extra_keys": []
+      "duplicate_keys": []
+      "renamed_keys": []
+      "key_order_matches_authoritative_source": true
+      "all_values_complete_nonempty_strings": true
+      "raw_keys_as_content": false
+      "arabic_fallback": false
+      "english_fallback": false
+      "intentional_non_bengali_values": "Fixed native endonyms, official Latin brand/project/commercial/place identities, exact international phone number, and the unchanged Arabic Hadith only."
+      "fixed_native_labels_preserved": true
+      "original_arabic_hadith_byte_identical": true
+      "hadith_translation_exact_published_excerpt": true
+      "facts_review":
+        "phone": "+966 57 005 2424 unchanged"
+        "maqsed_hours": "৪:৩০ PM–midnight; Thursday and Friday until ২ AM, expressed naturally in Bengali and preserving the master facts."
+        "bustan_hours": "৬ AM–১২ noon, then ৪:৩০ PM–১১:৩০ PM; both sessions preserved."
+        "haram_hours": "24-hour reception preserved as দিনরাত ২৪ ঘণ্টা খোলা।"
+        "location_314": "Bab Al Salam 314 preserved without an invented gate interpretation."
+        "products": "Eight distinct approved products preserved, including separate ready food/powders, Al Jabirah Box without sachet wording, and non-box Maamoul."
+        "urls": "No URLs are translatable values in the 82-key schema; operational URLs remain external source data and were not changed."
+      "unsupported_claims_added": false
+      "mobile_button_copy_reviewed": true
+      "rendered_mobile_layout_tested": false
+      "direction_correct": true
+      "manual_bidi_controls_added": false
+      "direct_arabic_translation": true
+      "english_used_only_for_schema_and_controlled_terminology": true
+      "other_specialist_drafts_consulted": false
+      "linguistic_review_method": "Independent AI Bengali cultural, food, and religious-context localization pass, followed by self-review against Arabic and exact-concept menu check. No native human or religious approval claimed."
+      "yaml_standard_parser": "PyYAML safe_load successful"
+      "ordered_values_sha256": "3366bd43b65623f24f8695f3cb9e5b8d5d35e86669d22da3bbcebac735a0ddc1"
+      "ordered_values_sha256_method": "length-prefixed-utf8-v1"
+      "coordinator_compared_every_key_against_arabic_master": true
+      "coordinator_review_type": "AI semantic and structural review; not native human or religious approval"
+    "typography_notes":
+      "base_direction": "ltr"
+      "font_requirement": "Use a font with complete Bengali-script coverage, including Bengali digits, conjuncts, vowel signs, and appropriate shaping; Noto Sans Bengali is one suitable family."
+      "stored_text_order": "logical"
+      "manual_bidi_controls_added": false
+      "arabic_hadith_rendering": "Render the unchanged Arabic Hadith in an explicitly RTL element, isolated from the surrounding Bengali LTR content."
+      "latin_and_phone_rendering": "Keep Saweeg, Saweeg Global, approved Latin place/product identities, international phone number, and URLs readable in LTR runs; use markup-level isolation rather than manual stored controls."
+      "endonym_rendering": "Render every language endonym in its own natural direction; preserve all 10 stored labels exactly."
+      "numerals": "Bengali numerals are used for hours and Hadith 5417; the international phone and approved location identity Bab Al Salam 314 retain their required Latin digits."
+      "punctuation": "Use Bengali danda for prose sentence endings; use en dashes for time ranges. Latin proper names take Bengali suffixes with a hyphen when needed."
+      "mobile_layout": "Button labels are concise; allow normal Bengali word wrapping and avoid splitting conjuncts. Actual rendered mobile layout has not been tested."
+    "publication_blockers":
+    - "independent_religious_review_pending"
+    "open_questions": []
+  "fr":
+    "native_label": "Français"
+    "direction": "ltr"
+    "review_status": "ready-for-owner-review"
+    "native_human_review_completed": false
+    "religious_review_status": "religious-review-required"
+    "publishable": false
+    "specialist_role": "AI French cultural, food, and brand localization specialist; respectful religious-context localization; independent direct-from-Arabic pass"
+    "hadith_translation_source": "https://www.3ilmchar3i.net/article-30679834.html"
+    "hadith_source_metadata":
+      "publisher": "La science légiférée – 3ilmchar3i.net"
+      "page_title": "Les bienfaits de la talbina - التلبينة (vidéo)"
+      "publication_date": "2009-05-17"
+      "translator": "No named French translator credited in the retrieved article; not independently verified."
+      "upstream_attribution": "The article credits hadith.al-islam.com beneath the quoted narration and commentary; the French translator is not named."
+      "reference": "Approved display: Sahih al-Bukhari, hadith 5417. The French article gives a parallel narration with the Muslim chain and later explicitly cites Al-Bukhârî 5417 and Muslim 2216."
+      "approved_reference_number": 5417
+      "source_url": "https://www.3ilmchar3i.net/article-30679834.html"
+      "reference_verification_url": "https://hadeethenc.com/ar/browse/hadith/66002"
+      "verification_method": "Targeted web search returned the published full indexed article, including the exact French sentence, Arabic narration, publication date, and 5417/2216 citations; direct page opening timed out. HadithEnc Arabic record 66002 independently identifies the approved narration as Bukhari 5417 and Muslim 2216."
+      "published_wording_preserved": true
+      "source_transliteration": "Talbinah"
+      "source_spelling_exception": "coeur remains as published, without replacing it by cœur; straight quotation marks retained."
+      "source_status": "established-published-French-translation-of-parallel-narration; correspondence-to-5417-requires-religious-review"
+      "review_required": "Independent religious review must confirm the published French wording and its use under the approved 5417 reference, including the nuance of ببعض الحزن."
+      "independent_religious_review_completed": false
+      "surrounding_medical_claims_imported": false
+      "rejected_alternative": "The French 5417 entry in the Fawaz Ahmed dataset was traceable, but its translator/provenance was not verified; it was not used."
+      "quotation_key": "world.talbinah.hadithTranslation"
+    "glossary":
+      "brand":
+        "form": "Saweeg"
+        "usage_rule": "Marque officielle en alphabet latin, toujours avec une majuscule. Ne pas traduire ni confondre avec le saweeg traditionnel."
+      "project":
+        "form": "Saweeg Global"
+        "usage_rule": "Nom officiel du projet, conservé tel quel, y compris dans les liens de navigation et le titre des réseaux sociaux."
+      "madinah":
+        "form": "Médine"
+        "usage_rule": "Exonyme français usuel de المدينة المنورة / Madinah, employé uniformément. Préserve l’origine culturelle et géographique."
+      "talbinah":
+        "form": "talbinah"
+        "usage_rule": "Nom culturel conservé, avec majuscule en début de nom de produit ou de rubrique. La définition explique la préparation à base d’orge moulu."
+      "prophetic_talbinah":
+        "form": "talbinah prophétique"
+        "usage_rule": "Désignation culturelle et religieuse du mets cité dans la tradition prophétique. Aucun ajout de promesse médicale ou thérapeutique."
+      "prophetic_tradition":
+        "form": "tradition prophétique"
+        "usage_rule": "Équivalent contextuel de السنة النبوية ; ne pas en déduire une promesse pour un produit commercial."
+      "talbinah_powder":
+        "form": "Poudre de talbinah prophétique"
+        "usage_rule": "Produit destiné à la préparation, distinct de la talbinah servie chaude ou froide et de la poudre de saweeg. Ne pas ajouter un conditionnement en paquet ou en sachet."
+      "traditional_saweeg":
+        "form": "saweeg traditionnel"
+        "usage_rule": "Nom de l’aliment en minuscules dans les phrases et dans les compléments des noms de produits. Les ingrédients ne sont pas déduits du nom."
+      "saweeg_powder":
+        "form": "Poudre de saweeg"
+        "usage_rule": "Produit indépendant ; saweeg désigne ici l’aliment. Ne pas remplacer par de la poudre de talbinah ni ajouter de conditionnement."
+      "al_jabirah":
+        "form": "Al Jabirah"
+        "usage_rule": "Nom commercial conservé avec la graphie latine approuvée. Aucun ingrédient ni format supplémentaire n’est présumé."
+      "al_jabirah_box":
+        "form": "Coffret Al Jabirah"
+        "usage_rule": "Ensemble commercial approuvé. Ne pas reprendre la mention « sachets » du menu : elle ajoute une précision absente du maître arabe."
+      "saweeg_maamoul":
+        "form": "Maamoul au saweeg"
+        "usage_rule": "Nom du produit : saweeg désigne l’aliment. Ne pas transformer en boîte de maamoul ni ajouter de garniture ou de composition."
+      "madinah_food_heritage":
+        "form": "patrimoine culinaire de Médine"
+        "usage_rule": "Recettes, mémoire des foyers et traditions d’accueil liées à Médine ; ne se limite pas à un produit."
+      "saudi_food_heritage":
+        "form": "patrimoine culinaire saoudien"
+        "usage_rule": "Cadre culturel plus large, sans affirmer que tous les produits sont propres à l’Arabie saoudite."
+      "branch":
+        "form": "succursale"
+        "usage_rule": "Lieu physique que l’on peut visiter. Terme aligné sur la dénomination officielle française « Succursale Al Haram » ; distinct de la boutique en ligne."
+      "menu":
+        "form": "menu"
+        "usage_rule": "Liste de produits et de prix propre à une succursale. Dans les commandes de navigation, menu désigne aussi le panneau de navigation selon son contexte."
+      "online_store":
+        "form": "boutique en ligne"
+        "usage_rule": "Destination officielle pour commander. N’implique aucune livraison mondiale ; les possibilités disponibles restent à consulter."
+      "maqsed_branch":
+        "form": "Succursale Al-Maqsed"
+        "usage_rule": "Nom de la succursale, fondé sur l’identité approuvée Al-Maqsed. Ne pas modifier la graphie du nom propre."
+      "maqsed_place":
+        "form": "Al-Maqsed Quba"
+        "usage_rule": "Nom du lieu conservé. La mosquée de Quba est un repère distinct, situé à côté selon le maître arabe."
+      "bustan_branch":
+        "form": "Succursale Bustan Al-Mustazal"
+        "usage_rule": "Nom de la succursale, distinct du lieu qui l’abrite ; graphie latine approuvée conservée."
+      "bustan_place":
+        "form": "Bustan Al-Mustazal"
+        "usage_rule": "Nom du lieu conservé sans traduction littérale ni modification de graphie."
+      "haram_branch":
+        "form": "Succursale Al Haram"
+        "usage_rule": "Nom de la succursale, identique à celui du menu officiel français. Ne pas ajouter de description non approuvée."
+      "haram_place":
+        "form": "Al Haram"
+        "usage_rule": "Identité du lieu conservée dans le nom de la succursale et dans son texte alternatif."
+      "bab_al_salam_314":
+        "form": "Bab Al Salam 314"
+        "usage_rule": "Description d’emplacement approuvée. Le nombre 314 reste inchangé ; ne pas ajouter « porte n° 314 » ni l’interpréter comme un numéro de porte de la mosquée."
+      "hot_talbinah":
+        "form": "Talbinah chaude"
+        "usage_rule": "Température de service, non caractère épicé. Identique au menu officiel français."
+      "cold_talbinah":
+        "form": "Talbinah froide"
+        "usage_rule": "Produit prêt à servir froid, distinct de la poudre à préparer. Identique au menu officiel français."
+      "talbinah_ice_cream":
+        "form": "Glace à la talbinah"
+        "usage_rule": "Libellé générique du produit approuvé. Le menu distingue cornet et pot, mais aucun de ces formats n’est ajouté au nom générique."
+      "matcha_talbinah":
+        "form": "Matcha à la talbinah"
+        "usage_rule": "Identité combinant matcha et talbinah. Libellé identique à celui du menu officiel français, sans réduire le produit au matcha seul."
+      "hadith_reference":
+        "form": "Rapporté par Al-Bukhari, hadith 5417."
+        "usage_rule": "Source et numéro du maître arabe conservés. La traduction publiée du sens et sa correspondance avec la version 5417 restent soumises à une révision religieuse indépendante."
+    "strings":
+      "world.welcome.title": "Bienvenue chez Saweeg"
+      "world.welcome.description": "Une histoire de Médine que nous partageons avec le monde. Découvrez Saweeg dans votre langue."
+      "world.welcome.languageLabel": "Choisissez votre langue"
+      "world.hero.heading": "De Médine au monde entier"
+      "world.hero.description": "Le patrimoine culinaire de Médine, à travers des produits et des expériences d’aujourd’hui."
+      "world.hero.cta": "Découvrir Saweeg"
+      "world.about.heading": "À la découverte de Saweeg"
+      "world.about.description": "Saweeg est une marque saoudienne de Médine qui revisite le patrimoine culinaire de la ville dans un esprit contemporain. Talbinah prophétique, saweeg traditionnel et produits pour recevoir, offrir ou savourer au quotidien."
+      "world.about.heritage": "Nous puisons dans les recettes de Médine, les souvenirs de ses foyers et ses traditions d’accueil. Nous renouvelons la façon de les partager pour qu’ils gardent leur place dans la vie quotidienne."
+      "world.talbinah.heading": "Qu’est-ce que la talbinah prophétique ?"
+      "world.talbinah.description": "La talbinah est une préparation traditionnelle à base d’orge moulu, cuite jusqu’à obtenir une texture lisse. Citée dans la tradition prophétique, elle compte parmi les principaux produits que Saweeg présente sous des formes contemporaines."
+      "world.talbinah.hadithIntro": "D’après Aïcha (qu’Allah l’agrée), le Messager d’Allah (paix et bénédictions sur lui) a dit :"
+      "world.talbinah.hadithText": "«التَّلْبِينَةُ مَجَمَّةٌ لِفُؤَادِ الْمَرِيضِ، تَذْهَبُ بِبَعْضِ الْحُزْنِ»."
+      "world.talbinah.hadithTranslation": "\"La Talbinah apaise le coeur du malade et dissipe certaines tristesses.\""
+      "world.talbinah.hadithSource": "Rapporté par Al-Bukhari, hadith 5417."
+      "world.products.heading": "Découvrez nos produits"
+      "world.products.description": "De la talbinah et du saweeg traditionnel aux créations d’aujourd’hui, pour recevoir ou préparer chez vous."
+      "world.products.hotTalbinah.name": "Talbinah chaude"
+      "world.products.coldTalbinah.name": "Talbinah froide"
+      "world.products.talbinahIceCream.name": "Glace à la talbinah"
+      "world.products.matchaTalbinah.name": "Matcha à la talbinah"
+      "world.products.talbinahPowder.name": "Poudre de talbinah prophétique"
+      "world.products.saweegPowder.name": "Poudre de saweeg"
+      "world.products.alJabirahBox.name": "Coffret Al Jabirah"
+      "world.products.saweegMaamoul.name": "Maamoul au saweeg"
+      "world.branches.heading": "Bienvenue dans nos succursales"
+      "world.branches.description": "Venez nous voir à Médine. Choisissez la succursale qui vous convient et consultez son emplacement et son menu."
+      "world.branches.maqsed.name": "Succursale Al-Maqsed"
+      "world.branches.maqsed.location": "À l’intérieur d’Al-Maqsed Quba, à côté de la mosquée de Quba, à Médine."
+      "world.branches.maqsed.hours": "De 16 h 30 à minuit. Le jeudi et le vendredi, jusqu’à 2 h du matin."
+      "world.branches.bustan.name": "Succursale Bustan Al-Mustazal"
+      "world.branches.bustan.location": "À l’intérieur de Bustan Al-Mustazal, à Médine."
+      "world.branches.bustan.hours": "De 6 h à midi, puis de 16 h 30 à 23 h 30."
+      "world.branches.haram.name": "Succursale Al Haram"
+      "world.branches.haram.location": "Bab Al Salam 314, Médine."
+      "world.branches.haram.hours": "Nous vous accueillons 24 h/24."
+      "world.branches.mapCta": "Voir sur la carte"
+      "world.menu.cta": "Voir le menu"
+      "world.menu.languageUnavailable": "Le menu de cette succursale n’est pas disponible dans votre langue pour le moment. Vous pouvez choisir l’une des langues proposées."
+      "world.menu.chooseLanguageCta": "Choisir la langue du menu"
+      "world.store.heading": "Saweeg chez vous"
+      "world.store.description": "Explorez les produits de la boutique en ligne Saweeg et découvrez les possibilités de commande et de livraison proposées."
+      "world.store.cta": "Visiter la boutique"
+      "world.contact.heading": "Contacter Saweeg"
+      "world.contact.description": "Une question sur nos produits ou nos succursales ? Notre service client se fera un plaisir de vous aider."
+      "world.contact.phone": "+966 57 005 2424"
+      "world.contact.whatsappCta": "Nous contacter sur WhatsApp"
+      "world.social.heading": "Suivez Saweeg Global"
+      "world.social.description": "Des histoires, des produits et des contenus en plusieurs langues pour vous faire découvrir le patrimoine de Médine."
+      "world.social.instagramCta": "Instagram"
+      "world.social.tiktokCta": "TikTok"
+      "world.language.changeCta": "Changer de langue"
+      "world.navigation.backToTop": "Retour en haut"
+      "world.nav.about": "À propos de Saweeg"
+      "world.nav.talbinah": "Talbinah"
+      "world.nav.products": "Produits"
+      "world.nav.branches": "Succursales"
+      "world.nav.contact": "Nous contacter"
+      "world.navigation.label": "Navigation principale"
+      "world.navigation.skip": "Aller au contenu"
+      "world.navigation.openMenu": "Ouvrir le menu"
+      "world.navigation.closeMenu": "Fermer le menu"
+      "world.brand.homeLabel": "Saweeg Global – Choisir la langue"
+      "world.footer.linksTitle": "Liens Saweeg"
+      "world.footer.tagline": "Une expression contemporaine de l’authenticité"
+      "world.footer.rights": "© Saweeg. Tous droits réservés."
+      "world.images.heroAlt": "Vue de Médine"
+      "world.images.aboutAlt": "Talbinah froide de Saweeg"
+      "world.images.talbinahAlt": "Poudre de talbinah dans un bol"
+      "world.branches.maqsed.imageAlt": "Façade de la succursale Saweeg à Al-Maqsed Quba"
+      "world.branches.bustan.imageAlt": "Façade de la succursale Saweeg à Bustan Al-Mustazal"
+      "world.branches.haram.imageAlt": "Façade de la succursale Saweeg dans le secteur d’Al Haram"
+      "world.languages.ar.label": "العربية"
+      "world.languages.en.label": "English"
+      "world.languages.ur.label": "اردو"
+      "world.languages.id.label": "Bahasa Indonesia"
+      "world.languages.bn.label": "বাংলা"
+      "world.languages.tr.label": "Türkçe"
+      "world.languages.fa.label": "فارسی"
+      "world.languages.fr.label": "Français"
+      "world.languages.ms.label": "Bahasa Melayu"
+      "world.languages.ru.label": "Русский"
+    "menu_terminology_review":
+      "status": "consulted-live-official-french-menu"
+      "consulted_at": "2026-10-22"
+      "url": "https://go.saweegsa.com/menu/haram/fr/"
+      "access_method": "Web reader failed; official HTML and its referenced live JavaScript catalog were read via Python urllib. Only French catalog terminology informed this locale."
+      "catalog_url": "https://go.saweegsa.com/assets/catalog-images-CIgsEenh.js"
+      "product_inventory_url": "https://go.saweegsa.com/assets/haram-main-kOHBLKp_.js"
+      "source_priority": "Approved Arabic meaning takes priority; English was used only for schema and controlled-identity reference."
+      "exact_concept_matches":
+      - "menu_id": "hot-talbinah"
+        "locale_key": "world.products.hotTalbinah.name"
+        "menu_form": "Talbinah chaude"
+        "decision": "Adopted unchanged."
+      - "menu_id": "cold-talbinah"
+        "locale_key": "world.products.coldTalbinah.name"
+        "menu_form": "Talbinah froide"
+        "decision": "Adopted unchanged."
+      - "menu_id": "talbinah-matcha"
+        "locale_key": "world.products.matchaTalbinah.name"
+        "menu_form": "Matcha à la talbinah"
+        "decision": "Adopted unchanged; same combined product concept."
+      - "menu_id": "branchName"
+        "locale_key": "world.branches.haram.name"
+        "menu_form": "Succursale Al Haram"
+        "decision": "Adopted unchanged; succursale used consistently for physical branches."
+      - "menu_id": "welcome"
+        "locale_key": "world.welcome.title"
+        "menu_form": "Bienvenue chez Saweeg"
+        "decision": "Adopted unchanged."
+      - "menu_id": "storeButton"
+        "locale_key": "world.store.cta"
+        "menu_form": "Visiter la boutique"
+        "decision": "Adopted unchanged."
+      - "menu_id": "contactTitle"
+        "locale_key": "world.contact.heading"
+        "menu_form": "Contacter Saweeg"
+        "decision": "Adopted unchanged."
+      - "menu_id": "footerLinks"
+        "locale_key": "world.footer.linksTitle"
+        "menu_form": "Liens Saweeg"
+        "decision": "Adopted unchanged."
+      "partial_or_rejected_matches":
+      - "menu_id": "talbinah-ice-cream-biscuit / talbinah-ice-cream-cup"
+        "locale_key": "world.products.talbinahIceCream.name"
+        "menu_form": "Glace à la talbinah — Cornet / Glace à la talbinah — Pot"
+        "decision": "The general phrase Glace à la talbinah is consistent; neither serving format is added because the approved featured product is generic."
+      - "menu_id": "talbinah-powder-sachet"
+        "locale_key": "world.products.talbinahPowder.name"
+        "menu_form": "Paquet de poudre de talbinah"
+        "decision": "Near concept only: package format is narrower and the religious-cultural designation is omitted. Approved Arabic yields Poudre de talbinah prophétique, without Paquet."
+      - "menu_id": "saweeg-powder-sachet"
+        "locale_key": "world.products.saweegPowder.name"
+        "menu_form": "Paquet de poudre Saweeg"
+        "decision": "Near concept only: package format is narrower and capitalized Saweeg can read as the brand. Approved Arabic yields Poudre de saweeg, preserving the food distinction."
+      - "menu_id": "al-jabirah-box"
+        "locale_key": "world.products.alJabirahBox.name"
+        "menu_form": "Boîte de sachets Al Jabirah"
+        "decision": "Rejected sachets, which adds an unapproved composition/packaging detail. Coffret Al Jabirah preserves the commercial collection concept."
+      - "menu_id": "saweeg-maamoul"
+        "locale_key": "world.products.saweegMaamoul.name"
+        "menu_form": "Maamoul Saweeg"
+        "decision": "Same product ID, localized as Maamoul au saweeg to express the food concept naturally and distinguish it from the brand."
+      - "menu_id": "saweeg-maamoul-box"
+        "locale_key": "world.products.saweegMaamoul.name"
+        "menu_form": "Boîte de Maamoul Saweeg"
+        "decision": "Different boxed product; excluded. The approved featured maamoul is not automatically a box."
+      "fallbacks_observed":
+      - "menu_id": "homeLabel"
+        "observed_text": "Saweeg home"
+        "decision": "English fallback not copied; a full French logo label is supplied."
+      - "menu_id": "logoAlt"
+        "observed_text": "Saweeg logo"
+        "decision": "English fallback not copied; no corresponding logo-alt key exists in the 82-key schema."
+      - "menu_id": "welcomeStrip"
+        "observed_text": "سلام من لدن أرض السلام"
+        "decision": "Arabic fixed strip is outside the approved master; not imported."
+      - "menu_id": "selectorTitle"
+        "observed_text": "فرع الحرم | سويق"
+        "decision": "Arabic title is outside the current schema; not imported."
+      "prices_and_extra_products_imported": false
+      "menu_modified": false
+    "linguistic_qa":
+      "pass_type": "Independent AI specialist translation directly from approved Arabic; English consulted only for terminology and schema; no other locale drafts used."
+      "expected_key_count": 82
+      "actual_key_count": 82
+      "missing_keys": []
+      "extra_keys": []
+      "duplicate_keys": []
+      "renamed_keys": []
+      "key_order_matches_authoritative_source": true
+      "raw_keys_as_visible_values": []
+      "fixed_language_labels_preserved": true
+      "arabic_hadith_preserved_byte_for_byte": true
+      "arabic_fallback_detected": false
+      "english_fallback_detected": false
+      "permitted_foreign_text": "Original Arabic Hadith; 10 fixed language endonyms; approved Latin brands, proper names and platform names. These are intentional, not fallback."
+      "phone_preserved_exactly": true
+      "hours_preserved": "16:30–00:00; Thursday and Friday until 02:00. Bustan 06:00–12:00 and 16:30–23:30. Al Haram 24 hours. French 24-hour notation used naturally."
+      "product_count": 8
+      "product_distinctions_preserved": true
+      "branch_facts_preserved": true
+      "operational_urls_changed": false
+      "unsupported_claims_added": false
+      "mobile_cta_review": "Button labels use concise French infinitives or familiar short phrases. Longest CTA: Nous contacter sur WhatsApp (27 characters). Visual responsive rendering not performed."
+      "base_direction_correct": true
+      "manual_bidi_controls_added": false
+      "yaml_parser": "PyYAML safe_load and duplicate-rejecting loader passed during specialist validation."
+      "native_human_review_completed": false
+      "independent_religious_review_completed": false
+      "ordered_values_sha256": "9646996520c20281e069623a78edd0222548ca1a6186b29afd97f130448e71c3"
+      "ordered_values_sha256_method": "length-prefixed-utf8-v1"
+      "coordinator_compared_every_key_against_arabic_master": true
+      "coordinator_review_type": "AI semantic and structural review; not native human or religious approval"
+    "typography_notes":
+      "base_direction": "ltr"
+      "stored_order": "logical Unicode"
+      "french_punctuation": "Curly apostrophes; narrow no-break space U+202F before question marks and around h in opening hours; U+00A0 before the introductory colon. The published Hadith quote keeps its original punctuation and spelling."
+      "case": "French sentence case. Brand Saweeg and project Saweeg Global retain official capitals; traditional food saweeg remains lowercase."
+      "name_number_url_rendering": "Keep approved Latin names, international phone and URLs readable in LTR spans; do not translate or reformat the phone. Operational URLs remain source data."
+      "arabic_hadith_rendering": "Render world.talbinah.hadithText in an isolated RTL element; do not insert directional control characters into its stored value."
+      "language_endonyms": "Render each endonym with its own language and direction; preserve all ten stored labels unchanged."
+      "manual_direction_controls_added": false
+      "rendered_layout_tested": false
+    "publication_blockers":
+    - "independent_religious_review_pending"
+    "open_questions": []
+  "ms":
+    "native_label": "Bahasa Melayu"
+    "direction": "ltr"
+    "review_status": "ready-for-owner-review"
+    "native_human_review_completed": false
+    "religious_review_status": "religious-review-required"
+    "publishable": false
+    "specialist_role": "AI Malay cultural, food, and Islamic-context localization specialist"
+    "hadith_translation_source": "https://oarep.usim.edu.my/server/api/core/bitstreams/a209ebc0-94f5-47e1-8139-91ab9164cec9/content"
+    "hadith_source_metadata":
+      "publisher": "The 8th International Prophetic Conference (SWAN 2022), conference proceedings"
+      "repository_host": "Universiti Sains Islam Malaysia (USIM)"
+      "publication_title": "Pemakanan Sunnah dalam Mengurangkan Isu Kesihatan Mental: Kajian daripada Perspektif Hadis"
+      "authors":
+      - "Siti Ainul Mardiyyah Mohd Zahid"
+      - "Latifah Abd Majid"
+      "translator": "Not separately credited in the publication; paper authors are identified, but individual translation attribution is unconfirmed."
+      "publication_year": 2022
+      "printed_page": 116
+      "pdf_page": 4
+      "reference": "Sahih al-Bukhari, Kitab Makanan, Bab Talbinah, hadis 5417; source footnote 24."
+      "quote_scope": "Only the concluding Prophetic speech is excerpted from the published Malay meaning; surrounding narration and commentary are excluded."
+      "published_wording_preserved": true
+      "whitespace_note": "PDF line wrapping is joined with single spaces; published words, spelling and final full stop are preserved. Outer curly quotation marks delimit the excerpt."
+      "retrieval_method": "Verified through web-indexed institutional PDF text; direct urllib retrieval of this PDF returned HTTP 503, and follow-up web open/find was inconsistent."
+      "evidence_search_reference": "turn67search0"
+      "verified_on": "2026-10-22"
+      "comparison_note": "The excerpt renders some sadness as sebahagian dari kesedihan; no medical or product promise is added outside the quotation."
+      "independent_religious_review_completed": false
+      "religious_review_status": "religious-review-required"
+      "quotation_key": "world.talbinah.hadithTranslation"
+    "glossary":
+      "brand":
+        "form": "Saweeg"
+        "usage_rule": "Official Latin brand; preserve spelling and capital S. Do not translate into the food name."
+      "project":
+        "form": "Saweeg Global"
+        "usage_rule": "Official Latin project name; retain unchanged."
+      "madinah":
+        "form": "Madinah"
+        "usage_rule": "Natural established Malay place name; use consistently for المدينة المنورة."
+      "talbinah":
+        "form": "talbinah"
+        "usage_rule": "Retain the cultural food name; capitalized at sentence start and in commercial product names. Explain only using the approved barley description."
+      "prophetic_talbinah":
+        "form": "talbinah nabawi"
+        "usage_rule": "Religious and cultural designation for the food mentioned in the Sunnah, without an added therapeutic claim."
+      "talbinah_powder":
+        "form": "Serbuk Talbinah Nabawi"
+        "usage_rule": "Preparation powder product. Not ready-to-serve talbinah and not a sachet designation."
+      "traditional_saweeg":
+        "form": "saweeg"
+        "usage_rule": "Lowercase when referring to the traditional food, including inside localized product names, to distinguish it from the Saweeg brand. Do not infer ingredients."
+      "saweeg_powder":
+        "form": "Serbuk saweeg"
+        "usage_rule": "A distinct preparation powder product. Lowercase saweeg identifies the food; never substitute talbinah powder or add a sachet."
+      "al_jabirah":
+        "form": "Al Jabirah"
+        "usage_rule": "Commercial product name; preserve approved Latin spelling without inventing meaning, form or ingredients."
+      "al_jabirah_box":
+        "form": "Kotak Al Jabirah"
+        "usage_rule": "Commercial collection; not powder, a single sachet or a sachet box. Approved Arabic master overrides the live menu sachet-box wording."
+      "saweeg_maamoul":
+        "form": "Maamoul saweeg"
+        "usage_rule": "Maamoul made with the traditional food saweeg; no box, filling or ingredients are added. Lowercase food name is deliberate."
+      "madinah_food_heritage":
+        "form": "warisan makanan Madinah"
+        "usage_rule": "Covers recipes, food memories and traditions of hospitality associated with Madinah."
+      "saudi_food_heritage":
+        "form": "warisan makanan Arab Saudi"
+        "usage_rule": "Broader Saudi cultural framework; does not claim product exclusivity to Saudi Arabia."
+      "prophetic_tradition":
+        "form": "sunnah Nabi"
+        "usage_rule": "Respectful standard Malay religious term; does not create a commercial or medical endorsement."
+      "branch":
+        "form": "cawangan"
+        "usage_rule": "A physical location that can be visited; distinct from the online store."
+      "menu":
+        "form": "menu"
+        "usage_rule": "A branch-specific list of items and prices; not the online store. Unavailable-language notice must remain visible instead of silent fallback."
+      "online_store":
+        "form": "kedai dalam talian"
+        "usage_rule": "Official ordering destination; does not imply worldwide shipping."
+      "maqsed_branch":
+        "form": "Cawangan Al-Maqsed"
+        "usage_rule": "Approved branch identity with Malay branch descriptor; retain Al-Maqsed spelling."
+      "maqsed_place":
+        "form": "Al-Maqsed Quba"
+        "usage_rule": "Preserve the approved place identity; branch is inside this place next to Masjid Quba."
+      "bustan_branch":
+        "form": "Cawangan Bustan Al-Mustazal"
+        "usage_rule": "Approved branch identity with Malay branch descriptor."
+      "bustan_place":
+        "form": "Bustan Al-Mustazal"
+        "usage_rule": "Preserve the approved place name and identity."
+      "haram_branch":
+        "form": "Cawangan Al Haram"
+        "usage_rule": "Approved branch identity; exact Malay official-menu branch form."
+      "haram_place":
+        "form": "Al Haram"
+        "usage_rule": "Preserve approved place identity; no unapproved expansion."
+      "bab_al_salam_314":
+        "form": "Bab Al Salam 314"
+        "usage_rule": "Approved location descriptor. Do not add pintu, nombor pintu or an explanation treating 314 as a mosque gate number."
+      "hot_talbinah":
+        "form": "Talbinah Panas"
+        "usage_rule": "Serving temperature, not a spicy product; same concept as official Malay menu hot-talbinah."
+      "cold_talbinah":
+        "form": "Talbinah Sejuk"
+        "usage_rule": "Serving temperature; same concept as official Malay menu cold-talbinah."
+      "talbinah_ice_cream":
+        "form": "Ais Krim Talbinah"
+        "usage_rule": "Generic approved product name; do not import menu cone/cup variants."
+      "matcha_talbinah":
+        "form": "Matcha Talbinah"
+        "usage_rule": "Retain both product concepts; exact official Malay menu term for talbinah-matcha."
+    "strings":
+      "world.welcome.title": "Selamat datang ke Saweeg"
+      "world.welcome.description": "Kisah dari Madinah yang kami kongsikan dengan dunia. Kenali Saweeg dalam bahasa anda."
+      "world.welcome.languageLabel": "Pilih bahasa anda"
+      "world.hero.heading": "Dari Madinah ke seluruh dunia"
+      "world.hero.description": "Warisan makanan Madinah dalam produk dan pengalaman masa kini."
+      "world.hero.cta": "Kenali Saweeg"
+      "world.about.heading": "Kenali Saweeg"
+      "world.about.description": "Saweeg ialah jenama Arab Saudi dari Madinah yang memperkenalkan semula warisan makanan Madinah dengan sentuhan masa kini. Daripada talbinah nabawi dan saweeg kepada produk untuk menjamu tetamu, dijadikan hadiah dan dinikmati setiap hari."
+      "world.about.heritage": "Kami mendapat ilham daripada resipi Madinah, kenangan di rumah-rumahnya dan tradisi menjamu tetamu. Kami memperbaharui cara penyajiannya agar terus dekat dengan kehidupan seharian."
+      "world.talbinah.heading": "Apakah talbinah nabawi?"
+      "world.talbinah.description": "Talbinah ialah makanan tradisional yang diperbuat daripada barli yang dikisar dan dimasak sehingga bertekstur lembut. Talbinah disebut dalam sunnah Nabi dan merupakan antara produk utama Saweeg yang disajikan dalam olahan masa kini."
+      "world.talbinah.hadithIntro": "Aisyah r.a. meriwayatkan bahawa Rasulullah SAW bersabda:"
+      "world.talbinah.hadithText": "«التَّلْبِينَةُ مَجَمَّةٌ لِفُؤَادِ الْمَرِيضِ، تَذْهَبُ بِبَعْضِ الْحُزْنِ»."
+      "world.talbinah.hadithTranslation": "“Bubur Talbinah itu boleh menyegarkan hati orang yang sakit dan dapat menghilangkan sebahagian dari kesedihan.”"
+      "world.talbinah.hadithSource": "Sahih al-Bukhari, hadis 5417."
+      "world.products.heading": "Kenali produk kami"
+      "world.products.description": "Daripada talbinah dan saweeg kepada olahan masa kini untuk menjamu tetamu dan disediakan di rumah."
+      "world.products.hotTalbinah.name": "Talbinah Panas"
+      "world.products.coldTalbinah.name": "Talbinah Sejuk"
+      "world.products.talbinahIceCream.name": "Ais Krim Talbinah"
+      "world.products.matchaTalbinah.name": "Matcha Talbinah"
+      "world.products.talbinahPowder.name": "Serbuk Talbinah Nabawi"
+      "world.products.saweegPowder.name": "Serbuk saweeg"
+      "world.products.alJabirahBox.name": "Kotak Al Jabirah"
+      "world.products.saweegMaamoul.name": "Maamoul saweeg"
+      "world.branches.heading": "Kunjungi cawangan kami"
+      "world.branches.description": "Kunjungi kami di Madinah. Pilih cawangan yang sesuai, kemudian lihat lokasi dan menunya."
+      "world.branches.maqsed.name": "Cawangan Al-Maqsed"
+      "world.branches.maqsed.location": "Di dalam Al-Maqsed Quba, bersebelahan Masjid Quba, Madinah."
+      "world.branches.maqsed.hours": "4:30 petang–12:00 tengah malam. Khamis dan Jumaat hingga 2:00 pagi."
+      "world.branches.bustan.name": "Cawangan Bustan Al-Mustazal"
+      "world.branches.bustan.location": "Di dalam Bustan Al-Mustazal, Madinah."
+      "world.branches.bustan.hours": "6:00 pagi–12:00 tengah hari, kemudian 4:30 petang–11:30 malam."
+      "world.branches.haram.name": "Cawangan Al Haram"
+      "world.branches.haram.location": "Bab Al Salam 314, Madinah."
+      "world.branches.haram.hours": "Dibuka 24 jam."
+      "world.branches.mapCta": "Lihat peta"
+      "world.menu.cta": "Lihat menu"
+      "world.menu.languageUnavailable": "Menu cawangan ini belum tersedia dalam bahasa anda. Anda boleh memilih salah satu bahasa yang tersedia."
+      "world.menu.chooseLanguageCta": "Pilih bahasa menu"
+      "world.store.heading": "Saweeg di rumah anda"
+      "world.store.description": "Terokai produk di kedai dalam talian Saweeg serta pilihan pesanan dan penghantaran yang tersedia."
+      "world.store.cta": "Lawati kedai"
+      "world.contact.heading": "Hubungi Saweeg"
+      "world.contact.description": "Ada pertanyaan tentang produk atau cawangan kami? Pasukan khidmat pelanggan kami sedia membantu."
+      "world.contact.phone": "+966 57 005 2424"
+      "world.contact.whatsappCta": "Hubungi kami di WhatsApp"
+      "world.social.heading": "Ikuti Saweeg Global"
+      "world.social.description": "Kisah, produk dan kandungan dalam pelbagai bahasa yang mendekatkan anda dengan warisan Madinah."
+      "world.social.instagramCta": "Instagram"
+      "world.social.tiktokCta": "TikTok"
+      "world.language.changeCta": "Tukar bahasa"
+      "world.navigation.backToTop": "Kembali ke atas"
+      "world.nav.about": "Tentang Saweeg"
+      "world.nav.talbinah": "Talbinah"
+      "world.nav.products": "Produk"
+      "world.nav.branches": "Cawangan"
+      "world.nav.contact": "Hubungi kami"
+      "world.navigation.label": "Navigasi utama"
+      "world.navigation.skip": "Langkau ke kandungan"
+      "world.navigation.openMenu": "Buka menu"
+      "world.navigation.closeMenu": "Tutup menu"
+      "world.brand.homeLabel": "Saweeg Global – Pilih bahasa anda"
+      "world.footer.linksTitle": "Pautan Saweeg"
+      "world.footer.tagline": "Warisan asli dengan sentuhan masa kini"
+      "world.footer.rights": "© Saweeg. Hak cipta terpelihara."
+      "world.images.heroAlt": "Pemandangan Madinah"
+      "world.images.aboutAlt": "Talbinah sejuk daripada Saweeg"
+      "world.images.talbinahAlt": "Serbuk talbinah di dalam mangkuk"
+      "world.branches.maqsed.imageAlt": "Hadapan cawangan Saweeg di Al-Maqsed Quba"
+      "world.branches.bustan.imageAlt": "Hadapan cawangan Saweeg di Bustan Al-Mustazal"
+      "world.branches.haram.imageAlt": "Hadapan cawangan Saweeg di kawasan Al Haram"
+      "world.languages.ar.label": "العربية"
+      "world.languages.en.label": "English"
+      "world.languages.ur.label": "اردو"
+      "world.languages.id.label": "Bahasa Indonesia"
+      "world.languages.bn.label": "বাংলা"
+      "world.languages.tr.label": "Türkçe"
+      "world.languages.fa.label": "فارسی"
+      "world.languages.fr.label": "Français"
+      "world.languages.ms.label": "Bahasa Melayu"
+      "world.languages.ru.label": "Русский"
+    "menu_terminology_review":
+      "official_url": "https://go.saweegsa.com/menu/haram/ms/"
+      "accessed_on": "2026-10-22"
+      "retrieval_method": "Official page fetched via Python urllib after web open reported inaccessible. Loaded official catalog-images-CIgsEenh.js and extracted only its ms locale object for the final terminology comparison."
+      "catalog_url": "https://go.saweegsa.com/assets/catalog-images-CIgsEenh.js"
+      "page_catalog_link": "Official page references haram-main-kOHBLKp_.js, which imports catalog-images-CIgsEenh.js."
+      "scope": "Consistency reference only. The approved Arabic master remains authoritative. No prices, variants, ingredients or availability imported."
+      "exact_same_concept_matches":
+      - "catalog_id": "hot-talbinah"
+        "menu_form": "Talbinah Panas"
+        "locale_key": "world.products.hotTalbinah.name"
+        "decision": "Retained exactly."
+      - "catalog_id": "cold-talbinah"
+        "menu_form": "Talbinah Sejuk"
+        "locale_key": "world.products.coldTalbinah.name"
+        "decision": "Retained exactly."
+      - "catalog_id": "talbinah-matcha"
+        "menu_form": "Matcha Talbinah"
+        "locale_key": "world.products.matchaTalbinah.name"
+        "decision": "Retained exactly."
+      - "catalog_id": "saweeg-maamoul"
+        "menu_form": "Maamoul Saweeg"
+        "locale_key": "world.products.saweegMaamoul.name"
+        "decision": "Same product identity; localized as Maamoul saweeg with lowercase food name under the brand-versus-food rule."
+      - "catalog_id": "branchName"
+        "menu_form": "Cawangan Al Haram"
+        "locale_key": "world.branches.haram.name"
+        "decision": "Retained exactly."
+      - "catalog_id": "storeButton"
+        "menu_form": "Lawati kedai"
+        "locale_key": "world.store.cta"
+        "decision": "Retained exactly."
+      - "catalog_id": "contactTitle"
+        "menu_form": "Hubungi Saweeg"
+        "locale_key": "world.contact.heading"
+        "decision": "Retained exactly."
+      - "catalog_id": "links"
+        "menu_form": "Pautan Saweeg"
+        "locale_key": "world.footer.linksTitle"
+        "decision": "Retained exactly."
+      - "catalog_id": "footerStore"
+        "menu_form": "Kedai dalam talian"
+        "locale_key": "world.store.description"
+        "decision": "Same online-store terminology used in a sentence with normal lowercase."
+      "concept_conflicts_and_non_equivalents":
+      - "catalog_id": "al-jabirah-box"
+        "menu_form": "Kotak Saset Al Jabirah"
+        "approved_form": "Kotak Al Jabirah"
+        "locale_key": "world.products.alJabirahBox.name"
+        "decision": "Rejected sachet-box detail: approved Arabic بوكس الجابرة designates the collection without sachet specification."
+      - "catalog_id": "talbinah-powder-sachet"
+        "menu_form": "Pek Serbuk Talbinah"
+        "approved_form": "Serbuk Talbinah Nabawi"
+        "locale_key": "world.products.talbinahPowder.name"
+        "decision": "Not an exact concept match. Keep the approved powder name and nabawi distinction; do not import pek or sachet packaging."
+      - "catalog_id": "saweeg-powder-sachet"
+        "menu_form": "Pek Serbuk Saweeg"
+        "approved_form": "Serbuk saweeg"
+        "locale_key": "world.products.saweegPowder.name"
+        "decision": "Not an exact concept match. Retain powder concept, lowercase food name and no inferred pack/sachet format."
+      - "catalog_id": "talbinah-ice-cream-biscuit / talbinah-ice-cream-cup"
+        "menu_form": "Ais Krim Talbinah — Kon / Ais Krim Talbinah — Cawan"
+        "approved_form": "Ais Krim Talbinah"
+        "locale_key": "world.products.talbinahIceCream.name"
+        "decision": "Menu variants are narrower than the master concept. Retain common food term without importing cone/cup variants."
+      - "catalog_id": "saweeg-maamoul-box"
+        "menu_form": "Kotak Maamoul Saweeg"
+        "approved_form": "Maamoul saweeg"
+        "locale_key": "world.products.saweegMaamoul.name"
+        "decision": "Not the same menu item as saweeg-maamoul. Do not import a box."
+      "fallbacks_observed":
+      - "catalog_id": "welcomeStrip / selectorTitle"
+        "observed_language": "Arabic"
+        "decision": "Not imported; use approved localized Saweeg Global copy."
+      - "catalog_id": "homeLabel / logoAlt / welcomeEnglish / chooseLanguageEnglish"
+        "observed_language": "English"
+        "decision": "Existing official menu contains English labels; none is imported as Malay fallback."
+      "unavailable_menu_behavior": "Approved Arabic policy retained: Al Haram offers Malay; Al-Maqsed and Bustan Al-Mustazal menus currently offer Arabic and English. Show the translated unavailability notice and explicit language choice; no silent fallback."
+    "linguistic_qa":
+      "performed_by": "Independent AI Malay specialist; no human or religious approval claimed."
+      "source_priority": "Translated directly from approved Arabic master version 1.0; only source metadata and en locale inspected from Wave 1 package as structure and terminology reference."
+      "complete_independent_first_draft": true
+      "other_wave2_drafts_consulted": false
+      "key_count": 82
+      "expected_key_count": 82
+      "missing_keys": []
+      "extra_keys": []
+      "duplicate_keys": []
+      "renamed_keys": []
+      "key_order_matches_authoritative_schema": true
+      "fixed_native_language_labels_unchanged": true
+      "original_arabic_hadith_byte_identical": true
+      "raw_localization_key_values": []
+      "arabic_fallback_values": []
+      "english_fallback_values": []
+      "permitted_non_malay_content": "Fixed Arabic Hadith; ten immutable native endonyms; brand and project names; approved place names; cultural food names; Instagram, TikTok and WhatsApp; international telephone number."
+      "eight_product_concepts_preserved": true
+      "branch_names_and_locations_preserved": true
+      "opening_hours_preserved": true
+      "phone_exact_match": true
+      "phone_display": "+966 57 005 2424"
+      "unsupported_claims_added": false
+      "mobile_ctas": "Concise Malay imperatives; longest CTA is Hubungi kami di WhatsApp (24 characters). No layout rendering has been performed."
+      "language_variant": "Standard contemporary Bahasa Melayu; uses serbuk, sejuk, ais krim, cawangan, kedai dalam talian, khidmat pelanggan and natural Malay syntax rather than Indonesian vocabulary."
+      "brand_food_distinction": "Saweeg for brand; saweeg for food, including Serbuk saweeg and Maamoul saweeg."
+      "yaml_parse_success": true
+      "ordered_values_sha256": "ea304515f05ea228debe0f01fb29b62ccb674d1513e0e72918a3fd57b70ab82f"
+      "ordered_values_sha256_method": "length-prefixed-utf8-v1"
+      "coordinator_compared_every_key_against_arabic_master": true
+      "coordinator_review_type": "AI semantic and structural review; not native human or religious approval"
+    "typography_notes":
+      "base_direction": "ltr"
+      "stored_text_order": "logical"
+      "font_requirement": "Use a font with complete Malay Latin coverage and readable Arabic font coverage for the fixed Hadith."
+      "punctuation": "Natural Malay punctuation; sentence case for interface copy; approved product titles and cultural product names retain customary capitalization except the deliberate lowercase food saweeg."
+      "hours": "Malay day periods are explicit: pagi, tengah hari, petang, malam and tengah malam. En dashes delimit ranges."
+      "brand_phone_urls": "Keep Latin brand names, international phone number and URLs readable as LTR runs; use rendering-level isolation where required."
+      "arabic_hadith": "Render the unchanged Arabic Hadith in its own RTL element; keep Malay translation LTR beneath it."
+      "language_endonyms": "Give each immutable native endonym its own appropriate rendering direction."
+      "manual_bidi_control_characters_added": false
+      "rendered_layout_tested": false
+    "publication_blockers":
+    - "independent_religious_review_pending"
+    "open_questions": []
+  "ru":
+    "native_label": "Русский"
+    "direction": "ltr"
+    "review_status": "ready-for-owner-review"
+    "native_human_review_completed": false
+    "religious_review_status": "religious-review-required"
+    "publishable": false
+    "specialist_role": "AI Russian cultural, food, and brand localization specialist with Islamic religious-context sensitivity"
+    "hadith_translation_source": "https://hadis.uk/saxix-al-buxari-xadis-5417/68355/"
+    "hadith_source_metadata":
+      "url": "https://hadis.uk/saxix-al-buxari-xadis-5417/68355/"
+      "publisher": "Энциклопедия хадисов (hadis.uk)"
+      "page_title": "«Сахих аль-Бухари». Хадис № 5417"
+      "posted_by": "Фарук аль-Асари"
+      "publication_date": "2021-03-30"
+      "last_updated_on_page": "2021-03-31"
+      "translator": "Not credited on the verified page; no translator attribution inferred."
+      "reference": "Сахих аль-Бухари, хадис 5417"
+      "retrieved_on": "2026-10-22"
+      "verification_method": "Live web search and full-page open; quotation found in paragraph for hadith 5417 alongside the Arabic text."
+      "published_wording_and_transliteration_preserved": true
+      "quotation_punctuation_preserved": true
+      "source_transliteration": "Тальбина"
+      "local_translation_invented": false
+      "independent_religious_review_completed": false
+      "review_note": "A published, traceable Russian meaning has been located; this does not certify its religious accuracy. Only the quoted meaning is carried forward; the page's ancillary health commentary is excluded."
+      "quotation_key": "world.talbinah.hadithTranslation"
+    "glossary":
+      "brand":
+        "form": "Saweeg"
+        "usage_rule": "Official Latin brand spelling, unchanged and indeclinable; never use Cyrillic савик as the brand."
+      "project":
+        "form": "Saweeg Global"
+        "usage_rule": "Official project name, unchanged; no translated substitute."
+      "madinah":
+        "form": "Медина"
+        "usage_rule": "Conventional Russian geographical name; inflect naturally: из Медины, в Медине."
+      "talbinah":
+        "form": "тальбина"
+        "usage_rule": "Retain the cultural food name; lower case in running text and inflect naturally. The approved definition supplies the explanation."
+      "prophetic_talbinah":
+        "form": "тальбина Пророка"
+        "usage_rule": "Respectful Russian rendering of the approved religious and cultural term; no added healing or medical claim."
+      "prophetic_tradition":
+        "form": "Сунна Пророка"
+        "usage_rule": "Established Islamic-context Russian term; no commercial promise is inferred."
+      "talbinah_powder":
+        "form": "Порошок тальбины Пророка"
+        "usage_rule": "Preparation product; retain порошок and the religious-cultural qualifier. Distinct from ready-to-serve тальбина and from порошок савика; do not add sachet packaging."
+      "traditional_saweeg":
+        "form": "савик"
+        "usage_rule": "Cyrillic cultural food term, distinct from Latin brand Saweeg and from the official menu's brand-like Latin food forms; actual strings use савик, савика and савиком. This is a food-concept distinction, not an inference about ingredients or a recipe."
+      "saweeg_powder":
+        "form": "Порошок савика"
+        "usage_rule": "Separate powder product referring to the traditional food, not talbinah powder or the brand alone. No sachet or ingredients are added."
+      "al_jabirah":
+        "form": "Al Jabirah"
+        "usage_rule": "Commercial name retained in approved Latin spelling; do not translate its lexical meaning or infer contents."
+      "al_jabirah_box":
+        "form": "Набор Al Jabirah"
+        "usage_rule": "Commercial product collection; набор conveys the approved box concept without implying sachets or powder."
+      "saweeg_maamoul":
+        "form": "Маамуль с савиком"
+        "usage_rule": "Keep the cultural pastry name маамуль and the Cyrillic food identity in the inflected form савиком. The wording represents Arabic السويق as the named food concept, not a new ingredient or recipe inference. Do not add a filling or a box."
+      "madinah_food_heritage":
+        "form": "кулинарное наследие Медины"
+        "usage_rule": "Recipes, food memory and hospitality of Madinah; not exclusive product-origin claims."
+      "saudi_food_heritage":
+        "form": "кулинарное наследие Саудовской Аравии"
+        "usage_rule": "Wider cultural context, not an assertion that every product is exclusive to Saudi Arabia."
+      "branch":
+        "form": "филиал"
+        "usage_rule": "A physical location that can be visited; distinct from the internet shop."
+      "menu":
+        "form": "меню"
+        "usage_rule": "Branch-specific menu; do not use it as a synonym for the online store."
+      "online_store":
+        "form": "интернет-магазин"
+        "usage_rule": "Official ordering destination; do not imply worldwide delivery."
+      "maqsed_branch":
+        "form": "Филиал «Аль-Максед»"
+        "usage_rule": "Approved Al-Maqsed branch identity in Cyrillic; consistent with its canonical English identifier."
+      "maqsed_place":
+        "form": "Аль-Максед Куба"
+        "usage_rule": "Approved Al-Maqsed Quba place identity; use as a proper name without inventing a venue type."
+      "bustan_branch":
+        "form": "Филиал «Бустан аль-Мустазаль»"
+        "usage_rule": "Approved Bustan Al-Mustazal branch identity in Cyrillic; do not translate the proper name into a generic garden."
+      "bustan_place":
+        "form": "Бустан аль-Мустазаль"
+        "usage_rule": "Approved Bustan Al-Mustazal place identity; Cyrillic follows the approved Latin vocalization."
+      "haram_branch":
+        "form": "Филиал «Аль-Харам»"
+        "usage_rule": "Matches the live official Russian menu branch label; do not add a mosque or gate number."
+      "haram_place":
+        "form": "Аль-Харам"
+        "usage_rule": "Approved Al Haram place identity; in image description use район Аль-Харам."
+      "bab_al_salam_314":
+        "form": "Баб ас-Салам 314"
+        "usage_rule": "Approved Bab Al Salam 314 location descriptor. The Russian sun-letter assimilation preserves identity; 314 is not described as a mosque gate number."
+      "hot_talbinah":
+        "form": "Горячая тальбина"
+        "usage_rule": "Ready-to-serve hot product; горячая indicates serving temperature, not spiciness."
+      "cold_talbinah":
+        "form": "Холодная тальбина"
+        "usage_rule": "Ready-to-serve cold product; do not replace with powder."
+      "talbinah_ice_cream":
+        "form": "Мороженое из тальбины"
+        "usage_rule": "Generic approved product, without cone/cup, flavour or health additions."
+      "matcha_talbinah":
+        "form": "Матча с тальбиной"
+        "usage_rule": "Same concept and terminology as the official Russian menu; not a powder product."
+      "hadith_reference":
+        "form": "Сахих аль-Бухари, хадис № 5417."
+        "usage_rule": "Preserve collection and number; the translated meaning remains blocked for independent religious review."
+    "strings":
+      "world.welcome.title": "Добро пожаловать в Saweeg"
+      "world.welcome.description": "История из Медины, которой мы делимся со всем миром. Узнайте о Saweeg на своём языке."
+      "world.welcome.languageLabel": "Выберите язык"
+      "world.hero.heading": "Из Медины — всему миру"
+      "world.hero.description": "Кулинарное наследие Медины в современных продуктах и новых впечатлениях."
+      "world.hero.cta": "Узнать о Saweeg"
+      "world.about.heading": "О Saweeg"
+      "world.about.description": "Saweeg — саудовский бренд из Медины, который по-новому представляет кулинарное наследие города. В нашем ассортименте — тальбина Пророка, традиционный савик и продукты для угощения гостей, подарков и на каждый день."
+      "world.about.heritage": "Мы черпаем вдохновение в рецептах Медины, воспоминаниях о её домах и традициях гостеприимства. Мы находим новые способы подачи, чтобы это наследие оставалось частью повседневной жизни."
+      "world.talbinah.heading": "Что такое тальбина Пророка?"
+      "world.talbinah.description": "Тальбина — традиционное блюдо из молотого ячменя, которое варят до нежной однородной консистенции. Она упоминается в Сунне Пророка и входит в число основных продуктов Saweeg, которые мы предлагаем в современных форматах."
+      "world.talbinah.hadithIntro": "Аиша, да будет доволен ею Аллах, передала, что Посланник Аллаха, да благословит его Аллах и приветствует, сказал:"
+      "world.talbinah.hadithText": "«التَّلْبِينَةُ مَجَمَّةٌ لِفُؤَادِ الْمَرِيضِ، تَذْهَبُ بِبَعْضِ الْحُزْنِ»."
+      "world.talbinah.hadithTranslation": "“Тальбина успокаивает сердце больного и уносит с собой часть (его) печали”"
+      "world.talbinah.hadithSource": "Сахих аль-Бухари, хадис № 5417."
+      "world.products.heading": "Наши продукты"
+      "world.products.description": "От тальбины и савика до современных форматов угощения гостей и приготовления дома."
+      "world.products.hotTalbinah.name": "Горячая тальбина"
+      "world.products.coldTalbinah.name": "Холодная тальбина"
+      "world.products.talbinahIceCream.name": "Мороженое из тальбины"
+      "world.products.matchaTalbinah.name": "Матча с тальбиной"
+      "world.products.talbinahPowder.name": "Порошок тальбины Пророка"
+      "world.products.saweegPowder.name": "Порошок савика"
+      "world.products.alJabirahBox.name": "Набор Al Jabirah"
+      "world.products.saweegMaamoul.name": "Маамуль с савиком"
+      "world.branches.heading": "Приходите в наши филиалы"
+      "world.branches.description": "Ждём вас в Медине. Выберите удобный филиал, посмотрите его расположение и меню."
+      "world.branches.maqsed.name": "Филиал «Аль-Максед»"
+      "world.branches.maqsed.location": "На территории «Аль-Максед Куба», рядом с мечетью Куба, Медина."
+      "world.branches.maqsed.hours": "16:30–00:00. В четверг и пятницу — до 02:00 следующего дня."
+      "world.branches.bustan.name": "Филиал «Бустан аль-Мустазаль»"
+      "world.branches.bustan.location": "На территории «Бустан аль-Мустазаль», Медина."
+      "world.branches.bustan.hours": "06:00–12:00, затем 16:30–23:30."
+      "world.branches.haram.name": "Филиал «Аль-Харам»"
+      "world.branches.haram.location": "Баб ас-Салам 314, Медина."
+      "world.branches.haram.hours": "Работаем круглосуточно."
+      "world.branches.mapCta": "На карте"
+      "world.menu.cta": "Посмотреть меню"
+      "world.menu.languageUnavailable": "Меню этого филиала пока недоступно на вашем языке. Вы можете выбрать один из доступных языков."
+      "world.menu.chooseLanguageCta": "Выбрать язык меню"
+      "world.store.heading": "Saweeg у вас дома"
+      "world.store.description": "Посмотрите продукты в интернет-магазине Saweeg и узнайте о доступных способах заказа и доставки."
+      "world.store.cta": "Перейти в магазин"
+      "world.contact.heading": "Связаться с Saweeg"
+      "world.contact.description": "Есть вопросы о наших продуктах или филиалах? Наша служба поддержки с радостью поможет вам."
+      "world.contact.phone": "+966 57 005 2424"
+      "world.contact.whatsappCta": "Написать в WhatsApp"
+      "world.social.heading": "Подписаться на Saweeg Global"
+      "world.social.description": "Истории, продукты и материалы на разных языках, которые знакомят вас с наследием Медины."
+      "world.social.instagramCta": "Instagram"
+      "world.social.tiktokCta": "TikTok"
+      "world.language.changeCta": "Сменить язык"
+      "world.navigation.backToTop": "Наверх"
+      "world.nav.about": "О Saweeg"
+      "world.nav.talbinah": "Тальбина"
+      "world.nav.products": "Продукты"
+      "world.nav.branches": "Филиалы"
+      "world.nav.contact": "Контакты"
+      "world.navigation.label": "Основная навигация"
+      "world.navigation.skip": "Перейти к содержимому"
+      "world.navigation.openMenu": "Открыть меню"
+      "world.navigation.closeMenu": "Закрыть меню"
+      "world.brand.homeLabel": "Saweeg Global — выбор языка"
+      "world.footer.linksTitle": "Ссылки Saweeg"
+      "world.footer.tagline": "Традиции в современном воплощении"
+      "world.footer.rights": "© Saweeg. Все права защищены."
+      "world.images.heroAlt": "Вид Медины"
+      "world.images.aboutAlt": "Холодная тальбина от Saweeg"
+      "world.images.talbinahAlt": "Порошок тальбины в миске"
+      "world.branches.maqsed.imageAlt": "Фасад филиала Saweeg в «Аль-Максед Куба»"
+      "world.branches.bustan.imageAlt": "Фасад филиала Saweeg в «Бустан аль-Мустазаль»"
+      "world.branches.haram.imageAlt": "Фасад филиала Saweeg в районе Аль-Харам"
+      "world.languages.ar.label": "العربية"
+      "world.languages.en.label": "English"
+      "world.languages.ur.label": "اردو"
+      "world.languages.id.label": "Bahasa Indonesia"
+      "world.languages.bn.label": "বাংলা"
+      "world.languages.tr.label": "Türkçe"
+      "world.languages.fa.label": "فارسی"
+      "world.languages.fr.label": "Français"
+      "world.languages.ms.label": "Bahasa Melayu"
+      "world.languages.ru.label": "Русский"
+    "menu_terminology_review":
+      "official_url": "https://go.saweegsa.com/menu/haram/ru/"
+      "retrieved_on": "2026-10-22"
+      "retrieval_method": "Web opener failed; live HTML and its linked JavaScript catalog were fetched with Python urllib. Russian catalog object inspected."
+      "catalog_url": "https://go.saweegsa.com/assets/catalog-images-CIgsEenh.js"
+      "page_module_url": "https://go.saweegsa.com/assets/haram-main-kOHBLKp_.js"
+      "authority_rule": "Arabic master version 1.0 controls meaning. Only identical concepts or relevant base terminology are reused; packaging, prices, availability and unrelated menu copy are not imported."
+      "exact_concept_matches":
+      - "catalog_id": "hot-talbinah"
+        "menu_value": "Горячая тальбина"
+        "target_key": "world.products.hotTalbinah.name"
+        "decision": "Reused exactly."
+      - "catalog_id": "cold-talbinah"
+        "menu_value": "Холодная тальбина"
+        "target_key": "world.products.coldTalbinah.name"
+        "decision": "Reused exactly."
+      - "catalog_id": "talbinah-matcha"
+        "menu_value": "Матча с тальбиной"
+        "target_key": "world.products.matchaTalbinah.name"
+        "decision": "Reused exactly."
+      - "catalog_id": "branchName"
+        "menu_value": "Филиал «Аль-Харам»"
+        "target_key": "world.branches.haram.name"
+        "decision": "Reused exactly."
+      "partial_concepts_and_conflicts":
+      - "catalog_ids":
+        - "talbinah-ice-cream-biscuit"
+        - "talbinah-ice-cream-cup"
+        "menu_values":
+        - "Мороженое из тальбины — рожок"
+        - "Мороженое из тальбины — стаканчик"
+        "target_key": "world.products.talbinahIceCream.name"
+        "decision": "Base terminology retained; serving formats omitted because the Arabic master gives only generic talbinah ice cream."
+      - "catalog_id": "talbinah-powder-sachet"
+        "menu_value": "Упаковка порошка тальбины"
+        "target_key": "world.products.talbinahPowder.name"
+        "decision": "Not an exact full product-name match: menu adds packaging and omits the approved prophetic qualifier. Use Порошок тальбины Пророка directly from Arabic; no sachet added."
+      - "catalog_id": "saweeg-powder-sachet"
+        "menu_value": "Упаковка порошка Saweeg"
+        "target_key": "world.products.saweegPowder.name"
+        "decision": "Not copied: Latin brand-like Saweeg obscures the food distinction and menu adds packaging. Use Порошок савика from Arabic."
+      - "catalog_id": "al-jabirah-box"
+        "menu_value": "Коробка саше Al Jabirah"
+        "target_key": "world.products.alJabirahBox.name"
+        "decision": "Rejected the extra sachet concept. Use Набор Al Jabirah, the approved collection concept."
+      - "catalog_id": "saweeg-maamoul"
+        "menu_value": "Маамуль Saweeg"
+        "target_key": "world.products.saweegMaamoul.name"
+        "decision": "The pastry name is retained; Latin Saweeg is rendered as the Cyrillic food concept in the actual inflected form савиком, yielding Маамуль с савиком. This preserves Arabic food identity and is not an inference about ingredients or recipe."
+      - "catalog_id": "saweeg-maamoul-box"
+        "menu_value": "Набор маамуль Saweeg"
+        "target_key": "world.products.saweegMaamoul.name"
+        "decision": "Different product concept; box is not imported."
+      "fallback_findings":
+      - "Live Russian menu includes English values homeLabel and logoAlt and an Arabic welcomeStrip. These are outside the matching content concepts and were not imported."
+      - "No official Russian menu naming was available for Al-Maqsed Quba or Bustan Al-Mustazal; Cyrillic forms preserve the approved Arabic places and the canonical English identifiers."
+      "other_menu_content_used": false
+    "linguistic_qa":
+      "key_count": 82
+      "expected_key_count": 82
+      "missing_keys": []
+      "extra_keys": []
+      "duplicate_keys": []
+      "renamed_keys": []
+      "key_order_matches_authoritative_reference": true
+      "translated_directly_from_approved_arabic": true
+      "english_used_only_for_schema_and_terminology": true
+      "other_locale_drafts_used": false
+      "raw_keys_as_values": false
+      "arabic_fallback_detected": false
+      "english_fallback_detected": false
+      "fixed_language_endonyms_preserved": true
+      "arabic_hadith_byte_identical": true
+      "international_phone_preserved": true
+      "numbers_and_hours_preserved": true
+      "branch_facts_preserved": true
+      "product_concepts_preserved": true
+      "unsupported_claims_added": false
+      "mobile_ctas_linguistically_reviewed": true
+      "mobile_layout_tested": false
+      "native_human_review_completed": false
+      "ai_specialist_self_review_completed": true
+      "source_links_modified": false
+      "content_strings_containing_urls": 0
+      "link_note": "The 82-string schema contains no operational URLs; supplied branch, menu, phone and social link data remain outside this locale mapping."
+      "ordered_values_sha256": "3240acf53fba923c6b9f7fea6e21be79cf2bd2f9e0499b615b6b8036b4a09621"
+      "ordered_values_sha256_method": "length-prefixed-utf8-v1"
+      "coordinator_compared_every_key_against_arabic_master": true
+      "coordinator_review_type": "AI semantic and structural review; not native human or religious approval"
+    "typography_notes":
+      "base_direction": "ltr"
+      "cyrillic_font_coverage_required": true
+      "punctuation": "Russian guillemets for names, em dash with spaces in prose, en dash without spaces for hours, 24-hour clock. The published hadith quotation alone retains its source quotation marks exactly."
+      "brand_phone_url_rendering": "Render Saweeg, Saweeg Global, Al Jabirah, platform names, international phone and URLs as readable LTR runs; use semantic direction isolation in markup where needed."
+      "arabic_hadith_rendering": "Render unchanged Arabic hadith as a separate RTL run or block with appropriate Arabic font coverage."
+      "fixed_endonym_rendering": "Render each fixed language name in its own language direction."
+      "manual_bidi_control_characters_added": false
+      "stored_values_normalized_or_reordered": false
+      "rendered_layout_tested": false
+    "publication_blockers":
+    - "independent_religious_review_pending"
+    "open_questions": []
+"validation":
+  "bn":
+    "key_count": 82
+    "content_and_interface_key_count": 72
+    "fixed_language_label_count": 10
+    "missing_keys": []
+    "extra_keys": []
+    "duplicate_keys": []
+    "renamed_keys": []
+    "key_order_matches_source": true
+    "nonempty_string_values": true
+    "raw_keys_as_values": false
+    "arabic_fallback_detected": false
+    "english_fallback_detected": false
+    "fixed_language_endonyms_preserved": true
+    "arabic_hadith_byte_identical": true
+    "international_phone_byte_identical": true
+    "numbers_hours_and_branch_facts_reviewed_against_arabic": true
+    "eight_product_concepts_preserved": true
+    "source_operational_urls_modified": false
+    "operational_url_count_in_strings": 0
+    "unsupported_claims_detected": false
+    "direction_correct": true
+    "manual_bidi_controls_detected": false
+    "mobile_cta_linguistic_review": "passed"
+    "longest_action_cta_unicode_codepoints": 26
+    "mobile_layout_tested": false
+    "values_equal_specialist_delivery_byte_for_byte": true
+    "ordered_values_sha256": "3366bd43b65623f24f8695f3cb9e5b8d5d35e86669d22da3bbcebac735a0ddc1"
+  "fr":
+    "key_count": 82
+    "content_and_interface_key_count": 72
+    "fixed_language_label_count": 10
+    "missing_keys": []
+    "extra_keys": []
+    "duplicate_keys": []
+    "renamed_keys": []
+    "key_order_matches_source": true
+    "nonempty_string_values": true
+    "raw_keys_as_values": false
+    "arabic_fallback_detected": false
+    "english_fallback_detected": false
+    "fixed_language_endonyms_preserved": true
+    "arabic_hadith_byte_identical": true
+    "international_phone_byte_identical": true
+    "numbers_hours_and_branch_facts_reviewed_against_arabic": true
+    "eight_product_concepts_preserved": true
+    "source_operational_urls_modified": false
+    "operational_url_count_in_strings": 0
+    "unsupported_claims_detected": false
+    "direction_correct": true
+    "manual_bidi_controls_detected": false
+    "mobile_cta_linguistic_review": "passed"
+    "longest_action_cta_unicode_codepoints": 27
+    "mobile_layout_tested": false
+    "values_equal_specialist_delivery_byte_for_byte": true
+    "ordered_values_sha256": "9646996520c20281e069623a78edd0222548ca1a6186b29afd97f130448e71c3"
+  "ms":
+    "key_count": 82
+    "content_and_interface_key_count": 72
+    "fixed_language_label_count": 10
+    "missing_keys": []
+    "extra_keys": []
+    "duplicate_keys": []
+    "renamed_keys": []
+    "key_order_matches_source": true
+    "nonempty_string_values": true
+    "raw_keys_as_values": false
+    "arabic_fallback_detected": false
+    "english_fallback_detected": false
+    "fixed_language_endonyms_preserved": true
+    "arabic_hadith_byte_identical": true
+    "international_phone_byte_identical": true
+    "numbers_hours_and_branch_facts_reviewed_against_arabic": true
+    "eight_product_concepts_preserved": true
+    "source_operational_urls_modified": false
+    "operational_url_count_in_strings": 0
+    "unsupported_claims_detected": false
+    "direction_correct": true
+    "manual_bidi_controls_detected": false
+    "mobile_cta_linguistic_review": "passed"
+    "longest_action_cta_unicode_codepoints": 24
+    "mobile_layout_tested": false
+    "values_equal_specialist_delivery_byte_for_byte": true
+    "ordered_values_sha256": "ea304515f05ea228debe0f01fb29b62ccb674d1513e0e72918a3fd57b70ab82f"
+  "ru":
+    "key_count": 82
+    "content_and_interface_key_count": 72
+    "fixed_language_label_count": 10
+    "missing_keys": []
+    "extra_keys": []
+    "duplicate_keys": []
+    "renamed_keys": []
+    "key_order_matches_source": true
+    "nonempty_string_values": true
+    "raw_keys_as_values": false
+    "arabic_fallback_detected": false
+    "english_fallback_detected": false
+    "fixed_language_endonyms_preserved": true
+    "arabic_hadith_byte_identical": true
+    "international_phone_byte_identical": true
+    "numbers_hours_and_branch_facts_reviewed_against_arabic": true
+    "eight_product_concepts_preserved": true
+    "source_operational_urls_modified": false
+    "operational_url_count_in_strings": 0
+    "unsupported_claims_detected": false
+    "direction_correct": true
+    "manual_bidi_controls_detected": false
+    "mobile_cta_linguistic_review": "passed"
+    "longest_action_cta_unicode_codepoints": 19
+    "mobile_layout_tested": false
+    "values_equal_specialist_delivery_byte_for_byte": true
+    "ordered_values_sha256": "3240acf53fba923c6b9f7fea6e21be79cf2bd2f9e0499b615b6b8036b4a09621"
+"cross_locale_validation":
+  "identical_key_sets": true
+  "identical_key_order": true
+  "all_locale_string_counts": 82
+  "total_localized_values": 328
+  "missing_keys": 0
+  "extra_keys": 0
+  "duplicate_keys": 0
+  "renamed_keys": 0
+  "raw_keys_as_values": false
+  "fallback_content_detected": false
+  "unsupported_claims_detected": false
+  "fixed_language_endonyms_preserved": true
+  "original_arabic_hadith_byte_identical": true
+  "reviewed_english_reference_values_unchanged": true
+  "specialist_localized_values_unchanged_after_assembly": true
+  "all_directions": "ltr"
+  "manual_bidi_controls_present": false
+  "native_human_review_completed": false
+  "religious_review_completed": false
+  "all_locales_publishable": false
+  "yaml_parser": "PyYAML 6.0.3"
+  "yaml_syntax_valid": true
+  "duplicate_mapping_key_check": "passed"
+  "anchors_aliases_or_merge_keys_present": false
+  "escaped_unicode_sequences_present": false
+  "rendered_mobile_layout_tested": false
+  "invariant_exceptions":
+  - "fixed Arabic Hadith"
+  - "ten fixed native language endonyms"
+  - "approved brand, commercial, cultural food, place and platform names"
+  - "approved international phone display"
+  "english_equal_values_explicitly_reviewed":
+    "ms":
+      "world.products.matchaTalbinah.name": "Matcha Talbinah is the same established cultural product name in Malay."
+      "world.branches.haram.location": "Bab Al Salam 314 and Madinah are approved proper names, also natural in Malay."
+  "claim_check_method": "Independent AI specialist self-review plus coordinator semantic comparison of all 82 keys per locale against the approved Arabic master; not a standalone automated medical or religious certification."
+"publication_blockers":
+- "independent_religious_review_pending"
+"open_questions": []
