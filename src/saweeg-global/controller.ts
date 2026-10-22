@@ -4,10 +4,11 @@ export function mountWorldInteractions(root: HTMLElement): () => void {
   const options = {signal:abort.signal};
   const button=root.querySelector<HTMLButtonElement>("[data-menu-button]");
   const panel=root.querySelector<HTMLElement>("[data-mobile-navigation]");
-  const desktop=matchMedia("(min-width:1024px)");
+  const desktop=matchMedia("(min-width:900px)");
   const reduced=matchMedia("(prefers-reduced-motion:reduce)");
   function setMenu(open:boolean,returnFocus=false) {
     if(!button || !panel) return;
+    document.body.classList.toggle("menu-open",open);
     panel.hidden=!open;button.setAttribute("aria-expanded",String(open));
     button.setAttribute("aria-label",(open?button.dataset.closeLabel:button.dataset.openLabel)!);
     if(open)panel.querySelector<HTMLAnchorElement>("a")?.focus();
@@ -17,6 +18,8 @@ export function mountWorldInteractions(root: HTMLElement): () => void {
   root.addEventListener("keydown",event=>{if(event.key==="Escape"&&panel&&!panel.hidden)setMenu(false,true);},options);
   desktop.addEventListener("change",event=>{if(event.matches)setMenu(false);},options);
   root.addEventListener("click",event=>{
+    const header=root.querySelector("[data-site-header]");
+    if(panel&&!panel.hidden&&event.target instanceof Node&&!header?.contains(event.target))setMenu(false);
     const element=(event.target as Element).closest<HTMLElement>("a,button");
     if(!element)return;
     if(element.hasAttribute("data-world-disclosure")) {
@@ -39,5 +42,5 @@ export function mountWorldInteractions(root: HTMLElement): () => void {
     root.querySelectorAll(".desktop-nav a,.mobile-navigation a").forEach(anchor=>{if(anchor.getAttribute("href")===current)anchor.setAttribute("aria-current","true");else anchor.removeAttribute("aria-current");});
   }
   window.addEventListener("scroll",syncNavigation,{...options,passive:true});
-  return ()=>abort.abort();
+  return ()=>{setMenu(false);abort.abort();};
 }

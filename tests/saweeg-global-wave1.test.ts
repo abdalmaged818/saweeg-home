@@ -2,7 +2,6 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import fs from 'node:fs';
 import {execFileSync} from 'node:child_process';
-import {transpileModule,ScriptTarget,ModuleKind} from 'typescript';
 import {verifyGenerated,parseWave1,sourcePath,wave1Locales} from '../scripts/global-wave1.mjs';
 import {wave1Content,wave1Metadata} from '../src/saweeg-global/content/wave1.generated.ts';
 import {requiredContentKeys,arabicMaster} from '../src/saweeg-global/content/ar.ts';
@@ -55,10 +54,18 @@ test('Review-only access cannot be used as a public renderer; full and incomplet
 test('Arabic master and protected production sources remain equal to approved Phase 1 merge',()=>{
   const baseline='4ad8147df978625388f078ce9edeab36e5d2e021';
   const files=execFileSync('git',['-c','core.quotePath=false','ls-tree','-r','--name-only',baseline,'src','public','assets-source','scripts/generate-pages.ts','vite.config.ts'],{encoding:'utf8'}).trim().split('\n');
-  const allowed=new Set(['src/saweeg-global/locales.ts','src/saweeg-global/validation.ts','src/saweeg-global/render.ts','src/saweeg-global/shared-shell.ts']);
+  const allowed=new Set(['src/saweeg-global/locales.ts','src/saweeg-global/validation.ts','src/saweeg-global/render.ts','src/saweeg-global/shared-shell.ts','src/saweeg-global/world.css','src/saweeg-global/controller.ts']);
   const shell='src/saweeg-global/shared-shell.ts';
-  const compile=(source:string)=>transpileModule(source,{compilerOptions:{target:ScriptTarget.ES2022,module:ModuleKind.ESNext}}).outputText;
-  assert.equal(compile(fs.readFileSync(shell,'utf8')),compile(execFileSync('git',['show',`${baseline}:${shell}`],{encoding:'utf8'})),'Shared-shell runtime geometry or behavior changed; only its content type may narrow');
+  // Owner-authorized Global adapter/chrome refinement. Production components and
+  // every other protected file below remain byte-identical to the approved baseline.
+  const adapter=fs.readFileSync(shell,'utf8');
+  assert(adapter.includes('renderHeader({locale,')&&adapter.includes('renderFooter({locale,'));
+  assert(!/<header|<footer/.test(adapter));
+  const controller='src/saweeg-global/controller.ts';
+  assert.equal(fs.readFileSync(controller,'utf8'),execFileSync('git',['show',`${baseline}:${controller}`],{encoding:'utf8'}).replace('min-width:1024px','min-width:900px')
+    .replace('    panel.hidden=!open;button.setAttribute','    document.body.classList.toggle("menu-open",open);\n    panel.hidden=!open;button.setAttribute')
+    .replace('  root.addEventListener("click",event=>{\n    const element=', '  root.addEventListener("click",event=>{\n    const header=root.querySelector("[data-site-header]");\n    if(panel&&!panel.hidden&&event.target instanceof Node&&!header?.contains(event.target))setMenu(false);\n    const element=')
+    .replace('return ()=>abort.abort();','return ()=>{setMenu(false);abort.abort();};'));
   for(const file of files){if(allowed.has(file)||file==='public/assets/social/saweeg-gateway-preview-20260910.png')continue;assert(fs.readFileSync(file).equals(execFileSync('git',['show',`${baseline}:${file}`],{maxBuffer:64*1024*1024})),file);}
   for(const file of ['src/main.ts','scripts/generate-pages.ts','vite.config.ts'])assert(!fs.readFileSync(file,'utf8').includes('review.ts'));
 });

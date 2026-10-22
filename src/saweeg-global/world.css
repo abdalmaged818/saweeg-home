@@ -9,17 +9,7 @@
 .swg-world img{display:block;max-width:100%;}
 .swg-world figure{margin:0;}
 .swg-world ul{list-style:none;padding:0;margin:0;}
-.swg-world :focus-visible{outline:2px solid var(--color-olive);outline-offset:4px;box-shadow:var(--focus-ring);border-radius:10px;}
 .swg-world main:focus,.swg-world h2[tabindex]:focus{outline:0;box-shadow:none;}
-.swg-world .site-header{background:var(--color-ivory);}
-.swg-world .header-inner{min-height:68px;border-radius:18px;}
-.swg-world .brand img{width:56px;height:56px;}
-.swg-world .desktop-nav{display:none;}
-.swg-world .header-actions{margin-inline-start:auto;}
-.swg-world .mobile-navigation{padding-inline:var(--gutter);}
-.swg-world .mobile-navigation-inner{max-width:1200px;}
-.swg-world .language-link{white-space:normal;text-align:center;}
-.swg-world .menu-button{flex:0 0 44px;}
 .swg-world .world-section{padding-block:var(--section-space);}
 .swg-world .world-band{background:var(--color-white);border-block:1px solid var(--color-border);}
 .swg-world .world-section-head{max-width:680px;margin-block-end:clamp(24px,3vw,40px);}
@@ -77,7 +67,7 @@
 .swg-world .world-store p{margin-block-start:10px;color:var(--color-on-olive-secondary);max-width:54ch;}
 .swg-world .world-store .button{justify-self:start;background:var(--color-gold);color:var(--color-text);}
 .swg-world .world-store .button:hover{background:var(--color-ordering-card);}
-.swg-world .world-store :focus-visible,.swg-world .site-footer :focus-visible{box-shadow:var(--focus-ring-on-dark);outline-color:var(--color-ivory);}
+.swg-world .world-store :focus-visible{box-shadow:var(--focus-ring-on-dark);outline-color:var(--color-ivory);}
 .swg-world .world-connect{display:grid;gap:16px;}
 .swg-world .world-contact,.swg-world .world-social{display:flex;flex-direction:column;gap:12px;padding:clamp(24px,3vw,32px);border:1px solid var(--color-border);border-radius:16px;background:var(--color-white);box-shadow:var(--shadow-card);}
 .swg-world .world-connect h2{font-size:clamp(22px,1.15rem + .9vw,28px);}
@@ -87,13 +77,9 @@
 .swg-world .world-social p{color:var(--color-olive-hover);}
 .swg-world .world-phone{align-self:start;display:inline-flex;align-items:center;min-height:44px;font:600 20px var(--font-en);}
 .swg-world .site-footer{margin-block-start:var(--section-space);}
-.swg-world .footer-content{grid-template-columns:1fr;}
-.swg-world .footer-brand img{width:64px;height:64px;}
 .swg-world .world-footer-utility{display:flex;gap:8px;flex-wrap:wrap;}
-.swg-world .world-footer-utility a{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--color-on-olive-border);border-radius:999px;text-decoration:none;}
 @media(min-width:640px){.swg-world .world-product-grid{gap:16px;}}
 @media(min-width:760px){.swg-world .world-branch-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.swg-world .world-branch-grid>li:last-child:nth-child(odd){grid-column:1/-1;}}
-@media(min-width:900px){.swg-world .world-split{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);}.swg-world .world-editorial{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);}.swg-world .world-media{aspect-ratio:4/5;max-height:540px;}.swg-world .world-hero-media{aspect-ratio:auto;height:min(520px,42vw);}.swg-world .world-product-grid{grid-template-columns:repeat(4,minmax(0,1fr));}.swg-world .world-store{grid-template-columns:minmax(0,1fr) auto;}.swg-world .world-connect{grid-template-columns:repeat(2,minmax(0,1fr));}.swg-world .footer-content{grid-template-columns:1fr 1.6fr;}}
-@media(max-width:1023px){.swg-world .desktop-nav{display:none!important;}.swg-world .menu-button{display:flex!important;}}
-@media(min-width:1024px){.swg-world .desktop-nav{display:flex;}.swg-world .menu-button,.swg-world .mobile-navigation{display:none!important;}.swg-world .header-actions{margin-inline-start:0;}.swg-world .world-language-grid{grid-template-columns:repeat(5,minmax(0,1fr));}.swg-world .world-branch-grid{grid-template-columns:repeat(3,minmax(0,1fr));}.swg-world .world-branch-grid>li:last-child:nth-child(odd){grid-column:auto;}}
+@media(min-width:900px){.swg-world .world-split{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);}.swg-world .world-editorial{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);}.swg-world .world-media{aspect-ratio:4/5;max-height:540px;}.swg-world .world-hero-media{aspect-ratio:auto;height:min(520px,42vw);}.swg-world .world-product-grid{grid-template-columns:repeat(4,minmax(0,1fr));}.swg-world .world-store{grid-template-columns:minmax(0,1fr) auto;}.swg-world .world-connect{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(min-width:1024px){.swg-world .world-language-grid{grid-template-columns:repeat(5,minmax(0,1fr));}.swg-world .world-branch-grid{grid-template-columns:repeat(3,minmax(0,1fr));}.swg-world .world-branch-grid>li:last-child:nth-child(odd){grid-column:auto;}}
 @media(prefers-reduced-motion:reduce){.swg-world *,.swg-world *::before,.swg-world *::after{transition:none!important;animation:none!important;scroll-behavior:auto!important;}}
