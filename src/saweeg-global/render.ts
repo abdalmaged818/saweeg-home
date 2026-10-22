@@ -1,3 +1,4 @@
+import { localeDestination, globalContentLocales } from "./destinations.ts";
 import { renderIcon } from "../components/icons.ts";
 import { getHaramLocale } from "../menu/haram/locales.ts";
 import { approvedContent, publicV1Content, publishableLocales } from "./validation.ts";
@@ -35,7 +36,7 @@ export function frame(c:WorldDisplayContent,options:WorldRenderOptions,minimal:b
     {label:c["world.social.tiktokCta"],href:worldLinks.tiktok,external:true},
     {label:c["world.contact.whatsappCta"],href:worldLinks.whatsapp,external:true}
   ] : [...links,{label:c["world.store.cta"],href:worldLinks.store,external:true}];
-  const props={content:c,selectorHref:options.selectorHref,navigation:links,footerLinks,minimal};
+  const props={direction:localeRegistry[options.locale].directionality,content:c,selectorHref:options.selectorHref,navigation:links,footerLinks,minimal};
   const root=html(`<div class="swg-world" lang="${options.locale}" dir="${localeRegistry[options.locale].directionality}" id="world-top"><a class="skip-link" href="#world-main">${text(c,"world.navigation.skip")}</a><div class="welcome-strip" lang="${options.mode==="public"?options.locale:"ar"}" dir="${options.mode==="public"?localeRegistry[options.locale].directionality:"rtl"}"><p class="welcome-strip__text">${options.mode==="public"?text(c,"world.welcome.title"):esc(getHaramLocale("ar").welcomeStrip)}</p></div></div>`);
   root.append(worldHeader(props));
   root.append(html(`<main id="world-main" tabindex="-1">${body}</main>`),worldFooter(props));
@@ -47,7 +48,7 @@ export function renderLanguageSelector(options:WorldRenderOptions):HTMLElement {
 }
 // Pure composition also used by the isolated test adapter. Public entry points above/below retain their gate.
 export function composeLanguageSelector(c:WorldDisplayContent,options:WorldRenderOptions):HTMLElement {
-  return frame(c,options,true,`<section class="container world-welcome" aria-labelledby="world-welcome-title"><div class="world-split"><div>${projectName()}<h1 id="world-welcome-title">${text(c,"world.welcome.title")}</h1><p class="world-lead">${text(c,"world.welcome.description")}</p></div><figure class="world-media world-hero-media">${image(editorialMedia.hero,c,options.media,true)}</figure></div><div class="world-language-area"><h2>${text(c,"world.welcome.languageLabel")}</h2><ul class="world-language-grid">${(options.mode==="public"?publishableLocales():localeCodes).map(code=>`<li><a class="world-language-card" href="${esc(options.localeHref(code))}" lang="${code}" dir="${localeRegistry[code].directionality}" hreflang="${code}"><span>${esc(languageLabels[localeRegistry[code].labelKey])}</span>${renderIcon("arrow")}</a></li>`).join("")}</ul></div></section>`);
+  return frame(c,options,true,`<section class="container world-welcome" aria-labelledby="world-welcome-title"><div class="world-split"><div>${projectName()}<h1 id="world-welcome-title">${text(c,"world.welcome.title")}</h1><p class="world-lead">${text(c,"world.welcome.description")}</p></div><figure class="world-media world-hero-media">${image(editorialMedia.hero,c,options.media,true)}</figure></div><div class="world-language-area"><h2>${text(c,"world.welcome.languageLabel")}</h2><ul class="world-language-grid">${(options.mode==="public"?publishableLocales():localeCodes).map(code=>`<li><a class="world-language-card" href="${esc(options.mode==="public"?localeDestination(code):options.localeHref(code))}" lang="${code}" dir="${localeRegistry[code].directionality}" hreflang="${code}"><span>${esc(languageLabels[localeRegistry[code].labelKey])}</span>${renderIcon("arrow")}</a></li>`).join("")}</ul></div></section>`);
 }
 export function renderHero(c:WorldDisplayContent,resolve:MediaResolver):string {
   return `<section class="container world-hero" aria-labelledby="world-hero-title"><div class="world-split"><div>${projectName()}<h1 id="world-hero-title">${text(c,"world.hero.heading")}</h1><p class="world-lead">${text(c,"world.hero.description")}</p>${action(c["world.hero.cta"],"#world-about")}</div><figure class="world-media world-hero-media">${image(editorialMedia.hero,c,resolve,true)}</figure></div></section>`;
@@ -79,6 +80,7 @@ export function renderContact(c:WorldDisplayContent):string {
 }
 export function renderGlobalPage(options:WorldRenderOptions):HTMLElement {
   const c=contentFor(options);
+  if(options.mode==="public"&&!globalContentLocales.includes(options.locale as typeof globalContentLocales[number]))throw new Error("Use the authoritative locale destination");
   return composeGlobalPage(c,options);
 }
 export function composeGlobalPage(c:WorldDisplayContent,options:WorldRenderOptions,meaning?:string):HTMLElement {

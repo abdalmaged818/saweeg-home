@@ -6,6 +6,7 @@ import {build} from 'vite';
 import {parseHTML} from 'linkedom';
 import {verifyGenerated} from './global-wave1.mjs';
 import {siteConfig} from '../src/config/site.ts';
+import {localeDestination,globalContentLocales,compatibilityLocales} from '../src/saweeg-global/destinations.ts';
 import {v1LocaleCodes,localeRegistry} from '../src/saweeg-global/locales.ts';
 import {publicV1Content} from '../src/saweeg-global/validation.ts';
 import {editorialMedia} from '../src/saweeg-global/media.ts';
@@ -30,16 +31,16 @@ for(const media of Object.values(editorialMedia))if('privateSource' in media){
 }
 const origin=siteConfig.brand.origin;
 assert.equal(origin,'https://go.saweegsa.com');
-const href=locale=>`${origin}/global/${locale?locale+'/':''}`;
+const href=locale=>`${origin}${locale?localeDestination(locale):'/global/'}`;
 const escape=value=>value.replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const fonts='https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&display=swap';
 const social=`${origin}/assets/social/saweeg-gateway-preview-20260910.png`;
 const ogLocales={ar:'ar_SA',en:'en_US',tr:'tr_TR',ur:'ur_PK',fa:'fa_IR',id:'id_ID'};
-for(const routeLocale of [null,...v1LocaleCodes]){
+for(const routeLocale of [null,...globalContentLocales]){
   const locale=routeLocale??'ar',content=publicV1Content(locale),direction=localeRegistry[locale].directionality;
   const {document,HTMLElement}=parseHTML('<!doctype html><html><body></body></html>');
   globalThis.document=document;globalThis.HTMLElement=HTMLElement;
-  const options={locale,selectorHref:'/global/',localeHref:code=>`/global/${code}/`,mode:'public',media:media=>'privateSource' in media?`/global/assets/editorial/${path.basename(media.source)}`:media.source};
+  const options={locale,selectorHref:'/global/',localeHref:localeDestination,mode:'public',media:media=>'privateSource' in media?`/global/assets/editorial/${path.basename(media.source)}`:media.source};
   const root=routeLocale?renderGlobalPage(options):renderLanguageSelector(options);root.dataset.release='v1';isolateWorldRuns(root,locale);
   assert.equal(root.querySelectorAll('.world-hadith-meaning').length,0);
   const title=`${content[routeLocale?'world.hero.heading':'world.welcome.title']} | Saweeg Global`;
@@ -70,6 +71,18 @@ for(const routeLocale of [null,...v1LocaleCodes]){
 `;
   const destination=path.join('dist/global',routeLocale??'','index.html');fs.mkdirSync(path.dirname(destination),{recursive:true});fs.writeFileSync(destination,html);
 }
+for(const locale of compatibilityLocales){
+  const content=publicV1Content(locale),target=localeDestination(locale),canonical=href(locale);
+  const html=`<!doctype html>
+<html lang="${locale}" dir="${localeRegistry[locale].directionality}"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,follow"><link rel="canonical" href="${canonical}">
+<meta http-equiv="refresh" content="0;url=${target}">
+<title>${escape(content['world.brand.homeLabel'])}</title>
+</head><body><main><a href="${target}">${escape(content['world.brand.homeLabel'])}</a></main></body></html>
+`;
+  const destination=path.join('dist/global',locale,'index.html');fs.mkdirSync(path.dirname(destination),{recursive:true});fs.writeFileSync(destination,html);
+}
 for(const [file,digest]of Object.entries(protectedFiles))assert.equal(hash(path.join('dist',file)),digest,`Existing public output changed: ${file}`);
 assert(walk('dist').filter(file=>!previous.includes(file)).every(file=>file.startsWith('global/')));
-console.log('Global V1: 7 static noindex routes; 6 active locales; original Hadith only; all 183 existing public files unchanged.');
+console.log('Global V1: 5 content/selector routes and 2 compatibility redirects; 6 authoritative language destinations; original Hadith only; all 183 existing public files unchanged.');

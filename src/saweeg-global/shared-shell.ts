@@ -6,6 +6,7 @@ import type { WorldShellContent } from "./content/types.ts";
 export interface ShellLink { label: string; href: string; external?: boolean }
 export interface WorldShellProps {
   content: WorldShellContent;
+  direction: "rtl" | "ltr";
   selectorHref: string;
   navigation: readonly ShellLink[];
   footerLinks: readonly ShellLink[];
@@ -33,8 +34,9 @@ function required<T extends Element>(root: Element, selector: string): T {
 // structural HTML or modifies their existing callers. Slot contracts fail closed.
 export function worldHeader(props: WorldShellProps): HTMLElement {
   const c=props.content;
-  const copy=getCopy("ar");
-  const root=parsed(renderHeader({locale:"ar",page:"home",copy,prefix:"/",pathFor:()=>props.selectorHref}));
+  const locale=props.direction==="rtl"?"ar":"en";
+  const copy=getCopy(locale);
+  const root=parsed(renderHeader({locale,page:"home",copy,prefix:"/",pathFor:()=>props.selectorHref}));
   const brand=required<HTMLAnchorElement>(root,".brand");
   brand.href=props.selectorHref;brand.setAttribute("aria-label",c["world.brand.homeLabel"]);
   required<HTMLImageElement>(brand,"img").alt="";
@@ -58,8 +60,9 @@ export function worldHeader(props: WorldShellProps): HTMLElement {
 }
 export function worldFooter(props: WorldShellProps): HTMLElement {
   const c=props.content;
-  const copy=getCopy("ar");
-  const root=parsed(renderFooter({locale:"ar",page:"home",copy,prefix:"/",pathFor:()=>props.selectorHref}));
+  const locale=props.direction==="rtl"?"ar":"en";
+  const copy=getCopy(locale);
+  const root=parsed(renderFooter({locale,page:"home",copy,prefix:"/",pathFor:()=>props.selectorHref}));
   const nav=required<HTMLElement>(root,".footer-nav");
   nav.setAttribute("aria-label",c["world.navigation.label"]);
   // The unlinked footer logo uses the invariant brand name, not another content key.
@@ -72,7 +75,9 @@ export function worldFooter(props: WorldShellProps): HTMLElement {
   const utility=required(root,".footer-language");
   if(props.minimal)utility.remove();else{
     const row=document.createElement("div");row.className="world-footer-utility";
-    row.append(shellAnchor({label:c["world.language.changeCta"],href:props.selectorHref}),shellAnchor({label:c["world.navigation.backToTop"],href:"#world-top"}));
+    for(const link of [{label:c["world.language.changeCta"],href:props.selectorHref},{label:c["world.navigation.backToTop"],href:"#world-top"}]){
+      const anchor=shellAnchor(link);anchor.className="footer-language";row.append(anchor);
+    }
     utility.replaceWith(row);
   }
   root.querySelectorAll("[data-analytics-event],[data-locale-switch]").forEach(element=>{element.removeAttribute("data-analytics-event");element.removeAttribute("data-locale-switch");});

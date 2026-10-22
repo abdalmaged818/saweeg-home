@@ -1,5 +1,42 @@
-@media (min-width: 768px) {
-  .swg-world[data-release="v1"] .world-language-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+/* Shared chrome comes from main.css; only localized content slots differ. */
+.swg-world .footer-brand p { margin-block-start:12px; }
+.swg-world .site-footer .footer-nav-title { font-size:0.9375rem; margin-block-end:10px; }
+.swg-world .world-footer-utility { align-items:center; }
+.swg-world :is(.site-header,.site-footer) { font-size:1.0625rem; line-height:1.85; }
+.swg-world[dir="ltr"] :is(.site-header,.site-footer) { font-family:var(--font-en); line-height:1.7; }
+@media (min-width:900px) {
+  .swg-world .footer-content { grid-template-columns:minmax(0,1fr) minmax(0,1.2fr); }
+}
+@media (min-width:768px) {
+  .swg-world[data-release="v1"] .world-language-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+}
+@media (max-width:899px) {
+  .swg-world[data-release="v1"] .world-media { position:relative; width:100%; min-width:0; }
+  .swg-world[data-release="v1"] .world-media>img { position:absolute; inset:0; width:100%; height:100%; }
+  .swg-world[data-release="v1"] { font-size:1rem; line-height:1.75; }
+  .swg-world[data-release="v1"] .world-split { gap:24px; min-width:0; }
+  .swg-world[data-release="v1"] .world-split>div { min-width:0; }
+  .swg-world[data-release="v1"] .world-hero,
+  .swg-world[data-release="v1"] .world-welcome { padding-block-start:24px; }
+  .swg-world[data-release="v1"] .world-hero { padding-block-end:32px; }
+  .swg-world[data-release="v1"] .world-hero-media { aspect-ratio:1; height:auto; max-height:none; max-width:480px; justify-self:center; }
+  .swg-world[data-release="v1"] h1 { font-size:clamp(1.875rem,1.25rem + 3vw,2.5rem); line-height:1.3; }
+  .swg-world[data-release="v1"] h2 { font-size:clamp(1.375rem,1.15rem + 1.2vw,1.875rem); }
+  .swg-world[data-release="v1"] .world-section { padding-block:36px; }
+  .swg-world[data-release="v1"] .world-project { margin-block-end:12px; }
+  .swg-world[data-release="v1"] .world-lead { font-size:1rem; line-height:1.75; margin-block-start:12px; }
+  .swg-world[data-release="v1"] .world-hero .button { margin-block-start:20px; }
+  .swg-world[data-release="v1"] .world-section-head { margin-block-end:20px; }
+  .swg-world[data-release="v1"] .world-language-area { margin-block-start:28px; }
+  .swg-world[data-release="v1"] .world-language-grid { gap:10px; }
+  .swg-world[data-release="v1"] .world-language-card { min-height:88px; padding:12px; gap:8px; }
+  .swg-world[data-release="v1"] .world-language-card span { font-size:1rem; line-height:1.4; }
+  .swg-world[data-release="v1"] .world-product h3 { min-height:60px; padding:10px 12px; font-size:1rem; }
+  .swg-world[data-release="v1"] .world-branch-body { padding:18px; gap:10px; }
+  .swg-world[data-release="v1"] .world-store,
+  .swg-world[data-release="v1"] .world-contact,
+  .swg-world[data-release="v1"] .world-social { padding:22px; gap:16px; }
+  .swg-world[data-release="v1"] .world-hadith { padding:20px; }
+  .swg-world[data-release="v1"] .world-connect { gap:16px; }
+  .swg-world[data-release="v1"] .site-footer { margin-block-start:36px; }
 }
