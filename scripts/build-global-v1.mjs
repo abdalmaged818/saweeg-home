@@ -79,7 +79,7 @@ for(const locale of compatibilityLocales){
 <meta name="robots" content="noindex,follow"><link rel="canonical" href="${canonical}">
 <meta http-equiv="refresh" content="0;url=${target}">
 <title>${escape(content['world.brand.homeLabel'])}</title>
-</head><body><main><a href="${target}">${escape(content['world.brand.homeLabel'])}</a></main></body></html>
+</head><body><main><a style="display:inline-flex;align-items:center;min-width:44px;min-height:44px" href="${target}">${escape(content['world.brand.homeLabel'])}</a></main></body></html>
 `;
   const destination=path.join('dist/global',locale,'index.html');fs.mkdirSync(path.dirname(destination),{recursive:true});fs.writeFileSync(destination,html);
 }

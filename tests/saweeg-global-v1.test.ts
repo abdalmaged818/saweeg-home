@@ -112,6 +112,8 @@ test('One destination authority replaces duplicate Arabic/English pages with saf
     assert.equal(document.querySelector('meta[name=robots]')!.getAttribute('content'),'noindex,follow');
     assert.equal(document.querySelector('meta[http-equiv=refresh]')!.getAttribute('content'),`0;url=${target}`);
     assert.equal(document.querySelector('main a')!.getAttribute('href'),target);
+    assert.equal((document.querySelector('main a') as HTMLAnchorElement).style.minHeight,'44px');
+    assert.equal((document.querySelector('main a') as HTMLAnchorElement).style.minWidth,'44px');
     assert.equal(document.querySelector('main a')!.textContent,publicV1Content(locale)['world.brand.homeLabel']);
     assert.equal(document.querySelectorAll('.swg-world,header,footer,img,script').length,0);
     assert(!target.startsWith('/global/'));assert(document.body.textContent.trim());
