@@ -1,3 +1,4 @@
+import approvedHaramPrices from "./fixtures/approved-haram-prices.json" with { type: "json" };
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import http from 'node:http';
@@ -74,9 +75,21 @@ async function semantic(page) {
 }
 
 function compare(actual, expected, route) {
+  const originalProducts = expected.products;
+  if (/^\/menu\/haram\/[a-z]{2}\/$/.test(route)) {
+    expected = {...expected, products:expected.products.map(product => {
+      assert(Object.hasOwn(approvedHaramPrices, product.id), product.id);
+      return {...product, text:product.text.replace(/\d+(?!.*\d)/, String(approvedHaramPrices[product.id]))};
+    })};
+  }
   for(const field of ['lang','dir','title','seo','products','categories','campaign']) assert.deepEqual(actual[field],expected[field],`${route}: ${field}`);
   // New chrome, the two approved existing hero CTAs, and newly visible participation excerpts are additive.
-  for(const text of expected.content) assert(actual.content.includes(text),`${route}: protected content missing: ${text}`);
+  for(const text of expected.content) {
+    // Every full product name + localized price is already compared above.
+    // Only the redundant standalone, deliberately changed price labels differ.
+    if (/^\/menu\/haram\/[a-z]{2}\/$/.test(route) && originalProducts.some(product => product.text.endsWith(text) && expected.content.includes(product.text.slice(0, -text.length)))) continue;
+    assert(actual.content.includes(text),`${route}: protected content missing: ${text}`);
+  }
   for(const link of expected.links) {
     if(link.href === null) continue;
     assert(actual.links.some(current=>current.href===link.href && current.text===link.text && current.target===link.target && current.rel===link.rel),`${route}: protected link changed: ${JSON.stringify(link)}`);
@@ -101,6 +114,16 @@ try {
         if(capture) fixtures.cases[key]=actual;
         else {
           compare(actual,fixtures.cases[key],route);
+          if (route === '/' || route === '/en/') {
+            const actions=page.locator('a[data-analytics-event="branch_menu_click"][data-analytics-label="haram"]');
+            assert.equal(await actions.count(), route === '/' ? 2 : 1);
+            for (const link of await actions.all()) {
+              assert.equal(await link.getAttribute('href'), '/menu/haram/');
+              assert.equal(await link.getAttribute('target'), null);
+              assert.equal((await link.innerText()).trim(), route === '/' ? 'اطلع على المينيو' : 'View Menu');
+              const box=await link.boundingBox(); assert(box.height>=44 && box.width>=44);
+            }
+          }
           const geometry=await page.evaluate(()=>({scroll:[scrollX,scrollY],overflow:document.documentElement.scrollWidth>innerWidth,h1:document.querySelectorAll('h1').length,
             broken:[...document.images].filter(image=>{const rect=image.getBoundingClientRect();return !image.closest('[hidden]')&&(!image.complete||!image.naturalWidth||rect.width===0||rect.height===0)}).map(image=>image.src),
             cards:[...document.querySelectorAll('.haram-language-card')].map(element=>{const r=element.getBoundingClientRect();return [r.width,r.height]}),
@@ -153,6 +176,18 @@ try {
         await page.goto(origin+'/');await page.locator('[data-locale-switch="en"]').first().press('Enter');await page.waitForURL(origin+'/en/');
         await page.locator('.footer-language').press('Enter');await page.waitForURL(origin+'/');
         report.switching.push({width,homeLanguageSwitch:true,status:'pass'});await context.close();
+      }
+      for (const route of ['/', '/en/']) {
+        const context=await browser.newContext({viewport:{width,height:900}}), page=await context.newPage();
+        await page.goto(origin+route);
+        const count=await page.locator('a[data-analytics-event="branch_menu_click"][data-analytics-label="haram"]').count();
+        for (let index=0;index<count;index++) {
+          await page.goto(origin+route);
+          await page.locator('a[data-analytics-event="branch_menu_click"][data-analytics-label="haram"]').nth(index).click();
+          await page.waitForURL(origin+'/menu/haram/');
+          assert.equal(await page.locator('.haram-language-card').count(),10);
+        }
+        report.switching.push({width,route,haramHomepageJourney:true,status:'pass'});await context.close();
       }
       for(const locale of ['ar','en','ur','id','bn','tr','fa','fr','ms','ru']) {
         const context=await browser.newContext({viewport:{width,height:900}}), page=await context.newPage();

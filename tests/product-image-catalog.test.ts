@@ -1,3 +1,5 @@
+import { withApprovedHaramPrices } from "./helpers/approved-haram-prices.ts";
+import approvedHaramPrices from "./fixtures/approved-haram-prices.json" with { type: "json" };
 import { localizationSnapshot } from "./helpers/menu-localization-snapshot.ts";
 import assert from "node:assert/strict";
 import fs from "node:fs";
@@ -84,18 +86,18 @@ test("every approved variant resolves identically; product records cannot declar
 
 test("complete shared-branch and independent Haram price tables equal the approved baseline", () => {
   const sharedPrices = (branch: "maqsed" | "bustan") => [...products.filter(p => p.branches.includes(branch)).map(p => ["product", p.id, p.price]), ...extras.filter(p => p.branches.includes(branch)).map(p => ["extra", p.id, p.price])];
-  assert.deepEqual({ maqsed: sharedPrices("maqsed"), bustan: sharedPrices("bustan"), haram: haramMenuItems.map(p => ["product", p.id, p.price]) }, baseline.prices);
+  assert.deepEqual({ maqsed: sharedPrices("maqsed"), bustan: sharedPrices("bustan"), haram: haramMenuItems.map(p => ["product", p.id, p.price]) }, { ...baseline.prices, haram: baseline.prices.haram.map(([kind, id]) => [kind, id, approvedHaramPrices[id as keyof typeof approvedHaramPrices]]) });
   assert.equal(products.find(p => p.id === "talbinah-matcha")!.price, 22);
-  assert.equal(haramMenuItems.find(p => p.id === "talbinah-matcha")!.price, 25);
+  assert.equal(haramMenuItems.find(p => p.id === "talbinah-matcha")!.price, 22);
 });
 
 test("all non-image product data, availability, ordering, categories and translations remain unchanged", () => {
   assert.deepEqual(products.map(dataOnly), baseline.sharedProducts);
   assert.deepEqual(extras, baseline.sharedExtras);
-  assert.deepEqual(haramMenuItems.map(dataOnly), baseline.haramProducts);
+  assert.deepEqual(haramMenuItems.map(dataOnly), baseline.haramProducts.map(record => { const item = record as {id: keyof typeof approvedHaramPrices}; return {...item, price: approvedHaramPrices[item.id]}; }));
   // Source layout changes in Phase 3; preserve all resolved values rather than source bytes.
   const { protectedFileHashes, ...semanticBaseline } = JSON.parse(fs.readFileSync(path.join(root, "tests/fixtures/foundation-phase3-localization-baseline.json"), "utf8"));
-  assert.deepEqual(localizationSnapshot(), semanticBaseline);
+  assert.deepEqual(localizationSnapshot(), withApprovedHaramPrices(semanticBaseline));
   for (const [file, expected] of Object.entries(baseline.protectedFiles)) assert.equal(protectedFileHashes[file], expected, file + ": original baseline provenance");
 });
 

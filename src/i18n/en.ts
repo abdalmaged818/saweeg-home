@@ -160,6 +160,7 @@ export const en = {
       haram: "Madinah – Al Haram Area"
     },
     menuCta: "Open menu",
+    haramMenuCta: "View Menu",
     names: {
       maqsed: "Al-Maqsed branch",
       bustan: "Bustan Al-Mustazal branch",

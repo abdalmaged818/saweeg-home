@@ -121,6 +121,7 @@ export interface SiteCopy {
     locationCtas: Partial<Record<BranchId, string>>;
     locations: Partial<Record<BranchId, string>>;
     menuCta: string;
+    haramMenuCta: string;
     names: Record<BranchId, string>;
   };
   contact: {

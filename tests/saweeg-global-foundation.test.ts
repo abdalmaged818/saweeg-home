@@ -1,3 +1,4 @@
+import { approvedHaramSourceHash, assertProtectedSource } from "./helpers/approved-haram-update.mjs";
 import assert from "node:assert/strict";
 import test from "node:test";
 import fs from "node:fs";
@@ -104,7 +105,7 @@ test("all baseline production source, assets, menus, prices and routes stay byte
   for(const [file,digest] of Object.entries(baseline.files)){
     assert(fs.existsSync(file),file);
     const approved=approvedOverrides.find(entry=>entry.path===file);
-    assert.equal(hash(fs.readFileSync(file)),approved?approved.approvedHash:digest,file);
+    assert.equal(hash(fs.readFileSync(file)),approved?approved.approvedHash:approvedHaramSourceHash(file,digest),file);
   }
   const readAt=(revision:string,file:string)=>parse(execFileSync("git",["show",`${revision}:${file}`],{encoding:"utf8"}));
   const currentDeploy=parse(fs.readFileSync(".github/workflows/deploy.yml","utf8"));

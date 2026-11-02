@@ -1,3 +1,4 @@
+import { approvedHaramSourceHash, assertProtectedSource } from "./helpers/approved-haram-update.mjs";
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import fs from 'node:fs';
@@ -66,6 +67,6 @@ test('Arabic master and protected production sources remain equal to approved Ph
     .replace('    panel.hidden=!open;button.setAttribute','    document.body.classList.toggle("menu-open",open);\n    panel.hidden=!open;button.setAttribute')
     .replace('  root.addEventListener("click",event=>{\n    const element=', '  root.addEventListener("click",event=>{\n    const header=root.querySelector("[data-site-header]");\n    if(panel&&!panel.hidden&&event.target instanceof Node&&!header?.contains(event.target))setMenu(false);\n    const element=')
     .replace('return ()=>abort.abort();','return ()=>{setMenu(false);abort.abort();};'));
-  for(const file of files){if(allowed.has(file)||file==='public/assets/social/saweeg-gateway-preview-20260910.png')continue;assert(fs.readFileSync(file).equals(execFileSync('git',['show',`${baseline}:${file}`],{maxBuffer:64*1024*1024})),file);}
+  for(const file of files){if(allowed.has(file)||file==='public/assets/social/saweeg-gateway-preview-20260910.png')continue;assertProtectedSource(file,execFileSync('git',['show',`${baseline}:${file}`],{maxBuffer:64*1024*1024}),fs.readFileSync(file));}
   for(const file of ['src/main.ts','scripts/generate-pages.ts','vite.config.ts'])assert(!fs.readFileSync(file,'utf8').includes('review.ts'));
 });
