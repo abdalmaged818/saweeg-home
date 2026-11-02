@@ -1,3 +1,4 @@
+import { approvedHaramSourceHash, assertProtectedSource } from "./helpers/approved-haram-update.mjs";
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -10,7 +11,7 @@ test('visual redesign preserves every protected production source and product as
   assert.equal(baseline.commit, 'cad38858aeb1e9033b1835f5a54b5f71121bc80a');
   assert(Object.keys(baseline.files).length > 100);
   for(const [file, hash] of Object.entries(baseline.files)) {
-    assert.equal(crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex'), hash, file);
+    assert.equal(crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex'), approvedHaramSourceHash(file, hash), file);
   }
 });
 

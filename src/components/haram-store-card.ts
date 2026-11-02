@@ -1,3 +1,6 @@
+import { siteConfig } from "../config/site.ts";
+import { getCopy } from "../i18n/index.ts";
+
 export const haramStorePhoto = {
   source: "assets-source/branches/haram/IMG_2578.PNG",
   output: "/assets/images/saweeg-haram-storefront-2026-10.webp"
@@ -23,10 +26,13 @@ export const renderHaramStoreCard = (): string => `
             <span>نستقبلكم على مدار الساعة</span>
           </li>
         </ul>
+        <div class="swg-haram__actions">
         <a class="swg-haram__btn" href="https://maps.app.goo.gl/t7VQtDZSWHREcnXL6?g_st=ic" target="_blank" rel="noopener noreferrer" aria-label="موقع الفرع — يفتح خرائط Google في نافذة جديدة">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21.5s-7-6.6-7-11.8a7 7 0 0 1 14 0c0 5.2-7 11.8-7 11.8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="9.7" r="2.6" stroke="currentColor" stroke-width="1.8"/></svg>
           موقع الفرع
         </a>
+        <a class="swg-haram__btn" href="${siteConfig.links.haramMenu}" data-analytics-event="branch_menu_click" data-analytics-label="haram">${getCopy("ar").branches.haramMenuCta}</a>
+        </div>
       </div>
     </div>
   </section>`;

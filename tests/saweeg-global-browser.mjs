@@ -1,3 +1,4 @@
+import { approvedHaramSourceTransition, assertProtectedSource } from "./helpers/approved-haram-update.mjs";
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -25,7 +26,18 @@ async function compareProduction(){
     execFileSync('tar',['-xf',archive,'-C',scratch]);
     // A baseline install may change peer-resolution paths. Never share its mutable node_modules.
     fs.cpSync(path.resolve('node_modules'),path.join(scratch,'node_modules'),{recursive:true,verbatimSymlinks:true});
-    execFileSync('corepack',['pnpm','build'],{cwd:scratch,stdio:'pipe',maxBuffer:64*1024*1024});
+    // Rebuild the immutable pre-Global baseline with only the exact approved
+    // homepage actions and Haram prices; all other emitted bytes remain protected.
+    for (const file of Object.keys(approvedHaramSourceTransition)) {
+      const before=fs.readFileSync(path.join(scratch,file)), after=fs.readFileSync(file);
+      assertProtectedSource(file,before,after);fs.writeFileSync(path.join(scratch,file),after);
+    }
+    // Build the historical production bundle without executing its superseded
+    // price assertions. The current full build/test suite runs independently.
+    for (const script of ['generate-favicons.mjs','generate-social-preview.mjs','generate-pages.ts'])
+      execFileSync(process.execPath,[`scripts/${script}`],{cwd:scratch,stdio:'pipe',maxBuffer:64*1024*1024});
+    for (const command of [['tsc','--noEmit'],['vite','build']])
+      execFileSync('corepack',['pnpm','exec',...command],{cwd:scratch,stdio:'pipe',maxBuffer:64*1024*1024});
     baseline=path.join(scratch,'dist');
   }
   const before=walk(baseline),allAfter=walk('dist'),after=allAfter.filter(file=>!file.startsWith('global/'));assert.deepEqual(after,before,'Existing production emitted-file set changed');

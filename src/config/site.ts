@@ -15,6 +15,7 @@ export const siteConfig = {
     maqsedMap: "https://maps.app.goo.gl/TrhRQ4bykuBKf6bo7?g_st=ipc",
     bustanMap: "https://maps.app.goo.gl/D7PPQc497DZeLxWh8?g_st=ic",
     haramMap: "https://maps.app.goo.gl/39mDVAhBHQNr4UfM6?g_st=ic",
+    haramMenu: "/menu/haram/",
     maqsedMenu: "/menu/?branch=maqsed",
     bustanMenu: "/menu/?branch=bustan",
     careersUrl: "",

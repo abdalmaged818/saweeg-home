@@ -11,7 +11,8 @@ const locations: Record<BranchId, string> = {
 
 const menus: Partial<Record<BranchId, string>> = {
   maqsed: siteConfig.links.maqsedMenu,
-  bustan: siteConfig.links.bustanMenu
+  bustan: siteConfig.links.bustanMenu,
+  haram: siteConfig.links.haramMenu
 };
 
 export const renderBranches = (copy: SiteCopy): string => `
@@ -32,7 +33,7 @@ export const renderBranches = (copy: SiteCopy): string => `
               ${location ? `<p class="branch-card__location">${location}</p>` : ""}
               <div class="branch-actions">
                 <a class="button button-primary" href="${locations[branch.id]}" target="_blank" rel="noopener noreferrer" data-analytics-event="branch_map_click" data-analytics-label="${branch.id}">${copy.branches.locationCtas[branch.id] ?? copy.branches.locationCta}</a>
-                ${menu ? `<a class="button button-soft" href="${menu}" target="_blank" rel="noopener noreferrer" data-analytics-event="branch_menu_click" data-analytics-label="${branch.id}">${copy.branches.menuCta}</a>` : ""}
+                ${menu ? `<a class="button button-soft" href="${menu}"${branch.id === "haram" ? "" : ' target="_blank" rel="noopener noreferrer"'} data-analytics-event="branch_menu_click" data-analytics-label="${branch.id}">${branch.id === "haram" ? copy.branches.haramMenuCta : copy.branches.menuCta}</a>` : ""}
               </div>
             </article>`;
         }).join("")}

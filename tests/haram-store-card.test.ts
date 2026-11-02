@@ -1,3 +1,7 @@
+import { parseHTML } from "linkedom";
+import { renderBranches } from "../src/components/branches.ts";
+import { getCopy } from "../src/i18n/index.ts";
+import { siteConfig } from "../src/config/site.ts";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
@@ -38,4 +42,32 @@ test("Haram photo preserves full original proportions, and CSS stays isolated", 
   assert.match(styles, /:focus-visible/);
   assert.doesNotMatch(styles, /@import|font-face|gradient|media-mark|font-family:(?! inherit)/);
   for (const selector of styles.matchAll(/(?:^|\})\s*([^@{}]+)\{/g)) assert(selector[1].trim().startsWith(".swg-haram"));
+});
+
+test("homepage Haram menu actions use the centralized selector, localized copy and same-tab analytics", () => {
+  assert.equal(siteConfig.links.haramMenu, "/menu/haram/");
+  for (const locale of ["ar", "en"] as const) {
+    const copy = getCopy(locale);
+    const {document} = parseHTML(renderBranches(copy));
+    const menu = document.querySelector('a[data-analytics-event="branch_menu_click"][data-analytics-label="haram"]')!;
+    assert(menu);
+    assert.equal(menu.getAttribute("href"), siteConfig.links.haramMenu);
+    assert.equal(menu.textContent, locale === "ar" ? "اطلع على المينيو" : "View Menu");
+    assert.equal(menu.hasAttribute("target"), false);
+    for (const branch of ["maqsed", "bustan"] as const) {
+      const link = document.querySelector(`a[data-analytics-event="branch_menu_click"][data-analytics-label="${branch}"]`)!;
+      assert.equal(link.getAttribute("href"), siteConfig.links[`${branch}Menu`]);
+      assert.equal(link.textContent, copy.branches.menuCta);
+      assert.equal(link.getAttribute("target"), "_blank");
+    }
+  }
+  const {document} = parseHTML(renderHaramStoreCard());
+  const actions = document.querySelector(".swg-haram__actions")!;
+  assert.equal(actions.querySelectorAll("a").length, 2);
+  const menu = actions.querySelector('a[data-analytics-label="haram"]')!;
+  assert.equal(menu.getAttribute("href"), siteConfig.links.haramMenu);
+  assert.equal(menu.textContent, "اطلع على المينيو");
+  assert.equal(menu.getAttribute("data-analytics-event"), "branch_menu_click");
+  assert.equal(menu.hasAttribute("target"), false);
+  assert.equal(actions.querySelector('a[target="_blank"]')!.getAttribute("href"), "https://maps.app.goo.gl/t7VQtDZSWHREcnXL6?g_st=ic");
 });

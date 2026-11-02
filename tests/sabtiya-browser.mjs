@@ -80,8 +80,12 @@ try {
       assert.equal(intro.placeholder, 0);
       assert(intro.height >= 44 && intro.target === "_blank" && intro.rel.includes("noopener") && intro.rel.includes("noreferrer"));
       assert.equal(intro.href, "https://maps.app.goo.gl/t7VQtDZSWHREcnXL6?g_st=ic");
-      await page.locator(".swg-haram__btn").focus();
-      assert(await page.locator(".swg-haram__btn").evaluate(e => getComputedStyle(e).outlineStyle !== "none"));
+      const introductionActions = page.locator(".swg-haram__btn");
+      assert.equal(await introductionActions.count(), 2);
+      for (const action of await introductionActions.all()) {
+        await action.focus();
+        assert(await action.evaluate(e => getComputedStyle(e).outlineStyle !== "none"));
+      }
       assert.equal(metrics.media, 0);
       assert(!/النسخة|REPLACE|data-replace/.test(metrics.text));
       if (state.name === "before") {

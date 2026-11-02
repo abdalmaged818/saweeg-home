@@ -160,6 +160,7 @@ export const ar = {
       haram: "المدينة المنورة – منطقة الحرم"
     },
     menuCta: "فتح المنيو",
+    haramMenuCta: "اطلع على المينيو",
     names: {
       maqsed: "فرع المقصد",
       bustan: "فرع بستان المستظل",

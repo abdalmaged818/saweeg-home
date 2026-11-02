@@ -1,3 +1,4 @@
+import approvedHaramPrices from "./fixtures/approved-haram-prices.json" with { type: "json" };
 import { localizationSnapshot } from "./helpers/menu-localization-snapshot.ts";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
@@ -58,10 +59,15 @@ test("Arabic terminology changes are targeted to approved categories and stable 
   const expectedLocales = JSON.parse(fs.readFileSync(path.join(projectRoot, "tests/fixtures/foundation-phase3-localization-baseline.json"), "utf8")).haramLocales;
   assert.deepEqual(localizationSnapshot().haramLocales, expectedLocales);
 });
-test("Only the approved Gift Box price changes in centralized Haram data", () => {
-  const source = fs.readFileSync(path.join(projectRoot, "src/menu/haram/data.ts"), "utf8")
-    .replace(/\r/g, "").replace('item("gift-box", "boxes", 45)', 'item("gift-box", "boxes", 52)');
-  assert.equal(source, "import { canonicalImageFor } from \"../data/catalog-images.ts\";\nimport type { HaramMenuItem } from \"./types.ts\";\n\nconst item = (\n  id: HaramMenuItem[\"id\"],\n  category: HaramMenuItem[\"category\"],\n  price: number,\n  catalogId = id\n): HaramMenuItem => ({ id, category, price, catalogId, image: canonicalImageFor(catalogId) });\n\n// This is the single Al Haram price and availability source for every locale.\nexport const haramMenuItems: HaramMenuItem[] = [\n  item(\"talbinah-ice-cream-biscuit\", \"iceCream\", 11),\n  item(\"talbinah-ice-cream-cup\", \"iceCream\", 15),\n  item(\"chocolate-ice-cream-biscuit\", \"iceCream\", 11),\n  item(\"chocolate-ice-cream-cup\", \"iceCream\", 15),\n  item(\"mixed-ice-cream-biscuit\", \"iceCream\", 11),\n  item(\"mixed-ice-cream-cup\", \"iceCream\", 15),\n  item(\"lotus-cheesecake\", \"desserts\", 20),\n  item(\"damkah\", \"desserts\", 20),\n  item(\"dates-with-saweeg\", \"desserts\", 20),\n  item(\"pecan-basbousa\", \"desserts\", 13),\n  item(\"date-tart\", \"desserts\", 13),\n  item(\"saweeg-maamoul\", \"desserts\", 25),\n  item(\"cold-talbinah\", \"drinks\", 16),\n  item(\"hot-talbinah\", \"drinks\", 16),\n  item(\"hot-talbinah-one-liter\", \"drinks\", 55),\n  item(\"saudi-coffee\", \"drinks\", 7),\n  item(\"saudi-coffee-dallah\", \"drinks\", 25),\n  item(\"saudi-coffee-dallah-with-sweets\", \"drinks\", 45),\n  item(\"tea\", \"drinks\", 5),\n  item(\"tea-thermos\", \"drinks\", 25),\n  item(\"talbinah-matcha\", \"drinks\", 25),\n  item(\"bottled-water\", \"drinks\", 1),\n  item(\"talbinah-powder-sachet\", \"powders\", 25),\n  item(\"saweeg-powder-sachet\", \"powders\", 25),\n  item(\"mixed-nuts-sachet\", \"powders\", 12),\n  item(\"al-jabirah-sachet\", \"powders\", 6),\n  item(\"safawi-dates-nuts-box\", \"boxes\", 78),\n  item(\"ajwa-dates-nuts-box\", \"boxes\", 85),\n  item(\"al-jabirah-box\", \"boxes\", 75),\n  item(\"gift-box\", \"boxes\", 52),\n  item(\"saweeg-maamoul-box\", \"boxes\", 89),\n  item(\"pecan-basbousa-box\", \"boxes\", 55),\n  item(\"sachet-box\", \"boxes\", 75),\n  item(\"date-tart-box\", \"boxes\", 55)\n];\n");
+test("Only the 34 workbook-approved centralized Haram prices may change", () => {
+  const source = fs.readFileSync(path.join(projectRoot, "src/menu/haram/data.ts"), "utf8").replace(/\r/g, "");
+  const withoutPrices = (text: string) => text.replace(/(item\("[^"]+", "[^"]+", )\d+/g, "$1<price>");
+  assert.equal(withoutPrices(source), withoutPrices("import { canonicalImageFor } from \"../data/catalog-images.ts\";\nimport type { HaramMenuItem } from \"./types.ts\";\n\nconst item = (\n  id: HaramMenuItem[\"id\"],\n  category: HaramMenuItem[\"category\"],\n  price: number,\n  catalogId = id\n): HaramMenuItem => ({ id, category, price, catalogId, image: canonicalImageFor(catalogId) });\n\n// This is the single Al Haram price and availability source for every locale.\nexport const haramMenuItems: HaramMenuItem[] = [\n  item(\"talbinah-ice-cream-biscuit\", \"iceCream\", 11),\n  item(\"talbinah-ice-cream-cup\", \"iceCream\", 15),\n  item(\"chocolate-ice-cream-biscuit\", \"iceCream\", 11),\n  item(\"chocolate-ice-cream-cup\", \"iceCream\", 15),\n  item(\"mixed-ice-cream-biscuit\", \"iceCream\", 11),\n  item(\"mixed-ice-cream-cup\", \"iceCream\", 15),\n  item(\"lotus-cheesecake\", \"desserts\", 20),\n  item(\"damkah\", \"desserts\", 20),\n  item(\"dates-with-saweeg\", \"desserts\", 20),\n  item(\"pecan-basbousa\", \"desserts\", 13),\n  item(\"date-tart\", \"desserts\", 13),\n  item(\"saweeg-maamoul\", \"desserts\", 25),\n  item(\"cold-talbinah\", \"drinks\", 16),\n  item(\"hot-talbinah\", \"drinks\", 16),\n  item(\"hot-talbinah-one-liter\", \"drinks\", 55),\n  item(\"saudi-coffee\", \"drinks\", 7),\n  item(\"saudi-coffee-dallah\", \"drinks\", 25),\n  item(\"saudi-coffee-dallah-with-sweets\", \"drinks\", 45),\n  item(\"tea\", \"drinks\", 5),\n  item(\"tea-thermos\", \"drinks\", 25),\n  item(\"talbinah-matcha\", \"drinks\", 25),\n  item(\"bottled-water\", \"drinks\", 1),\n  item(\"talbinah-powder-sachet\", \"powders\", 25),\n  item(\"saweeg-powder-sachet\", \"powders\", 25),\n  item(\"mixed-nuts-sachet\", \"powders\", 12),\n  item(\"al-jabirah-sachet\", \"powders\", 6),\n  item(\"safawi-dates-nuts-box\", \"boxes\", 78),\n  item(\"ajwa-dates-nuts-box\", \"boxes\", 85),\n  item(\"al-jabirah-box\", \"boxes\", 75),\n  item(\"gift-box\", \"boxes\", 45),\n  item(\"saweeg-maamoul-box\", \"boxes\", 89),\n  item(\"pecan-basbousa-box\", \"boxes\", 55),\n  item(\"sachet-box\", \"boxes\", 75),\n  item(\"date-tart-box\", \"boxes\", 55)\n];\n"));
+  for (const locale of haramLocales) for (const item of haramMenuItems) {
+    assert.equal(item.price, approvedHaramPrices[item.id]);
+    assert.equal(haramLocaleContent[locale].priceLabel(item.price),
+      haramLocaleContent[locale].priceLabel(approvedHaramPrices[item.id]));
+  }
 });
 test("Shared product prices, order, availability and image settings remain unchanged", () => {
   // Approved PR #34 (a0384be), verified against its parent: only approved names changed.
@@ -192,7 +198,7 @@ test("Management-approved terminology is consistent across all ten Haram locales
     assert.equal(content.categories.powders, shelfTitles[locale]);
   }
   assert.equal(haramLocaleContent.ar.categories.desserts, "حلويات");
-  assert.equal(haramMenuItems.find(item => item.id === "gift-box")?.price, 45);
+  assert.equal(haramMenuItems.find(item => item.id === "gift-box")?.price, 42);
   assert.equal(products.find(item => item.id === "gift-box")?.price, 42);
   assert.equal(haramLocaleContent.tr.productNames["talbinah-ice-cream-cup"], "Talbinah Dondurma — Kap");
 });
@@ -236,19 +242,7 @@ test("Maqsed and Bustan menus retain their confirmed products and prices", () =>
 });
 
 test("Al Haram has exactly the approved 34 priced variants without duplicates", () => {
-  const expectedPrices = {
-    "talbinah-ice-cream-biscuit": 11, "talbinah-ice-cream-cup": 15,
-    "chocolate-ice-cream-biscuit": 11, "chocolate-ice-cream-cup": 15,
-    "mixed-ice-cream-biscuit": 11, "mixed-ice-cream-cup": 15,
-    "lotus-cheesecake": 20, damkah: 20, "dates-with-saweeg": 20, "pecan-basbousa": 13,
-    "date-tart": 13, "saweeg-maamoul": 25, "cold-talbinah": 16, "hot-talbinah": 16,
-    "hot-talbinah-one-liter": 55, "saudi-coffee": 7, "saudi-coffee-dallah": 25,
-    "saudi-coffee-dallah-with-sweets": 45, tea: 5, "tea-thermos": 25, "talbinah-matcha": 25,
-    "bottled-water": 1, "talbinah-powder-sachet": 25, "saweeg-powder-sachet": 25,
-    "mixed-nuts-sachet": 12, "al-jabirah-sachet": 6, "safawi-dates-nuts-box": 78,
-    "ajwa-dates-nuts-box": 85, "al-jabirah-box": 75, "gift-box": 45,
-    "saweeg-maamoul-box": 89, "pecan-basbousa-box": 55, "sachet-box": 75, "date-tart-box": 55
-  } as const;
+  const expectedPrices = approvedHaramPrices;
   assert.equal(haramMenuItems.length, 34);
   assert.equal(new Set(haramMenuItems.map((item) => item.id)).size, 34);
   assert.deepEqual(Object.fromEntries(haramMenuItems.map((item) => [item.id, item.price])), expectedPrices);

@@ -16,6 +16,7 @@
 .swg-haram .swg-haram__info { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 10px; }
 .swg-haram .swg-haram__info li { display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 17px; line-height: 1.5; }
 .swg-haram .swg-haram__icon { flex: 0 0 auto; width: 24px; height: 24px; }
+.swg-haram .swg-haram__actions { display: flex; flex-wrap: wrap; gap: 10px; max-width: 100%; }
 .swg-haram .swg-haram__btn { margin-top: 8px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 10px 22px; border-radius: 999px; background: var(--swg-olive); color: var(--color-white); font-family: inherit; font-weight: 600; font-size: 0.9375rem; line-height: 1.2; text-decoration: none; transition: background-color .15s ease; width: auto; }
 .swg-haram .swg-haram__btn:hover { background: var(--color-storefront-button-hover); color: var(--color-white); }
 .swg-haram .swg-haram__btn:focus-visible { outline: 3px solid var(--swg-ink); outline-offset: 3px; }

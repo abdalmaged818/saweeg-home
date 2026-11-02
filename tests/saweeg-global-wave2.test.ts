@@ -1,3 +1,4 @@
+import { approvedHaramSourceHash, assertProtectedSource } from "./helpers/approved-haram-update.mjs";
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -49,5 +50,5 @@ test('Wave 2 changes no existing non-Global source, data, assets, route generato
   const baseline='fdca6eb432219788c6f71b5acec349a552c4b04a';
   const files=execFileSync('git',['-c','core.quotePath=false','ls-tree','-r','--name-only',baseline,'src','public','assets-source','content-source','.github','scripts/generate-pages.ts','scripts/process-menu-product-images.mjs','vite.config.ts','package.json','pnpm-lock.yaml'],{encoding:'utf8'}).trim().split('\n');
   const allowed=new Set(['src/saweeg-global/locales.ts','src/saweeg-global/validation.ts','src/saweeg-global/destinations.ts','public/assets/social/saweeg-gateway-preview-20260910.png']);
-  for(const file of files){if(allowed.has(file))continue;assert(fs.readFileSync(file).equals(execFileSync('git',['show',`${baseline}:${file}`],{maxBuffer:64*1024*1024})),`Protected baseline changed: ${file}`);}
+  for(const file of files){if(allowed.has(file))continue;assertProtectedSource(file,execFileSync('git',['show',`${baseline}:${file}`],{maxBuffer:64*1024*1024}),fs.readFileSync(file));}
 });

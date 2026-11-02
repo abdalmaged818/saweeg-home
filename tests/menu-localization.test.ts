@@ -1,3 +1,5 @@
+import { withApprovedHaramPrices } from "./helpers/approved-haram-prices.ts";
+import approvedHaramPrices from "./fixtures/approved-haram-prices.json" with { type: "json" };
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
@@ -15,7 +17,7 @@ import { getMessages } from "../src/menu/i18n/index.ts";
 import { localizationSnapshot } from "./helpers/menu-localization-snapshot.ts";
 const fixture = JSON.parse(fs.readFileSync(new URL("./fixtures/foundation-phase3-localization-baseline.json", import.meta.url), "utf8"));
 const exactKeys = (object: object, keys: readonly string[]) => { assert.equal(new Set(keys).size, keys.length); assert.deepEqual(Object.keys(object).sort(), [...keys].sort()); };
-test("resolved localization and every commercial record equal the approved Phase 2 semantic baseline", () => { const { protectedFileHashes, ...expected } = fixture; assert.deepEqual(localizationSnapshot(), expected); });
+test("resolved localization and every commercial record equal the approved Phase 2 semantic baseline", () => { const { protectedFileHashes, ...expected } = fixture; assert.deepEqual(localizationSnapshot(), withApprovedHaramPrices(expected)); });
 test("shared product, extra, category and branch catalogs have complete exact stable IDs", () => { const domains = { products: sharedProductIds, extras: sharedExtraIds, categories: sharedCategoryIds, branches: sharedBranchIds }; const records = { products, extras, categories, branches }; for (const locale of ["ar", "en"] as const)
     for (const domain of Object.keys(domains) as (keyof typeof domains)[]) {
         exactKeys(sharedLocaleCatalogs[locale][domain], domains[domain]);
@@ -82,6 +84,6 @@ test("localization does not own prices or images; branch-specific prices remain 
     const shared = products.find(p => p.id === id)!;
     const haram = haramMenuItems.find(p => p.id === id)!;
     assert.equal(shared.price, id === "gift-box" ? 42 : 22);
-    assert.equal(haram.price, id === "gift-box" ? 45 : 25);
+    assert.equal(haram.price, approvedHaramPrices[id as keyof typeof approvedHaramPrices]);
 } for (const [id, price] of [["mixed-nuts-sachet", 12], ["saweeg-powder-sachet", 25], ["talbinah-powder-sachet", 25], ["al-jabirah-sachet", 6]] as const)
     assert.equal(haramMenuItems.find(p => p.id === id)!.price, price); });
