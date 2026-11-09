@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import { execFile, execFileSync } from "node:child_process";
 import { promisify } from "node:util";
 import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import test from "node:test";
 import { parseHTML } from "linkedom";
 import { getCopy } from "../src/i18n/index.ts";
@@ -29,6 +31,27 @@ const assertAdditiveSitemap = (before: string, after: string): void => {
   assert.equal(original,before,"Every previous sitemap byte must remain unchanged");
 };
 
+const assertBaselineSocialPreview = async (file: string, source: Buffer, generated: Buffer): Promise<void> => {
+  // The established build regenerates this PNG using runner fonts. Protect both
+  // the committed source bytes and the deployed result, comparing equivalent
+  // baseline/current builds rather than a stored PNG against a generated PNG.
+  const committed=await gitFile("git",["show","HEAD:"+file],{encoding:"buffer",maxBuffer:64*1024*1024});
+  assert.equal(Buffer.compare(committed.stdout,source),0,file+": committed original");
+  const scratch=await fs.promises.mkdtemp(path.join(os.tmpdir(),"saweeg-go-social-baseline-"));
+  await fs.promises.symlink(path.resolve("node_modules"),path.join(scratch,"node_modules"),process.platform==="win32"?"junction":"dir");
+  for(const input of ["scripts/generate-social-preview.mjs","public/assets/images/saweeg-madinah-hero.png","public/assets/brand/logo-saweeg.svg"]){
+    const previous=await gitFile("git",["show",baseline+":"+input],{encoding:"buffer",maxBuffer:64*1024*1024});
+    assert.equal(Buffer.compare(await fs.promises.readFile(input),previous.stdout),0,input+": baseline input");
+    const destination=path.join(scratch,input);
+    await fs.promises.mkdir(path.dirname(destination),{recursive:true});
+    await fs.promises.writeFile(destination,previous.stdout);
+  }
+  await gitFile(process.execPath,[path.join(scratch,"scripts/generate-social-preview.mjs")],{cwd:scratch,timeout:90000});
+  const equivalent=await fs.promises.readFile(path.join(scratch,file));
+  assert.equal(Buffer.compare(generated,equivalent),0,file+": production output versus untouched baseline build");
+  console.log("Social preview original and equivalent baseline build both verified");
+};
+
 test("v2 preserves all commercial data, localization, image assets, campaigns and article content against production", {timeout:180000}, async () => {
   const files = execFileSync("git", ["-c", "core.quotePath=false", "ls-tree", "-r", "--name-only", baseline,
     "src/menu/data", "src/menu/i18n", "src/menu/haram/data.ts", "src/menu/haram/locales.ts",
@@ -42,6 +65,7 @@ test("v2 preserves all commercial data, localization, image assets, campaigns an
     // Keep runner IPC and file I/O responsive while comparing every original byte.
     const after=await fs.promises.readFile(file);
     if(file==="public/sitemap.xml") assertAdditiveSitemap(before.toString("utf8"),after.toString("utf8"));
+    else if(file==="public/assets/social/saweeg-gateway-preview-20260910.png") await assertBaselineSocialPreview(file,before,after);
     // Compare the complete buffers byte-for-byte, but report only the filename
     // and comparison result instead of constructing a multi-megabyte image diff.
     else assert.equal(Buffer.compare(after,before),0,file);
