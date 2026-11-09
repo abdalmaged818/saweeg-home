@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import { execFileSync } from "node:child_process";
+import { execFile, execFileSync } from "node:child_process";
+import { promisify } from "node:util";
 import fs from "node:fs";
 import test from "node:test";
 import { parseHTML } from "linkedom";
@@ -14,6 +15,7 @@ import { renderReturnNavigation, safeInternalPrevious } from "../src/components/
 import { goCopy, returnCopy } from "../src/content/go-redesign.ts";
 
 const baseline = "dc961fd9810857c0f544b40698f179a90fe21a61";
+const gitFile=promisify(execFile);
 console.log("Go v2 verification module loaded");
 const read = (file: string) => fs.readFileSync(file, "utf8");
 const assertAdditiveSitemap = (before: string, after: string): void => {
@@ -35,13 +37,13 @@ test("v2 preserves all commercial data, localization, image assets, campaigns an
     "content-source", "public", "assets-source"], {encoding:"utf8"}).trim().split("\n");
   assert(files.length > 100);
   console.log("Verifying every baseline source and asset:",files.length);
-  for (const file of files) {
-    const before=execFileSync("git", ["show", baseline + ":" + file], {maxBuffer:64*1024*1024});
-    // Yield between complete asset comparisons so the native test worker can
-    // service its runner IPC while Git expands large original photographs.
+  for (const [index,file] of files.entries()) {
+    const {stdout:before}=await gitFile("git", ["show", baseline + ":" + file], {encoding:"buffer",maxBuffer:64*1024*1024});
+    // Keep runner IPC and file I/O responsive while comparing every original byte.
     const after=await fs.promises.readFile(file);
     if(file==="public/sitemap.xml") assertAdditiveSitemap(before.toString("utf8"),after.toString("utf8"));
     else assert.deepEqual(after,before,file);
+    if((index+1)%25===0)console.log("Verified baseline files:",index+1,"/",files.length);
   }
   const previous = execFileSync("git", ["show", baseline + ":src/components/sabtiya.ts"], {encoding:"utf8"});
   assert.equal(read("src/components/sabtiya.ts").replace("sabtiya-section announcement-card","sabtiya-section container"), previous);
