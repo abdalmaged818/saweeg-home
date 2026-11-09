@@ -126,9 +126,11 @@ for (const [html, label] of [[homeAr, "Arabic homepage"], [homeEn, "English home
 }
 
 for (const relative of expectedFiles.filter((file) => file.endsWith(".html") && !["index.html", "en/index.html"].includes(file))) {
-  if (readDist(relative).includes(homepageWelcome)) {
-    failures.push(`Welcome phrase must not appear outside the homepage: ${relative}`);
-  }
+  const occurrences=readDist(relative).split(homepageWelcome).length-1;
+  // Go v2 uses the same welcome/header shell on every statically rendered Go
+  // page. Menu shells are rendered once by their existing client entry points.
+  const expected=relative.startsWith("menu/")?0:1;
+  if(occurrences!==expected)failures.push(`Expected ${expected} static welcome strip(s), found ${occurrences}: ${relative}`);
 }
 
 const requiredHtmlSnippets = [
