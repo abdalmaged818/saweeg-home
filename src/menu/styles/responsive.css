@@ -30,10 +30,6 @@
 }
 
 @media (min-width: 820px) {
-  :root {
-    --header-offset: 88px;
-  }
-
   .hero__content {
     max-width: 760px;
   }

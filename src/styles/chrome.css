@@ -48,6 +48,6 @@
 .page-return .button{max-width:100%;min-height:48px;padding:11px 22px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:12px;font-size:15px;font-weight:600;line-height:1.4;text-align:center}
 .page-return .button-primary,.header-store{background:var(--color-olive);color:var(--color-white)}
 .page-return .button-outline{background:var(--surface);color:var(--text)}
-@media(min-width:768px){.footer-content{grid-template-columns:1.3fr 1fr 1fr 1.4fr;gap:32px}.footer-identity,.footer-downloads{grid-column:auto}}
+@media(min-width:768px){.header-inner{min-height:72px}.brand img{width:56px;height:56px}.footer-content{grid-template-columns:1.3fr 1fr 1fr 1.4fr;gap:32px}.footer-identity,.footer-downloads{grid-column:auto}}
 @media(min-width:1024px){.header-inner{min-height:72px}.desktop-nav{display:flex}.menu-button,.mobile-navigation,.mobile-menu{display:none!important}.header-actions{margin-inline-start:0}.header-store{display:inline-flex;white-space:nowrap;font-size:13px;padding-inline:14px}.brand img{width:56px;height:56px}}
 @media(max-width:479px){.page-return .button{flex:1 1 100%}}

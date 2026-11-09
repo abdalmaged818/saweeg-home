@@ -97,10 +97,14 @@
   --transition: 180ms ease;
   --font-ar: "IBM Plex Sans Arabic", system-ui, sans-serif;
   --font-en: "Inter", system-ui, sans-serif;
-  --header-height: 72px;
+  --header-height: 64px;
   --content-width: 1200px;
   --gutter: clamp(16px, 3vw, 32px);
   --section-space: clamp(28px, 4vw, 52px);
   --heading-size: clamp(1.625rem, 3vw, 2.25rem);
   --hero-size: clamp(1.875rem, 1.2rem + 2.9vw, 3.25rem);
+}
+
+@media (min-width: 768px) {
+  :root { --header-height: 72px; }
 }

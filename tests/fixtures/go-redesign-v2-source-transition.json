@@ -81,21 +81,25 @@
       "before": "fc48575646130f58e05d4a35dccf1ae48808df5f471b586ca4cbc3ca44cb5327",
       "after": "6f6e03fbffffb377a7261d3533c0046aad806e29dcead39306344abd0529d425"
     },
+    "src/menu/styles/base.css": {
+      "before": "2a3b15fe7f2c98a772bc99e68f9ea1722a01b45016ffa7df2ce9ea911c448b2e",
+      "after": "4481bfed4b2b998107b38584d8b47cc8e3849ad9e2b622f95491e164d774ae0c"
+    },
     "src/menu/styles/components.css": {
       "before": "a766b76b49725bb3bcc0db6356c3ab51deb8a2339f895b5cf96406992a84d6da",
       "after": "9e8691e0f6728125a26bf1ddd97e256544bef80160fcca3b75dd38cde49ecea3"
     },
     "src/menu/styles/layout.css": {
       "before": "ac9352ae1f00f02f84165828449ba14c9d84e883563a0f3f49b036bc294442da",
-      "after": "dff9025d9567c0bf8d2f1b8a4d211d64320bba4aef9860b02c5ca297995ed27f"
+      "after": "99bfd37507665bc156b2a67676cb2b59287454685d89fc39d08c355e9208858f"
     },
     "src/menu/styles/responsive.css": {
       "before": "3abbc1e2f64b7d1afa88d028df43a36aec7691e820fa2d64924f5704a1a03ec5",
-      "after": "00aed259d3ac97a0ec45fabcfd9626731154a6f6dbb99101563aa1c13b04e4c1"
+      "after": "87f756d0d529996f5e92f8679f1ac30b66841239f092aeea6fbe2f9043bf5a5a"
     },
     "src/menu/styles/tokens.css": {
       "before": "4b3af69943ab082a87eace898dfbbb9555a7da0f7542360b73b6379ec50ad34c",
-      "after": "8627878f33c6f6adc93960c84127dfd2fd2fbd0aca9e6be71e1d337df97b6937"
+      "after": "e0973974f7030eb02e1cb8d6a4bf14c76c97af4ee02e78d2db0e27da91023bc6"
     },
     "src/menu/templates/menu-page.ts": {
       "before": "4d40f5b5ff5856c9087c7d34892cd232cbb347f1f044fbd77ccc5893f68be31b",
@@ -135,7 +139,7 @@
     },
     "src/styles/chrome.css": {
       "before": "b677698f1e0a95c005d50a9ca406c0568dbb83e9a810d4d5eb345d696d9b7216",
-      "after": "a58828adfdef3b29452f23771a4605139afbb2c9190834f7795bd1ab41ea1074"
+      "after": "513d772c4cb2a253208849f5c23eb756a8151196ddda1169048ce60d916bc877"
     },
     "src/styles/components.css": {
       "before": "a2e7013c7996f6712f5f5320bf58a378537809ce7f41d8dfe663945c54c98b8d",
@@ -171,7 +175,7 @@
     },
     "src/styles/tokens.css": {
       "before": "c18f2f758c4fa99d813a2f0c91a1d770e7f6f145b9b41ddaa3748a9076effc57",
-      "after": "a3ce4ecc60fd82a6983be27c2edcd9db79157f6abfa01941c37b93f14f7df9f3"
+      "after": "cc9ff215f1b17bb9023df87e336ac377296eeb819adf7659efdf22bcd8a731f0"
     },
     "src/types/site.ts": {
       "before": "7e8eb50c9b507b3027f2aeb409c7b84dedc62be87c1ed4a3ca5d18156a4aa952",

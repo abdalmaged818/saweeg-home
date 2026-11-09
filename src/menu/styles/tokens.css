@@ -3,7 +3,7 @@
 :root {
   --radius-pill: 999px;
   --max-width: 1180px;
-  --header-offset: 96px;
+  --header-offset: calc(var(--header-height) + 72px);
 
   --brand-beige: var(--color-ivory);
   --brand-green: var(--color-olive);

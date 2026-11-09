@@ -268,7 +268,18 @@ try {
         const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage();
         await page.goto(origin+'/menu/'+(language==='en'?'en/':'')+'?branch=maqsed');await page.locator('button[data-branch="bustan"]').press('Enter');await page.waitForURL('**branch=bustan');
         await page.locator('[data-language-link]').first().press('Enter');await page.waitForURL(url=>url.searchParams.get('branch')==='bustan'&&url.pathname===(language==='ar'?'/menu/en/':'/menu/'));
-        await page.locator('.category-navigation a').last().press('Enter');assert.equal(await page.evaluate(()=>location.hash),'#extras');
+        for(const link of await page.locator('.category-navigation a').all()){
+          const target=await link.getAttribute('href');
+          await link.press('Enter');
+          await page.waitForFunction(hash=>location.hash===hash,target);
+          await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+          const visible=await page.evaluate(hash=>{
+            const heading=document.querySelector(hash),navigation=document.querySelector('.category-navigation');
+            return heading.getBoundingClientRect().top>=navigation.getBoundingClientRect().bottom-1;
+          },target);
+          assert(visible,'Category navigation must leave the target heading below sticky controls: '+target);
+        }
+        assert.equal(await page.evaluate(()=>location.hash),'#extras');
         report.switching.push({width,language,status:'pass'});await context.close();
       }
     }
