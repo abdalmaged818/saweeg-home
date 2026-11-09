@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&display=swap");
 
 html:has(.haram) { background: var(--page-bg); }
 
@@ -17,7 +17,7 @@ body:has(.haram) {
   color: var(--text);
 }
 
-.haram a { color: inherit; }
+.haram a:not(.button) { color: inherit; }
 
 .haram-welcome-strip { position: relative; z-index: 101; }
 
@@ -284,6 +284,8 @@ body:has(.haram) {
   font-size: 0.78rem;
   white-space: nowrap;
 }
+
+html[lang="en"] .haram { font-family: var(--font-en); }
 
 html[lang="ur"] .haram,
 html[lang="fa"] .haram { font-family: "Noto Naskh Arabic", "IBM Plex Sans Arabic", sans-serif; }

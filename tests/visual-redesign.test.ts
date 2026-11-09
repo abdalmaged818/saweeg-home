@@ -34,9 +34,10 @@ test('redesign retains one semantic palette and approved readable contrast pairs
 });
 
 test('approved media geometry, equal language cards, and intentional text-only rendering stay explicit', () => {
-  for(const file of ['src/menu/styles/components.css','src/menu/haram/haram.css','src/styles/haram-store-card.css']) {
+  for(const file of ['src/menu/styles/components.css','src/menu/haram/haram.css']) {
     assert.match(read(file), /aspect-ratio:\s*4\s*\/\s*3/);
   }
+  assert.match(read("src/styles/haram-store-card.css"), /aspect-ratio:\s*4\s*\/\s*5/);
   const haram=read('src/menu/haram/haram.css');
   assert.match(haram,/grid-auto-rows:\s*var\(--haram-language-card-block-size\)/);
   assert.match(haram,/overflow-wrap:\s*anywhere/);

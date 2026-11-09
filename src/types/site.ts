@@ -1,5 +1,5 @@
 export type Locale = "ar" | "en";
-export type PageId = "home" | "about" | "news" | "blog" | "opportunities";
+export type PageId = "home" | "about" | "news" | "blog" | "opportunities" | "branches" | "contact";
 export type DestinationId = "store" | "menu" | "delivery";
 export type QuickLinkId = "whatsapp" | "tiktok" | "x" | "maqsed" | "bustan";
 export type BranchId = "maqsed" | "bustan" | "haram";

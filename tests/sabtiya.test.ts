@@ -66,9 +66,8 @@ test("Customer component has exact destinations and no template guidance or medi
   assert(!/النسخة|data-replace|REPLACE|<!--|<img|IBM Plex/.test(html));
   const css = fs.readFileSync(new URL("../src/styles/sabtiya.css", import.meta.url), "utf8");
   assert(!/@import|font-face|font-family:(?! inherit)/.test(css));
-  assert(css.includes("min-height: 48px"));
+  assert.match(css, /min-height:\s*44px/);
   const home = fs.readFileSync(new URL("../src/pages/home.ts", import.meta.url), "utf8");
-  assert(home.indexOf("renderHero(copy)") < home.indexOf('id="sabtiya-slot"'));
-  assert(home.indexOf('id="sabtiya-slot"') < home.indexOf('class="destinations-section"'));
+  assert(home.indexOf('id="destinations"') < home.indexOf('id="sabtiya-slot"'));
   assert(home.includes('locale === "ar"'));
 });

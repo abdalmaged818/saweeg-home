@@ -2,6 +2,9 @@
   /* Canonical Saweeg color system. All editable site and menu styles consume these tokens. */
   --color-ivory: #f4f1ec;
   --color-olive: #5c6351;
+  --color-primary-dark: #344331;
+  --color-icon-tile: #d3c19f;
+  --color-bg-soft: #faf8f4;
   --color-gold: #c4a972;
   --color-white: #ffffff;
   --color-text: #30342d;
@@ -52,7 +55,7 @@
   --color-product-fallback-line: color-mix(in srgb, var(--color-olive) 18%, transparent);
 
   --saweeg-green: var(--color-olive);
-  --saweeg-green-dark: var(--color-olive);
+  --saweeg-green-dark: var(--color-primary-dark);
   --saweeg-green-seasonal: var(--color-olive);
   --saweeg-olive: var(--color-olive);
   --saweeg-green-soft: var(--color-olive-soft);
@@ -62,7 +65,7 @@
 
   --page-bg: var(--color-ivory);
   --surface: var(--color-white);
-  --surface-soft: var(--color-menu-card);
+  --surface-soft: var(--color-haram-light);
   --text: var(--color-text);
   --text-secondary: var(--color-secondary);
   --text-soft: var(--color-secondary);
@@ -82,7 +85,7 @@
 
   --radius-xl: 20px;
   --radius-lg: 16px;
-  --radius-md: 16px;
+  --radius-md: 14px;
   --radius-sm: 12px;
   --shadow-card: 0 1px 2px color-mix(in srgb, var(--color-text) 4%, transparent), 0 6px 18px color-mix(in srgb, var(--color-olive) 6%, transparent);
   --shadow-soft: 0 8px 24px color-mix(in srgb, var(--color-olive) 6%, transparent);
@@ -94,10 +97,10 @@
   --transition: 180ms ease;
   --font-ar: "IBM Plex Sans Arabic", system-ui, sans-serif;
   --font-en: "Inter", system-ui, sans-serif;
-  --header-height: 94px;
+  --header-height: 72px;
   --content-width: 1200px;
-  --gutter: clamp(16px, 3.5vw, 40px);
-  --section-space: clamp(56px, 4.5vw + 32px, 104px);
+  --gutter: clamp(16px, 3vw, 32px);
+  --section-space: clamp(28px, 4vw, 52px);
   --heading-size: clamp(1.625rem, 1.15rem + 1.9vw, 2.375rem);
   --hero-size: clamp(1.875rem, 1.2rem + 2.9vw, 3.25rem);
 }

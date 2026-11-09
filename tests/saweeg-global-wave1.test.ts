@@ -63,7 +63,7 @@ test('Arabic master and protected production sources remain equal to approved Ph
   assert(adapter.includes('renderHeader({locale,')&&adapter.includes('renderFooter({locale,'));
   assert(!/<header|<footer/.test(adapter));
   const controller='src/saweeg-global/controller.ts';
-  assert.equal(fs.readFileSync(controller,'utf8'),execFileSync('git',['show',`${baseline}:${controller}`],{encoding:'utf8'}).replace('min-width:1024px','min-width:900px')
+  assert.equal(fs.readFileSync(controller,'utf8'),execFileSync('git',['show',`${baseline}:${controller}`],{encoding:'utf8'})
     .replace('    panel.hidden=!open;button.setAttribute','    document.body.classList.toggle("menu-open",open);\n    panel.hidden=!open;button.setAttribute')
     .replace('  root.addEventListener("click",event=>{\n    const element=', '  root.addEventListener("click",event=>{\n    const header=root.querySelector("[data-site-header]");\n    if(panel&&!panel.hidden&&event.target instanceof Node&&!header?.contains(event.target))setMenu(false);\n    const element=')
     .replace('return ()=>abort.abort();','return ()=>{setMenu(false);abort.abort();};'));

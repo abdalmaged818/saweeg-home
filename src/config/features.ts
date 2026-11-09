@@ -18,6 +18,8 @@ const hasAvailableOpportunity = (
 export const pageAvailability: Record<PageId, boolean> = {
   home: true,
   about: true,
+  branches: true,
+  contact: true,
   news: siteConfig.features.news,
   blog: siteConfig.features.blog,
   opportunities: siteConfig.features.opportunities && hasAvailableOpportunity

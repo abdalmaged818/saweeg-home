@@ -1,4 +1,5 @@
-import { gatewayHomePath, menuBasePath } from "../config/site";
+import { menuBasePath } from "../config/site";
+import { bindReturnNavigation } from "../../components/return-navigation.ts";
 import { getMessages } from "../i18n";
 import {
   renderExtras,
@@ -14,36 +15,8 @@ import { bindMobileMenu } from "./mobile-menu";
 
 const storageKey = "saweeg:selected-branch";
 
-const isMenuPath = (pathname: string): boolean =>
-  pathname === menuBasePath.slice(0, -1) || pathname.startsWith(menuBasePath);
-
-const getGatewayReturnUrl = (): string | null => {
-  if (!document.referrer || window.opener || window.history.length <= 1) {
-    return null;
-  }
-
-  try {
-    const referrer = new URL(document.referrer);
-    if (referrer.origin !== window.location.origin || isMenuPath(referrer.pathname)) {
-      return null;
-    }
-
-    return `${referrer.pathname}${referrer.search}${referrer.hash}`;
-  } catch {
-    return null;
-  }
-};
-
 const validBranch = (value: string | null): BranchId | null =>
   value === "maqsed" || value === "bustan" ? value : null;
-
-const getStoredBranch = (): BranchId | null => {
-  try {
-    return validBranch(localStorage.getItem(storageKey));
-  } catch {
-    return null;
-  }
-};
 
 const storeBranch = (branch: BranchId): void => {
   try {
@@ -60,7 +33,7 @@ const getInitialState = (fixedBranch?: BranchId): AppState => {
 
   return {
     language,
-    branch: fixedBranch ?? validBranch(params.get("branch")) ?? getStoredBranch() ?? "maqsed"
+    branch: fixedBranch ?? validBranch(params.get("branch")) ?? "maqsed"
   };
 };
 
@@ -75,13 +48,20 @@ const syncUrl = (
   const query = params.toString();
   const nextUrl = `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`;
   window.history[mode === "push" ? "pushState" : "replaceState"](
-    { branch: state.branch },
+    { ...window.history.state, branch: state.branch,
+      ...(mode === "push" ? { saweegPrevious: `${location.pathname}${location.search}${location.hash}` } : {}) },
     "",
     nextUrl
   );
 };
 
 export const initializeApp = (options: MenuPageOptions & { fixedBranch?: BranchId } = {}): void => {
+  if (!options.fixedBranch && new URLSearchParams(location.search).get("branch") === "haram") {
+    const query = new URLSearchParams(location.search);
+    query.delete("branch");
+    location.replace(`${menuBasePath}haram/${query.size ? `?${query}` : ""}${location.hash}`);
+    return;
+  }
   const root = document.querySelector<HTMLElement>("#app");
   if (!root) {
     throw new Error("Application root is missing.");
@@ -89,11 +69,6 @@ export const initializeApp = (options: MenuPageOptions & { fixedBranch?: BranchI
 
   const state = getInitialState(options.fixedBranch);
   const refs = renderMenuPage(root, state, options);
-  const backLink = root.querySelector<HTMLAnchorElement>("[data-menu-back-link]");
-  if (!backLink) {
-    throw new Error("Menu back link is missing.");
-  }
-  backLink.href = getGatewayReturnUrl() ?? gatewayHomePath(state.language);
   bindMobileMenu(refs.mobileMenuButton, refs.mobileMenu, state.language);
 
   const refreshSelectionUi = (): void => {
@@ -144,6 +119,7 @@ export const initializeApp = (options: MenuPageOptions & { fixedBranch?: BranchI
   });
 
   syncUrl(state, "replace", options.fixedBranch);
+  bindReturnNavigation(root);
   refreshSelectionUi();
   attachImageFallbacks(root);
 };

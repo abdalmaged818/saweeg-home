@@ -244,7 +244,6 @@ html[lang="en"] .participation-body p {
 .participation-closing {
   margin-block-start: 46px;
   padding: 28px;
-  border-inline-start: 4px solid var(--saweeg-gold);
   border-radius: var(--radius-md);
   background: var(--saweeg-green-soft);
 }
@@ -294,7 +293,7 @@ html[lang="en"] .participation-body p {
 
 .participation-cta h2 {
   color: var(--surface);
-  font-size: clamp(1.8rem, 6vw, 2.8rem);
+  font-size: clamp(1.25rem, 2.4vw, 1.5rem);
 }
 
 .participation-cta p {
@@ -335,7 +334,6 @@ html[lang="en"] .about-story-copy > p {
 .about-story-copy blockquote {
   margin: 28px 0;
   padding: 24px;
-  border-inline-start: 4px solid var(--saweeg-gold);
   border-radius: var(--radius-md);
   background: var(--saweeg-green-soft);
 }

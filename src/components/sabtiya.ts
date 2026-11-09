@@ -60,7 +60,7 @@ export const renderSabtiya = (now = new Date()): string => {
     <p class="sab-intro">تلقونا داخل مقصد قباء، بجوار مسجد قباء.<br>موعدنا الجاي السبت <time datetime="${state.date}">${state.dateLabel}</time>.</p>
     <ul class="sab-common"><li>تفاصيل السبتية الجاية بنشاركها معكم.</li></ul>
     <div class="sab-actions sab-actions--center">${button(maqsed, "شوف موقع المقصد", "green")}${button(store, "تعرّف على متجر سويق", "line")}</div>`;
-  return `<section class="sabtiya-section container" id="sabtiya" dir="rtl" aria-labelledby="sabtiya-title"><div class="sab-card">${content}</div></section>`;
+  return `<section class="sabtiya-section announcement-card" id="sabtiya" dir="rtl" aria-labelledby="sabtiya-title"><div class="sab-card">${content}</div></section>`;
 };
 
 export const initializeSabtiya = (): void => {

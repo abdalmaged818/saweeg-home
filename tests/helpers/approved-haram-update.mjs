@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import {createHash} from "node:crypto";
+import goRedesign from "../fixtures/go-redesign-v2-source-transition.json" with {type:"json"};
 
 // Exact owner-approved homepage menu actions and Haram-only price transition.
 // Historical fixtures stay immutable; no wildcard or unchecked file exception.
@@ -40,9 +41,19 @@ export const approvedHaramSourceTransition = {
 export const sourceDigest = bytes => createHash("sha256").update(bytes).digest("hex");
 export function approvedHaramSourceHash(file, originalHash) {
   const transition = approvedHaramSourceTransition[file];
-  if (!transition) return originalHash;
-  assert.equal(originalHash, transition[0], file + ": unexpected pre-update source");
-  return transition[1];
+  let expected=originalHash;
+  if (transition) {
+    assert.equal(originalHash, transition[0], file + ": unexpected pre-update source");
+    expected=transition[1];
+  }
+  // Exact owner-approved Go v2 UI changes, after the already-approved price update.
+  // No wildcard, skipped source, rewritten historical fixture or commercial-data exception.
+  const visual=goRedesign.files[file];
+  if (visual) {
+    assert.equal(expected,visual.before,file+": unexpected pre-redesign source");
+    return visual.after;
+  }
+  return expected;
 }
 export function assertProtectedSource(file, before, after) {
   assert.equal(sourceDigest(after), approvedHaramSourceHash(file, sourceDigest(before)), file);

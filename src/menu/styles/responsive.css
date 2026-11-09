@@ -61,3 +61,8 @@
     padding-inline: 0.7rem;
   }
 }
+
+@media (max-width: 600px) {
+  .branch-selector { gap: 8px; }
+  .branch-option { min-height: 52px; padding: 12px 4px; }
+}

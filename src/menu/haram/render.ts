@@ -1,3 +1,8 @@
+import { renderFooter } from "../../components/footer.ts";
+import { getCopy } from "../../i18n/index.ts";
+import { createPathFor } from "../../pages/routes.ts";
+import { returnCopy } from "../../content/go-redesign.ts";
+import { renderReturnNavigation } from "../../components/return-navigation.ts";
 import { assetUrl, siteConfig } from "../config/site";
 import { haramMenuItems } from "./data";
 import { haramLocaleContent, getHaramLocale, haramProductName } from "./locales";
@@ -53,7 +58,9 @@ const createSharedHeader = (copy: HaramLocaleContent, isSelector = false): HTMLE
   const branchLink = create("a", undefined, copy.branchName);
   branchLink.href = selectorPath;
   branchLink.setAttribute("aria-current", isSelector ? "page" : "false");
-  desktopNav.append(branchLink);
+  const homeLink = create("a", undefined, returnCopy[copy.locale].nav);
+  homeLink.href = copy.locale === "en" ? "/en/" : "/";
+  desktopNav.append(homeLink, branchLink);
 
   const actions = create("div", "header-actions");
   const changeLanguage = create("a", "language-link", isSelector ? copy.chooseLanguage : copy.changeLanguage);
@@ -80,7 +87,7 @@ const createSharedHeader = (copy: HaramLocaleContent, isSelector = false): HTMLE
   mobileBranch.href = selectorPath;
   const mobileLanguage = create("a", undefined, isSelector ? copy.chooseLanguage : copy.changeLanguage);
   mobileLanguage.href = isSelector ? "#haram-languages" : selectorPath;
-  mobileNav.append(mobileBranch, mobileLanguage);
+  mobileNav.append(homeLink.cloneNode(true), mobileBranch, mobileLanguage);
   mobileInner.append(mobileNav);
   mobileNavigation.append(mobileInner);
   inner.append(brand, desktopNav, actions);
@@ -166,7 +173,18 @@ const createProductRuns = (items: HaramMenuItem[], copy: HaramLocaleContent): HT
   return runs.map((run) => createProductRun(run, copy));
 };
 
+const returnNavigation = (locale: HaramLocale): HTMLElement => {
+  const holder = create("div");
+  holder.innerHTML = renderReturnNavigation(locale, locale === "en" ? "/en/" : "/");
+  return holder.firstElementChild as HTMLElement;
+};
+
 const createFooter = (copy: HaramLocaleContent): HTMLElement => {
+  if (copy.locale === "ar" || copy.locale === "en") {
+    const holder = create("div");
+    holder.innerHTML = renderFooter({ locale: copy.locale, page: "home", copy: getCopy(copy.locale), prefix: "/", pathFor: createPathFor("/"), localeSwitchPath: selectorPath });
+    return holder.firstElementChild as HTMLElement;
+  }
   const footer = create("footer", "haram-footer");
   const inner = create("div", "haram-shell haram-footer__inner");
   const logo = create("img", "haram-footer__logo") as HTMLImageElement;
@@ -237,7 +255,7 @@ export const renderHaramSelector = (root: HTMLElement): void => {
     grid.append(card);
   });
   shell.append(grid);
-  main.append(shell);
+  main.append(shell, returnNavigation("ar"));
   page.append(createSharedHeader(arabic, true), main, createFooter(arabic));
   root.replaceChildren(page);
 };
@@ -269,7 +287,7 @@ export const renderHaramMenu = (root: HTMLElement, locale: HaramLocale): void =>
   const changeBottom = create("a", "text-link haram-menu__change", copy.changeLanguage);
   changeBottom.href = selectorPath;
   menu.append(changeBottom);
-  main.append(menu, createStoreAndContact(copy));
+  main.append(menu, createStoreAndContact(copy), returnNavigation(locale));
   page.append(createSharedHeader(copy), main, createFooter(copy));
   root.replaceChildren(page);
 };

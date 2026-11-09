@@ -20,6 +20,9 @@ test("the canonical Saweeg tokens contain the approved palette", () => {
   const expected = {
     "--color-ivory": "#f4f1ec",
     "--color-olive": "#5c6351",
+    "--color-primary-dark": "#344331",
+    "--color-icon-tile": "#d3c19f",
+    "--color-bg-soft": "#faf8f4",
     "--color-gold": "#c4a972",
     "--color-white": "#ffffff",
     "--color-text": "#30342d",
