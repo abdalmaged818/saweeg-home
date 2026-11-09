@@ -26,7 +26,7 @@ const assertAdditiveSitemap = (before: string, after: string): void => {
   assert.equal(original,before,"Every previous sitemap byte must remain unchanged");
 };
 
-test("v2 preserves all commercial data, localization, image assets, campaigns and article content against production", () => {
+test("v2 preserves all commercial data, localization, image assets, campaigns and article content against production", async () => {
   const files = execFileSync("git", ["-c", "core.quotePath=false", "ls-tree", "-r", "--name-only", baseline,
     "src/menu/data", "src/menu/i18n", "src/menu/haram/data.ts", "src/menu/haram/locales.ts",
     "src/config/site.ts", "src/menu/config/site.ts", "src/content/about.ts", "src/content/participations.ts",
@@ -35,7 +35,9 @@ test("v2 preserves all commercial data, localization, image assets, campaigns an
   assert(files.length > 100);
   for (const file of files) {
     const before=execFileSync("git", ["show", baseline + ":" + file], {maxBuffer:64*1024*1024});
-    const after=fs.readFileSync(file);
+    // Yield between complete asset comparisons so the native test worker can
+    // service its runner IPC while Git expands large original photographs.
+    const after=await fs.promises.readFile(file);
     if(file==="public/sitemap.xml") assertAdditiveSitemap(before.toString("utf8"),after.toString("utf8"));
     else assert.deepEqual(after,before,file);
   }

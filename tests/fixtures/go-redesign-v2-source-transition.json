@@ -107,7 +107,7 @@
     },
     "src/pages/contact.ts": {
       "before": null,
-      "after": "5ed8306ac0ae09590c58bd142ca2fc2958ffbdea3557fec7e707da37dd9f8d60"
+      "after": "55612d356b05563cae0e1046434117c044b2711b2226279bda5f5bca45f4a490"
     },
     "src/pages/document.ts": {
       "before": "989e47d4e29cc240fb3bc90e0ae4067a54ef66e4115e00ca85f06ab999a5e661",
@@ -143,7 +143,7 @@
     },
     "src/styles/go-pages.css": {
       "before": null,
-      "after": "3904bd47dad89c14199f8fc21a27072d5f3a00935222c09601e4877d5f66414a"
+      "after": "2d4bced546a63812dfe3ee3fb37716af04adde96b0b4ae085f7a63a934a4f9ce"
     },
     "src/styles/haram-store-card.css": {
       "before": "bc9c7d8aac1686c831c921e3db3c98fae6202b7cb3419e1e5f127c9356004810",

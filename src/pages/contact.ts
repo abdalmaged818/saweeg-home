@@ -5,9 +5,12 @@ import type { IconName, Locale, SiteCopy } from "../types/site.ts";
 
 export const renderContactPage = (locale: Locale, copy: SiteCopy): string => {
   const ui = goCopy[locale];
-  const row = (href: string, icon: IconName, label: string, detail = "", download = false) => `<li><a href="${href}" ${download ? 'download' : 'target="_blank" rel="noopener noreferrer"'}>
+  const row = (href: string, icon: IconName, label: string, detail = "", download = false) => {
+    const channel=(["whatsapp","tiktok","x","hungerstation","keeta"] as const).find(key=>siteConfig.links[key]===href);
+    return `<li><a href="${href}"${channel ? ` data-analytics-event="${channel}_click"` : ""} ${download ? 'download' : 'target="_blank" rel="noopener noreferrer"'}>
     <span class="icon-chip">${renderIcon(icon)}</span><span class="contact-row__copy"><strong>${label}</strong>${detail ? `<small>${detail}</small>` : ""}</span>
     <span class="contact-row__end" aria-hidden="true">↗</span><span class="visually-hidden">${locale === "ar" ? (download ? "تنزيل PDF" : "يفتح في نافذة جديدة") : (download ? "Download PDF" : "opens in a new tab")}</span></a></li>`;
+  };
   return `<section class="contact-page container" id="contact" aria-labelledby="contact-title">
     <div class="section-heading"><span class="eyebrow">${copy.contact.eyebrow}</span><h1 id="contact-title">${ui.contactTitle}</h1><p>${ui.contactIntro}</p></div>
     <div class="contact-grid">
