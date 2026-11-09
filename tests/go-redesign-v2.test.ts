@@ -14,6 +14,7 @@ import { renderReturnNavigation, safeInternalPrevious } from "../src/components/
 import { goCopy, returnCopy } from "../src/content/go-redesign.ts";
 
 const baseline = "dc961fd9810857c0f544b40698f179a90fe21a61";
+console.log("Go v2 verification module loaded");
 const read = (file: string) => fs.readFileSync(file, "utf8");
 const assertAdditiveSitemap = (before: string, after: string): void => {
   const additions=["branches/","en/branches/","contact/","en/contact/"].map(path=>"https://go.saweegsa.com/"+path);
@@ -26,13 +27,14 @@ const assertAdditiveSitemap = (before: string, after: string): void => {
   assert.equal(original,before,"Every previous sitemap byte must remain unchanged");
 };
 
-test("v2 preserves all commercial data, localization, image assets, campaigns and article content against production", async () => {
+test("v2 preserves all commercial data, localization, image assets, campaigns and article content against production", {timeout:180000}, async () => {
   const files = execFileSync("git", ["-c", "core.quotePath=false", "ls-tree", "-r", "--name-only", baseline,
     "src/menu/data", "src/menu/i18n", "src/menu/haram/data.ts", "src/menu/haram/locales.ts",
     "src/config/site.ts", "src/menu/config/site.ts", "src/content/about.ts", "src/content/participations.ts",
     "src/data/participations.ts", "src/pages/about.ts", "src/pages/participation.ts", "src/analytics.ts",
     "content-source", "public", "assets-source"], {encoding:"utf8"}).trim().split("\n");
   assert(files.length > 100);
+  console.log("Verifying every baseline source and asset:",files.length);
   for (const file of files) {
     const before=execFileSync("git", ["show", baseline + ":" + file], {maxBuffer:64*1024*1024});
     // Yield between complete asset comparisons so the native test worker can
