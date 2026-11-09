@@ -2,9 +2,9 @@
 .swg-world { background:var(--color-ivory);color:var(--color-text);font-family:var(--font-ar);font-size:17px;line-height:1.85;scroll-padding-block-start:110px; }
 .swg-world *, .swg-world *::before,.swg-world *::after {box-sizing:border-box;}
 .swg-world [hidden]{display:none!important;}
-.swg-world h1,.swg-world h2,.swg-world h3{margin:0;color:var(--color-text);line-height:1.35;text-wrap:balance;}
-.swg-world h1{font-size:var(--hero-size);font-weight:700;}
-.swg-world h2{font-size:var(--heading-size);}
+.swg-world main h1,.swg-world main h2,.swg-world main h3{margin:0;color:var(--color-text);line-height:1.35;text-wrap:balance;}
+.swg-world main h1{font-size:var(--hero-size);font-weight:700;}
+.swg-world main h2{font-size:var(--heading-size);}
 .swg-world p{margin:0;}
 .swg-world img{display:block;max-width:100%;}
 .swg-world figure{margin:0;}
@@ -59,7 +59,6 @@
 .swg-world .button--primary{background:var(--color-olive);color:var(--color-white);}
 .swg-world .button--primary:hover{background:var(--color-olive-hover);}
 .swg-world .button--secondary{background:var(--color-white);color:var(--color-olive);border-color:var(--color-input-border);}
-.swg-world .site-footer h2{color:var(--color-ivory);}
 .swg-world .world-unavailable{flex:1 1 100%;display:grid;gap:10px;padding:12px 14px;border-radius:12px;background:var(--color-menu-card);color:var(--color-olive-hover);}
 .swg-world .world-unavailable>div{display:flex;flex-wrap:wrap;gap:8px;}
 .swg-world .world-store{display:grid;gap:20px;align-items:center;padding:clamp(28px,5vw,56px);border-radius:20px;background:var(--color-olive);color:var(--color-ivory);}

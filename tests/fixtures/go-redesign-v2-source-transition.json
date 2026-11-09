@@ -184,6 +184,14 @@
     "vite.config.ts": {
       "before": "c720bbac71a4ee41a6330fcf1f2785bf4fd247313ada783f9ebe177fe983b8fb",
       "after": "b44b6640aaf1ebaf26972430b16f72e0a6c5d397ffe395a958932b856874d2e8"
+    },
+    "src/saweeg-global/world.css": {
+      "before": "8097962d2adfcb9d24af31287fa7c1bf57c9b4eec723e7d712a2fb21c7613ab0",
+      "after": "7957a1f4c4ef0c19798df2e0f3ad43427d50ec267434d1379e6749d1b0342763"
+    },
+    "src/saweeg-global/v1.css": {
+      "before": "10ef4f1185fa9147715ec21ec0bdad5ae75b31f7468a68408f555ca4583adfc7",
+      "after": "883b26b78b812aa2535f04250587b314fb4afda629520348d606ceffc593acd8"
     }
   }
 }
