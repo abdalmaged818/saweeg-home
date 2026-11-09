@@ -42,7 +42,9 @@ test("v2 preserves all commercial data, localization, image assets, campaigns an
     // Keep runner IPC and file I/O responsive while comparing every original byte.
     const after=await fs.promises.readFile(file);
     if(file==="public/sitemap.xml") assertAdditiveSitemap(before.toString("utf8"),after.toString("utf8"));
-    else assert.deepEqual(after,before,file);
+    // Compare the complete buffers byte-for-byte, but report only the filename
+    // and comparison result instead of constructing a multi-megabyte image diff.
+    else assert.equal(Buffer.compare(after,before),0,file);
     if((index+1)%25===0)console.log("Verified baseline files:",index+1,"/",files.length);
   }
   const previous = execFileSync("git", ["show", baseline + ":src/components/sabtiya.ts"], {encoding:"utf8"});
