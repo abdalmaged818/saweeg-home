@@ -5,7 +5,7 @@ export type QuickLinkId = "whatsapp" | "tiktok" | "x" | "maqsed" | "bustan";
 export type BranchId = "maqsed" | "bustan" | "haram";
 export type NewsKind = "news" | "blog";
 export type OpportunityId = "careers" | "collaboration";
-export type IconName = "bag" | "menu" | "delivery" | "whatsapp" | "tiktok" | "x" | "pin" | "arrow" | "people" | "handshake";
+export type IconName = "bag" | "menu" | "delivery" | "whatsapp" | "tiktok" | "x" | "pin" | "clock" | "arrow" | "people" | "handshake";
 
 export interface Destination {
   id: DestinationId;

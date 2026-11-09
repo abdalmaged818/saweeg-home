@@ -1,13 +1,17 @@
 {
   "baseline": "dc961fd9810857c0f544b40698f179a90fe21a61",
   "files": {
+    "public/sitemap.xml": {
+      "before": "5b52afee19a43b6eca544a7b01fb334ac73ec631263070090ff74087d8481264",
+      "after": "ceb5ebf05f14fd2b71e7f882aa1355dc17ef7b53333cf16cd0ad73f9bf04ce26"
+    },
     "scripts/generate-pages.ts": {
       "before": "2bf8f793d82cd30b950f2e55d5d540e5d05661d56154d2d894a65a9df4d75f80",
       "after": "4323a2b28efbde0c776d1164d5b9326c081cb2a0d5fd99668235e2740493c415"
     },
     "src/components/branches.ts": {
       "before": "c1018713186955b21da279a12c2138f6c64dd5594da4691c005765e91ab4992a",
-      "after": "fcca635771e537de510b386f11883a190feb08a1d608adacbbd0f9382f4afd13"
+      "after": "e369719373207408c645316a2f8dd2434464988027e609a142383e4ed4391352"
     },
     "src/components/footer.ts": {
       "before": "440da41cd85a1401517483ba60ef3bac4afdd77c5fa70de6c573aa2c0e141d91",
@@ -15,7 +19,7 @@
     },
     "src/components/haram-store-card.ts": {
       "before": "cf426bdc7f2b0a0be78e76aec546ca7ea7697872e5dc76dd4f3c8cb4336ca683",
-      "after": "2d1cfe0d48dad2170723a527e086c9f35d20fa67b39fa6f32cebc312f6c49144"
+      "after": "77ce8247d9bdd06950c917c8a88c739863512529e24247f475c18c2abe94fd3f"
     },
     "src/components/header-controller.ts": {
       "before": "e897c2b896fccde19d663cca875dc1db24978ac4ce93d99910568169b40e793e",
@@ -25,6 +29,14 @@
       "before": "11ff19fbf6d4a8b8d81a26530b7a5a7992c060057720bc1fb2418745dea072b8",
       "after": "c6ec4bb2afbb5ee4e06745fc43cef0797fd9523beb989d55d1c4ca08095612dd"
     },
+    "src/components/icons.ts": {
+      "before": "10bf67954ae6071a7bbfe797b13f824dd76d31def0916c17688ab49ec949357a",
+      "after": "7428712ff11204b6ca082b38bfe13262359cc6c2b5eca85aca834619227b0cf3"
+    },
+    "src/components/return-navigation.ts": {
+      "before": null,
+      "after": "26b1348f728f4bbd81185b8ecf7c40d7b52c92c33d85b1fe3ad2e948f3c8f25f"
+    },
     "src/components/sabtiya.ts": {
       "before": "098bcf2f6f4b9faf68f705d0d4fe93e96c331ba802aca8d0bdeb86716a2e9052",
       "after": "6df32b95ecb6182f713c79c2a3d4a61345b597b91cb37c3c552e2d6dffa5c963"
@@ -32,6 +44,10 @@
     "src/config/features.ts": {
       "before": "cd47973a8820f0733d37daf446d1e257cf9c151892301769167386d096b9c041",
       "after": "0af96609d186d45a94646f37356672ae1d015f419437a037b54423c5e44afef1"
+    },
+    "src/content/go-redesign.ts": {
+      "before": null,
+      "after": "090e6567b110a218a7d3690208e282af85e9f569bb68c8b299b188a846ee3a0e"
     },
     "src/i18n/ar.ts": {
       "before": "610158cc1d3e0ad98f937893f84239d968cda23ec7939e86a7a3c1a5a8485ea7",
@@ -51,7 +67,7 @@
     },
     "src/menu/haram/haram.css": {
       "before": "cd75affe415d0c24adabbc2b57be7637ea0c6e0741028187fa233e744dcb37b1",
-      "after": "b3dcbd73ac75a61fe64f48788e3d5dd4369ae6db078427282e636f13544bc2a8"
+      "after": "9996dcafe0eb0939c608b020f30215bb13f68cba5218dda1914929e27d4a95a4"
     },
     "src/menu/haram/render.ts": {
       "before": "22c4380d0f27c51b19b63fe73f39cdd8c8be08ee691cd831eef3d9ba1efce21f",
@@ -67,15 +83,31 @@
     },
     "src/menu/styles/components.css": {
       "before": "a766b76b49725bb3bcc0db6356c3ab51deb8a2339f895b5cf96406992a84d6da",
-      "after": "32106fe32fd4283948e6ae56b3906633296d6711aeb54dfe85bdea2e1a79e2e4"
+      "after": "9e8691e0f6728125a26bf1ddd97e256544bef80160fcca3b75dd38cde49ecea3"
+    },
+    "src/menu/styles/layout.css": {
+      "before": "ac9352ae1f00f02f84165828449ba14c9d84e883563a0f3f49b036bc294442da",
+      "after": "dff9025d9567c0bf8d2f1b8a4d211d64320bba4aef9860b02c5ca297995ed27f"
     },
     "src/menu/styles/responsive.css": {
       "before": "3abbc1e2f64b7d1afa88d028df43a36aec7691e820fa2d64924f5704a1a03ec5",
-      "after": "5207b1b9e67a71ab7c77102a6ee15affb4d09e7484d07edaa72f48b795dd7373"
+      "after": "00aed259d3ac97a0ec45fabcfd9626731154a6f6dbb99101563aa1c13b04e4c1"
+    },
+    "src/menu/styles/tokens.css": {
+      "before": "4b3af69943ab082a87eace898dfbbb9555a7da0f7542360b73b6379ec50ad34c",
+      "after": "8627878f33c6f6adc93960c84127dfd2fd2fbd0aca9e6be71e1d337df97b6937"
     },
     "src/menu/templates/menu-page.ts": {
       "before": "4d40f5b5ff5856c9087c7d34892cd232cbb347f1f044fbd77ccc5893f68be31b",
       "after": "d4146b34275bfeecb8ca02227c35a18e324b48564599b5dfc80bd44964116ab8"
+    },
+    "src/pages/branches.ts": {
+      "before": null,
+      "after": "5e718c20ac864e5b7c060a3239832fb591e7b4b269b8d5c4d5931678b9dd5d2d"
+    },
+    "src/pages/contact.ts": {
+      "before": null,
+      "after": "5ed8306ac0ae09590c58bd142ca2fc2958ffbdea3557fec7e707da37dd9f8d60"
     },
     "src/pages/document.ts": {
       "before": "989e47d4e29cc240fb3bc90e0ae4067a54ef66e4115e00ca85f06ab999a5e661",
@@ -97,6 +129,10 @@
       "before": "2c8a66dfa976b4460a8a0e67ae025bbfba87cd0f9c19fd884f2381f9348384d2",
       "after": "5237291d89e402d601a66e0533e51fd77693882728dd7b158b673ea4539e854d"
     },
+    "src/styles/base.css": {
+      "before": "4e848d1e83c258eea0fd3230153303c07390d423c74860a54b49a4c885091eb1",
+      "after": "2355e1adb69c3e7c6f309e579ee861f1dbfd6a597d188e55da8a4bed0ced5c3f"
+    },
     "src/styles/chrome.css": {
       "before": "b677698f1e0a95c005d50a9ca406c0568dbb83e9a810d4d5eb345d696d9b7216",
       "after": "a58828adfdef3b29452f23771a4605139afbb2c9190834f7795bd1ab41ea1074"
@@ -105,9 +141,17 @@
       "before": "a2e7013c7996f6712f5f5320bf58a378537809ce7f41d8dfe663945c54c98b8d",
       "after": "f21222aac1ad5afcd56972668b7fad5e8c8e25b3d823bf1ce5a2222b40304091"
     },
+    "src/styles/go-pages.css": {
+      "before": null,
+      "after": "3904bd47dad89c14199f8fc21a27072d5f3a00935222c09601e4877d5f66414a"
+    },
     "src/styles/haram-store-card.css": {
       "before": "bc9c7d8aac1686c831c921e3db3c98fae6202b7cb3419e1e5f127c9356004810",
-      "after": "dce287bfd040a113983c421f0e8dc4678044f9953a956d537e50d5339049210b"
+      "after": "8a182dac36417f10ac69c406d17854a8a077bc5e61b91a864f25a1257499adba"
+    },
+    "src/styles/layout.css": {
+      "before": "16eed29501ed9ad33a09c1318676e41d5a151ae610c2ff0097499ea8a0c5d93f",
+      "after": "3b6a660381e51b8769302f303ac19f62455ccd8c7330e41bf715ab951386cc33"
     },
     "src/styles/main.css": {
       "before": "f4e6f6d49f41556298747b579bf03ed1728b2af94191b359fea94ce02ff7b0ea",
@@ -117,41 +161,25 @@
       "before": "7fe3b4d3647587f499c38425bc3881c9a3da3424c6f7053934abf3f5135fad6a",
       "after": "f7a0ef0e559bb1a9aace9d910465f53de0c58ee2c74ce29aeb06cb65f3f5f093"
     },
+    "src/styles/responsive.css": {
+      "before": "97b671df9f42d0bfc4a3bc98c21e6ebceb9765e97fdc1b0a572f3801cebbd7ac",
+      "after": "ba976c1acb6fdbd6b9726fbf7915fe44fa1aa19341615c36393f13d473fdbbe7"
+    },
     "src/styles/sabtiya.css": {
       "before": "34d231c29f89d4a6557df57751a9a811101f9fed0a1a1bb804363e8956dbdae8",
-      "after": "b78f9eaac99abe49242927d8073c14ea2e4c6dc91b5db8e6dede529c82bb5793"
+      "after": "a6db0d272ffe47d696485b311129bfccb2b31eb27c32d403634a4c0e36782663"
     },
     "src/styles/tokens.css": {
       "before": "c18f2f758c4fa99d813a2f0c91a1d770e7f6f145b9b41ddaa3748a9076effc57",
-      "after": "7916b637e9a62ff8f3fbdce4222bb35bc15495b748dc309f2df3a112f7e70d36"
+      "after": "a3ce4ecc60fd82a6983be27c2edcd9db79157f6abfa01941c37b93f14f7df9f3"
     },
     "src/types/site.ts": {
       "before": "7e8eb50c9b507b3027f2aeb409c7b84dedc62be87c1ed4a3ca5d18156a4aa952",
-      "after": "4d366aeb0d201b779a7045a7f0d4333fa2c7bc6e18725e7b952b7f960c9fd13c"
+      "after": "62ea9e2034e257139ad0041b50724eefe6963fedbc8550c798d973341bb2c896"
     },
     "vite.config.ts": {
       "before": "c720bbac71a4ee41a6330fcf1f2785bf4fd247313ada783f9ebe177fe983b8fb",
       "after": "b44b6640aaf1ebaf26972430b16f72e0a6c5d397ffe395a958932b856874d2e8"
-    },
-    "src/components/return-navigation.ts": {
-      "before": null,
-      "after": "26b1348f728f4bbd81185b8ecf7c40d7b52c92c33d85b1fe3ad2e948f3c8f25f"
-    },
-    "src/content/go-redesign.ts": {
-      "before": null,
-      "after": "090e6567b110a218a7d3690208e282af85e9f569bb68c8b299b188a846ee3a0e"
-    },
-    "src/pages/branches.ts": {
-      "before": null,
-      "after": "5e718c20ac864e5b7c060a3239832fb591e7b4b269b8d5c4d5931678b9dd5d2d"
-    },
-    "src/pages/contact.ts": {
-      "before": null,
-      "after": "5ed8306ac0ae09590c58bd142ca2fc2958ffbdea3557fec7e707da37dd9f8d60"
-    },
-    "src/styles/go-pages.css": {
-      "before": null,
-      "after": "1afe507b9cfb9485f74150edbf81d5731651fd65f387989f72d72f2eaac5d25e"
     }
   }
 }

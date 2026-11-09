@@ -1,6 +1,6 @@
 .sabtiya-section{background:var(--color-primary-dark);color:var(--color-ivory);border-color:var(--color-primary-dark)}
 .sab-card{height:100%;display:flex;flex-direction:column}
-.sab-card h2{color:var(--color-ivory);font-size:21px;line-height:1.5}
+.sab-card h2{color:var(--color-ivory);font-size:17px;line-height:1.5}
 .sab-card h2 span{display:block;font-size:15px;font-weight:400;color:var(--color-haram-light);margin-block-start:4px}
 .sab-intro{font-size:14px;color:var(--color-haram-light);margin-block:16px 0 10px}
 .sab-common,.sab-terms{margin:8px 0 20px;padding-inline-start:18px;font-size:13px;color:var(--color-haram-light)}

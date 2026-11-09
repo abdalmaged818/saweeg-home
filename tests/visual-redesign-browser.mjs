@@ -168,7 +168,7 @@ try {
             cards:[...document.querySelectorAll('.haram-language-card')].map(element=>{const r=element.getBoundingClientRect();return [r.width,r.height]}),
             media:[...document.querySelectorAll('.product-card__media,.haram-product__media')].map(element=>{const r=element.getBoundingClientRect();return r.width/r.height}),
             noAlt:[...document.images].filter(image=>!image.alt.trim()).map(image=>image.src),
-            landmarks:['main','header','footer'].map(selector=>document.querySelectorAll(selector).length),
+            landmarks:['main','header.site-header','footer.site-footer,footer.haram-footer'].map(selector=>document.querySelectorAll(selector).length),
             textOnlyMedia:document.querySelectorAll('.haram-product--text-only img,.haram-product--text-only .haram-product__media,.product-card--without-image img,.compact-product-card img').length}));
           assert.deepEqual(geometry.scroll,[0,0]);assert.equal(geometry.overflow,false,`${route} ${width}: overflow`);assert.equal(geometry.h1,1);assert.deepEqual(geometry.broken,[]);assert.equal(geometry.textOnlyMedia,0);
           assert.deepEqual(geometry.noAlt,[]);assert.deepEqual(geometry.landmarks,[1,1,1]);

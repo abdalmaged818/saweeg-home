@@ -153,7 +153,7 @@ html[lang="ar"] .eyebrow {
 
 .hero__title {
   margin: 0;
-  font-size: var(--hero-size);
+  font-size: var(--heading-size);
   color: var(--text);
   line-height: 1.35;
   letter-spacing: 0;
@@ -410,7 +410,7 @@ html[lang="ar"] .eyebrow {
 .product-card__name {
   margin: 0;
   color: var(--text);
-  font-size: 1rem;
+  font-size: 15px;
   line-height: 1.55;
   overflow-wrap: anywhere;
   font-weight: 600;
@@ -418,17 +418,15 @@ html[lang="ar"] .eyebrow {
 
 .product-card__price {
   flex: 0 0 auto;
-  margin: 0;
-  border-radius: 8px;
-  background: var(--surface-soft);
+  margin: auto 0 0;
   color: var(--price);
-  padding: 2px 10px;
-  font-size: 0.9375rem;
+  padding-block-start: 8px;
+  font-size: 18px;
   font-weight: 700;
+  line-height: 1.4;
   white-space: nowrap;
   align-self: flex-start;
   font-variant-numeric: tabular-nums;
-  min-height: 30px;
 }
 
 .product-card__quantity,

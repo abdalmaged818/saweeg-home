@@ -15,6 +15,16 @@ import { goCopy, returnCopy } from "../src/content/go-redesign.ts";
 
 const baseline = "dc961fd9810857c0f544b40698f179a90fe21a61";
 const read = (file: string) => fs.readFileSync(file, "utf8");
+const assertAdditiveSitemap = (before: string, after: string): void => {
+  const additions=["branches/","en/branches/","contact/","en/contact/"].map(path=>"https://go.saweegsa.com/"+path);
+  let original=after;
+  for(const href of additions){
+    const line="  <url><loc>"+href+"</loc></url>\n";
+    assert.equal(original.split(line).length,2,href);
+    original=original.replace(line,"");
+  }
+  assert.equal(original,before,"Every previous sitemap byte must remain unchanged");
+};
 
 test("v2 preserves all commercial data, localization, image assets, campaigns and article content against production", () => {
   const files = execFileSync("git", ["-c", "core.quotePath=false", "ls-tree", "-r", "--name-only", baseline,
@@ -23,9 +33,20 @@ test("v2 preserves all commercial data, localization, image assets, campaigns an
     "src/data/participations.ts", "src/pages/about.ts", "src/pages/participation.ts", "src/analytics.ts",
     "content-source", "public", "assets-source"], {encoding:"utf8"}).trim().split("\n");
   assert(files.length > 100);
-  for (const file of files) assert.deepEqual(fs.readFileSync(file), execFileSync("git", ["show", baseline + ":" + file], {maxBuffer:64*1024*1024}), file);
+  for (const file of files) {
+    const before=execFileSync("git", ["show", baseline + ":" + file], {maxBuffer:64*1024*1024});
+    const after=fs.readFileSync(file);
+    if(file==="public/sitemap.xml") assertAdditiveSitemap(before.toString("utf8"),after.toString("utf8"));
+    else assert.deepEqual(after,before,file);
+  }
   const previous = execFileSync("git", ["show", baseline + ":src/components/sabtiya.ts"], {encoding:"utf8"});
   assert.equal(read("src/components/sabtiya.ts").replace("sabtiya-section announcement-card","sabtiya-section container"), previous);
+});
+
+test("visual source transitions cannot exempt commercial data, translations or image assets", () => {
+  const transition=JSON.parse(read("tests/fixtures/go-redesign-v2-source-transition.json"));
+  for(const file of Object.keys(transition.files))assert(!/^(?:src\/menu\/(?:data|i18n)\/|src\/menu\/haram\/(?:data|locales)\.ts|assets-source\/|content-source\/|public\/(?!sitemap\.xml$))/.test(file),file+": commercial/content asset exception is forbidden");
+  assertAdditiveSitemap(execFileSync("git",["show",baseline+":public/sitemap.xml"],{encoding:"utf8"}),read("public/sitemap.xml"));
 });
 
 test("home has three approved destinations, compact welcome and only the existing Arabic announcements", () => {

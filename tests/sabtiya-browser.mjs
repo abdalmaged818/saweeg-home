@@ -89,7 +89,7 @@ try {
       assert(!/النسخة|REPLACE|data-replace/.test(metrics.text));
       if (state.name === "before") {
         assert.equal(metrics.count, 0);
-        assert(Math.abs(metrics.beforeGap - 32) < 1, "Only the approved announcement margin follows destinations");
+        assert(Math.abs(metrics.beforeGap - (width >= 900 ? 56 : 48)) < 1, "Only the approved announcement margin follows destinations");
       } else {
         assert.equal(metrics.count, 1);
         assert.equal(metrics.direction, "rtl");

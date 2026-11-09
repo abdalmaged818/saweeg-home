@@ -16,7 +16,7 @@ export const renderBranches = (copy: SiteCopy, locale: Locale = "ar", asPage = f
       return `<article class="branch-card" id="branch-${branch.id}" aria-labelledby="branch-title-${branch.id}">
         <h2 id="branch-title-${branch.id}">${ui.branchNames[branch.id]}</h2><p class="branch-card__line">${ui.branchLines[branch.id]}</p>
         <p class="branch-card__location">${renderIcon("pin")}${ui.branchLocations[branch.id]}</p>
-        <section class="branch-hours${branch.id === "haram" ? " branch-hours--always" : ""}" aria-label="${ui.hours}"><h3>${ui.hours}</h3>
+        <section class="branch-hours${branch.id === "haram" ? " branch-hours--always" : ""}" aria-label="${ui.hours}"><h3>${renderIcon("clock")}${ui.hours}</h3>
           ${branch.id === "haram" ? `<p class="always-time"><strong dir="ltr">24</strong><span>${ui.hourUnit}</span></p><p class="always-caption">${ui.aroundClock}</p>` : `<dl>${ui.schedules[branch.id].map(([label,time]) => `<div><dt>${label}</dt><dd>${time}</dd></div>`).join("")}</dl>`}
         </section>
         <div class="branch-actions"><a class="button button-primary" href="${menu}" data-analytics-event="branch_menu_click" data-analytics-label="${branch.id}">${branch.id === "haram" ? copy.branches.haramMenuCta : copy.branches.menuCta}</a>

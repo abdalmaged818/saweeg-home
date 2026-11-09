@@ -7,13 +7,13 @@
   --color-bg-soft: #faf8f4;
   --color-gold: #c4a972;
   --color-white: #ffffff;
-  --color-text: #30342d;
-  --color-olive-hover: #41483b;
-  --color-secondary: #666d61;
+  --color-text: #2d312a;
+  --color-olive-hover: #46513f;
+  --color-secondary: #5f685a;
   --color-menu-card: #e4e7df;
   --color-ordering-card: #f0e7d6;
-  --color-gold-text: #7a6338;
-  --color-border: #dcddd5;
+  --color-gold-text: #725a2f;
+  --color-border: #dcded5;
   --color-input-border: #858b7c;
   --color-on-olive-secondary: #dce0d5;
   --color-error: #9b3a32;
@@ -79,7 +79,7 @@
   --button-gold: var(--color-gold);
   --button-gold-hover: var(--color-ordering-card);
   --button-gold-text: var(--color-text);
-  --price: var(--color-olive-hover);
+  --price: var(--color-primary-dark);
   --error: var(--color-error);
   --error-surface: var(--color-error-surface);
 
@@ -101,6 +101,6 @@
   --content-width: 1200px;
   --gutter: clamp(16px, 3vw, 32px);
   --section-space: clamp(28px, 4vw, 52px);
-  --heading-size: clamp(1.625rem, 1.15rem + 1.9vw, 2.375rem);
+  --heading-size: clamp(1.625rem, 3vw, 2.25rem);
   --hero-size: clamp(1.875rem, 1.2rem + 2.9vw, 3.25rem);
 }
