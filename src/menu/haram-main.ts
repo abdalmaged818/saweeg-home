@@ -1,5 +1,6 @@
 import "../styles/main.css";
 import "./haram/haram.css";
+import { bindReturnNavigation } from "../components/return-navigation.ts";
 import { bindSharedHeader } from "../components/header-controller.ts";
 import { renderHaramMenu, renderHaramSelector } from "./haram/render";
 import { haramLocales, type HaramLocale } from "./haram/types";
@@ -22,3 +23,4 @@ if (pageKind === "selector") {
 }
 
 bindSharedHeader(root);
+bindReturnNavigation(root);

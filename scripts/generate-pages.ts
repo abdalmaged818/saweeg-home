@@ -4,6 +4,8 @@ import { fileURLToPath } from "node:url";
 import { getCopy } from "../src/i18n/index.ts";
 import type { Locale, PageId } from "../src/types/site.ts";
 import { renderAboutPage } from "../src/pages/about.ts";
+import { renderBranchesPage } from "../src/pages/branches.ts";
+import { renderContactPage } from "../src/pages/contact.ts";
 import { renderBlogPage } from "../src/pages/blog.ts";
 import { renderDocument } from "../src/pages/document.ts";
 import { renderHomePage } from "../src/pages/home.ts";
@@ -33,6 +35,10 @@ const baseTargets: PageTarget[] = [
   { locale: "en", page: "home", file: "en/index.html", prefix: "../" },
   { locale: "ar", page: "about", file: "about/index.html", prefix: "../" },
   { locale: "en", page: "about", file: "en/about/index.html", prefix: "../../" },
+  { locale: "ar", page: "branches", file: "branches/index.html", prefix: "../" },
+  { locale: "en", page: "branches", file: "en/branches/index.html", prefix: "../../" },
+  { locale: "ar", page: "contact", file: "contact/index.html", prefix: "../" },
+  { locale: "en", page: "contact", file: "en/contact/index.html", prefix: "../../" },
   { locale: "ar", page: "news", file: "news/index.html", prefix: "../" },
   { locale: "en", page: "news", file: "en/news/index.html", prefix: "../../" },
   { locale: "ar", page: "blog", file: "blog/index.html", prefix: "../" },
@@ -229,6 +235,8 @@ const renderPage = ({ locale, page, prefix, participationSlug }: PageTarget): st
     pathFor(locale, "opportunities")
   );
   if (page === "about") content = renderAboutPage(locale, prefix);
+  if (page === "branches") content = renderBranchesPage(locale, copy);
+  if (page === "contact") content = renderContactPage(locale, copy);
   if (page === "news") content = renderNewsPage(locale, prefix);
   if (page === "blog") content = renderBlogPage(copy, pathFor(locale, "home"));
   if (page === "opportunities") content = renderOpportunitiesPage(copy, pathFor(locale, "home"));

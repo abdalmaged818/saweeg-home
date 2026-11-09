@@ -1,6 +1,7 @@
 import type { IconName } from "../types/site.ts";
 
 const paths: Record<IconName, string> = {
+  clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
   bag: '<path d="M4 8h16l-1.2 11a2 2 0 0 1-2 1.8H7.2a2 2 0 0 1-2-1.8L4 8Z"/><path d="M8.5 8V6.5a3.5 3.5 0 0 1 7 0V8"/>',
   menu: '<path d="M6 3h12a1 1 0 0 1 1 1v16l-3-1.6L13 20l-3-1.6L7 20l-2-1V4a1 1 0 0 1 1-1Z"/><path d="M9 8h6M9 12h6"/>',
   delivery: '<path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/>',

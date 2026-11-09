@@ -37,6 +37,7 @@ export function worldHeader(props: WorldShellProps): HTMLElement {
   const locale=props.direction==="rtl"?"ar":"en";
   const copy=getCopy(locale);
   const root=parsed(renderHeader({locale,page:"home",copy,prefix:"/",pathFor:()=>props.selectorHref}));
+  root.querySelector(".header-store")?.remove();
   const brand=required<HTMLAnchorElement>(root,".brand");
   brand.href=props.selectorHref;brand.setAttribute("aria-label",c["world.brand.homeLabel"]);
   required<HTMLImageElement>(brand,"img").alt="";
@@ -63,6 +64,7 @@ export function worldFooter(props: WorldShellProps): HTMLElement {
   const locale=props.direction==="rtl"?"ar":"en";
   const copy=getCopy(locale);
   const root=parsed(renderFooter({locale,page:"home",copy,prefix:"/",pathFor:()=>props.selectorHref}));
+  root.querySelectorAll(".footer-subtitle,.footer-social,.footer-order").forEach(element=>element.remove());
   const nav=required<HTMLElement>(root,".footer-nav");
   nav.setAttribute("aria-label",c["world.navigation.label"]);
   // The unlinked footer logo uses the invariant brand name, not another content key.

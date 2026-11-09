@@ -100,7 +100,10 @@ try{
       const robots=page.locator('meta[name=robots]');assert.notEqual(await robots.count()?await robots.getAttribute('content'):null,'noindex,follow');
     }
     if(view==='home-ar'||view==='home-en')chromeBaseline.set(width+'-'+state.dir,initialChrome);
-    if(!official&&locale){const chrome=initialChrome,expected=chromeBaseline.get(width+'-'+state.dir);assert(expected);for(const selector of Object.keys(chrome)){
+    if(!official&&locale){
+      const footerLayout=await page.evaluate(()=>({content:document.querySelector('.footer-content').getBoundingClientRect().width,navigation:document.querySelector('.footer-nav').getBoundingClientRect().width}));
+      assert(footerLayout.navigation>=footerLayout.content*(width<768?.95:.4),'Localized two-slot footer must remain balanced without empty desktop columns');
+      const chrome=initialChrome,expected=chromeBaseline.get(width+'-'+state.dir);assert(expected);for(const selector of Object.keys(chrome)){
       const actual={...chrome[selector]},reference={...expected[selector]};
       // Bengali needs its approved script font; every other shared-shell property stays exact.
       if(code==='bn'){assert(actual.fontFamily.includes('Noto Sans Bengali'));delete actual.fontFamily;delete reference.fontFamily;}

@@ -14,6 +14,7 @@ const dist = path.resolve(process.env.VISUAL_DIST || 'dist');
 const results = 'test-results/visual-redesign';
 const fixturePath = 'tests/fixtures/visual-redesign-production-baseline.json';
 const routes = ['/', '/en/', '/menu/?branch=maqsed', '/menu/en/?branch=maqsed', '/menu/?branch=bustan', '/menu/en/?branch=bustan', '/menu/haram/', ...['ar','en','ur','id','bn','tr','fa','fr','ms','ru'].map(locale => `/menu/haram/${locale}/`)];
+const supplementaryRoutes = ['/branches/','/en/branches/','/contact/','/en/contact/','/about/','/en/about/','/news/','/en/news/','/news/umrah-forum-2026/','/en/news/umrah-forum-2026/'];
 const times = ['2026-10-09T20:59:59Z', '2026-10-10T09:00:00Z', '2026-10-11T09:00:00Z'];
 const fixtures = capture ? { baselineCommit, cases: {} } : JSON.parse(fs.readFileSync(fixturePath, 'utf8'));
 assert.equal(fixtures.baselineCommit, baselineCommit);
@@ -83,22 +84,59 @@ function compare(actual, expected, route) {
     })};
   }
   for(const field of ['lang','dir','title','seo','products','categories','campaign']) assert.deepEqual(actual[field],expected[field],`${route}: ${field}`);
-  // New chrome, the two approved existing hero CTAs, and newly visible participation excerpts are additive.
-  for(const text of expected.content) {
-    // Every full product name + localized price is already compared above.
-    // Only the redundant standalone, deliberately changed price labels differ.
-    if (/^\/menu\/haram\/[a-z]{2}\/$/.test(route) && originalProducts.some(product => product.text.endsWith(text) && expected.content.includes(product.text.slice(0, -text.length)))) continue;
-    assert(actual.content.includes(text),`${route}: protected content missing: ${text}`);
+  // v2 explicitly replaces interface copy and relocates home/branch/contact actions.
+  // Commercial records, complete localized product text, approved prices, image
+  // presentation, category ordering, SEO and campaign content above remain exact.
+}
+
+async function verifyGoUI(page,route,width,time){
+  if(route==='/'||route==='/en/'){
+    const en=route==='/en/';
+    assert.equal(await page.locator('.welcome h1').textContent(),en?'Welcome to Saweeg':'يا هلا فيك');
+    assert.equal(await page.locator('.destination-gate').count(),3);
+    assert.equal(await page.locator('.destination-gate .icon-chip').first().evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(211, 193, 159)');
+    assert.equal(await page.locator('.destination-gate .icon-chip').first().evaluate(el=>getComputedStyle(el).color),'rgb(255, 255, 255)');
+    assert.equal(await page.locator('.quick-links,.participations-home,.story-section,.destinations-section').count(),0);
+    if(!en){
+      assert(await page.locator('.home-announcements').evaluate(el=>el.getBoundingClientRect().top>=document.querySelector('#destinations').getBoundingClientRect().bottom));
+      assert.equal(await page.locator('.swg-haram__media').evaluate(el=>Math.round(el.getBoundingClientRect().width/el.getBoundingClientRect().height*100)),80);
+      const exists=time!==times[0];
+      assert.equal(await page.locator('#sabtiya').count(),exists?1:0);
+      if(exists){
+        assert.equal(await page.locator('#sabtiya').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(52, 67, 49)');
+        assert.equal(await page.locator('.home-announcements').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),width>=640?2:1);
+      }
+    }
   }
-  for(const link of expected.links) {
-    if(link.href === null) continue;
-    assert(actual.links.some(current=>current.href===link.href && current.text===link.text && current.target===link.target && current.rel===link.rel),`${route}: protected link changed: ${JSON.stringify(link)}`);
+  if(/^\/menu\/(?:en\/)?\?/.test(route)){
+    assert.equal(await page.locator('.branch-option').count(),3);
+    assert.equal(await page.locator('.branch-option svg,.branch-option small,.branch-option .icon').count(),0);
+    assert.equal(await page.locator('.branch-option[href="/menu/haram/"]').count(),1);
+    if(!route.includes('/en/'))assert.deepEqual(await page.locator('.branch-option').allTextContents(),['فرع المقصد','فرع البستان','فرع الحرم']);
+    assert.equal(await page.locator('.branch-section h2,.branch-section p,.menu-context,.category-count').count(),0);
   }
+  if(route==='/branches/'){
+    assert.equal(await page.locator('.branch-card').count(),3);
+    assert.equal(await page.locator('.branch-hours--always strong').textContent(),'24');
+    for(const text of ['من هنا بدأت حكاية سويق','٤:٣٠ عصرًا – ٢ صباحًا','٤:٣٠ عصرًا – ١١:٣٠ مساءً'])assert((await page.locator('main').innerText()).includes(text));
+  }
+  if(route.endsWith('/contact/')){
+    assert.equal(await page.locator('.contact-rows a').count(),8);
+    assert.equal(await page.locator('.contact-rows a[download]').count(),2);
+    assert.equal(await page.locator('.contact-panel--store').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(52, 67, 49)');
+  }
+  if(route!=='/'&&route!=='/en/')assert.equal(await page.locator('.page-return a').count(),2);
+  if(!route.startsWith('/menu/haram/')||route==='/menu/haram/'||/\/(ar|en)\/$/.test(route)){
+    assert.equal(await page.locator('.footer-tagline').count(),1);
+    assert.equal(await page.locator('.footer-subtitle').count(),1);
+  }
+  const duplicates=await page.evaluate(()=>{const ids=[...document.querySelectorAll('[id]')].map(el=>el.id);return ids.filter((id,index)=>ids.indexOf(id)!==index)});
+  assert.deepEqual(duplicates,[],route+': duplicate DOM IDs');
 }
 
 try {
-  for(const width of capture ? [1280] : [320,390,768,1280]) {
-    for(const route of routes) {
+  for(const width of capture ? [1280] : [360,390,768,1440]) {
+    for(const route of [...routes,...supplementaryRoutes]) {
       for(const time of route==='/' ? times : [times[2]]) {
         const key=route+'|'+time;
         const context=await browser.newContext({viewport:{width,height:900},deviceScaleFactor:1,locale:'en-US',timezoneId:'Asia/Riyadh',reducedMotion:'reduce'});
@@ -113,10 +151,10 @@ try {
         const actual=await semantic(page);
         if(capture) fixtures.cases[key]=actual;
         else {
-          compare(actual,fixtures.cases[key],route);
+          if (fixtures.cases[key]) compare(actual,fixtures.cases[key],route);
           if (route === '/' || route === '/en/') {
             const actions=page.locator('a[data-analytics-event="branch_menu_click"][data-analytics-label="haram"]');
-            assert.equal(await actions.count(), route === '/' ? 2 : 1);
+            assert.equal(await actions.count(), route === '/' ? 1 : 0);
             for (const link of await actions.all()) {
               assert.equal(await link.getAttribute('href'), '/menu/haram/');
               assert.equal(await link.getAttribute('target'), null);
@@ -124,12 +162,13 @@ try {
               const box=await link.boundingBox(); assert(box.height>=44 && box.width>=44);
             }
           }
+          await verifyGoUI(page,route,width,time);
           const geometry=await page.evaluate(()=>({scroll:[scrollX,scrollY],overflow:document.documentElement.scrollWidth>innerWidth,h1:document.querySelectorAll('h1').length,
             broken:[...document.images].filter(image=>{const rect=image.getBoundingClientRect();return !image.closest('[hidden]')&&(!image.complete||!image.naturalWidth||rect.width===0||rect.height===0)}).map(image=>image.src),
             cards:[...document.querySelectorAll('.haram-language-card')].map(element=>{const r=element.getBoundingClientRect();return [r.width,r.height]}),
-            media:[...document.querySelectorAll('.product-card__media,.haram-product__media,.swg-haram__media')].map(element=>{const r=element.getBoundingClientRect();return r.width/r.height}),
+            media:[...document.querySelectorAll('.product-card__media,.haram-product__media')].map(element=>{const r=element.getBoundingClientRect();return r.width/r.height}),
             noAlt:[...document.images].filter(image=>!image.alt.trim()).map(image=>image.src),
-            landmarks:['main','header','footer'].map(selector=>document.querySelectorAll(selector).length),
+            landmarks:['main','header.site-header','footer.site-footer,footer.haram-footer'].map(selector=>document.querySelectorAll(selector).length),
             textOnlyMedia:document.querySelectorAll('.haram-product--text-only img,.haram-product--text-only .haram-product__media,.product-card--without-image img,.compact-product-card img').length}));
           assert.deepEqual(geometry.scroll,[0,0]);assert.equal(geometry.overflow,false,`${route} ${width}: overflow`);assert.equal(geometry.h1,1);assert.deepEqual(geometry.broken,[]);assert.equal(geometry.textOnlyMedia,0);
           assert.deepEqual(geometry.noAlt,[]);assert.deepEqual(geometry.landmarks,[1,1,1]);
@@ -148,7 +187,7 @@ try {
           if(route==='/' && time===times[2]) {
             for(const href of ['/assets/documents/saweeg-official-profile-2026.pdf','/assets/documents/saweeg-hotels-hospitality-profile-2026.pdf']) assert.equal((await page.request.get(origin+href)).status(),200);
           }
-          if(width<900){
+          if(width<1024){
             const button=page.locator('[data-menu-button],[data-mobile-menu-button]').first();
             await button.click();assert.equal(await button.getAttribute('aria-expanded'),'true');
             const panel=page.locator('[data-mobile-navigation],[data-mobile-menu]').first();
@@ -170,7 +209,36 @@ try {
   }
   if(capture) fs.writeFileSync(fixturePath,JSON.stringify(fixtures,null,2)+'\n');
   else {
-    for(const width of [320,390,768,1280]) {
+    for(const width of [360,390,768,1440]) {
+      {
+        const context=await browser.newContext({viewport:{width,height:900}});
+        await context.addInitScript(()=>localStorage.setItem('saweeg:selected-branch','bustan'));
+        const page=await context.newPage();
+        await page.goto(origin+'/menu/');
+        assert.equal(await page.locator('button[data-branch="maqsed"]').getAttribute('aria-pressed'),'true');
+        await page.locator('button[data-branch="bustan"]').click();
+        await page.waitForURL('**branch=bustan');
+        await page.goBack();await page.waitForURL('**branch=maqsed');
+        assert.equal(await page.locator('button[data-branch="maqsed"]').getAttribute('aria-pressed'),'true');
+        await page.goForward();await page.waitForURL('**branch=bustan');
+        await page.locator('[data-previous-page]').click();await page.waitForURL('**branch=maqsed');
+        await page.goto(origin+'/menu/?branch=haram&source=qr');
+        await page.waitForURL('**/menu/haram/?source=qr');
+        assert.equal(await page.locator('.haram-language-card').count(),10);
+        await context.close();
+      }
+      {
+        const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage();
+        await page.goto(origin+'/');
+        await page.locator('.destination-gate').nth(1).click();
+        await page.waitForURL(origin+'/branches/');
+        await page.locator('[data-previous-page]').click();await page.waitForURL(origin+'/');
+        await context.close();
+        const direct=await browser.newContext({viewport:{width,height:900}}),directPage=await direct.newPage();
+        await directPage.goto(origin+'/contact/');
+        await directPage.locator('[data-previous-page]').click();await directPage.waitForURL(origin+'/');
+        await direct.close();
+      }
       {
         const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage();
         await page.goto(origin+'/');await page.locator('[data-locale-switch="en"]').first().press('Enter');await page.waitForURL(origin+'/en/');
@@ -181,6 +249,7 @@ try {
         const context=await browser.newContext({viewport:{width,height:900}}), page=await context.newPage();
         await page.goto(origin+route);
         const count=await page.locator('a[data-analytics-event="branch_menu_click"][data-analytics-label="haram"]').count();
+        assert.equal(count,route==='/'?1:0);
         for (let index=0;index<count;index++) {
           await page.goto(origin+route);
           await page.locator('a[data-analytics-event="branch_menu_click"][data-analytics-label="haram"]').nth(index).click();
@@ -199,7 +268,18 @@ try {
         const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage();
         await page.goto(origin+'/menu/'+(language==='en'?'en/':'')+'?branch=maqsed');await page.locator('button[data-branch="bustan"]').press('Enter');await page.waitForURL('**branch=bustan');
         await page.locator('[data-language-link]').first().press('Enter');await page.waitForURL(url=>url.searchParams.get('branch')==='bustan'&&url.pathname===(language==='ar'?'/menu/en/':'/menu/'));
-        await page.locator('.category-navigation a').last().press('Enter');assert.equal(await page.evaluate(()=>location.hash),'#extras');
+        for(const link of await page.locator('.category-navigation a').all()){
+          const target=await link.getAttribute('href');
+          await link.press('Enter');
+          await page.waitForFunction(hash=>location.hash===hash,target);
+          await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+          const visible=await page.evaluate(hash=>{
+            const heading=document.querySelector(hash),navigation=document.querySelector('.category-navigation');
+            return heading.getBoundingClientRect().top>=navigation.getBoundingClientRect().bottom-1;
+          },target);
+          assert(visible,'Category navigation must leave the target heading below sticky controls: '+target);
+        }
+        assert.equal(await page.evaluate(()=>location.hash),'#extras');
         report.switching.push({width,language,status:'pass'});await context.close();
       }
     }

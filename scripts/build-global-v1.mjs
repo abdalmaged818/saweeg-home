@@ -18,7 +18,9 @@ verifyGenerated();
 verifyWave2();
 const walk=(dir,relative='')=>fs.readdirSync(path.join(dir,relative),{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(dir,path.join(relative,e.name)):[path.join(relative,e.name)]).sort();
 const hash=file=>createHash('sha256').update(fs.readFileSync(file)).digest('hex');
-const previous=walk('dist');assert.equal(previous.length,183,'Existing production file set changed');
+const approvedGoPages=['branches/index.html','en/branches/index.html','contact/index.html','en/contact/index.html'];
+const previous=walk('dist');assert.equal(previous.length,183+approvedGoPages.length,'Existing production file set changed beyond the four approved Go pages');
+for(const page of approvedGoPages)assert(previous.includes(page),page);
 const protectedFiles=Object.fromEntries(previous.map(file=>[file,hash(path.join('dist',file))]));
 const result=await build({configFile:false,base:'/',publicDir:false,build:{outDir:'dist',emptyOutDir:false,copyPublicDir:false,cssCodeSplit:false,target:'es2022',sourcemap:false,
   rollupOptions:{input:{globalV1:path.resolve('src/saweeg-global/main.ts')},output:{entryFileNames:'global/assets/global-v1-[hash].js',chunkFileNames:'global/assets/[name]-[hash].js',assetFileNames:'global/assets/[name]-[hash][extname]'}}}});
@@ -87,4 +89,4 @@ for(const locale of compatibilityLocales){
 }
 for(const [file,digest]of Object.entries(protectedFiles))assert.equal(hash(path.join('dist',file)),digest,`Existing public output changed: ${file}`);
 assert(walk('dist').filter(file=>!previous.includes(file)).every(file=>file.startsWith('global/')));
-console.log('Global Wave 2: 9 content/selector routes and 2 compatibility redirects; 10 authoritative language destinations; original Hadith only; all 183 existing public files unchanged.');
+console.log('Global Wave 2: 9 content/selector routes and 2 compatibility redirects; 10 authoritative language destinations; original Hadith only; all 187 Go public files unchanged during the Global build.');

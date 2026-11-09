@@ -1,9 +1,11 @@
+import { renderReturnNavigation } from "../../components/return-navigation.ts";
+import { goCopy } from "../../content/go-redesign.ts";
 import { getCopy } from "../../i18n/index.ts";
 import { renderHeader } from "../../components/header.ts";
 import { renderFooter } from "../../components/footer.ts";
 import { createPathFor } from "../../pages/routes.ts";
 import { sharedNameFor, sharedItemText } from "../i18n/catalog.ts";
-import { assetUrl, branchMapUrl, menuBasePath, siteConfig } from "../config/site";
+import { assetUrl, menuBasePath, siteConfig } from "../config/site";
 import { branches } from "../data/branches";
 import { categories } from "../data/categories";
 import { canonicalImageFor } from "../data/catalog-images";
@@ -93,10 +95,7 @@ const appHref = (
   return `${menuBasePath}${languagePath}?${query.toString()}${hash}`;
 };
 
-const brandHref = (language: Language, branch: AppState["branch"]): string =>
-  branch === "haram"
-    ? `${menuBasePath}${language === "en" ? "en/" : ""}`
-    : appHref(language, branch);
+const brandHref = (language: Language, _branch: AppState["branch"]): string => language === "en" ? "/en/" : "/";
 
 const createBrand = (
   language: Language,
@@ -106,7 +105,7 @@ const createBrand = (
   brand.href = brandHref(language, branch);
   brand.setAttribute(
     "aria-label",
-    getMessages(language).backToMenu
+    getCopy(language).nav.home
   );
   brand.dataset.brandLink = "";
 
@@ -202,7 +201,17 @@ const createMobileMenu = (state: AppState): HTMLElement => {
     state.branch
   );
   languageLink.dataset.languageLink = "";
+  const copy = getCopy(state.language), paths = createPathFor("/");
+  const internal = [
+    [copy.nav.home, paths(state.language, "home")],
+    [goCopy[state.language].menu, appHref(state.language, state.branch)],
+    [goCopy[state.language].branches, paths(state.language, "branches")],
+    [copy.nav.about, paths(state.language, "about")],
+    [copy.nav.news, paths(state.language, "news")],
+    [copy.nav.contact, paths(state.language, "contact")]
+  ].map(([label, href]) => { const link = createElement("a", "mobile-menu__link", label); link.href = href; return link; });
   card.append(
+    ...internal,
     storeLink,
     maqsedLink,
     bustanLink,
@@ -223,17 +232,10 @@ const createHero = (
   const section = createElement("section", "hero");
   const inner = createElement("div", "hero__inner container");
   const content = createElement("div", "hero__content");
-  const button = createElement(
-    "a",
-    "button button--primary",
-    hero?.ctaLabel ?? messages.chooseBranch
-  );
-  button.href = hasBranchSelection ? "#branch-picker" : "#menu-products";
   content.append(
     createElement("p", "eyebrow", hero?.eyebrow ?? messages.heroEyebrow),
     createElement("h1", "hero__title", hero?.title ?? messages.heroTitle),
-    createElement("p", "hero__body", hero?.body ?? messages.heroBody),
-    button
+    createElement("p", "hero__body", hero?.body ?? messages.heroBody)
   );
   inner.append(content);
   section.append(inner);
@@ -241,19 +243,9 @@ const createHero = (
 };
 
 const createBackNavigation = (state: AppState): HTMLElement => {
-  const messages = getMessages(state.language);
-  const navigation = createElement("nav", "menu-back-navigation");
-  navigation.setAttribute("aria-label", messages.backToPreviousPage);
-  const inner = createElement("div", "container menu-back-navigation__inner");
-  const link = createElement(
-    "a",
-    "button button--secondary menu-back-navigation__button",
-    messages.backToPreviousPage
-  );
-  link.dataset.menuBackLink = "";
-  inner.append(link);
-  navigation.append(inner);
-  return navigation;
+  const holder = createElement("div");
+  holder.innerHTML = renderReturnNavigation(state.language, state.language === "en" ? "/en/" : "/");
+  return holder.firstElementChild as HTMLElement;
 };
 
 const createBranchButton = (
@@ -261,7 +253,7 @@ const createBranchButton = (
   state: AppState
 ): HTMLButtonElement => {
   const messages = getMessages(state.language);
-  const name = localName(branch, state.language);
+  const name = state.language === "ar" ? (branch.id === "maqsed" ? "فرع المقصد" : "فرع البستان") : localName(branch, state.language);
   const button = createElement(
     "button",
     "branch-option",
@@ -285,20 +277,17 @@ const createBranchSection = (state: AppState): HTMLElement => {
   const section = createElement("section", "branch-section section");
   section.id = "branch-picker";
   const inner = createElement("div", "container branch-section__inner");
-  const copy = createElement("div", "section-heading");
-  copy.append(
-    createElement("h2", "section-title", messages.branchSectionTitle),
-    createElement("p", "section-copy", messages.branchSectionBody)
-  );
-
   const controls = createElement("div", "branch-controls");
   const selector = createElement("div", "branch-selector");
   selector.setAttribute("role", "group");
   selector.setAttribute("aria-label", messages.branchSelectorLabel);
   branches.forEach((branch) => selector.append(createBranchButton(branch, state)));
 
+  const haram = createElement("a", "branch-option", state.language === "ar" ? "فرع الحرم" : "Al Haram Branch");
+  haram.href = menuBasePath + "haram/";
+  selector.append(haram);
   controls.append(selector);
-  inner.append(copy, controls);
+  inner.append(controls);
   section.append(inner);
   return section;
 };
@@ -331,42 +320,6 @@ const createExtrasSection = (state: AppState): HTMLElement => {
   const list = createElement("div", "extras-card");
   list.dataset.extrasList = "";
   inner.append(createSectionHeading(messages.extrasTitle, "extras-title"), list);
-  section.append(inner);
-  return section;
-};
-
-const createBranchLocationsSection = (state: AppState): HTMLElement => {
-  const messages = getMessages(state.language);
-  const section = createElement("section", "locations-section section");
-  section.id = "branches";
-  section.setAttribute("aria-labelledby", "branch-locations-title");
-  const inner = createElement("div", "container");
-  const title = createElement(
-    "h2",
-    "section-title locations-section__title",
-    messages.branchLocationsTitle
-  );
-  title.id = "branch-locations-title";
-  const grid = createElement("div", "location-grid");
-
-  branches.forEach((branch) => {
-    const card = createElement("article", "location-card");
-    const name = localName(branch, state.language);
-    const heading = createElement("h3", "location-card__title", name);
-    const link = createElement(
-      "a",
-      "button button--secondary location-card__link",
-      messages.openBranchLocation
-    );
-    link.href = branchMapUrl(branch.id);
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.setAttribute("aria-label", messages.branchMapLabel(name));
-    card.append(heading, link);
-    grid.append(card);
-  });
-
-  inner.append(title, grid);
   section.append(inner);
   return section;
 };
@@ -438,7 +391,6 @@ const createFooter = (state: AppState): HTMLElement => {
   });
   const footer = holder.firstElementChild as HTMLElement;
   footer.querySelector<HTMLImageElement>(".footer-brand img")!.alt = messages.logoAlt;
-  footer.querySelector(".footer-brand p")!.textContent = messages.footerTagline;
   const legacy = createElement("nav", "menu-footer-context-links");
   legacy.setAttribute("aria-label", messages.footerNavLabel);
   for (const [label, href] of [
@@ -651,10 +603,9 @@ export const renderMenuPage = (
     ...(options.showBranchSection === false ? [] : [createBranchSection(state)]),
     menuSection,
     extrasSection,
-    ...(options.showBranchLocations === false ? [] : [createBranchLocationsSection(state)]),
-    createBackNavigation(state),
     createStoreSection(state),
-    createContactSection(state)
+    createContactSection(state),
+    createBackNavigation(state)
   );
   const page = createElement("div", "site");
   page.append(skipLink, welcome, header, main, createFooter(state));

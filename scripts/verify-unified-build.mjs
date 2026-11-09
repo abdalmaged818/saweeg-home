@@ -9,14 +9,14 @@ const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "
 const distRoot = path.join(projectRoot, "dist");
 execFileSync(process.execPath,["--experimental-strip-types","scripts/global-wave1.mjs"],{cwd:projectRoot,stdio:"inherit"});
 execFileSync(process.execPath,["--experimental-strip-types","scripts/global-wave2.mjs"],{cwd:projectRoot,stdio:"inherit"});
-execFileSync(process.execPath, ["--experimental-strip-types", "--test",
-  "tests/sabtiya.test.ts", "tests/menu-official-data.test.ts", "tests/haram-store-card.test.ts",
+execFileSync(process.execPath, ["--experimental-strip-types", "--test-concurrency=1", "--test",
+  "tests/go-redesign-v2.test.ts", "tests/sabtiya.test.ts", "tests/menu-official-data.test.ts", "tests/haram-store-card.test.ts",
   "tests/brand-color-tokens.test.mjs", "tests/product-image-catalog.test.ts", "tests/menu-localization.test.ts", "tests/visual-redesign.test.ts", "tests/saweeg-global-foundation.test.ts", "tests/saweeg-global-wave1.test.ts", "tests/saweeg-global-v1.test.ts", "tests/saweeg-global-wave2.test.ts"], { cwd: projectRoot, stdio: "inherit" });
 const sabtiyaHome = fs.readFileSync(path.join(distRoot, "index.html"), "utf8");
 const sabtiyaEnglishHome = fs.readFileSync(path.join(distRoot, "en/index.html"), "utf8");
-if ((sabtiyaHome.match(/class="swg-haram container"/g) ?? []).length !== 1 ||
-    sabtiyaEnglishHome.includes('class="swg-haram container"') ||
-    sabtiyaHome.indexOf('class="swg-haram container"') > sabtiyaHome.indexOf('id="sabtiya-slot"')) {
+if ((sabtiyaHome.match(/class="swg-haram announcement-card"/g) ?? []).length !== 1 ||
+    sabtiyaEnglishHome.includes('class="swg-haram announcement-card"') ||
+    sabtiyaHome.indexOf('class="swg-haram announcement-card"') > sabtiyaHome.indexOf('id="sabtiya-slot"')) {
   throw new Error("Haram introduction must exist once, on Arabic home only, before Sabtiya.");
 }
 for (const value of ["جديدنا", "جرعة سلام من جوار خير الأنام", "باب السلام ٣١٤",
@@ -37,6 +37,10 @@ if (!sabtiyaHome.includes('id="sabtiya-slot"') || sabtiyaEnglishHome.includes('i
 const expectedFiles = [
   "index.html",
   "en/index.html",
+  "branches/index.html",
+  "en/branches/index.html",
+  "contact/index.html",
+  "en/contact/index.html",
   "about/index.html",
   "en/about/index.html",
   "news/index.html",
@@ -122,9 +126,11 @@ for (const [html, label] of [[homeAr, "Arabic homepage"], [homeEn, "English home
 }
 
 for (const relative of expectedFiles.filter((file) => file.endsWith(".html") && !["index.html", "en/index.html"].includes(file))) {
-  if (readDist(relative).includes(homepageWelcome)) {
-    failures.push(`Welcome phrase must not appear outside the homepage: ${relative}`);
-  }
+  const occurrences=readDist(relative).split(homepageWelcome).length-1;
+  // Go v2 uses the same welcome/header shell on every statically rendered Go
+  // page. Menu shells are rendered once by their existing client entry points.
+  const expected=relative.startsWith("menu/")?0:1;
+  if(occurrences!==expected)failures.push(`Expected ${expected} static welcome strip(s), found ${occurrences}: ${relative}`);
 }
 
 const requiredHtmlSnippets = [

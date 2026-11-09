@@ -3,6 +3,7 @@ import { getCopy } from "../i18n/index.ts";
 import type { Locale, PageId } from "../types/site.ts";
 import { renderFooter } from "../components/footer.ts";
 import { renderHeader } from "../components/header.ts";
+import { renderReturnNavigation } from "../components/return-navigation.ts";
 import { canonicalFor, createPathFor } from "./routes.ts";
 
 const homepageWelcome = "سلام من لدن أرض السلام";
@@ -168,9 +169,9 @@ export const renderDocument = ({
 </head>
 <body>
   <a class="skip-link" href="#main-content">${copy.skipLink}</a>
-  ${page === "home" ? `<div class="welcome-strip" lang="ar" dir="rtl"><p class="welcome-strip__text">${homepageWelcome}</p></div>` : ""}
+  <div class="welcome-strip" lang="ar" dir="rtl"><p class="welcome-strip__text">${homepageWelcome}</p></div>
   ${renderHeader({ locale, page, copy, prefix, pathFor, localeSwitchPath })}
-  <main id="main-content">${content}</main>
+  <main id="main-content">${content}${page !== "home" ? renderReturnNavigation(locale, pathFor(locale, "home")) : ""}</main>
   ${renderFooter({ locale, page, copy, prefix, pathFor, localeSwitchPath })}
   <script type="module" src="${prefix}src/main.ts"></script>
 </body>

@@ -1,3 +1,4 @@
+import goRedesign from "./fixtures/go-redesign-v2-source-transition.json" with {type:"json"};
 import { approvedHaramSourceTransition, assertProtectedSource } from "./helpers/approved-haram-update.mjs";
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -26,11 +27,20 @@ async function compareProduction(){
     execFileSync('tar',['-xf',archive,'-C',scratch]);
     // A baseline install may change peer-resolution paths. Never share its mutable node_modules.
     fs.cpSync(path.resolve('node_modules'),path.join(scratch,'node_modules'),{recursive:true,verbatimSymlinks:true});
-    // Rebuild the immutable pre-Global baseline with only the exact approved
-    // homepage actions and Haram prices; all other emitted bytes remain protected.
-    for (const file of Object.keys(approvedHaramSourceTransition)) {
-      const before=fs.readFileSync(path.join(scratch,file)), after=fs.readFileSync(file);
-      assertProtectedSource(file,before,after);fs.writeFileSync(path.join(scratch,file),after);
+    // Rebuild the immutable pre-Global output with exactly the approved Haram
+    // price/action transition and the reviewed Go v2 UI transition. Commercial
+    // inputs and existing assets have no visual-transition exceptions.
+    const approvedFiles = new Set([...Object.keys(approvedHaramSourceTransition), ...Object.keys(goRedesign.files)]);
+    for (const file of approvedFiles) {
+      if(file.startsWith("src/saweeg-global/")) continue;
+      const destination=path.join(scratch,file), after=fs.readFileSync(file);
+      if(fs.existsSync(destination)) assertProtectedSource(file,fs.readFileSync(destination),after);
+      else {
+        assert.equal(goRedesign.files[file]?.before,null,file);
+        assert.equal(digest(file),goRedesign.files[file].after,file);
+        fs.mkdirSync(path.dirname(destination),{recursive:true});
+      }
+      fs.writeFileSync(destination,after);
     }
     // Build the historical production bundle without executing its superseded
     // price assertions. The current full build/test suite runs independently.
@@ -124,7 +134,7 @@ try{
       assert.equal(state.products.length,8);assert.equal(new Set(state.products.map(x=>x.id)).size,8);assert(state.products.every(x=>Math.abs(x.ratio-4/3)<.01));assert.deepEqual(state.hadith,{lang:'ar',dir:'rtl',cta:0});
       const catalog=(await import('../src/menu/data/catalog-images.ts')).canonicalProductImages;
       for(const p of state.products){assert.equal(p.file,catalog[p.id].file);assert.equal(p.fit,catalog[p.id].fit);assert.equal(p.position,catalog[p.id].position==='center'?'50% 50%':catalog[p.id].position);}
-      if(width<900){const button=page.locator('[data-menu-button]');await button.click();assert.equal(await button.getAttribute('aria-expanded'),'true');assert(await page.locator('[data-mobile-navigation] a').first().evaluate(el=>document.activeElement===el));await page.keyboard.press('Escape');assert.equal(await button.getAttribute('aria-expanded'),'false');assert(await button.evaluate(el=>document.activeElement===el));await button.click();await page.setViewportSize({width:1280,height:900});await page.waitForFunction(()=>document.querySelector('[data-menu-button]').getAttribute('aria-expanded')==='false');await page.setViewportSize({width,height:900});}
+      if(width<1024){const button=page.locator('[data-menu-button]');await button.click();assert.equal(await button.getAttribute('aria-expanded'),'true');assert(await page.locator('[data-mobile-navigation] a').first().evaluate(el=>document.activeElement===el));await page.keyboard.press('Escape');assert.equal(await button.getAttribute('aria-expanded'),'false');assert(await button.evaluate(el=>document.activeElement===el));await button.click();await page.setViewportSize({width:1280,height:900});await page.waitForFunction(()=>document.querySelector('[data-menu-button]').getAttribute('aria-expanded')==='false');await page.setViewportSize({width,height:900});}
       if(view==='unavailable'){const disclosure=page.locator('[data-world-disclosure]');await disclosure.press('Enter');assert.equal(await disclosure.getAttribute('aria-expanded'),'true');assert.equal(await page.locator('.world-unavailable [hreflang]').count(),2);await disclosure.press('Enter');assert.equal(await disclosure.getAttribute('aria-expanded'),'false');}
     }
     await page.keyboard.press('Tab');assert(await page.evaluate(()=>getComputedStyle(document.activeElement).outlineStyle!=='none'),'visible focus');

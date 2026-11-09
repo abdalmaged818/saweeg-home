@@ -35,7 +35,7 @@ try {
       await page.goto("http://127.0.0.1:4173/", { waitUntil: "networkidle" });
       await page.reload({ waitUntil: "networkidle" });
       const metrics = await page.evaluate(() => {
-        const section = document.querySelector("#sabtiya"), hero = document.querySelector(".hero"), destinations = document.querySelector("#destinations");
+        const section = document.querySelector("#sabtiya"), hero = document.querySelector(".welcome"), destinations = document.querySelector("#destinations");
         const introduction = document.querySelector(".swg-haram");
         const bounds = element => element?.getBoundingClientRect();
         return {
@@ -48,16 +48,15 @@ try {
           buttons: [...(section?.querySelectorAll("a") ?? [])].map(e => ({ height: bounds(e).height, href: e.getAttribute("href"), target: e.target, rel: e.rel })),
           fontInherited: !section || getComputedStyle(section.querySelector(".sab-card")).fontFamily === getComputedStyle(document.body).fontFamily,
           direction: section && getComputedStyle(section).direction,
-          positioned: !section || bounds(section).top >= bounds(hero).bottom - 1 && bounds(section).bottom <= bounds(destinations).top + 1,
-          beforeGap: bounds(destinations).top - bounds(introduction).bottom,
+          positioned: !section || bounds(section).top >= bounds(destinations).bottom - 1,
+          beforeGap: bounds(introduction).top - bounds(destinations).bottom,
           introduction: (() => {
-            const media = introduction.querySelector(".swg-haram__media"), body = introduction.querySelector(".swg-haram__body");
-            const image = media.querySelector("img"), button = introduction.querySelector("a");
+            const media = introduction.querySelector(".swg-haram__media"), body = introduction.querySelector(".swg-haram__intro");
+            const image = media.querySelector("img"), button = introduction.querySelector('a[target="_blank"]');
             return { count: document.querySelectorAll(".swg-haram").length,
-              positioned: bounds(introduction).top >= bounds(hero).bottom - 1 && bounds(introduction).bottom <= bounds(section ?? destinations).top,
+              positioned: bounds(introduction).top >= bounds(destinations).bottom - 1,
               ratio: bounds(media).width / bounds(media).height,
-              stacked: bounds(media).bottom <= bounds(body).top + 1,
-              leftPhoto: bounds(media).right <= bounds(body).left + 1,
+              thumbnail: Math.abs(bounds(media).width - 64) < 1,
               fit: getComputedStyle(image).objectFit, position: getComputedStyle(image).objectPosition,
               font: getComputedStyle(introduction).fontFamily === getComputedStyle(document.body).fontFamily,
               clipped: [...introduction.querySelectorAll("h2,p,li,a")].filter(e => e.scrollWidth > e.clientWidth + 1).map(e => e.textContent),
@@ -73,14 +72,14 @@ try {
       const intro = metrics.introduction;
       assert.equal(intro.count, 1);
       assert(intro.positioned && intro.font && !intro.clipped.length);
-      assert(Math.abs(intro.ratio - 4 / 3) < 0.01);
-      assert(width < 760 ? intro.stacked : intro.leftPhoto);
+      assert(Math.abs(intro.ratio - 4 / 5) < 0.01);
+      assert(intro.thumbnail);
       assert.equal(intro.fit, "cover");
       assert.equal(intro.position, "50% 58%");
       assert.equal(intro.placeholder, 0);
       assert(intro.height >= 44 && intro.target === "_blank" && intro.rel.includes("noopener") && intro.rel.includes("noreferrer"));
       assert.equal(intro.href, "https://maps.app.goo.gl/t7VQtDZSWHREcnXL6?g_st=ic");
-      const introductionActions = page.locator(".swg-haram__btn");
+      const introductionActions = page.locator(".swg-haram__actions a");
       assert.equal(await introductionActions.count(), 2);
       for (const action of await introductionActions.all()) {
         await action.focus();
@@ -90,7 +89,7 @@ try {
       assert(!/النسخة|REPLACE|data-replace/.test(metrics.text));
       if (state.name === "before") {
         assert.equal(metrics.count, 0);
-        assert(Math.abs(metrics.beforeGap - 32) < 1, "Only the approved introduction margin remains before destinations");
+        assert(Math.abs(metrics.beforeGap - (width >= 900 ? 56 : 48)) < 1, "Only the approved announcement margin follows destinations");
       } else {
         assert.equal(metrics.count, 1);
         assert.equal(metrics.direction, "rtl");
@@ -100,7 +99,7 @@ try {
         assert.deepEqual(metrics.buttons.map(button => button.href), expected);
         if (state.name === "launch") {
           assert.equal(metrics.offers, 2);
-          assert.equal(metrics.columns, width < 640 ? 1 : 2);
+          assert.equal(metrics.columns, 1);
           assert(metrics.text.includes("العرضان السبت 10 أكتوبر فقط."));
           assert(!metrics.text.includes("موعدنا كل سبت"));
         } else {

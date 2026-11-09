@@ -17,6 +17,8 @@ export const en = {
     contact: "Contact"
   },
   meta: {
+    branches: { title: "Saweeg Branches", description: "Saweeg branches in Madinah, opening hours, digital menus and Maps destinations." },
+    contact: { title: "Contact Saweeg", description: "Contact Saweeg, order through delivery partners, visit our store and download company profiles." },
     home: {
       title: "Saweeg | Everything Saweeg in One Place",
       description: "The official Saweeg gateway for the online store, digital menu, delivery, branches, and ways to connect."

@@ -4,6 +4,8 @@ import type { Locale, PageId } from "../types/site.ts";
 const pageSegments: Record<PageId, string> = {
   home: "",
   about: "about/",
+  branches: "branches/",
+  contact: "contact/",
   news: "news/",
   blog: "blog/",
   opportunities: "opportunities/"

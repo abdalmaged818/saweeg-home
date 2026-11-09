@@ -3,12 +3,12 @@
 :root {
   --radius-pill: 999px;
   --max-width: 1180px;
-  --header-offset: 96px;
+  --header-offset: calc(var(--header-height) + 72px);
 
   --brand-beige: var(--color-ivory);
   --brand-green: var(--color-olive);
   --brand-brown: var(--color-olive);
-  --green-dark: var(--color-olive);
+  --green-dark: var(--color-primary-dark);
   --green-soft: var(--color-olive-soft);
   --brown-dark: var(--color-secondary);
   --brown-soft: var(--color-ordering-card);

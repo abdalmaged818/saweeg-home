@@ -40,7 +40,7 @@ export const bindSharedHeader = (scope: ParentNode = document): void => {
     }
   });
 
-  window.matchMedia("(min-width: 900px)").addEventListener("change", (event) => {
+  window.matchMedia("(min-width: 1024px)").addEventListener("change", (event) => {
     if (event.matches) closeMenu();
   });
 };

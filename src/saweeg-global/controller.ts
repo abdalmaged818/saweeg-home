@@ -4,7 +4,7 @@ export function mountWorldInteractions(root: HTMLElement): () => void {
   const options = {signal:abort.signal};
   const button=root.querySelector<HTMLButtonElement>("[data-menu-button]");
   const panel=root.querySelector<HTMLElement>("[data-mobile-navigation]");
-  const desktop=matchMedia("(min-width:900px)");
+  const desktop=matchMedia("(min-width:1024px)");
   const reduced=matchMedia("(prefers-reduced-motion:reduce)");
   function setMenu(open:boolean,returnFocus=false) {
     if(!button || !panel) return;
