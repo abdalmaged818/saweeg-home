@@ -97,7 +97,10 @@ test('Only approved Global routes/assets are emitted; all original image bytes a
     const text=fs.readFileSync(`dist/global/${file}`,'utf8');assert(!/ready-for-owner-review|religious_review_status|_global-preview|world\.hero|UNAPPROVED_MEANING/.test(text));
     for(const [locale,pack]of Object.entries(translationPackages))if(locale!=='ar')assert(!text.includes(pack!.content['world.talbinah.hadithTranslation']));
   }
-  assert.equal(walk('dist').filter(file=>!file.startsWith('global/')).length,183);
+  const goFiles=walk('dist').filter(file=>!file.startsWith('global/'));
+  const approvedGoPages=['branches/index.html','en/branches/index.html','contact/index.html','en/contact/index.html'];
+  assert.equal(goFiles.length,183+approvedGoPages.length);
+  for(const page of approvedGoPages)assert(goFiles.includes(page),page);
   assert(!/from\s+["'][^"']*review/.test(fs.readFileSync('src/saweeg-global/main.ts','utf8')));
 });
 
