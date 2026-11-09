@@ -139,7 +139,7 @@
     },
     "src/styles/chrome.css": {
       "before": "b677698f1e0a95c005d50a9ca406c0568dbb83e9a810d4d5eb345d696d9b7216",
-      "after": "513d772c4cb2a253208849f5c23eb756a8151196ddda1169048ce60d916bc877"
+      "after": "d45555e2b1b5354d55b8c6d360d68f3416b17d108012999a89c52adab49b368e"
     },
     "src/styles/components.css": {
       "before": "a2e7013c7996f6712f5f5320bf58a378537809ce7f41d8dfe663945c54c98b8d",
@@ -191,7 +191,7 @@
     },
     "src/saweeg-global/v1.css": {
       "before": "10ef4f1185fa9147715ec21ec0bdad5ae75b31f7468a68408f555ca4583adfc7",
-      "after": "883b26b78b812aa2535f04250587b314fb4afda629520348d606ceffc593acd8"
+      "after": "a26d6784452996aa9aa4767b680c36849a2d35b3af202bf28da2e14300babd71"
     }
   }
 }

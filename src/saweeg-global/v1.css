@@ -1,10 +1,12 @@
 /* Shared chrome comes from main.css; only localized content slots differ. */
 .swg-world .footer-brand p { margin-block-start:12px; }
 .swg-world .world-footer-utility { align-items:center; }
+.swg-world .footer-nav { grid-column:1 / -1; grid-template-columns:repeat(2,minmax(0,1fr)); }
 .swg-world :is(.site-header,.site-footer) { font-size:1.0625rem; line-height:1.85; }
 .swg-world[dir="ltr"] :is(.site-header,.site-footer) { font-family:var(--font-en); line-height:1.7; }
-@media (min-width:900px) {
+@media (min-width:768px) {
   .swg-world .footer-content { grid-template-columns:minmax(0,1fr) minmax(0,1.2fr); }
+  .swg-world .footer-nav { grid-column:auto; }
 }
 @media (min-width:768px) {
   .swg-world[data-release="v1"] .world-language-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }

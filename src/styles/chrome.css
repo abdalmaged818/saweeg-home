@@ -33,6 +33,7 @@
 .footer-social svg{width:20px;height:20px}
 .footer-nav,.footer-order{display:grid;align-content:start;gap:0}
 .footer-nav h2,.footer-order h2,.footer-downloads h2{font-size:14px;color:var(--color-icon-tile);margin:0 0 8px}
+.footer-nav-title{grid-column:1/-1}
 .footer-nav a,.footer-order a{display:flex;align-items:center;gap:6px;min-height:44px;font-size:14px;color:var(--color-ivory)}
 .footer-nav a:hover,.footer-order a:hover{text-decoration:underline}
 .footer-downloads{margin:0;padding:0;border:0}
