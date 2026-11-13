@@ -1,0 +1,8 @@
+{
+  "baseline": "d4bd224a05927674768f701d0ed9278b9190fb8c",
+  "files": {
+    "src/content/go-redesign.ts": {"before":"090e6567b110a218a7d3690208e282af85e9f569bb68c8b299b188a846ee3a0e","after":"e0fa36d7e3fbe0a101af7592c16722a58406fdf269947cbf375b17b53cfeb41b"},
+    "src/saweeg-global/validation.ts": {"before":"ee4f50966fc4540143ad30d2a3ba2d31d6bb0345dd6ca9556f1707f83000d45b","after":"30dc167c866f1ef2a30a5d304b625b30cfdaee2336f19a71bba2f2ac09144614"},
+    "src/content/bustan-hours.ts": {"before":null,"after":"78f5bdf2164172a2d66091329252dcda6f8a7ed8a27ac38163c6818397e96f81"}
+  }
+}

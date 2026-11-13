@@ -3,6 +3,7 @@ import { localeRegistry, activeLocaleCodes, isActiveLocale, isV1Locale, type Loc
 import type {WorldDisplayContent} from "./content/types.ts";
 import { wave1Content, wave1Metadata } from "./content/wave1.generated.ts";
 import { wave2Content, wave2Metadata } from "./content/wave2.generated.ts";
+import { bustanHours } from "../content/bustan-hours.ts";
 
 export interface TranslationPackage {
   locale: WorldLocale;
@@ -67,5 +68,5 @@ export function publicV1Content(locale:WorldLocale):WorldDisplayContent {
   assertPublicActivation(locale);
   const {"world.talbinah.hadithTranslation":unapprovedMeaning,...content}=translationPackages[locale]!.content;
   void unapprovedMeaning;
-  return content as WorldDisplayContent;
+  return {...content, "world.branches.bustan.hours": bustanHours[locale]} as WorldDisplayContent;
 }

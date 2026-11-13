@@ -7,6 +7,7 @@ import {arabicMaster,requiredContentKeys} from '../src/saweeg-global/content/ar.
 import {localeCodes,v1LocaleCodes,activeLocaleCodes,localeRegistry,languageLabels} from '../src/saweeg-global/locales.ts';
 import {globalContentLocales,compatibilityLocales,localeDestination} from '../src/saweeg-global/destinations.ts';
 import {publicV1Content,approvedContent,translationPackages,assertPublicActivation} from '../src/saweeg-global/validation.ts';
+import {bustanHours} from '../src/content/bustan-hours.ts';
 import {featuredProducts,featuredImage} from '../src/saweeg-global/products.ts';
 import {worldBranches,worldLinks,branchMenu} from '../src/saweeg-global/branches.ts';
 import {editorialMedia} from '../src/saweeg-global/media.ts';
@@ -19,7 +20,7 @@ test('Wave 1 plus Wave 2 activate ten complete locales without granting religiou
   for(const locale of activeLocaleCodes){
     const content=publicV1Content(locale),source=translationPackages[locale]!.content;
     assert.deepEqual(Object.keys(content),requiredContentKeys.filter(key=>key!=='world.talbinah.hadithTranslation'));
-    for(const key of Object.keys(content))assert.equal(content[key as keyof typeof content],source[key]);
+    for(const key of Object.keys(content))assert.equal(content[key as keyof typeof content],key==='world.branches.bustan.hours'?bustanHours[locale]:source[key]);
     if(locale!=='ar'){assert.equal(localeRegistry[locale].religious,'pending');assert.throws(()=>approvedContent(locale));}
     assert.equal(localeRegistry[locale].publicationScope,v1LocaleCodes.some(code=>code===locale)?'v1-original-hadith-only':'wave2-original-hadith-only');
   }

@@ -15,6 +15,7 @@ import { renderFooter } from "../src/components/footer.ts";
 import { createPathFor } from "../src/pages/routes.ts";
 import { renderReturnNavigation, safeInternalPrevious } from "../src/components/return-navigation.ts";
 import { goCopy, returnCopy } from "../src/content/go-redesign.ts";
+import "./bustan-hours.test.ts";
 
 const baseline = "dc961fd9810857c0f544b40698f179a90fe21a61";
 const gitFile=promisify(execFile);
@@ -112,7 +113,7 @@ test("header has exactly one home item per navigation and footer retains all dow
 test("branch hours and actual contact/download destinations are explicit without fabricated business information", () => {
   const {document} = parseHTML(renderBranches(getCopy("ar"),"ar",true));
   for (const value of ["من هنا بدأت حكاية سويق","٤:٣٠ عصرًا – ١٢ منتصف الليل","٤:٣٠ عصرًا – ٢ صباحًا",
-    "٦ صباحًا – ١٢ ظهرًا","٤:٣٠ عصرًا – ١١:٣٠ مساءً","نستقبلكم على مدار الساعة"]) assert(document.toString().includes(value));
+    "من السبت إلى الخميس، من ٦ صباحًا إلى ١٢ ظهرًا.","يوميًا، من ٤:٣٠ عصرًا إلى ١١:٣٠ مساءً.","نستقبلكم على مدار الساعة"]) assert(document.toString().includes(value));
   assert.equal(document.querySelector(".always-time strong")!.textContent,"24");
   const {document:contact} = parseHTML(renderContactPage("ar",getCopy("ar")));
   assert.equal(contact.querySelectorAll(".contact-rows a").length,8);

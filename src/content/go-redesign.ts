@@ -1,4 +1,5 @@
 import type { Locale } from "../types/site.ts";
+import { bustanPeriods } from "./bustan-hours.ts";
 
 // Approved interface copy from the Go Saweeg v2 handoff; menu data stays independent.
 export const goCopy = {
@@ -15,7 +16,7 @@ export const goCopy = {
     branchNames: { maqsed: "فرع المقصد", bustan: "فرع بستان المستظل", haram: "فرع الحرم" },
     branchLines: { maqsed: "من هنا بدأت حكاية سويق", bustan: "مذاق سويق وسط هدوء البستان", haram: "جرعة سلام من جوار خير الأنام" },
     branchLocations: { maqsed: "داخل مقصد قباء، بجوار مسجد قباء", bustan: "داخل بستان المستظل، المدينة المنورة", haram: "باب السلام ٣١٤" },
-    schedules: { maqsed: [["السبت – الأربعاء", "٤:٣٠ عصرًا – ١٢ منتصف الليل"], ["الخميس والجمعة", "٤:٣٠ عصرًا – ٢ صباحًا"]], bustan: [["الفترة الصباحية", "٦ صباحًا – ١٢ ظهرًا"], ["الفترة المسائية", "٤:٣٠ عصرًا – ١١:٣٠ مساءً"]] },
+    schedules: { maqsed: [["السبت – الأربعاء", "٤:٣٠ عصرًا – ١٢ منتصف الليل"], ["الخميس والجمعة", "٤:٣٠ عصرًا – ٢ صباحًا"]], bustan: bustanPeriods.ar },
     contactTitle: "خلك قريب من سويق", contactIntro: "تابع أخبارنا، تواصل معنا، واكتشف كل جديد من قلب المدينة المنورة.",
     channels: "قنوات التواصل", delivery: "اطلب سويق الآن", downloads: "تحميل الملفات التعريفية",
     store: "تسوّق من سويق", storeText: "اطلب التلبينة والسويق والبوكسات والهدايا من متجرنا الإلكتروني.", storeCta: "زيارة المتجر",
@@ -34,7 +35,7 @@ export const goCopy = {
     branchNames: { maqsed: "Al-Maqsed Branch", bustan: "Bustan Al-Mustazal Branch", haram: "Al Haram Branch" },
     branchLines: { maqsed: "Where the Saweeg story began", bustan: "The taste of Saweeg in the calm of the garden", haram: "A moment of peace beside the Prophet’s Mosque" },
     branchLocations: { maqsed: "Inside Maqsed Quba, beside Quba Mosque", bustan: "Inside Bustan Al-Mustazal, Madinah", haram: "Bab Al-Salam 314" },
-    schedules: { maqsed: [["Saturday – Wednesday", "4:30 PM – midnight"], ["Thursday and Friday", "4:30 PM – 2:00 AM (next day)"]], bustan: [["Morning", "6:00 AM – noon"], ["Evening", "4:30 PM – 11:30 PM"]] },
+    schedules: { maqsed: [["Saturday – Wednesday", "4:30 PM – midnight"], ["Thursday and Friday", "4:30 PM – 2:00 AM (next day)"]], bustan: bustanPeriods.en },
     contactTitle: "Stay close to Saweeg", contactIntro: "Follow our news, reach out, and discover everything new from the heart of Madinah.",
     channels: "Get in touch", delivery: "Order Saweeg now", downloads: "Download Saweeg Profiles",
     store: "Shop Saweeg", storeText: "Discover talbinah, saweeg, gift boxes, and more in our online store.", storeCta: "Visit the store",

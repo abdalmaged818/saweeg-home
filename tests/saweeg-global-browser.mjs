@@ -1,4 +1,5 @@
 import goRedesign from "./fixtures/go-redesign-v2-source-transition.json" with {type:"json"};
+import bustanHours from "./fixtures/bustan-hours-source-transition.json" with {type:"json"};
 import { approvedHaramSourceTransition, assertProtectedSource } from "./helpers/approved-haram-update.mjs";
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -30,14 +31,15 @@ async function compareProduction(){
     // Rebuild the immutable pre-Global output with exactly the approved Haram
     // price/action transition and the reviewed Go v2 UI transition. Commercial
     // inputs and existing assets have no visual-transition exceptions.
-    const approvedFiles = new Set([...Object.keys(approvedHaramSourceTransition), ...Object.keys(goRedesign.files)]);
+    const approvedFiles = new Set([...Object.keys(approvedHaramSourceTransition), ...Object.keys(goRedesign.files), ...Object.keys(bustanHours.files)]);
     for (const file of approvedFiles) {
       if(file.startsWith("src/saweeg-global/")) continue;
       const destination=path.join(scratch,file), after=fs.readFileSync(file);
       if(fs.existsSync(destination)) assertProtectedSource(file,fs.readFileSync(destination),after);
       else {
-        assert.equal(goRedesign.files[file]?.before,null,file);
-        assert.equal(digest(file),goRedesign.files[file].after,file);
+        const transition=bustanHours.files[file]??goRedesign.files[file];
+        assert.equal(transition?.before,null,file);
+        assert.equal(digest(file),transition.after,file);
         fs.mkdirSync(path.dirname(destination),{recursive:true});
       }
       fs.writeFileSync(destination,after);
