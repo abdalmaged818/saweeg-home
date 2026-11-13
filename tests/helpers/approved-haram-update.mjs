@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {createHash} from "node:crypto";
 import goRedesign from "../fixtures/go-redesign-v2-source-transition.json" with {type:"json"};
+import bustanHours from "../fixtures/bustan-hours-source-transition.json" with {type:"json"};
 
 // Exact owner-approved homepage menu actions and Haram-only price transition.
 // Historical fixtures stay immutable; no wildcard or unchecked file exception.
@@ -51,8 +52,10 @@ export function approvedHaramSourceHash(file, originalHash) {
   const visual=goRedesign.files[file];
   if (visual) {
     assert.equal(expected,visual.before,file+": unexpected pre-redesign source");
-    return visual.after;
+    expected=visual.after;
   }
+  const hours=bustanHours.files[file];
+  if(hours){assert.equal(expected,hours.before,file+": unexpected pre-hours-correction source");expected=hours.after;}
   return expected;
 }
 export function assertProtectedSource(file, before, after) {

@@ -118,7 +118,7 @@ async function verifyGoUI(page,route,width,time){
   if(route==='/branches/'){
     assert.equal(await page.locator('.branch-card').count(),3);
     assert.equal(await page.locator('.branch-hours--always strong').textContent(),'24');
-    for(const text of ['من هنا بدأت حكاية سويق','٤:٣٠ عصرًا – ٢ صباحًا','٤:٣٠ عصرًا – ١١:٣٠ مساءً'])assert((await page.locator('main').innerText()).includes(text));
+    for(const text of ['من هنا بدأت حكاية سويق','٤:٣٠ عصرًا – ٢ صباحًا','من السبت إلى الخميس، من ٦ صباحًا إلى ١٢ ظهرًا.','يوميًا، من ٤:٣٠ عصرًا إلى ١١:٣٠ مساءً.'])assert((await page.locator('main').innerText()).includes(text));
   }
   if(route.endsWith('/contact/')){
     assert.equal(await page.locator('.contact-rows a').count(),8);
