@@ -15,6 +15,7 @@ import { renderFooter } from "../src/components/footer.ts";
 import { createPathFor } from "../src/pages/routes.ts";
 import { renderReturnNavigation, safeInternalPrevious } from "../src/components/return-navigation.ts";
 import { goCopy, returnCopy } from "../src/content/go-redesign.ts";
+import "./bustan-hours.test.ts";
 
 const baseline = "dc961fd9810857c0f544b40698f179a90fe21a61";
 const gitFile=promisify(execFile);
